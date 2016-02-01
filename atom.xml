@@ -4,7 +4,7 @@
   <subtitle><![CDATA[致力于LINUX技术研究交流!开源一切,免费一切!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.elain.org/"/>
-  <updated>2016-02-01T07:05:48.000Z</updated>
+  <updated>2016-02-01T09:26:36.000Z</updated>
   <id>http://www.elain.org/</id>
   
   <author>
@@ -15,76 +15,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[my new post]]></title>
-    <link href="http://www.elain.org/2016/02/01/my-new-post/"/>
-    <id>http://www.elain.org/2016/02/01/my-new-post/</id>
-    <published>2016-02-01T06:20:17.000Z</published>
-    <updated>2016-02-01T07:05:48.000Z</updated>
-    <content type="html"><![CDATA[<p>#这里是正文，用markdown写，使用方法参照我原来的博客<a href="http://zipperary.com/2013/05/22/introduction-to-markdown/" target="_blank" rel="external">Introduction to markdown</a></p>
-<a id="more"></a>
-<p><em>single asterisks</em></p>
-<p><em>single underscores</em></p>
-<p><strong>double asterisks</strong></p>
-<p><strong>double underscores</strong></p>
-<p><code>There is a literal backtick (`) here.</code>)</p>
+    <title></title>
+    <link href="http://www.elain.org/2016/02/01/%E4%BD%BF%E7%94%A8rsyslog%E6%9D%A5%E6%94%B6%E9%9B%86%E5%B8%B8%E7%94%A8%E6%97%A5%E5%BF%97/"/>
+    <id>http://www.elain.org/2016/02/01/使用rsyslog来收集常用日志/</id>
+    <published>2016-02-01T09:26:36.000Z</published>
+    <updated>2016-02-01T09:26:36.000Z</updated>
+    <content type="html"><![CDATA[<p><strong>rsyslog</strong> 无论在性能还是部署上都优于其它日志收集应用，因系统自带，需要新功能只需要做升级即可，方便部署！</p>
+<p>版本：syslog-8.16.0</p>
+<p>download:<a href="http://rpms.adiscon.com/v8-stable" target="_blank" rel="external">http://rpms.adiscon.com/v8-stable</a></p>
+<p>因rsyslog 默认工作目录是没有设置的，在生成statefile时会无法自动生成 ，我们需要在主配置文件中添加，也可以添加在子配置文件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$WorkDirectory /var/lib/rsyslog&#10;$PreserveFQDN on  #&#22914;&#26524;&#38656;&#35201;&#33719;&#21462;&#20027;&#26426;&#21517;&#26102;&#65292;&#20027;&#26426;&#21517;&#20013;&#24102;&#26377;&#8217;.&#8217;,&#35831;&#35774;&#32622;&#65292;&#22914;&#20027;&#26426;&#21517;&#20026;&#65306;c1-b2c-shop-web01.bj</span><br></pre></td></tr></table></figure>
+<p>以下是收集单行日志示例(nginx access log为例)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">module(load=&#34;imfile&#34;)    # if you want to tail files&#10;module(load=&#34;omkafka&#34;)   # lets you send to Kafka&#10;&#10;#nginx access log&#10;input(type=&#34;imfile&#34;&#10;      File=&#34;/home/work/logs/nginx/*.log&#34;&#10;      Tag=&#34;ngx_log_shopapi&#34;&#10;      PersistStateInterval=&#34;1000&#34;&#10;      reopenOnTruncate=&#8220;on&#8221;&#10;&#10;      addMetadata=&#34;on&#34;&#10;)&#10;&#10;template( name=&#34;general_log&#34; type=&#34;string&#34; string=&#34;%hostname% %fromhost-ip% %msg%&#8221;)&#10;&#10;#nginx access log&#10;if ($syslogtag == &#34;ngx_log_shopapi&#34;) then &#123;&#10;    action(&#10;        broker=[&#34;c3-b2c-b2cop-log-kafka01.bj:9092&#34;,&#34;c3-b2c-b2cop-log-kafka02.bj:9092&#34;,&#34;c3-b2c-b2cop-log-kafka03.bj:9092&#34;]&#10;        type=&#34;omkafka&#34;&#10;        topic=&#34;ngx_log_shopapi&#34;&#10;        template=&#34;general_log&#34;&#10;        confParam=[&#34;compression.codec=gzip&#34;]&#10;        partitions.auto=&#34;on&#34;&#10;              )&#10;    stop&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注：<br>reopenOnTruncate=“on” #版本要求8.16.0以上，此配置是为了解决log rotate切割日志后不收集问题<br>详情见：<a href="https://github.com/rsyslog/rsyslog/issues/511" target="_blank" rel="external">https://github.com/rsyslog/rsyslog/issues/511</a></p>
+<p>%fromhost-ip #版本要求在8.17.0之后会支持，imfile模块获取主机IP，主要用于docker容器<br>详情见：<a href="https://github.com/rsyslog/rsyslog/issues/545" target="_blank" rel="external">https://github.com/rsyslog/rsyslog/issues/545</a></p>
+<p>以下是收集多行日志示例(php slow log为例)<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">module(load=&#34;imfile&#34;)    # if you want to tail files&#10;module(load=&#34;omkafka&#34;)   # lets you send to Kafka&#10;&#10;#php slow log&#10;input(type=&#34;imfile&#34;&#10;      File=&#34;/home/work/logs/php/php-fpm.log.slow&#34;&#10;      Tag=&#34;php_log_slow_v2&#34;&#10;      PersistStateInterval=&#34;1000&#34;&#10;      reopenOnTruncate=&#34;on&#34;&#10;      addMetadata=&#34;on&#34;&#10;      ReadMode=&#34;1&#34;&#10;      escapeLF=&#34;on&#34;&#10;)&#10;&#10;template( name=&#34;general_log&#34; type=&#34;string&#34; string=&#34;%hostname% %fromhost-ip% %msg%&#34;)&#10;&#10;#php slow log&#10;if ($syslogtag == &#34;php_log_slow_v2&#34;) then &#123;&#10;    action(&#10;        broker=[&#34;c3-b2c-b2cop-log-kafka01.bj:9092&#34;,&#34;c3-b2c-b2cop-log-kafka02.bj:9092&#34;,&#34;c3-b2c-b2cop-log-kafka03.bj:9092&#34;]&#10;        type=&#34;omkafka&#34;&#10;        topic=&#34;php_log_slow_v2&#34;&#10;        template=&#34;general_log&#34;&#10;        confParam=[&#34;compression.codec=gzip&#34;]&#10;        #errorFile=&#34;rsyslog_err.log&#34;&#10;        partitions.auto=&#34;on&#34;&#10;    )&#10;    stop&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参考文档 ：<br><a href="http://www.rsyslog.com/doc/v8-stable/" target="_blank" rel="external">http://www.rsyslog.com/doc/v8-stable/</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>#这里是正文，用markdown写，使用方法参照我原来的博客<a href="http://zipperary.com/2013/05/22/introduction-to-markdown/">Introduction to markdown</a></p>]]>
+    <![CDATA[<p><strong>rsyslog</strong> 无论在性能还是部署上都优于其它日志收集应用，因系统自带，需要新功能只需要做升级即可，方便部署！</p>
+<p>版本：syslog-8.16.0</p>
+<p>download:<a href="http://rpms.adiscon.com/v8-stable">http://rpms.adiscon.com/v8-stable</a></p>
+<p>因rsyslog 默认工作目录是没有设置的，在生成statefile时会无法自动生成 ，我们需要在主配置文件中添加，也可以添加在子配置文件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$WorkDirectory /var/lib/rsyslog&#10;$PreserveFQDN on  #&#22914;&#26524;&#38656;&#35201;&#33719;&#21462;&#20027;&#26426;&#21517;&#26102;&#65292;&#20027;&#26426;&#21517;&#20013;&#24102;&#26377;&#8217;.&#8217;,&#35831;&#35774;&#32622;&#65292;&#22914;&#20027;&#26426;&#21517;&#20026;&#65306;c1-b2c-shop-web01.bj</span><br></pre></td></tr></table></figure>
+<p>以下是收集单行日志示例(nginx access log为例)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">module(load=&#34;imfile&#34;)    # if you want to tail files&#10;module(load=&#34;omkafka&#34;)   # lets you send to Kafka&#10;&#10;#nginx access log&#10;input(type=&#34;imfile&#34;&#10;      File=&#34;/home/work/logs/nginx/*.log&#34;&#10;      Tag=&#34;ngx_log_shopapi&#34;&#10;      PersistStateInterval=&#34;1000&#34;&#10;      reopenOnTruncate=&#8220;on&#8221;&#10;&#10;      addMetadata=&#34;on&#34;&#10;)&#10;&#10;template( name=&#34;general_log&#34; type=&#34;string&#34; string=&#34;%hostname% %fromhost-ip% %msg%&#8221;)&#10;&#10;#nginx access log&#10;if ($syslogtag == &#34;ngx_log_shopapi&#34;) then &#123;&#10;    action(&#10;        broker=[&#34;c3-b2c-b2cop-log-kafka01.bj:9092&#34;,&#34;c3-b2c-b2cop-log-kafka02.bj:9092&#34;,&#34;c3-b2c-b2cop-log-kafka03.bj:9092&#34;]&#10;        type=&#34;omkafka&#34;&#10;        topic=&#34;ngx_log_shopapi&#34;&#10;        template=&#34;general_log&#34;&#10;        confParam=[&#34;compression.codec=gzip&#34;]&#10;        partitions.auto=&#34;on&#34;&#10;              )&#10;    stop&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注：<br>reopenOnTruncate=“on” #版本要求8.16.0以上，此配置是为了解决log rotate切割日志后不收集问题<br>详情见：<a href="https://github.com/rsyslog/rsyslog/issues/511">https://github.com/rsyslog/rsyslog/issues/511</a></p>
+<p>%fromhost-ip #版本要求在8.17.0之后会支持，imfile模块获取主机IP，主要用于docker容器<br>详情见：<a href="https://github.com/rsyslog/rsyslog/issues/545">https://github.com/rsyslog/rsyslog/issues/545</a></p>
+<p>以下是收集多行日志示例(php slow log为例)<br>]]>
     
-    </summary>
-    
-      <category term="post" scheme="http://www.elain.org/tags/post/"/>
-    
-      <category term="test" scheme="http://www.elain.org/tags/test/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[NexT theme]]></title>
-    <link href="http://www.elain.org/2016/02/01/next_themes/"/>
-    <id>http://www.elain.org/2016/02/01/next_themes/</id>
-    <published>2016-02-01T04:06:20.000Z</published>
-    <updated>2016-02-01T04:06:20.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="NexT"><a href="#NexT" class="headerlink" title="NexT"></a>NexT</h1><blockquote>
-<p>精于心，简于形</p>
-</blockquote>
-<p><a href="http://notes.iissnan.com" target="_blank">在线预览 Preview</a> | <a href="http://theme-next.iissnan.com" target="_blank">NexT 使用文档</a> |  <a href="/README.en.md">English Documentation</a></p>
-<p><a href="https://gitter.im/iissnan/hexo-theme-next?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge" target="_blank" rel="external"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/iissnan/hexo-theme-next"></a></p>
-<p><img src="http://iissnan.com/nexus/next/next-schemes.jpg" alt="NexT Schemes"></p>
-<h2 id="u6D4F_u89C8_u5668_u652F_u6301_Browser_support"><a href="#u6D4F_u89C8_u5668_u652F_u6301_Browser_support" class="headerlink" title="浏览器支持 Browser support"></a>浏览器支持 Browser support</h2><p><img src="http://iissnan.com/nexus/next/browser-support.png" alt="Browser support"></p>
-<h2 id="u8D21_u732E_Contributing"><a href="#u8D21_u732E_Contributing" class="headerlink" title="贡献 Contributing"></a>贡献 Contributing</h2><p>接受各种形式的贡献，包括不限于提交问题与需求，修复代码。等待您的<code>Pull Request</code>。</p>
-<p>Any types of contribution are welcome. Thanks.</p>
-<h2 id="u5F00_u53D1_Development"><a href="#u5F00_u53D1_Development" class="headerlink" title="开发 Development"></a>开发 Development</h2><p>NexT 主旨在于简洁优雅且易于使用，所以首先要尽量确保 NexT 的简洁易用性。</p>
-<p>NexT is built for easily use with elegant appearance. First things first, always keep things simple.</p>
-<h2 id="u5F00_u53D1_u5386_u53F2_Changelog"><a href="#u5F00_u53D1_u5386_u53F2_Changelog" class="headerlink" title="开发历史 Changelog"></a><a href="https://github.com/iissnan/hexo-theme-next/wiki/Changelog" target="_blank" rel="external">开发历史 Changelog</a></h2><p><a href="https://sourcegraph.com/github.com/iissnan/hexo-theme-next" target="_blank" rel="external"><img src="https://sourcegraph.com/api/repos/github.com/iissnan/hexo-theme-next/.counters/views.svg" alt="views"></a><br><a href="http://hexo.io" target="_blank" rel="external"><img src="http://img.shields.io/badge/Hexo-2.4+-2BAF2B.svg?style=flat-square" alt="hexo-image"></a><br><a href="http://bower.io" target="_blank" rel="external"><img src="http://img.shields.io/badge/Bower-*-2BAF2B.svg?style=flat-square" alt="bower-image"></a><br><a href="http://jquery.com/" target="_blank" rel="external"><img src="https://img.shields.io/badge/jquery-2.1-2BAF2B.svg?style=flat-square" alt="jquery-image"></a><br><a href="http://julian.com/research/velocity/" target="_blank" rel="external"><img src="https://img.shields.io/badge/Velocity-1.2-2BAF2B.svg?style=flat-square" alt="velocity-image"></a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="NexT"><a href="#NexT" class="headerlink" title="NexT"></a>NexT</h1><blockquote>
-<p>精于心，简于形</p>
-</blockquote>
-<p><a href="http://note]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <link href="http://www.elain.org/2016/02/01/hello-world/"/>
-    <id>http://www.elain.org/2016/02/01/hello-world/</id>
-    <published>2016-02-01T03:46:34.000Z</published>
-    <updated>2016-02-01T03:46:34.000Z</updated>
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.]]>
     </summary>
     
   </entry>
