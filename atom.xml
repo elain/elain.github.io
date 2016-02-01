@@ -4,7 +4,7 @@
   <subtitle><![CDATA[致力于LINUX技术研究交流!开源一切,免费一切!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.elain.org/"/>
-  <updated>2016-02-01T09:29:36.000Z</updated>
+  <updated>2016-02-01T09:31:49.000Z</updated>
   <id>http://www.elain.org/</id>
   
   <author>
@@ -15,24 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[xxx]]></title>
-    <link href="http://www.elain.org/2016/02/01/xxx/"/>
-    <id>http://www.elain.org/2016/02/01/xxx/</id>
-    <published>2016-02-01T09:29:36.000Z</published>
-    <updated>2016-02-01T09:29:36.000Z</updated>
-    <content type="html"></content>
-    <summary type="html">
-    
-    </summary>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[使用rsyslog来收集常用日志]]></title>
     <link href="http://www.elain.org/2016/02/01/%E4%BD%BF%E7%94%A8rsyslog%E6%9D%A5%E6%94%B6%E9%9B%86%E5%B8%B8%E7%94%A8%E6%97%A5%E5%BF%97/"/>
     <id>http://www.elain.org/2016/02/01/使用rsyslog来收集常用日志/</id>
     <published>2016-02-01T09:29:36.000Z</published>
-    <updated>2016-02-01T09:30:25.000Z</updated>
+    <updated>2016-02-01T09:31:49.000Z</updated>
     <content type="html"><![CDATA[<p><strong>rsyslog</strong> 无论在性能还是部署上都优于其它日志收集应用，因系统自带，需要新功能只需要做升级即可，方便部署！</p>
 <p>版本：syslog-8.16.0</p>
 <p>download:<a href="http://rpms.adiscon.com/v8-stable" target="_blank" rel="external">http://rpms.adiscon.com/v8-stable</a></p>
@@ -57,7 +44,11 @@
     
     </summary>
     
-      <category term="日志,rsyslog,efk" scheme="http://www.elain.org/tags/%E6%97%A5%E5%BF%97-rsyslog-efk/"/>
+      <category term="efk" scheme="http://www.elain.org/tags/efk/"/>
+    
+      <category term="rsyslog" scheme="http://www.elain.org/tags/rsyslog/"/>
+    
+      <category term="日志" scheme="http://www.elain.org/tags/%E6%97%A5%E5%BF%97/"/>
     
   </entry>
   
