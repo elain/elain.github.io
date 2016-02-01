@@ -4,7 +4,7 @@
   <subtitle><![CDATA[致力于LINUX技术研究交流!开源一切,免费一切!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.elain.org/"/>
-  <updated>2016-02-01T06:21:09.000Z</updated>
+  <updated>2016-02-01T07:05:48.000Z</updated>
   <id>http://www.elain.org/</id>
   
   <author>
@@ -19,11 +19,18 @@
     <link href="http://www.elain.org/2016/02/01/my-new-post/"/>
     <id>http://www.elain.org/2016/02/01/my-new-post/</id>
     <published>2016-02-01T06:20:17.000Z</published>
-    <updated>2016-02-01T06:21:09.000Z</updated>
+    <updated>2016-02-01T07:05:48.000Z</updated>
     <content type="html"><![CDATA[<p>#这里是正文，用markdown写，使用方法参照我原来的博客<a href="http://zipperary.com/2013/05/22/introduction-to-markdown/" target="_blank" rel="external">Introduction to markdown</a></p>
+<a id="more"></a>
+<p><em>single asterisks</em></p>
+<p><em>single underscores</em></p>
+<p><strong>double asterisks</strong></p>
+<p><strong>double underscores</strong></p>
+<p><code>There is a literal backtick (`) here.</code>)</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>#这里是正文，用markdown写，使用方法参照我原来的博客<a href="http://zipperary.com/2013/05/22/introduction-to-markdown/" target="_blank" rel="external">Introduc]]>
+    <![CDATA[<p>#这里是正文，用markdown写，使用方法参照我原来的博客<a href="http://zipperary.com/2013/05/22/introduction-to-markdown/">Introduction to markdown</a></p>]]>
+    
     </summary>
     
       <category term="post" scheme="http://www.elain.org/tags/post/"/>
