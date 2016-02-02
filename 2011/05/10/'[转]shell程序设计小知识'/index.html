@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[转]Shell程序设计小知识 | Elain&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、用户登陆进入系统后的系统环境变量：$HOME 使用者自己的目录$PATH 执行命令时所搜寻的目录$TZ 时区$MAILCHECK 每隔多少秒检查是否有新的信件$PS1 在命令列时的提示号$PS2 当命令尚未打完时，Shell 要求再输入时的提示号$MANPATH man 指令的搜寻路径
+二、特殊变量：
+$0 这个程序的执行名字$n 这个程序的第n个参数值，n=1..9$* 这个程序的所有参数$">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[转]Shell程序设计小知识">
+<meta property="og:url" content="http://www.elain.org/2011/05/10/'[转]shell程序设计小知识'/index.html">
+<meta property="og:site_name" content="Elain'blog">
+<meta property="og:description" content="一、用户登陆进入系统后的系统环境变量：$HOME 使用者自己的目录$PATH 执行命令时所搜寻的目录$TZ 时区$MAILCHECK 每隔多少秒检查是否有新的信件$PS1 在命令列时的提示号$PS2 当命令尚未打完时，Shell 要求再输入时的提示号$MANPATH man 指令的搜寻路径
+二、特殊变量：
+$0 这个程序的执行名字$n 这个程序的第n个参数值，n=1..9$* 这个程序的所有参数$">
+<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[转]Shell程序设计小知识">
+<meta name="twitter:description" content="一、用户登陆进入系统后的系统环境变量：$HOME 使用者自己的目录$PATH 执行命令时所搜寻的目录$TZ 时区$MAILCHECK 每隔多少秒检查是否有新的信件$PS1 在命令列时的提示号$PS2 当命令尚未打完时，Shell 要求再输入时的提示号$MANPATH man 指令的搜寻路径
+二、特殊变量：
+$0 这个程序的执行名字$n 这个程序的第n个参数值，n=1..9$* 这个程序的所有参数$">
+  
+    <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: true
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">elain</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">致力于LINUX技术研究交流!开源一切,免费一切!!!</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:elain2012@hotmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="/elain2012" title="新浪微博"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/IT，健康/" style="font-size: 10px;">IT，健康</a> <a href="/tags/LINUX/" style="font-size: 18.89px;">LINUX</a> <a href="/tags/PXE/" style="font-size: 10px;">PXE</a> <a href="/tags/RHEL/" style="font-size: 10px;">RHEL</a> <a href="/tags/access/" style="font-size: 10px;">access</a> <a href="/tags/apache/" style="font-size: 15.56px;">apache</a> <a href="/tags/arping/" style="font-size: 10px;">arping</a> <a href="/tags/awstats/" style="font-size: 10px;">awstats</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/bashrc/" style="font-size: 11.11px;">bashrc</a> <a href="/tags/cacti/" style="font-size: 12.22px;">cacti</a> <a href="/tags/centos/" style="font-size: 12.22px;">centos</a> <a href="/tags/chattr/" style="font-size: 10px;">chattr</a> <a href="/tags/chkconfig/" style="font-size: 10px;">chkconfig</a> <a href="/tags/chmod/" style="font-size: 10px;">chmod</a> <a href="/tags/chroot/" style="font-size: 10px;">chroot</a> <a href="/tags/cobbler/" style="font-size: 10px;">cobbler</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/crontab/" style="font-size: 10px;">crontab</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/cwrsync/" style="font-size: 10px;">cwrsync</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/ddos/" style="font-size: 10px;">ddos</a> <a href="/tags/drbd/" style="font-size: 10px;">drbd</a> <a href="/tags/eaccelerator/" style="font-size: 10px;">eaccelerator</a> <a href="/tags/earth/" style="font-size: 10px;">earth</a> <a href="/tags/efk/" style="font-size: 12.22px;">efk</a> <a href="/tags/elasticsearch/" style="font-size: 14.44px;">elasticsearch</a> <a href="/tags/elk/" style="font-size: 11.11px;">elk</a> <a href="/tags/es/" style="font-size: 11.11px;">es</a> <a href="/tags/etc/" style="font-size: 10px;">etc</a> <a href="/tags/facebook/" style="font-size: 11.11px;">facebook</a> <a href="/tags/fetion/" style="font-size: 11.11px;">fetion</a> <a href="/tags/find/" style="font-size: 10px;">find</a> <a href="/tags/firefox/" style="font-size: 11.11px;">firefox</a> <a href="/tags/fluentd/" style="font-size: 12.22px;">fluentd</a> <a href="/tags/free/" style="font-size: 10px;">free</a> <a href="/tags/fstab/" style="font-size: 10px;">fstab</a> <a href="/tags/ganglia/" style="font-size: 10px;">ganglia</a> <a href="/tags/geany/" style="font-size: 10px;">geany</a> <a href="/tags/gedit/" style="font-size: 11.11px;">gedit</a> <a href="/tags/getots/" style="font-size: 10px;">getots</a> <a href="/tags/gnome/" style="font-size: 10px;">gnome</a> <a href="/tags/gnome-player/" style="font-size: 10px;">gnome player</a> <a href="/tags/graphicsmagick/" style="font-size: 10px;">graphicsmagick</a> <a href="/tags/grub/" style="font-size: 10px;">grub</a> <a href="/tags/gstm/" style="font-size: 10px;">gstm</a> <a href="/tags/ha/" style="font-size: 11.11px;">ha</a> <a href="/tags/hadoop/" style="font-size: 11.11px;">hadoop</a> <a href="/tags/heartbeat/" style="font-size: 11.11px;">heartbeat</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/httpd/" style="font-size: 11.11px;">httpd</a> <a href="/tags/imagemagick/" style="font-size: 10px;">imagemagick</a> <a href="/tags/inittab/" style="font-size: 10px;">inittab</a> <a href="/tags/innodb/" style="font-size: 10px;">innodb</a> <a href="/tags/iostat/" style="font-size: 13.33px;">iostat</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ipv6/" style="font-size: 10px;">ipv6</a> <a href="/tags/it/" style="font-size: 10px;">it</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/keepalived/" style="font-size: 11.11px;">keepalived</a> <a href="/tags/kibana/" style="font-size: 12.22px;">kibana</a> <a href="/tags/kibana4/" style="font-size: 10px;">kibana4</a> <a href="/tags/kickstart/" style="font-size: 11.11px;">kickstart</a> <a href="/tags/lamp/" style="font-size: 12.22px;">lamp</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/lemp/" style="font-size: 11.11px;">lemp</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/log/" style="font-size: 11.11px;">log</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/logstash/" style="font-size: 10px;">logstash</a> <a href="/tags/lvs/" style="font-size: 13.33px;">lvs</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/memcache/" style="font-size: 10px;">memcache</a> <a href="/tags/memcached/" style="font-size: 10px;">memcached</a> <a href="/tags/michael-jackson/" style="font-size: 10px;">michael jackson</a> <a href="/tags/mongodb/" style="font-size: 14.44px;">mongodb</a> <a href="/tags/moosefs/" style="font-size: 10px;">moosefs</a> <a href="/tags/mpstat/" style="font-size: 12.22px;">mpstat</a> <a href="/tags/myisam/" style="font-size: 10px;">myisam</a> <a href="/tags/mysql/" style="font-size: 18.89px;">mysql</a> <a href="/tags/nagios/" style="font-size: 14.44px;">nagios</a> <a href="/tags/nc/" style="font-size: 10px;">nc</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/nginx/" style="font-size: 16.67px;">nginx</a> <a href="/tags/nosql/" style="font-size: 10px;">nosql</a> <a href="/tags/nrpe/" style="font-size: 10px;">nrpe</a> <a href="/tags/openfetion/" style="font-size: 10px;">openfetion</a> <a href="/tags/openssh/" style="font-size: 10px;">openssh</a> <a href="/tags/pagespeed/" style="font-size: 10px;">pagespeed</a> <a href="/tags/parted/" style="font-size: 10px;">parted</a> <a href="/tags/passwd/" style="font-size: 11.11px;">passwd</a> <a href="/tags/php/" style="font-size: 15.56px;">php</a> <a href="/tags/phpmyadmin/" style="font-size: 10px;">phpmyadmin</a> <a href="/tags/piranha/" style="font-size: 10px;">piranha</a> <a href="/tags/pop3/" style="font-size: 10px;">pop3</a> <a href="/tags/pptpd/" style="font-size: 10px;">pptpd</a> <a href="/tags/prework/" style="font-size: 10px;">prework</a> <a href="/tags/psmouse/" style="font-size: 10px;">psmouse</a> <a href="/tags/puppet/" style="font-size: 13.33px;">puppet</a> <a href="/tags/qq/" style="font-size: 10px;">qq</a> <a href="/tags/rabbitvcs/" style="font-size: 10px;">rabbitvcs</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/root/" style="font-size: 10px;">root</a> <a href="/tags/rrdtool/" style="font-size: 10px;">rrdtool</a> <a href="/tags/rsync/" style="font-size: 13.33px;">rsync</a> <a href="/tags/rsyslog/" style="font-size: 11.11px;">rsyslog</a> <a href="/tags/sar/" style="font-size: 11.11px;">sar</a> <a href="/tags/screen/" style="font-size: 10px;">screen</a> <a href="/tags/search-guard/" style="font-size: 10px;">search-guard</a> <a href="/tags/sersync/" style="font-size: 10px;">sersync</a> <a href="/tags/shadow/" style="font-size: 11.11px;">shadow</a> <a href="/tags/shell/" style="font-size: 17.78px;">shell</a> <a href="/tags/showslow/" style="font-size: 10px;">showslow</a> <a href="/tags/slave/" style="font-size: 10px;">slave</a> <a href="/tags/smtp/" style="font-size: 10px;">smtp</a> <a href="/tags/snort/" style="font-size: 10px;">snort</a> <a href="/tags/sort/" style="font-size: 10px;">sort</a> <a href="/tags/ssh/" style="font-size: 13.33px;">ssh</a> <a href="/tags/subversion/" style="font-size: 11.11px;">subversion</a> <a href="/tags/svn/" style="font-size: 13.33px;">svn</a> <a href="/tags/tar/" style="font-size: 10px;">tar</a> <a href="/tags/td-agent/" style="font-size: 10px;">td-agent</a> <a href="/tags/tetngine/" style="font-size: 10px;">tetngine</a> <a href="/tags/thunderbird/" style="font-size: 11.11px;">thunderbird</a> <a href="/tags/tomcat/" style="font-size: 11.11px;">tomcat</a> <a href="/tags/tomcat，多实例/" style="font-size: 10px;">tomcat，多实例</a> <a href="/tags/top/" style="font-size: 11.11px;">top</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a> <a href="/tags/ubunut/" style="font-size: 10px;">ubunut</a> <a href="/tags/unity/" style="font-size: 10px;">unity</a> <a href="/tags/varnish/" style="font-size: 11.11px;">varnish</a> <a href="/tags/vbox/" style="font-size: 10px;">vbox</a> <a href="/tags/vi/" style="font-size: 11.11px;">vi</a> <a href="/tags/vim/" style="font-size: 13.33px;">vim</a> <a href="/tags/vmstat/" style="font-size: 12.22px;">vmstat</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/web/" style="font-size: 16.67px;">web</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/wine/" style="font-size: 10px;">wine</a> <a href="/tags/worker/" style="font-size: 10px;">worker</a> <a href="/tags/xhprof/" style="font-size: 10px;">xhprof</a> <a href="/tags/yakuake/" style="font-size: 10px;">yakuake</a> <a href="/tags/yslow/" style="font-size: 10px;">yslow</a> <a href="/tags/yum/" style="font-size: 12.22px;">yum</a> <a href="/tags/zend/" style="font-size: 10px;">zend</a> <a href="/tags/主从同步/" style="font-size: 10px;">主从同步</a> <a href="/tags/休息/" style="font-size: 10px;">休息</a> <a href="/tags/内核/" style="font-size: 10px;">内核</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/心情/" style="font-size: 10px;">心情</a> <a href="/tags/敏捷/" style="font-size: 10px;">敏捷</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/漏洞/" style="font-size: 10px;">漏洞</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/职业规划，规划，职业/" style="font-size: 11.11px;">职业规划，规划，职业</a> <a href="/tags/面板/" style="font-size: 10px;">面板</a> <a href="/tags/颜色/" style="font-size: 10px;">颜色</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">elain</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/avatar.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">elain</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">致力于LINUX技术研究交流!开源一切,免费一切!!!</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:elain2012@hotmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="/elain2012" title="新浪微博"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-&#39;[转]shell程序设计小知识&#39;" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2011/05/10/'[转]shell程序设计小知识'/" class="article-date">
+      <time datetime="2011-05-10T00:16:31.000Z" itemprop="datePublished">2011-05-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [转]Shell程序设计小知识
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/SHELL编程/">SHELL编程</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>一、用户登陆进入系统后的系统环境变量：</strong><br>$HOME 使用者自己的目录<br>$PATH 执行命令时所搜寻的目录<br>$TZ 时区<br>$MAILCHECK 每隔多少秒检查是否有新的信件<br>$PS1 在命令列时的提示号<br>$PS2 当命令尚未打完时，Shell 要求再输入时的提示号<br>$MANPATH man 指令的搜寻路径</p>
+<p><strong>二、特殊变量：</strong></p>
+<p>$0 这个程序的执行名字<br>$n 这个程序的第n个参数值，n=1..9<br>$* 这个程序的所有参数<br>$# 这个程序的参数个数<br>$$ 这个程序的PID <a id="more"></a><br>$! 执行上一个指令的PID<br>$? 执行上一个指令的返回值</p>
+<p><strong>三、shell中的变元：</strong></p>
+<ul>
+<li>任意字符串<br>? 一个任意字符<br>[abc] a, b, c三者中之一<br>[a-n] 从a到n的任一字符</li>
+</ul>
+<p><strong>四、几个特殊字符表示
+</strong><br>\b 退回<br>\c 打印一行时没有换行符 这个我们经常会用到<br>\f 换页<br>\r 回车<br>\t 制表<br>\v 垂直制表<br>\ 反斜线本身</p>
+<p><strong>五、判断文件的属性</strong></p>
+<p>格式：-操作符 filename<br>-e 文件存在返回1， 否则返回0<br>-r 文件可读返回1,否则返回0<br>-w 文件可写返回1,否则返回0<br>-x 文件可执行返回1,否则返回0<br>-o 文件属于用户本人返回1, 否则返回0<br>-z 文件长度为0返回1, 否则返回0.<br>-f 文件为普通文件返回1, 否则返回0<br>-d 文件为目录文件时返回1, 否则返回0</p>
+<p><strong>六、测试字符串</strong><br>字符串1 = 字符串2　当两个字串相等时为真<br>字符串1 != 字符串2 当两个字串不等时为真<br>-n 字符串　 　　　 当字符串的长度大于0时为真<br>-z 字符串　　　　　 当字符串的长度为0时为真<br>字符串　　　　　　 当串字符串为非空时为真</p>
+<p><strong>七、测试两个整数关系</strong><br>数字1 -eq 数字2　　　　 两数相等为真<br>数字1 -ne 数字2　　　　 两数不等为真<br>数字1 -gt 数字2　　　　 数字1大于数字2为真<br>数字1 -ge 数字2 　　　 数字1大于等于数字2为真<br>数字1 -lt 数字2　　　　 数字1小于数字2为真<br>数字1 -le 数字2　　　　 数字1小于等于数字2为真</p>
+<p><strong>八、逻辑测试</strong><br>-a 　 　　　　　 与<br>-o　　　　　　　 或<br>!　　　　　　　　非</p>
+<h1 id="shell_u7279_u6B8A_u5B57_u7B26_u7684_u5F15_u7528"><a href="#shell_u7279_u6B8A_u5B57_u7B26_u7684_u5F15_u7528" class="headerlink" title="shell特殊字符的引用"></a><strong><span style="color: red">shell特殊字符的引用</span></strong></h1><p>shell中的特殊字符有</p>
+<p>1、$ 美元符<br>2、\ 反斜杠<br>3、` 反引号<br>4、”　双引号<br>5、&lt; ,&gt;,*,?,[,]</p>
+<p>下面我一一举列说明<br><strong>一、$符号</strong><br>1、echo $? 显示的是上一条指令退出状态<br>2、echo “$?” 效果同上<br>3、echo ‘$?’ 显示的是$?<br>4、echo \$? 显示的是$?<br>5、echo “\$?” 显示的是$?</p>
+<p>大家可能已经看出　$符号在双引号中具有特殊意义　双引号对$符号不起作用<br>而单引号可以将特殊字符的的特殊意义屏蔽掉，使其能显示为字符本身，反斜<br>杠也可以将特殊字符的特殊含义屏蔽掉，使特殊字符失去特殊含义。</p>
+<p><strong>二、\　反斜杠</strong><br>反斜杠的作用是将特殊符号字符的特殊含义屏蔽掉，使其还是原字符<br>A＝1234<br>echo \$A 显示为$A 如果不加\将显示为1234<br>echo ` 显示为`<br>echo \” 显示为双引号<br>echo \ 显示为\</p>
+<p><strong>三、` 反引号</strong><br>反引号的功能是命令替换，将反引号中的字符串做为命令来执行，我们在用shell编程时经常用的到　将系统命令的执行结果赋给一个变量</p>
+<p>A=<code>date</code><br>echo $A 显示的不是date而是当时的时间串<br>比如有一文件A的内容如下<br>ABCDEFG<br>1234456<br>abcdefg</p>
+<p>B=<code>cat A|grep 234</code> # 检索文件A中含有字符串234的行<br>echo $B 将显示为1234456<br>echo “$B” 将显示为什么？<br>echo “\$B” 将显示为什么？读者自己试试</p>
+<p><strong>四、” 双引号
+</strong> 在系统中有些特殊字符，为避免引用这些特殊字符　往往用双引号或单引号将这些特殊字符引起来，使其不具有特殊含义。<br>但有一部分特殊字符在引号中还是具有特殊含义，用双引号引起来是不起作用的。本文中所列的前四个特殊字符在双引号中还是特殊字符。为了使其不具有特殊含义一是用单引号引进来二是用\反斜线使其失去作用。</p>
+<p>比如我们想原样输出这些特殊字符</p>
+<p>echo “””<br>echo “$”<br>echo “\”<br>echo “<code>&quot;
+以上不是你所期望的结果，因为双引号对它们不起作用，你只能这样才能输出这些特殊字符的原形
+echo &#39;&quot;&#39;
+echo &#39;$&#39;
+echo &#39;\&#39;
+echo &#39;</code>‘<br>或<br>echo “\””<br>echo “\$”<br>echo “\“<br>echo “`“<br>将分别显示为　“ $ \ `</p>
+<p><strong>五、其它特殊字符</strong><br>大家注意到　除了前四个特殊字符外　我将其它的特殊字符都放在一块，这是因为前四个特殊字符在双引号中还是具有特殊含义，所以单独拿出来讲，除此以外的特殊字符如果你要输出这些特殊字符的原形，你就可以用双引号或单引号引起来使其失去特殊含义。<br>&lt; ,&gt;,*,?,[,]对shell有特殊含义　但你可以用双引号引起来输入这些原形</p>
+<p>讲了这么多大家是不是已经注意到所有的特殊字符在单引号中失去特殊含义，如果你要输出特殊字符原形但又记不清那些特殊字符在双引号中不能输出原形，建议你干脆用单引号引起来。</p>
+<p><strong><span style="color: red">条件测试语句</span></strong></p>
+<p><strong>一、if 条件语句
+</strong>格式：<br>if 条件表达式<br>then #当条件为真时执行以下语句<br>命令列表<br>else #为假时执行以下语句<br>命令列表<br>fi</p>
+<p>if　语句也可以嵌套使用</p>
+<p>if 条件表达式1<br>then<br>if 条件表达式2<br>then<br>命令列表<br>else<br>if 条件表达式3<br>then<br>命令列表<br>else<br>命令列表<br>fi<br>fi<br>else<br>命令列表<br>fi</p>
+<p>你可以进行多层嵌套　一个if语句一定要跟一个fi　表示该层条件结束　　否则会造成语法错误<br>结合前面讲的　举例如下：<br>这里先讲一个条件语句中用到的命令test　表示测试test后面的条件是否为真</p>
+<p>if test -f “$1”<br>then<br>lpr $1<br>else<br>if test -d “$1”<br>then<br>cd $1<br>lpr $1<br>else<br>echo “$1不是文件或目录”<br>fi<br>fi</p>
+<p>以上的例子还可以改成如下所示</p>
+<p>if test -f “$1”<br>then<br>lpr $1<br>elif test -d “$1” #elif　同else if<br>then<br>(cd $1;lpr $1)<br>else<br>echo “$1不是文件或目录”<br>fi</p>
+<p>以上的例子不知您是否看懂是什么意思吗？<br>假如我们现在将这个例子保存为prfile<br>chmod +x prfile<br>执行刚才的程序<br>./prfile aaa</p>
+<p>这个例子是检查你的输入的参数是否是一个文件　如果是就打印　如果是一个目录　先转目录再打印　如果即不是文件也不是目录给出提示</p>
+<p><strong>二、多重条件测试语句case</strong><br>格式：<br>case 字串　in<br>模式) 命令列表;;<br>模式) 命令列表;;<br>….<br>esac</p>
+<p>多重条件语句是以case 开始以esac结束　中间可以有多个条件列表　功能是测试字串和和里面的模式有没有匹配的,有就执行里面的命令列表　模式也可以是*号　表示任意字串，每个模式里面的最后要心;;双引号结束，否则会发生语法错误。</p>
+<p>现举例如下：</p>
+<p>case $1 in<br><em>.c)<br>cc $1<br>;;
+</em>.txt)<br>lpr $1<br>;;<br>*)<br>echo “未知的类型”<br>esac</p>
+<p>假如将以上内容保存在文件abc中</p>
+<p>chmod +x abc<br>执行　./abc a.c 　 将会对文件a.c进行编译<br>执行 ./abc readme.txt　将会把文件通过打印机<br>假如我将以上内容改一下，你是否会知道它的执行结果？</p>
+<p>case $1 in<br><em>)<br>cc $1<br>;;
+</em>.txt)<br>lpr $1<br>;;<br>*.c)<br>echo “未知的类型”<br>esac</p>
+<p><strong><span style="color: red">循环语句</span></strong><br><strong>一. while 循环</strong><br>while 命令格式</p>
+<p>while 条件表<br>do<br>命令表<br>done</p>
+<p>执行过程</p>
+<p>shell首先执行条件表,如果条件表的最后一条语句的退出状态为零,则执行盾环体内的命令<br>表,执行完后,再检查条件表,如果退出状态为零将继续执行,如此循环往复直到条件表的<br>最后一条语句的退出状态非零. 退出状态为零就是条件为真True.</p>
+<p>举例说明 假如shell文件的内容如下:</p>
+<p>Sum=0<br>i=0<br>while true #true是系统的关键词 表示真<br>do<br>i=<code>expr $i + 1</code><br>Sum=<code>expr $Sum + $i</code><br>if [ $i = “100” ]<br>then<br>break;<br>fi<br>done<br>echo $i $Sum<br>最后这个程序显示的是 100 5050<br>这个程序的运算就是将1到100加起来</p>
+<p>下面将这个程序再改动一下</p>
+<p>Sum=0<br>i=0<br>while [ $i != “100” ]<br>do<br>i=<code>expr $i + 1</code><br>Sum=<code>expr $Sum + $i</code><br>done<br>echo $i $Sum</p>
+<p>改动后的程序运算结果和上面是一样 但程序比上面的要简练</p>
+<p>在这个循环中还可以以until做为测试条件 它正好与while测试的条件相反,也就是当条件为假时将继续执行循环体内的语句,否则就退出循环体,下面还用这个例子.</p>
+<p>Sum=0<br>i=0<br>until [ $i = “100” ]<br>do<br>i=<code>expr $i + 1</code><br>Sum=<code>expr $Sum + $i</code><br>done<br>echo $i $Sum<br>当i不等于100时循环 就是当条件为假时循环,否则就退出,而第一个例子是当i不等于100<br>时循环,也就是测试条件为真时循环.</p>
+<p><strong>二.for 循环</strong></p>
+<p>命令格式:<br>for 变量 in 名字列表<br>do<br>命令列表<br>done</p>
+<p>这里的名字列表是一个由空格分隔的字符串列表,shell在执行for循环时每次依次从名字表<br>中取出一个字符串赋给循环变量作为变量的值.<br>在写for语句时,也可以省略in 名字列表部分,这表示用当前的位置参数来代替这时的名<br>字列表.<br>下面举个例子<br>比如在你的电脑中有两个目录,一个是aa,一个是bb在这两个目录中有5个相同的文件,但其<br>中一个目录中的一个或多个文件刚刚修改过,现在我忘记刚才改的是那几个文件 了,那么我靠梢员冉弦幌抡饬礁瞿柯嫉奈募椭懒?程序如下:</p>
+<p>for File in a1 a2 a3 a4 a5<br>do<br>diff aa/$File bb/$File<br>done</p>
+<p>下面再举一个不带名字列表的例子</p>
+<p>for File<br>do<br>echo $Filw<br>done</p>
+<p>文件内容保存在a.sh中 并可执行<br>我们在执行这个shell程序时命令行如下:<br>a.sh a1 a2 a3 a4 a5<br>执行结果如下:<br>a1<br>a2<br>a3<br>a4<br>a5<br>大家从这个例子中可以看到命令行的参数被逐一读入一次</p>
+<p><strong>三.循环控制语句</strong><br>break 命令不执行当前循环体内break下面的语句从当前循环退出.<br>continue 命令是程序在本循体内忽略下面的语句,从循环头开始执行.</p>
+<p>一,命令组合:圆括号和花括号<br>shell中有两种方法将命令组合在一起:圆括号和花括号.圆括号使shell创建一个子shell<br>来读取并执行括起来的名命令.左括号和右括号不论出现在命令行中的什么位置,shell都会<br>认为它们具有特殊的组合意义的.只有用双引号将它们括起来引用,才表示圆括号或花括号<br>的原义.例如:</p>
+<p>echo a(b)<br>将出现语法上的错误,要想输出a(b)字符串 只能括起来<br>echo “a(b)”<br>或echo a”(“b”)”<br>这样才能被shell正确解释.<br>利用组合命令有什么作用呢?<br><strong>一,用圆括号组合命令</strong><br>圆括号的组合命令可以创建子进程运行组合程序,建立子进程的功能是很有用的,因为<br>子shell在组合命令中的种种操作都不会影响到当前shell的各变量的值.<br>例如:<br>子进程在执行组合命令时改变了工作目录,并在新的工作目录下执行一系例命令,执行<br>完后它可以不必返回原工作目录,因为子进程工作目录的改变不会影响到当前工作目录.</p>
+<p>创建子进程后将当前的环境也同样传给子shell,当前shell中用export输出到环境中的<br>各变量在子shell中同样有效.</p>
+<p>花括号也可以将命令组合在一起.左 右花括号只有作为一条命令的第一个字出现时,<br>shell才它们含有特殊含义.<br>与圆括号不同的是花括号并不创建子shell,只是由当前的shell来读取并执行括起来的<br>命令.有时用户希望使用一组命令的顺序输出作为另一组命令的输入,此时用花括号是很方<br>便的.<br>不论是用圆括号不是花括号,退出状态都是等于最后一条括起来的命令的退出状态.</p>
+<p><strong>二,可以在当前shell中执行的命令</strong></p>
+<p>用户在使用shell时一定要了解那些是可以在当前shell中执行的命令 那些不可以<br>可以在当前shell中执行的命令有:</p>
+<p>break case cd continue<br>echo eval exec exit<br>export for if read<br>readonly return set shift<br>test times trap umask<br>until wait while<br>: {}</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2011/05/10/'[转]shell程序设计小知识'/">[转]Shell程序设计小知识</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
+        <p><span>发布时间:</span>2011年05月10日 - 08时16分</p>
+        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2011/05/10/'[转]shell程序设计小知识'/" title="[转]Shell程序设计小知识">http://www.elain.org/2011/05/10/&#39;[转]shell程序设计小知识&#39;/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/05/10/&#39;[转]shell程序设计小知识&#39;/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2011/05/14/ubuntu11.04的侧边栏消失的解决方法！/">
+                    ubuntu11.04的侧边栏消失的解决方法！
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2011/05/09/'ubuntu必备软件精选[elain推荐]更新20111020'/">
+                    Ubuntu必备软件精选[elain推荐]更新20111020
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#shell_u7279_u6B8A_u5B57_u7B26_u7684_u5F15_u7528"><span class="toc-number">1.</span> <span class="toc-text">shell特殊字符的引用</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2011/05/10/&#39;[转]shell程序设计小知识&#39;/" data-title="[转]Shell程序设计小知识" data-url="http://www.elain.org/2011/05/10/&#39;[转]shell程序设计小知识&#39;/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"elain"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2011/05/14/ubuntu11.04的侧边栏消失的解决方法！/" title="上一篇: ubuntu11.04的侧边栏消失的解决方法！">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2011/05/09/'ubuntu必备软件精选[elain推荐]更新20111020'/" title="下一篇: Ubuntu必备软件精选[elain推荐]更新20111020">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/02/01/使用rsyslog来收集常用日志/">使用Rsyslog来收集常用日志</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Rsyslog的使用/">Rsyslog的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/EFK日志收集丢失率测试报告/">EFK日志收集丢失率测试报告</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/16/给EFK日志系统添加kafka队列中遇到的time问题解决/">给EFK日志系统添加kafka队列中遇到的time问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/01/给kibana4中配置中国地图(添加最新版4.3.1修改方法)/">给kibana4中配置中国地图(添加最新版4.3.1修改方法)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/31/Elasticsearch免费认证插件Search-guard的部署安装及策略配置/">Elasticsearch 免费认证插件Search-Guard的部署安装及策略配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/04/15/多业务复用同组WEB通过独立upstream来敏捷运维/">多业务复用同组WEB通过独立upstream来敏捷运维</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/20/'[转]程序员可以在周末做的8件事'/">[转]程序员可以在周末做的8件事</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/08/17/'[转]VIM命令小抄，很不错'/">[转]VIM命令小抄，很不错</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/06/25/puppet管理之用户与SSH信任关系管理/">puppet管理之用户与SSH信任关系管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/05/30/puppet常用模块/">Puppet常用模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/05/29/在puppet使用中针对域名形式主机名取$hostname的问题/">在Puppet使用中针对域名形式主机名取$hostname的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/04/18/'[转]自己活，也让别人活'/">[转]自己活，也让别人活</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/03/26/'[转]40岁后才明白的道理:人一生奋斗余地很有限'/">[转]40岁后才明白的道理:人一生奋斗余地很有限</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/03/26/'[转]世界上最健康的作息时间表'/">[转]世界上最健康的作息时间表</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/03/26/'[转]30岁以前不要去在乎的30件事'/">[转]30岁以前不要去在乎的30件事</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/12/18/'[转]2012年LinuxJournal读者选择奖结果公布'/">[转]2012年Linux Journal读者选择奖结果公布</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/12/06/'[转]创业公司老板管理常识'/">[转]创业公司老板管理常识</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/11/28/'[转]如何摆脱低智商的社会，让自己脱颖而出？'/">[转]如何摆脱低智商的社会，让自己脱颖而出？</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/11/12/'[转]为什么IT人难以拿高薪'/">[转]为什么IT人难以拿高薪</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/11/12/[转]IT职业生涯规划–职涯路/">[转]IT职业生涯规划–职涯路</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/10/22/[转]简明Vim练级攻略/">[转]简明Vim练级攻略</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/08/25/修改.bashrc文件错误导致系统大部分命令失效的解决方法/">修改.Bashrc文件错误导致系统大部分命令失效的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/08/11/Puppet的使用与管理ppt分享/">Puppet的使用与管理 Ppt分享</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/07/31/使用openssh的新特性构建chroot环境/">使用Openssh的新特性构建chroot环境</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/06/27/闰秒BUG可能导致Linux服务器重启/">闰秒BUG可能导致Linux服务器重启</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/06/16/'[转]不同技术团队的配合问题及DevOps'/">[转]不同技术团队的配合问题及DevOps</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/06/06/'[新闻]IPv6今日正式上线中国支持IPv6网站占比达65%'/">[新闻]IPv6今日正式上线中国支持IPv6网站占比达65%</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/05/19/'ubuntu软件---RabbitVCS/">Ubuntu软件---RabbitVCS : TortoiseSVN 的替代者</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/04/26/ubuntu12.04正式版官方发布/">Ubuntu12.04正式版官方发布</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/04/24/'[转]我在Facebook的十点经验分享'/">[转]我在Facebook的十点经验分享</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/03/29/批量修改远程主机root密码脚本/">批量修改远程主机Root密码脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/03/23/'[转]如何学习技术？---献给有志之士'/">[转]如何学习技术？ ---献给有志之士</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/03/21/ubuntu游戏推荐-AlienArena-7.53/">Ubuntu游戏推荐-Alien Arena-7.53</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/03/17/[转]让你的Ubuntu10.10装扮成MacOSX风格/">[转]让你的Ubuntu10.10装扮成MacOSX风格</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/03/05/'[转]logrotate工具的使用'/">[转]Logrotate工具的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/02/27/'[转]一声叹息：两台服务器是为失败者准备的'/">[转]一声叹息：两台服务器是为失败者准备的</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/02/13/帮朋友招聘运维工程师（小米科技）/">帮朋友招聘运维工程师（小米科技）</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/02/03/'[PHP又暴重大漏洞]多语言拒绝服务漏洞事件预警'/">[PHP又暴重大漏洞]多语言拒绝服务漏洞事件预警</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/30/MongoDB实战系列之六：mongodb的高可用集群设计实战/">MongoDB实战系列之六：mongodb的高可用集群设计实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/17/MongoDB实战系列之五：mongodb的分片配置/">MongoDB实战系列之五：mongodb的分片配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/13/推荐三款nagios客户端，覆盖所有系统平台/">推荐三款Nagios客户端，覆盖所有系统平台</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/13/MongoDB实战系列之四：mongodb副本集部署/">MongoDB实战系列之四：mongodb副本集部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/12/'[新闻]PHP5.3.9正式版发布！'/">[新闻]PHP 5.3.9正式版发布！</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/08/MongoDB实战系列之三：MongoDB的主从部署/">MongoDB实战系列之三：MongoDB的主从部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/01/MongoDB实战系列之二：MongoDB的常用操作/">MongoDB实战系列之二：MongoDB的常用操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/12/31/MongoDB实战系列之一：MongoDB安装部署/">MongoDB实战系列之一：MongoDB安装部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/12/23/'[新闻]IT网站被黑引数据恐慌5000万用户信息外泄'/">[新闻]IT网站被黑引数据恐慌 5000万用户信息外泄</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/12/04/'[转]MySQL出错代码列表'/">[转]MySQL出错代码列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/12/03/'[新闻]淘宝Web服务器Tengine正式开源'/">[新闻]淘宝Web服务器Tengine正式开源</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/29/'[跟我学中小企业架构部署]之八：备份服务器部署'/">[跟我学中小企业架构部署]之八：备份服务器部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/26/'[转]每天两分钟远离电脑病'/">[转]每天两分钟 远离电脑病</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/25/监控WEB页面不正常报警脚本/">监控WEB页面不正常报警脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/24/'[转]网站页面性能优化的34条黄金守则'/">[转]网站页面性能优化的 34条黄金守则</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/21/'[跟我学中小企业架构部署]之七：监控系统cacti部署'/">[跟我学中小企业架构部署]之七：监控系统Cacti部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/09/'[转]keepalived.conf文件详解'/">[转]keepalived.conf 文件详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/07/'[跟我学中小企业架构部署]之六：监控系统nagios部署'/">[跟我学中小企业架构部署]之六：监控系统Nagios部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/05/无聊中安装的MACOS截图欣赏/">无聊中安装的MAC OS截图欣赏</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/04/'[转]浮夸'/">[转]浮夸</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/04/Redis的部署使用文档/">Redis的部署使用文档</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/29/用Piranha来实现WEB的负载均衡/">用Piranha来实现WEB的负载均衡</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/28/SSH另类安全加固/">SSH另类安全加固</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/25/'[跟我学中小企业架构部署]之五：WEB服务器LNMP部署'/">[跟我学中小企业架构部署]之五：WEB服务器LNMP部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/19/'[转载]kickstart配置文件详解'/">[转载]Kickstart配置文件详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/18/'[跟我学中小企业架构部署]之四：WEB服务器LAMP部署'/">[跟我学中小企业架构部署]之四：WEB服务器LAMP部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/14/'[跟我学中小企业架构部署]之三：数据库多实例部署'/">[跟我学中小企业架构部署]之三：数据库多实例部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/13/Ubuntu 11.10 正式版抢先体验(附下载地址)/">Ubuntu 11.10 正式版抢先体验(附下载地址)</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/11/CentOS下nagios报警飞信部署四步走/">CentOS下nagios报警飞信部署四步走</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/11/'[跟我学中小企业架构部署]之二：负载均衡部署'/">[跟我学中小企业架构部署]之二：负载均衡部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/09/'[跟我学中小企业架构部署]之一：整体架构设计'/">[跟我学中小企业架构部署]之一：整体架构设计</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/06/奥巴马总统对乔布斯的悼念--向伟大的SteveJobs致敬/">奥巴马总统对乔布斯的悼念--向伟大的Steve Jobs致敬</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/04/成功中国网即将重新上线！！！/">成功中国网即将重新上线！！！</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/27/'[转]Facebook背后的软件'/">[转]Facebook背后的软件</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/26/Hadoop系列之一：hadoop部署安装/">Hadoop系列之一：hadoop部署安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/20/LVS+Heartbeat安装部署文档/">LVS+Heartbeat安装部署文档</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/14/'[转载]轻松吧！重要人生启示'/">[转载]轻松吧！重要人生启示 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/13/phpmyadmin-MYSQL管理工具安装/">Phpmyadmin-MYSQL管理工具安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/08/分享神作《甩饼歌》/">分享神作《甩饼歌》</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/07/Memcached安装部署/">Memcached安装部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/05/SVN服务端数据定时备份脚本/">SVN服务端数据定时备份脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/02/多服务器访问日志合并脚本/">多服务器访问日志合并脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/29/'[转]袁萌：我国普及Linux的回顾与展望'/">[转]袁萌：我国普及Linux的回顾与展望</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/29/LEMP部署安装for RHEL AS4.6/">LEMP部署安装for RHEL AS4.6</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/25/'[转]快讯：Apache全系爆拒绝服务漏洞'/">[转]快讯：Apache 全系爆拒绝服务漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/25/apache+tomcat安装配置/">Apache+tomcat安装配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/18/分布式文件系统MooseFS的部署安装/">分布式文件系统MooseFS的部署安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/18/awstats日志分析工具部署/">Awstats日志分析工具部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/17/分享两个超级震撼的视频/">分享两个超级震撼的视频</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/16/检测MYSQL不同步发邮件通知的脚本/">检测MYSQL不同步发邮件通知的脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/16/PHP扩展缓存加速安装/">PHP扩展缓存加速安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/16/飞信forLinux安装/">飞信forLinux安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/15/'[客户端]批量部署监控客户端，多机分发'/">[客户端]批量部署监控客户端，多机分发 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/11/ubuntu运行wineQQ(比较完美)/">Ubuntu运行wine QQ(比较完美)</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/11/CentOS5.5下升级内核到2.6.38/">CentOS5.5下升级内核到2.6.38</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/09/分享ubuntu文档汇总/">分享Ubuntu文档汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/09/'[转载]Heartbeat详解'/">[转载]Heartbeat详解 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/08/ganglia监控的搭建部署/">Ganglia监控的搭建部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/08/ubuntu下使用gSTM+Firefox实现翻墙/">ubuntu下使用gSTM+Firefox实现翻墙</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/08/WINDOWS下使用SecureCRT+FireFox代理实现翻墙/">WINDOWS下使用SecureCRT+FireFox代理实现翻墙</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/07/earth-song-by-michael-jackson/">Earth Song by Michael Jackson</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/07/仅有内网IP的IDC的机器如何能够连到外网/">仅有内网IP的IDC的机器如何能够连到外网</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/05/you-are-not-alone-by-michael-jackson/">You Are Not Alone by Michael Jackson</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/04/screen命令的使用/">Screen命令的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/04/PHP安装xhprof扩展/">PHP安装xhprof扩展</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/04/GraphicsMagick扩展配置安装/">GraphicsMagick扩展配置安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/03/实战生产环境下使用parted给大于2T以上硬盘分区/">实战生产环境下使用parted给大于2T以上硬盘分区</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/01/编写脚本时以年月日为目录时值得注意的地方/">编写脚本时以年月日为目录时值得注意的地方</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/01/ubuntu面板恢复方法/">Ubuntu面板恢复方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/01/ubuntu下使用windows字体/">Ubuntu下使用windows字体</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/29/检查NGINX配置文件修改后自动reload脚本/">检查NGINX配置文件修改后自动reload脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/29/'[推荐]LINUX运维工程师学习资料[elain整理]'/">[推荐]LINUX运维工程师学习资料[elain整理] </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/28/pptpd安装部署文档/">Pptpd安装部署文档</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/26/Varnish安装部署文档/">Varnish安装部署文档</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/25/SVN在另类环境中实现自动提交的方法/">SVN在另类环境中实现自动提交的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/24/'[转载]职场人如何让老板舍不得你'/">[转载]职场人如何让老板舍不得你 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/23/ssh无密码登录验证技术/">Ssh 无密码登录验证技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/22/'实现linux作为server时与windows间的数据同步'/">实现Linux作为server时与windows间的数据同步 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/22/监控性能方面命令大总结/">监控性能方面命令大总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/22/'CentOS5.5下SVN部署文档'/">CentOS5.5下SVN部署文档 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/22/ubuntu下yakuake使用设置技巧/">Ubuntu下yakuake使用设置技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/21/CentOs5.4设置DVD为本地yum源/">CentOs5.4设置DVD为本地yum源</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/21/网络传输边传输边压缩方法/">网络传输边传输边压缩方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/21/'日志归总脚本部署思路'/">日志归总脚本部署思路 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/07/NGINX多域名日志切割备份脚本/">NGINX 多域名日志切割备份脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/01/nginx.conf文件详解及调优/">nginx.conf文件详解及调优</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/06/17/http错误代码大全/">Http错误代码大全</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/06/13/'[转]Nginx发现重大漏洞'/">[转]Nginx发现重大漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/06/01/ubuntu下禁用笔记本触摸板方法/">Ubuntu下禁用笔记本触摸板方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/05/27/屏蔽优酷烦人的广告方法/">屏蔽优酷烦人的广告方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/05/14/ubuntu11.04的侧边栏消失的解决方法！/">ubuntu11.04的侧边栏消失的解决方法！</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/05/10/'[转]shell程序设计小知识'/">[转]Shell程序设计小知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/05/09/'ubuntu必备软件精选[elain推荐]更新20111020'/">Ubuntu必备软件精选[elain推荐]更新20111020</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/05/09/mysql常用操作命令/">Mysql常用操作命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/04/22/查看各软件配置参数/">查看各软件配置参数</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/04/18/'[转]查看Apache并发请求数及其TCP连接状态故障排除'/">[转]查看Apache并发请求数及其TCP连接状态故障排除</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/04/14/内网邮件服务器测试外网收信/">内网邮件服务器测试外网收信</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/04/02/mysql常用引擎MyISAM和innodb的几点简单特性/">Mysql 常用引擎MyISAM和innodb的几点简单特性</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/04/02/gnomemplayer乱码解决/">Gnome Mplayer乱码解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/04/02/ubuntu里vbox里不能使用USB的解决方法/">ubuntu里vbox里不能使用USB的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/24/thunderbird导入通讯录乱码问题解决/">Thunderbird 导入通讯录乱码问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/23/献给正在为未来打拼的人/">献给正在为未来打拼的人</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/22/vsftpd服务器虚拟用户配置/">Vsftpd服务器虚拟用户配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/20/'[转]Shell中有特殊含义的字符'/">[转]Shell中有特殊含义的字符 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/20/分享elain.org数据备份脚本/">分享elain.org 数据备份脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/18/推荐一款在UBUNTU下使用的编辑器/">推荐一款在UBUNTU下使用的编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/18/'汉化thunderbird英文版及最小化到托盘的设置方法'/">汉化Thunderbird英文版及最小化到托盘的设置方法 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/16/'UBUNTU完美运行TM,RTX,MSOffice,迅雷'/">UBUNTU完美运行TM,RTX,MSOffice,迅雷</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/14/监控性能方面常用系统命令总结/">监控性能方面常用系统命令总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/14/让YUM只安装64位的RPM包设置方法/">让YUM只安装64位的RPM包设置方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/14/vim的一般使用技巧/">Vim的一般使用技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/14/VIM颜色设置/">VIM颜色设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/14/TOP命令详解/">TOP 命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/08/'[varnish]Varnish安装部署'/">[varnish]Varnish安装部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/08/'[MYSQL]mysql优化'/">[MYSQL]mysql优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/08/LINUX下的查找命令-find命令详解/">LINUX下的查找命令-Find命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/08/ApacheHTTPServer与Tomcat的三种连接方式介绍/">ApacheHTTPServer与Tomcat的三种连接方式介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/08/'[MYSQL]Mysql数据库丢失root密码恢复'/">[MYSQL]Mysql 数据库丢失Root密码恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/06/apache两种工作模式详解/">Apache两种工作模式详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/06/Linux系统服务详解/">Linux系统服务详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/06/Linux配置文件系统路径/">Linux配置文件系统路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/06/snort规则编写/">Snort 规则编写</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/05/Linux命令大总结（哭泣之剑学习时的笔记）/">Linux命令大总结（哭泣之剑学习时的笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/05/LINUX三个必背的文件/">LINUX三个必背的文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/05/打造LINUX系统安全/">打造LINUX系统安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/05/RHEL利用 CentOS更新 yum源/">RHEL利用 CentOS更新 Yum源</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/04/ubuntu面板恢复命令/">Ubuntu面板恢复命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/04/showslow性能测试平台搭建/">Showslow 性能测试平台搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/04/arping命令详解/">Arping命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/04/PXE+cobbler+kickstart全自动无人值守网络安装系统/">PXE+cobbler+kickstart全自动无人值守网络安装系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/03/iostat命令详解/">Iostat命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/03/vmstat命令详解/">Vmstat命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/03/mpstat命令详解/">Mpstat命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/03/sar命令详解/">Sar命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/'Linux主机名颜色设置,ps1设置,然linux有颜色'/">Linux主机名颜色设置,ps1设置,然linux有颜色</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/'Linux中变量$#,$@,$0,$1,$2的含义'/">Linux中变量$#,$@,$0,$1,$2的含义</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/解析选项getopts的用法及例子/">解析选项Getopts的用法及例子</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/Linux批量生成生成帐户脚本/">Linux批量生成生成帐户脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/tomcat多实例配置/">Tomcat 多实例配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/rsync命令详解/">Rsync命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/让gedit自动识别文件编码/">让Gedit自动识别文件编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/IT人士十大不良饮食习惯及改进建议/">IT人士十大不良饮食习惯及改进建议</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 elain
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <style>
+        body {
+          background: lightgray;
+        }
+        #container .left-col {
+          background: white;
+        }
+        .article-inner {
+          background: white;
+          margin-bottom: 1em;
+        }
+        .post-nav-button {
+          background: #ececec;
+        }
+        #header .header-nav .social #GitHub {
+          background-color: #bfd3ec;
+        }
+        #post-nav-button a {
+          background: rgba(215, 216, 215, .2);
+        }
+        .post-list {
+          background: white;
+        }
+    </style>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

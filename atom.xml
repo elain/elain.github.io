@@ -4,7 +4,7 @@
   <subtitle><![CDATA[致力于LINUX技术研究交流!开源一切,免费一切!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.elain.org/"/>
-  <updated>2016-02-01T09:31:49.000Z</updated>
+  <updated>2016-02-02T06:18:15.000Z</updated>
   <id>http://www.elain.org/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://www.elain.org/2016/02/01/%E4%BD%BF%E7%94%A8rsyslog%E6%9D%A5%E6%94%B6%E9%9B%86%E5%B8%B8%E7%94%A8%E6%97%A5%E5%BF%97/"/>
     <id>http://www.elain.org/2016/02/01/使用rsyslog来收集常用日志/</id>
     <published>2016-02-01T09:29:36.000Z</published>
-    <updated>2016-02-01T09:31:49.000Z</updated>
+    <updated>2016-02-02T06:18:15.000Z</updated>
     <content type="html"><![CDATA[<p><strong>rsyslog</strong> 无论在性能还是部署上都优于其它日志收集应用，因系统自带，需要新功能只需要做升级即可，方便部署！</p>
 <p>版本：syslog-8.16.0</p>
 <p>download:<a href="http://rpms.adiscon.com/v8-stable" target="_blank" rel="external">http://rpms.adiscon.com/v8-stable</a></p>
@@ -49,6 +49,972 @@
       <category term="rsyslog" scheme="http://www.elain.org/tags/rsyslog/"/>
     
       <category term="日志" scheme="http://www.elain.org/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Rsyslog的使用]]></title>
+    <link href="http://www.elain.org/2016/01/27/Rsyslog%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://www.elain.org/2016/01/27/Rsyslog的使用/</id>
+    <published>2016-01-27T13:34:16.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>[metaslider id=1011]</p>
+<p>&nbsp;</p>
+<p>PDF下载  <a href="http://www.elain.org/wp-content/uploads/2016/01/rsyslog的使用.pdf">rsyslog的使用</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>[metaslider id=1011]</p>
+<p>&nbsp;</p>
+<p>PDF下载  <a href="http://www.elain.org/wp-content/uploads/2016/01/rsyslog的使用.pdf">rsyslog的使用</a><]]>
+    </summary>
+    
+      <category term="elasticsearch" scheme="http://www.elain.org/tags/elasticsearch/"/>
+    
+      <category term="elk" scheme="http://www.elain.org/tags/elk/"/>
+    
+      <category term="rsyslog" scheme="http://www.elain.org/tags/rsyslog/"/>
+    
+      <category term="日志分析" scheme="http://www.elain.org/categories/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[EFK日志收集丢失率测试报告]]></title>
+    <link href="http://www.elain.org/2015/12/17/EFK%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E4%B8%A2%E5%A4%B1%E7%8E%87%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/"/>
+    <id>http://www.elain.org/2015/12/17/EFK日志收集丢失率测试报告/</id>
+    <published>2015-12-16T21:36:55.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>目前我们EFK日志系统接入了近10种日志类型，每天的日志量约1T，峰值时达到33W/s的写入，为了更好的服务，我对日志收集的完整度做了一次测试，现发出来，供大家参考！</p>
+<p>测试场景：<br>两种日志：<br>一种用户访问日志(nginx access log)<br>一种接口调用日志（nginx access log）</p>
+<p>测试方法：<br>每种日志每个场景做三次测试取平均值</p>
+<p>测试逻辑 ：</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2015/12/EFK_write_test.png"><img src="http://www.elain.org/wp-content/uploads/2015/12/EFK_write_test.png" alt="EFK_write_test"></a><br>添加有策略有：<br>rewrite_tag_filter<br>grep<br>ua_parser<br>replace<br>record_modifier<br>geoip<br>以下是测试结果对比图<a id="more"></a></p>
+<p><a href="http://www.elain.org/wp-content/uploads/2015/12/EFK_write_result.jpg"><img src="http://www.elain.org/wp-content/uploads/2015/12/EFK_write_result.jpg" alt="EFK_write_result"></a><br>从测试结果来看：<br>fluentd 在无策略写文件时，无丢失，在添加一定策略后出现不同程度丢失，数据完整率保持在99.95%以上，原因有二：<br>1、和日志内容有关，不同的日志会出现不同的结果<br>2、和策略有关，有些策略本身的匹配度导致一些日志没匹配至丢弃<br>以上两个问题，也可通过日志收集客户端fluent的log_format,和策略的匹配精准度来解决。</p>
+<p>fluentd 在无策略写elasticsearch时除上面的两条原因外，还有一条是elasticsearch的mappings设置有关，比如某些字段不符合mappings设置的类型，elasticsearch就会报错，拒绝写入<br>最常见的有 “-“ 、”null” 、乱码等，可以通过调整mappings的方式来解决这个问题。</p>
+<p>总体而言，目前我们的应用场景已满足，都能保持在99.9%以上,</p>
+<p>&nbsp;</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>目前我们EFK日志系统接入了近10种日志类型，每天的日志量约1T，峰值时达到33W/s的写入，为了更好的服务，我对日志收集的完整度做了一次测试，现发出来，供大家参考！</p>
+<p>测试场景：<br>两种日志：<br>一种用户访问日志(nginx access log)<br>一种接口调用日志（nginx access log）</p>
+<p>测试方法：<br>每种日志每个场景做三次测试取平均值</p>
+<p>测试逻辑 ：</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2015/12/EFK_write_test.png"><img src="http://www.elain.org/wp-content/uploads/2015/12/EFK_write_test.png" alt="EFK_write_test"></a><br>添加有策略有：<br>rewrite_tag_filter<br>grep<br>ua_parser<br>replace<br>record_modifier<br>geoip<br>以下是测试结果对比图]]>
+    
+    </summary>
+    
+      <category term="efk" scheme="http://www.elain.org/tags/efk/"/>
+    
+      <category term="elasticsearch" scheme="http://www.elain.org/tags/elasticsearch/"/>
+    
+      <category term="elk" scheme="http://www.elain.org/tags/elk/"/>
+    
+      <category term="fluentd" scheme="http://www.elain.org/tags/fluentd/"/>
+    
+      <category term="logstash" scheme="http://www.elain.org/tags/logstash/"/>
+    
+      <category term="日志分析" scheme="http://www.elain.org/categories/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[给EFK日志系统添加kafka队列中遇到的time问题解决]]></title>
+    <link href="http://www.elain.org/2015/10/16/%E7%BB%99EFK%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E6%B7%BB%E5%8A%A0kafka%E9%98%9F%E5%88%97%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84time%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
+    <id>http://www.elain.org/2015/10/16/给EFK日志系统添加kafka队列中遇到的time问题解决/</id>
+    <published>2015-10-16T07:34:42.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>以下是我在生产环境中的EFK 架构</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2015/10/efk.jpg"><img src="http://www.elain.org/wp-content/uploads/2015/10/efk.jpg" alt="efk"></a></p>
+<p>在添加kafka队列中的一个问题解决过程</p>
+<p>在fluentd中使用fluent-plugin-kafka收集日志到kafka中，日志正常；<br>然后使用 elasticsearch-river-kafka 来把kafka中的数据写入到ES中，查看正常；<br>再使用kibana 来读取ES中的数据来展示，问题来了，怎么调试也不能成功的展示数据；</p>
+<p>问题在于 fluent-plugin-kafka 默认没有收集日志中的time字段，打开 output_include_time 选项后<br>就可出现time字段，但并不是日志中的格式，而是转换成了 unix time(例如：1444961965)<br>而在es中date字段，首先尝试dateOptionalTime，失败的话会尝试UNIX-MS(例如：1444961965000)，但是收集到的日志时间是UNIX time，少了毫秒（少了000），所以计算出的时间是在1970年左右，而我在Kibana默认的time tickper是 最近15分钟，于是乎我把时间拉到了最近50年，看到了数据。</p>
+<p>查找网上并没找到解决方法，于是自己动手：</p>
+<p>修改 out_kafka.rb 如下：</p>
+<p>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
+<p>config_param :client_id, :string, :default =&gt; ‘kafka’<br>config_param :output_data_type, :string, :default =&gt; ‘json’<br>config_param :output_include_tag, :bool, :default =&gt; false</p>
+<ul>
+<li>config_param :output_include_time, :bool, :default =&gt; false</li>
+</ul>
+<ul>
+<li>#config_param :output_include_time, :bool, :default =&gt; false</li>
+<li>config_param :logstash_format, :bool, :default =&gt; false</li>
+</ul>
+<h1 id="poseidon_producer_options"><a href="#poseidon_producer_options" class="headerlink" title="poseidon producer options"></a>poseidon producer options</h1><p>config_param :max_send_retries, :integer, :default =&gt; 3<br>@@ -130,7 +131,17 @@ def emit(tag, es, chain)<br>begin<br>chain.next<br>es.each do |time,record|</p>
+<ul>
+<li>record[‘time’] = time if @output_include_time</li>
+</ul>
+<ul>
+<li>if @logstash_format</li>
+<li>if record.has_key?(“@timestamp”)</li>
+<li>time = Time.parse record[“@timestamp”]</li>
+<li>elsif record.has_key?(@time_key)</li>
+<li>time = Time.parse record[@time_key]</li>
+<li>record[‘@timestamp’] = record[@time_key]</li>
+<li>else</li>
+<li>record.merge!({“@timestamp” =&gt; Time.at(time).to_datetime.to_s})</li>
+<li>end</li>
+<li>end</li>
+<li>#record[‘time’] = time if @output_include_time<br>record[‘tag’] = tag if @output_include_tag<br>topic = record[‘topic’] || self.default_topic || tag<br>partition_key = record[‘partition_key’] || @default_partition_key</li>
+</ul>
+<p>[/ccWN]<a id="more"></a></p>
+<p>有同样需求的同学，请对比修改，完成后在td-agent.conf 的相应位置 添加</p>
+<p>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
+<p>type kafka</p>
+<p>: # Omit configuration about fluent-plugin-kafka</p>
+<p>logstash_format true</p>
+<p>[/ccWN]</p>
+<p>github:<a href="https://github.com/elain/fluent-plugin-kafka/commit/2ca46cd00f61e0dc63717b20a6c70e90510ac731" target="_blank" rel="external">https://github.com/elain/fluent-plugin-kafka/commit/2ca46cd00f61e0dc63717b20a6c70e90510ac731</a></p>
+<p>&nbsp;</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>以下是我在生产环境中的EFK 架构</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2015/10/efk.jpg"><img src="http://www.elain.org/wp-content/uploads/2015/10/efk.jpg" alt="efk"></a></p>
+<p>在添加kafka队列中的一个问题解决过程</p>
+<p>在fluentd中使用fluent-plugin-kafka收集日志到kafka中，日志正常；<br>然后使用 elasticsearch-river-kafka 来把kafka中的数据写入到ES中，查看正常；<br>再使用kibana 来读取ES中的数据来展示，问题来了，怎么调试也不能成功的展示数据；</p>
+<p>问题在于 fluent-plugin-kafka 默认没有收集日志中的time字段，打开 output_include_time 选项后<br>就可出现time字段，但并不是日志中的格式，而是转换成了 unix time(例如：1444961965)<br>而在es中date字段，首先尝试dateOptionalTime，失败的话会尝试UNIX-MS(例如：1444961965000)，但是收集到的日志时间是UNIX time，少了毫秒（少了000），所以计算出的时间是在1970年左右，而我在Kibana默认的time tickper是 最近15分钟，于是乎我把时间拉到了最近50年，看到了数据。</p>
+<p>查找网上并没找到解决方法，于是自己动手：</p>
+<p>修改 out_kafka.rb 如下：</p>
+<p>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
+<p>config_param :client_id, :string, :default =&gt; ‘kafka’<br>config_param :output_data_type, :string, :default =&gt; ‘json’<br>config_param :output_include_tag, :bool, :default =&gt; false</p>
+<ul>
+<li>config_param :output_include_time, :bool, :default =&gt; false</li>
+</ul>
+<ul>
+<li>#config_param :output_include_time, :bool, :default =&gt; false</li>
+<li>config_param :logstash_format, :bool, :default =&gt; false</li>
+</ul>
+<h1 id="poseidon_producer_options"><a href="#poseidon_producer_options" class="headerlink" title="poseidon producer options"></a>poseidon producer options</h1><p>config_param :max_send_retries, :integer, :default =&gt; 3<br>@@ -130,7 +131,17 @@ def emit(tag, es, chain)<br>begin<br>chain.next<br>es.each do |time,record|</p>
+<ul>
+<li>record[‘time’] = time if @output_include_time</li>
+</ul>
+<ul>
+<li>if @logstash_format</li>
+<li>if record.has_key?(“@timestamp”)</li>
+<li>time = Time.parse record[“@timestamp”]</li>
+<li>elsif record.has_key?(@time_key)</li>
+<li>time = Time.parse record[@time_key]</li>
+<li>record[‘@timestamp’] = record[@time_key]</li>
+<li>else</li>
+<li>record.merge!({“@timestamp” =&gt; Time.at(time).to_datetime.to_s})</li>
+<li>end</li>
+<li>end</li>
+<li>#record[‘time’] = time if @output_include_time<br>record[‘tag’] = tag if @output_include_tag<br>topic = record[‘topic’] || self.default_topic || tag<br>partition_key = record[‘partition_key’] || @default_partition_key</li>
+</ul>
+<p>[/ccWN]]]>
+    
+    </summary>
+    
+      <category term="efk" scheme="http://www.elain.org/tags/efk/"/>
+    
+      <category term="elasticsearch" scheme="http://www.elain.org/tags/elasticsearch/"/>
+    
+      <category term="fluentd" scheme="http://www.elain.org/tags/fluentd/"/>
+    
+      <category term="kafka" scheme="http://www.elain.org/tags/kafka/"/>
+    
+      <category term="kibana" scheme="http://www.elain.org/tags/kibana/"/>
+    
+      <category term="日志分析" scheme="http://www.elain.org/categories/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[给kibana4中配置中国地图(添加最新版4.3.1修改方法)]]></title>
+    <link href="http://www.elain.org/2015/09/01/%E7%BB%99kibana4%E4%B8%AD%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%9B%BD%E5%9C%B0%E5%9B%BE(%E6%B7%BB%E5%8A%A0%E6%9C%80%E6%96%B0%E7%89%884.3.1%E4%BF%AE%E6%94%B9%E6%96%B9%E6%B3%95)/"/>
+    <id>http://www.elain.org/2015/09/01/给kibana4中配置中国地图(添加最新版4.3.1修改方法)/</id>
+    <published>2015-09-01T03:20:30.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>因本人使用的是 fluentd 来收集日志，并不是logstash ,所以，以下是fluentd 中的配置：</p>
+<p>下载IP库(这里使用的maxmind的免费版，大家如公司有收费版本直接采用即可)<br><a href="http://dev.maxmind.com/geoip/legacy/geolite/" target="_blank" rel="external">http://dev.maxmind.com/geoip/legacy/geolite/</a></p>
+<p>[ccWN lang=”bash” width=”99%” height=”100%”]<br>mkdir -p &amp;&amp; cd /etc/td-agent/maps<br>axel -n 10 <a href="http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz" target="_blank" rel="external">http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz</a><br>gunzip GeoLiteCity.dat.gz<br>[/ccWN]<br>在tg-agent中添加好geoip数据库后，安装fluent的geoip插件</p>
+<p>[ccWN lang=”bash” width=”99%” height=”100%”]<br>/opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-geoip-0.5.1.gem<br>/opt/td-agent/embedded/bin/fluent-gem install fluent-mixin-rewrite-tag-name-0.1.0.gem<br>/opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-geoip-0.5.1.gem<br>[/ccWN]</p>
+<p>#注：这里如果安装失败，可能是网络原因，请直接下载对就包本地安装，我这里就是下载的gem包直接本地安装</p>
+<p>在td-agent.conf中添加：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>&lt;match geoip-order.**&gt;       #这里上接上面的tag<br>type geoip<br>geoip_lookup_key client_ip #这个是用户真实IP的字段<br>enable_key_country_code geoip_country<br>enable_key_city geoip_city</p>
+<p>#enable_key_latitude geoip_lat</p>
+<p>#enable_key_longitude geoip_lon<br>&lt;record&gt;                                 #这里是因为本身经纬度坐标是独立的两个字段，这里使用location合并<br>location ${latitude[“client_ip”]},${longitude[“client_ip”]}<br>&lt;/record&gt;<br>remove_tag_prefix geoip-order.<br>add_tag_prefix es-order.    #这里是新添加的tag</p>
+<p>#flush_interval 5s</p>
+<p>skip_adding_null_record  true  #遇到值为null的记录，跳过此字段<br>&lt;/match&gt;<br>[/ccWN]<br>重启td-agent</p>
+<p>在es的mappings中加入：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>“geoip” : {<br>“type” : “object”,<br>“dynamic”: true,<br>“path”: “full”,<br>“properties” : {<br>“location” : { “type” : “geo_point” }<br>}<br>}</p>
+<p>[/ccWN]<br>重建索引，这里的kibana中应该可以看到如下图中的字段</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2015/09/QQ20150901-4@2x.png"><img src="http://www.elain.org/wp-content/uploads/2015/09/QQ20150901-4@2x.png" alt="QQ20150901-4@2x"></a></p>
+<p>打开kibana4的index.js ,<br>路径：kibana/src/public/index.js 约 137475行左右<br>原先的titleLayer注释替换即可,以下是添加的高德地图：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>/<em><br>var tileLayer = L.tileLayer(‘<a href="https://otile{s}-s.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg" target="_blank" rel="external">https://otile{s}-s.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg</a>‘, {<br>attribution: ‘Tiles by &lt;a href=”<a href="http://www.mapquest.com/&quot;&gt;MapQuest&lt;/a&amp;gt" target="_blank" rel="external">http://www.mapquest.com/&quot;&gt;MapQuest&lt;/a&amp;gt</a>; &amp;mdash; ‘ +<br>‘Map data &amp;copy; &lt;a href=”<a href="http://openstreetmap.org&quot;&gt;OpenStreetMap&lt;/a&amp;gt" target="_blank" rel="external">http://openstreetmap.org&quot;&gt;OpenStreetMap&lt;/a&amp;gt</a>; contributors, ‘ +<br>‘&lt;a href=”<a href="http://creativecommons.org/licenses/by-sa/2.0/&quot;&gt;CC-BY-SA&lt;/a&amp;gt" target="_blank" rel="external">http://creativecommons.org/licenses/by-sa/2.0/&quot;&gt;CC-BY-SA&lt;/a&amp;gt</a>;’,<br>subdomains: ‘1234’<br>});
+</em>/</p>
+<p>//add gaode map by elain<br>var tileLayer = L.tileLayer(‘<a href="http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&amp;size=1&amp;scale=1&amp;style=8&amp;x={x}&amp;y={y}&amp;z={z}" target="_blank" rel="external">http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&amp;size=1&amp;scale=1&amp;style=8&amp;x={x}&amp;y={y}&amp;z={z}</a>‘, {<br>attribution: ‘Tiles by &lt;a href=”<a href="http://www.mapquest.com/&quot;&gt;MapQuest&lt;/a&amp;gt" target="_blank" rel="external">http://www.mapquest.com/&quot;&gt;MapQuest&lt;/a&amp;gt</a>; — ‘ +<br>‘Map data © &lt;a href=”<a href="http://openstreetmap.org&quot;&gt;OpenStreetMap&lt;/a&amp;gt" target="_blank" rel="external">http://openstreetmap.org&quot;&gt;OpenStreetMap&lt;/a&amp;gt</a>; contributors, ‘ +<br>‘&lt;a href=”<a href="http://creativecommons.org/licenses/by-sa/2.0/&quot;&gt;CC-BY-SA&lt;/a&amp;gt" target="_blank" rel="external">http://creativecommons.org/licenses/by-sa/2.0/&quot;&gt;CC-BY-SA&lt;/a&amp;gt</a>;’,<br>subdomains:[“1”,”2”,”3”,”4”],<br>variants: {<br>Satellite:{<br>url: ‘<a href="http://webst0{s}.is.autonavi.com/appmaptile?style=6&amp;x={x}&amp;y={y}&amp;z={z}" target="_blank" rel="external">http://webst0{s}.is.autonavi.com/appmaptile?style=6&amp;x={x}&amp;y={y}&amp;z={z}</a>‘<br>}<br>}<br>});<br>[/ccWN]<br>保存，重新加载</p>
+<p>使用tilemap创建地图效果如下：</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2015/09/QQ20150901-3@2x.png"><img src="http://www.elain.org/wp-content/uploads/2015/09/QQ20150901-3@2x.png" alt="QQ20150901-3@2x"></a></p>
+<a id="more"></a>
+<p>在logstash里面使用(未经过测试验证)<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>geoip {<br>source =&gt; “client_ip”<br>target =&gt; “geoip”<br>database =&gt; “/home/work/app/logstash/maps/GeoLiteCity.dat”</p>
+<p>}<br>[/ccWN]</p>
+<p>最新版4.3.1 的修改方法：</p>
+<p>打开 ./src/ui/public/vislib/visualizations/_map.js +11<br>把：</p>
+<p>[ccWN lang=”bash” width=”99%” height=”100%”]<br>url: ‘<a href="https://otile{s}-s.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg" target="_blank" rel="external">https://otile{s}-s.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg</a>‘,<br>[/ccWN]</p>
+<p>替换为：</p>
+<p>[ccWN lang=”bash” width=”99%” height=”100%”]<br>url: ‘<a href="http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&amp;size=1&amp;scale=1&amp;style=8&amp;x={x}&amp;y={y}&amp;z={z}" target="_blank" rel="external">http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&amp;size=1&amp;scale=1&amp;style=8&amp;x={x}&amp;y={y}&amp;z={z}</a>‘,</p>
+<p>[/ccWN]</p>
+<p>最重要的是这里，记得修改后在以下文件加载一下，才会生效，我理解是需要预编译的，否则会被cache住，所有的修改并不能及时生效。<br>打开 ./src/ui/autoload.js +35<br>末尾添加：</p>
+<p>[ccWN lang=”bash” width=”99%” height=”100%”]<br>‘ui/vislib’</p>
+<p>[/ccWN]</p>
+<p>重启生效</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>参考资料：<br><a href="https://www.digitalocean.com/community/tutorials/how-to-map-user-location-with-geoip-and-elk-elasticsearch-logstash-and-kibana" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-map-user-location-with-geoip-and-elk-elasticsearch-logstash-and-kibana</a><br><a href="http://zhou5zhou6.com/2015/03/19/kibana_map/" target="_blank" rel="external">http://zhou5zhou6.com/2015/03/19/kibana_map/</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>因本人使用的是 fluentd 来收集日志，并不是logstash ,所以，以下是fluentd 中的配置：</p>
+<p>下载IP库(这里使用的maxmind的免费版，大家如公司有收费版本直接采用即可)<br><a href="http://dev.maxmind.com/geoip/legacy/geolite/">http://dev.maxmind.com/geoip/legacy/geolite/</a></p>
+<p>[ccWN lang=”bash” width=”99%” height=”100%”]<br>mkdir -p &amp;&amp; cd /etc/td-agent/maps<br>axel -n 10 <a href="http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz">http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz</a><br>gunzip GeoLiteCity.dat.gz<br>[/ccWN]<br>在tg-agent中添加好geoip数据库后，安装fluent的geoip插件</p>
+<p>[ccWN lang=”bash” width=”99%” height=”100%”]<br>/opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-geoip-0.5.1.gem<br>/opt/td-agent/embedded/bin/fluent-gem install fluent-mixin-rewrite-tag-name-0.1.0.gem<br>/opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-geoip-0.5.1.gem<br>[/ccWN]</p>
+<p>#注：这里如果安装失败，可能是网络原因，请直接下载对就包本地安装，我这里就是下载的gem包直接本地安装</p>
+<p>在td-agent.conf中添加：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>&lt;match geoip-order.**&gt;       #这里上接上面的tag<br>type geoip<br>geoip_lookup_key client_ip #这个是用户真实IP的字段<br>enable_key_country_code geoip_country<br>enable_key_city geoip_city</p>
+<p>#enable_key_latitude geoip_lat</p>
+<p>#enable_key_longitude geoip_lon<br>&lt;record&gt;                                 #这里是因为本身经纬度坐标是独立的两个字段，这里使用location合并<br>location ${latitude[“client_ip”]},${longitude[“client_ip”]}<br>&lt;/record&gt;<br>remove_tag_prefix geoip-order.<br>add_tag_prefix es-order.    #这里是新添加的tag</p>
+<p>#flush_interval 5s</p>
+<p>skip_adding_null_record  true  #遇到值为null的记录，跳过此字段<br>&lt;/match&gt;<br>[/ccWN]<br>重启td-agent</p>
+<p>在es的mappings中加入：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>“geoip” : {<br>“type” : “object”,<br>“dynamic”: true,<br>“path”: “full”,<br>“properties” : {<br>“location” : { “type” : “geo_point” }<br>}<br>}</p>
+<p>[/ccWN]<br>重建索引，这里的kibana中应该可以看到如下图中的字段</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2015/09/QQ20150901-4@2x.png"><img src="http://www.elain.org/wp-content/uploads/2015/09/QQ20150901-4@2x.png" alt="QQ20150901-4@2x"></a></p>
+<p>打开kibana4的index.js ,<br>路径：kibana/src/public/index.js 约 137475行左右<br>原先的titleLayer注释替换即可,以下是添加的高德地图：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>/<em><br>var tileLayer = L.tileLayer(‘<a href="https://otile{s}-s.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg">https://otile{s}-s.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg</a>‘, {<br>attribution: ‘Tiles by &lt;a href=”<a href="http://www.mapquest.com/&quot;&gt;MapQuest&lt;/a&amp;gt">http://www.mapquest.com/&quot;&gt;MapQuest&lt;/a&amp;gt</a>; &amp;mdash; ‘ +<br>‘Map data &amp;copy; &lt;a href=”<a href="http://openstreetmap.org&quot;&gt;OpenStreetMap&lt;/a&amp;gt">http://openstreetmap.org&quot;&gt;OpenStreetMap&lt;/a&amp;gt</a>; contributors, ‘ +<br>‘&lt;a href=”<a href="http://creativecommons.org/licenses/by-sa/2.0/&quot;&gt;CC-BY-SA&lt;/a&amp;gt">http://creativecommons.org/licenses/by-sa/2.0/&quot;&gt;CC-BY-SA&lt;/a&amp;gt</a>;’,<br>subdomains: ‘1234’<br>});
+</em>/</p>
+<p>//add gaode map by elain<br>var tileLayer = L.tileLayer(‘<a href="http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&amp;size=1&amp;scale=1&amp;style=8&amp;x={x}&amp;y={y}&amp;z={z}">http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&amp;size=1&amp;scale=1&amp;style=8&amp;x={x}&amp;y={y}&amp;z={z}</a>‘, {<br>attribution: ‘Tiles by &lt;a href=”<a href="http://www.mapquest.com/&quot;&gt;MapQuest&lt;/a&amp;gt">http://www.mapquest.com/&quot;&gt;MapQuest&lt;/a&amp;gt</a>; — ‘ +<br>‘Map data © &lt;a href=”<a href="http://openstreetmap.org&quot;&gt;OpenStreetMap&lt;/a&amp;gt">http://openstreetmap.org&quot;&gt;OpenStreetMap&lt;/a&amp;gt</a>; contributors, ‘ +<br>‘&lt;a href=”<a href="http://creativecommons.org/licenses/by-sa/2.0/&quot;&gt;CC-BY-SA&lt;/a&amp;gt">http://creativecommons.org/licenses/by-sa/2.0/&quot;&gt;CC-BY-SA&lt;/a&amp;gt</a>;’,<br>subdomains:[“1”,”2”,”3”,”4”],<br>variants: {<br>Satellite:{<br>url: ‘<a href="http://webst0{s}.is.autonavi.com/appmaptile?style=6&amp;x={x}&amp;y={y}&amp;z={z}">http://webst0{s}.is.autonavi.com/appmaptile?style=6&amp;x={x}&amp;y={y}&amp;z={z}</a>‘<br>}<br>}<br>});<br>[/ccWN]<br>保存，重新加载</p>
+<p>使用tilemap创建地图效果如下：</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2015/09/QQ20150901-3@2x.png"><img src="http://www.elain.org/wp-content/uploads/2015/09/QQ20150901-3@2x.png" alt="QQ20150901-3@2x"></a></p>]]>
+    
+    </summary>
+    
+      <category term="elasticsearch" scheme="http://www.elain.org/tags/elasticsearch/"/>
+    
+      <category term="es" scheme="http://www.elain.org/tags/es/"/>
+    
+      <category term="fluentd" scheme="http://www.elain.org/tags/fluentd/"/>
+    
+      <category term="kibana" scheme="http://www.elain.org/tags/kibana/"/>
+    
+      <category term="kibana4" scheme="http://www.elain.org/tags/kibana4/"/>
+    
+      <category term="td-agent" scheme="http://www.elain.org/tags/td-agent/"/>
+    
+      <category term="日志分析" scheme="http://www.elain.org/categories/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Elasticsearch 免费认证插件Search-Guard的部署安装及策略配置]]></title>
+    <link href="http://www.elain.org/2015/08/31/Elasticsearch%E5%85%8D%E8%B4%B9%E8%AE%A4%E8%AF%81%E6%8F%92%E4%BB%B6Search-guard%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE/"/>
+    <id>http://www.elain.org/2015/08/31/Elasticsearch免费认证插件Search-guard的部署安装及策略配置/</id>
+    <published>2015-08-31T03:18:58.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://www.elain.org/wp-content/uploads/2015/08/Logo_CMYK_SearchGuard.png">
+</a><a href="http://www.elain.org/wp-content/uploads/2015/08/QQ20150831-1@2x.png"><img src="http://www.elain.org/wp-content/uploads/2015/08/QQ20150831-1@2x.png" alt="QQ20150831-1@2x"></a></p>
+<p>&nbsp;</p>
+<p>背景：</p>
+<p>当前es正在被各大互联网公司大量的使用，但目前安全方面还没有一个很成熟的方案，大部门都没有做安全认证或基于自身场景自己开发，没有一个好的开源方案<br>es官方推出了shield认证，试用了一番，很是方便，功能强大，文档也较全面，但最大的问题是收费的，我相信中国很多公司都不愿去花钱使用，所以随后在github<br>中找到了search-guard项目，接下来我们一起来了解并部署此项目到我们的ES环境中。</p>
+<p>目前此项目只支持到1.6以下的es，1.7 还未支持，所以，我们在ES1.6下来部署此项目</p>
+<p>软件版本：<br>ES 1.6.0<br>kibana 4.0.2<br>CentOS 6.3</p>
+<p>官网地址：<br><a href="http://floragunn.com/searchguard" target="_blank" rel="external">http://floragunn.com/searchguard</a></p>
+<p>功能特性：<br>基于用户与角色的权限控制<br>支持SSL/TLS方式安全认证<br>支持LDAP认证<br>支持最新的kibana4<br>更多特性见<a href="http://floragunn.com/searchguard" target="_blank" rel="external">官网介绍</a></p>
+<p>目标：<br>实现用户访问es中日志需要登陆授权，不同用户访问不同索引，不授权的索引无法查看，分组控制不同rd查看各自业务的日志，</p>
+<p>部署</p>
+<p>#download maven：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>axel -n 10 <a href="http://mirror.bit.edu.cn/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz" target="_blank" rel="external">http://mirror.bit.edu.cn/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz</a><br>tar zxvf apache-maven-3.3.3-bin.tar.gz<br>cd apache-maven-3.3.3/</p>
+<p>#git search-guard and build<br>git clone -b es1.6 <a href="https://github.com/floragunncom/search-guard.git" target="_blank" rel="external">https://github.com/floragunncom/search-guard.git</a><br>cd search-guard ;/home/work/app/maven/bin/mvn package -DskipTests<br>[/ccWN]</p>
+<p>#把编译好的包放到一个下载地址(方便于es集群使用，单台测试可不使用这种方案)：<br><a href="http://www.elain.org/dl/search-guard-16-0.6-SNAPSHOT.zip">http://www.elain.org/dl/search-guard-16-0.6-SNAPSHOT.zip</a></p>
+<p>#在es上以插件方式安装编译好的包<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>cd /home/work/app/elasticsearch/plugins/<br>./bin/plugin -u <a href="http://www.elain.org/dl/search-guard-16-0.6-SNAPSHOT.zip">http://www.elain.org/dl/search-guard-16-0.6-SNAPSHOT.zip</a> -i search-guard<br>[/ccWN]</p>
+<p>#elasticsearch.yml 添加<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
+<p>#################search-guard###################<br>searchguard.enabled: true<br>searchguard.key_path: /home/work/app/elasticsearch/keys<br>searchguard.auditlog.enabled: true<br>searchguard.allow_all_from_loopback: true #本地调试可打开，建议在线上关闭<br>searchguard.check_for_root: false<br>searchguard.http.enable_sessions: true</p>
+<p>#配置认证方式<br>searchguard.authentication.authentication_backend.impl: com.floragunn.searchguard.authentication.backend.simple.SettingsBasedAuthenticationBackend<br>searchguard.authentication.authorizer.impl: com.floragunn.searchguard.authorization.simple.SettingsBasedAuthorizator<br>searchguard.authentication.http_authenticator.impl: com.floragunn.searchguard.authentication.http.basic.HTTPBasicAuthenticator</p>
+<p>#配置用户名和密码<br>searchguard.authentication.settingsdb.user.admin: admin<br>searchguard.authentication.settingsdb.user.user1: 123<br>searchguard.authentication.settingsdb.user.user2: 123</p>
+<p>#配置用户角色<br>searchguard.authentication.authorization.settingsdb.roles.admin: [“root”]<br>searchguard.authentication.authorization.settingsdb.roles.user1: [“user1”]<br>searchguard.authentication.authorization.settingsdb.roles.user2: [“user2”]</p>
+<p>#配置角色权限（只读）<br>searchguard.actionrequestfilter.names: [“readonly”,”deny”]<br>searchguard.actionrequestfilter.readonly.allowed_actions: [“indices:data/read/<em>“, “indices:admin/exists”,”indices:admin/mappings/</em>“,”indices:admin/validate/query”,”<em>monitor</em>“]<br>searchguard.actionrequestfilter.readonly.forbidden_actions: [“indices:data/write/*”]</p>
+<p>#配置角色权限（禁止访问）<br>searchguard.actionrequestfilter.deny.allowed_actions: []<br>searchguard.actionrequestfilter.deny.forbidden_actions: [“indices:data/write/*”]</p>
+<p>#################search-guard###################<br>[/ccWN]</p>
+<p>#logging.yml 添加<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>logger.com.floragunn: DEBUG #开启debug，方便调试<br>[/ccWN]</p>
+<p>#创建key</p>
+<p>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
+<p>echo ‘be226fd1e6ddc74b’ &gt;/home/work/app/elasticsearch/keys/searchguard.key</p>
+<p>[/ccWN]</p>
+<p>&nbsp;</p>
+<p>#重启es<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>/etc/init.d/elasticsearch restart<br>[/ccWN]</p>
+<p>#配置权限策略如下 ：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>curl -XPUT ‘<a href="http://localhost:9200/searchguard/ac/ac?pretty" target="_blank" rel="external">http://localhost:9200/searchguard/ac/ac?pretty</a>‘ -d ‘<br>{“acl”: [<br>{<br>“<strong>Comment</strong>“: “Default is to execute all filters”,<br>“filters_bypass”: [],<br>“filters_execute”: [“actionrequestfilter.deny”]<br>}, //默认禁止访问<br>{<br>“<strong>Comment</strong>“: “This means that every requestor (regardless of the requestors hostname and username) which has the root role can do anything”,<br>“roles”: [<br>“root”<br>],<br>“filters_bypass”: [“<em>“],<br>“filters_execute”: []<br>}, // root角色完全权限<br>{<br>“<strong>Comment</strong>“: “This means that for the user spock on index popstuff only the actionrequestfilter.readonly will be executed, no other”,<br>“users”: [“user1”],<br>“indices”: [“index1-</em>“,”index2-<em>“,”.kibana”],<br>“filters_bypass”: [“actionrequestfilter.deny”],<br>“filters_execute”: [“actionrequestfilter.readonly”]<br>}, //user1 用户只能访问index1-</em>,index2-<em> 索引，且只有只读权限<br>{<br>“<strong>Comment</strong>“: “This means that for the user spock on index popstuff only the actionrequestfilter.readonly will be executed, no other”,<br>“users”: [“user2”],<br>“indices”: [“index3-</em>“,”.kibana”],<br>“filters_bypass”: [“actionrequestfilter.deny”],<br>“filters_execute”: [“actionrequestfilter.readonly”]<br>} //user2 用户只能访问index3-* 索引，且只有只读权限</p>
+<p>]}}<br>[/ccWN]<a id="more"></a></p>
+<p>#查看策略<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>curl -XGET -uadmin:admin <a href="http://localhost:9200/searchguard/ac/ac" target="_blank" rel="external">http://localhost:9200/searchguard/ac/ac</a><br>[/ccWN]</p>
+<p>#注：里面的中文注释是我后加上去的，需要在使用时删除，以上是我自己使用的策略，方便于不同用户访问不同索引，不授权的索引无法查看，分组控制不同rd查看各自业务的日志</p>
+<p>更多策略见：<br><a href="https://github.com/floragunncom/search-guard/blob/es1.6/searchguard_config_example_1.yml" target="_blank" rel="external">https://github.com/floragunncom/search-guard/blob/es1.6/searchguard_config_example_1.yml</a><br>更多配置与功能见：<br><a href="https://github.com/floragunncom/search-guard/blob/es1.6/searchguard_config_template.yml" target="_blank" rel="external">https://github.com/floragunncom/search-guard/blob/es1.6/searchguard_config_template.yml</a></p>
+<p>&nbsp;</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="http://www.elain.org/wp-content/uploads/2015/08/Logo_CMYK_SearchGuard.png">
+</a><a href="http://www.elain.org/wp-content/uploads/2015/08/QQ20150831-1@2x.png"><img src="http://www.elain.org/wp-content/uploads/2015/08/QQ20150831-1@2x.png" alt="QQ20150831-1@2x"></a></p>
+<p>&nbsp;</p>
+<p>背景：</p>
+<p>当前es正在被各大互联网公司大量的使用，但目前安全方面还没有一个很成熟的方案，大部门都没有做安全认证或基于自身场景自己开发，没有一个好的开源方案<br>es官方推出了shield认证，试用了一番，很是方便，功能强大，文档也较全面，但最大的问题是收费的，我相信中国很多公司都不愿去花钱使用，所以随后在github<br>中找到了search-guard项目，接下来我们一起来了解并部署此项目到我们的ES环境中。</p>
+<p>目前此项目只支持到1.6以下的es，1.7 还未支持，所以，我们在ES1.6下来部署此项目</p>
+<p>软件版本：<br>ES 1.6.0<br>kibana 4.0.2<br>CentOS 6.3</p>
+<p>官网地址：<br><a href="http://floragunn.com/searchguard">http://floragunn.com/searchguard</a></p>
+<p>功能特性：<br>基于用户与角色的权限控制<br>支持SSL/TLS方式安全认证<br>支持LDAP认证<br>支持最新的kibana4<br>更多特性见<a href="http://floragunn.com/searchguard">官网介绍</a></p>
+<p>目标：<br>实现用户访问es中日志需要登陆授权，不同用户访问不同索引，不授权的索引无法查看，分组控制不同rd查看各自业务的日志，</p>
+<p>部署</p>
+<p>#download maven：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>axel -n 10 <a href="http://mirror.bit.edu.cn/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz">http://mirror.bit.edu.cn/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz</a><br>tar zxvf apache-maven-3.3.3-bin.tar.gz<br>cd apache-maven-3.3.3/</p>
+<p>#git search-guard and build<br>git clone -b es1.6 <a href="https://github.com/floragunncom/search-guard.git">https://github.com/floragunncom/search-guard.git</a><br>cd search-guard ;/home/work/app/maven/bin/mvn package -DskipTests<br>[/ccWN]</p>
+<p>#把编译好的包放到一个下载地址(方便于es集群使用，单台测试可不使用这种方案)：<br><a href="http://www.elain.org/dl/search-guard-16-0.6-SNAPSHOT.zip">http://www.elain.org/dl/search-guard-16-0.6-SNAPSHOT.zip</a></p>
+<p>#在es上以插件方式安装编译好的包<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>cd /home/work/app/elasticsearch/plugins/<br>./bin/plugin -u <a href="http://www.elain.org/dl/search-guard-16-0.6-SNAPSHOT.zip">http://www.elain.org/dl/search-guard-16-0.6-SNAPSHOT.zip</a> -i search-guard<br>[/ccWN]</p>
+<p>#elasticsearch.yml 添加<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
+<p>#################search-guard###################<br>searchguard.enabled: true<br>searchguard.key_path: /home/work/app/elasticsearch/keys<br>searchguard.auditlog.enabled: true<br>searchguard.allow_all_from_loopback: true #本地调试可打开，建议在线上关闭<br>searchguard.check_for_root: false<br>searchguard.http.enable_sessions: true</p>
+<p>#配置认证方式<br>searchguard.authentication.authentication_backend.impl: com.floragunn.searchguard.authentication.backend.simple.SettingsBasedAuthenticationBackend<br>searchguard.authentication.authorizer.impl: com.floragunn.searchguard.authorization.simple.SettingsBasedAuthorizator<br>searchguard.authentication.http_authenticator.impl: com.floragunn.searchguard.authentication.http.basic.HTTPBasicAuthenticator</p>
+<p>#配置用户名和密码<br>searchguard.authentication.settingsdb.user.admin: admin<br>searchguard.authentication.settingsdb.user.user1: 123<br>searchguard.authentication.settingsdb.user.user2: 123</p>
+<p>#配置用户角色<br>searchguard.authentication.authorization.settingsdb.roles.admin: [“root”]<br>searchguard.authentication.authorization.settingsdb.roles.user1: [“user1”]<br>searchguard.authentication.authorization.settingsdb.roles.user2: [“user2”]</p>
+<p>#配置角色权限（只读）<br>searchguard.actionrequestfilter.names: [“readonly”,”deny”]<br>searchguard.actionrequestfilter.readonly.allowed_actions: [“indices:data/read/<em>“, “indices:admin/exists”,”indices:admin/mappings/</em>“,”indices:admin/validate/query”,”<em>monitor</em>“]<br>searchguard.actionrequestfilter.readonly.forbidden_actions: [“indices:data/write/*”]</p>
+<p>#配置角色权限（禁止访问）<br>searchguard.actionrequestfilter.deny.allowed_actions: []<br>searchguard.actionrequestfilter.deny.forbidden_actions: [“indices:data/write/*”]</p>
+<p>#################search-guard###################<br>[/ccWN]</p>
+<p>#logging.yml 添加<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>logger.com.floragunn: DEBUG #开启debug，方便调试<br>[/ccWN]</p>
+<p>#创建key</p>
+<p>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
+<p>echo ‘be226fd1e6ddc74b’ &gt;/home/work/app/elasticsearch/keys/searchguard.key</p>
+<p>[/ccWN]</p>
+<p>&nbsp;</p>
+<p>#重启es<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>/etc/init.d/elasticsearch restart<br>[/ccWN]</p>
+<p>#配置权限策略如下 ：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>curl -XPUT ‘<a href="http://localhost:9200/searchguard/ac/ac?pretty">http://localhost:9200/searchguard/ac/ac?pretty</a>‘ -d ‘<br>{“acl”: [<br>{<br>“<strong>Comment</strong>“: “Default is to execute all filters”,<br>“filters_bypass”: [],<br>“filters_execute”: [“actionrequestfilter.deny”]<br>}, //默认禁止访问<br>{<br>“<strong>Comment</strong>“: “This means that every requestor (regardless of the requestors hostname and username) which has the root role can do anything”,<br>“roles”: [<br>“root”<br>],<br>“filters_bypass”: [“<em>“],<br>“filters_execute”: []<br>}, // root角色完全权限<br>{<br>“<strong>Comment</strong>“: “This means that for the user spock on index popstuff only the actionrequestfilter.readonly will be executed, no other”,<br>“users”: [“user1”],<br>“indices”: [“index1-</em>“,”index2-<em>“,”.kibana”],<br>“filters_bypass”: [“actionrequestfilter.deny”],<br>“filters_execute”: [“actionrequestfilter.readonly”]<br>}, //user1 用户只能访问index1-</em>,index2-<em> 索引，且只有只读权限<br>{<br>“<strong>Comment</strong>“: “This means that for the user spock on index popstuff only the actionrequestfilter.readonly will be executed, no other”,<br>“users”: [“user2”],<br>“indices”: [“index3-</em>“,”.kibana”],<br>“filters_bypass”: [“actionrequestfilter.deny”],<br>“filters_execute”: [“actionrequestfilter.readonly”]<br>} //user2 用户只能访问index3-* 索引，且只有只读权限</p>
+<p>]}}<br>[/ccWN]]]>
+    
+    </summary>
+    
+      <category term="elasticsearch" scheme="http://www.elain.org/tags/elasticsearch/"/>
+    
+      <category term="es" scheme="http://www.elain.org/tags/es/"/>
+    
+      <category term="kibana" scheme="http://www.elain.org/tags/kibana/"/>
+    
+      <category term="search-guard" scheme="http://www.elain.org/tags/search-guard/"/>
+    
+      <category term="日志分析" scheme="http://www.elain.org/categories/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[多业务复用同组WEB通过独立upstream来敏捷运维]]></title>
+    <link href="http://www.elain.org/2015/04/15/%E5%A4%9A%E4%B8%9A%E5%8A%A1%E5%A4%8D%E7%94%A8%E5%90%8C%E7%BB%84WEB%E9%80%9A%E8%BF%87%E7%8B%AC%E7%AB%8Bupstream%E6%9D%A5%E6%95%8F%E6%8D%B7%E8%BF%90%E7%BB%B4/"/>
+    <id>http://www.elain.org/2015/04/15/多业务复用同组WEB通过独立upstream来敏捷运维/</id>
+    <published>2015-04-15T03:09:14.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>场景<br>在大部分企业中都遇到一组服务器多个业务复用的现象，比如以下场景<br>www.a.com www.b.com 都使用了同一组web服务器，在代理上，我们传统的配置方法是这样的 ：</p>
+<p>www.a.com.conf<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>……<br>upstream a_cluster_backend {<br>    server   1.1.1.1:80 weight=1 max_fails=2 fail_timeout=10s;<br>    server   1.1.1.2:80 weight=1 max_fails=2 fail_timeout=10s;<br>}<br>……<br>location / {<br>    proxy_pass <a href="http://a_cluster_backend" target="_blank" rel="external">http://a_cluster_backend</a>;<br>}[/ccWN]<br>www.b.mi.com.conf<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>……<br>upstream b_cluster_backend {<br>    server   1.1.1.1:80 weight=1 max_fails=2 fail_timeout=10s;<br>    server   1.1.1.2:80 weight=1 max_fails=2 fail_timeout=10s;<br>}<br>……<br>location / {<br>    proxy_pass <a href="http://b_cluster_backend" target="_blank" rel="external">http://b_cluster_backend</a>;<br>}<br>[/ccWN]<br>然而，这样的话，如果我的 1.1.1.1 这台服务器有故障，要下线，需要我更改两个配置文件，即www.a.com.conf www.b.com.conf</p>
+<p>那么问题来了，如果有10+个业务都在复用这一组WEB服务器呢，那就需要修改10+个配置文件了，以下是本人测试的两种方法与大家分享：</p>
+<p>方法一：<br>cluster.conf<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>upstream cluster_backend {<br>    server   1.1.1.1:80 weight=1 max_fails=2 fail_timeout=10s;<br>    server   1.1.1.2:80 weight=1 max_fails=2 fail_timeout=10s;<br>    }<br>[/ccWN]<br>www.a.com.conf<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>……<br>location / {<br>    proxy_pass <a href="http://cluster_backend" target="_blank" rel="external">http://cluster_backend</a>;<br>}<br>[/ccWN]<br>www.b.mi.com.conf<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>……<br>location / {<br>    proxy_pass <a href="http://cluster_backend" target="_blank" rel="external">http://cluster_backend</a>;<br>}<br>[/ccWN]<br>nginx.conf<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>http {<br>……<br>include  vhosts/*.conf;<br>}[/ccWN]</p>
+<p>方法二：<br>cluster.ini<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>    server   1.1.1.1:80 weight=1 max_fails=2 fail_timeout=10s;<br>    server   1.1.1.2:80 weight=1 max_fails=2 fail_timeout=10s;<br>[/ccWN]<br>www.a.com.conf<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>upstream a_cluster_backend {<br>    include vhosts/cluster.ini;<br>｝</p>
+<p>location / {<br>    proxy_pass <a href="http://a_cluster_backend" target="_blank" rel="external">http://a_cluster_backend</a>;<br>}[/ccWN]<br>www.b.mi.com.conf<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>upstream b_cluster_backend {<br>    include vhosts/cluster.ini;<br>｝<br>location / {<br>    proxy_pass <a href="http://b_cluster_backend" target="_blank" rel="external">http://b_cluster_backend</a>;<br>}<br>[/ccWN]<br>nginx.conf<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>http {<br>……<br>include  vhosts/*.conf;<br>}[/ccWN]<br>注：此方法需要nginx的upstream支持include,但NGINX 默认是不支持的，所以需要更改源码重新编译来支持<br>vim src/http/ngx_http_upstream.c<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>306 static ngx_command_t  ngx_http_upstream_commands[] = {<br> 307<br> 308     { ngx_string(“upstream”),<br> 309       NGX_HTTP_MAIN_CONF|NGX_CONF_BLOCK|NGX_CONF_TAKE1,<br> 310       ngx_http_upstream,<br> 311       0,<br> 312       0,<br> 313       NULL },</p>
+<ul>
+<li>314     { ngx_string(“include”),</li>
+<li>315       NGX_HTTP_UPS_CONF|NGX_CONF_TAKE1,</li>
+<li>316       ngx_conf_include,</li>
+<li>317       0,</li>
+<li>318       0,</li>
+<li>319       NULL },<br>320<br>321     { ngx_string(“server”),<br>322       NGX_HTTP_UPS_CONF|NGX_CONF_1MORE,<br>323       ngx_http_upstream_server,<br>324       NGX_HTTP_SRV_CONF_OFFSET,<br>325       0,<br>326       NULL },<br>327<br>328       ngx_null_command<br>329 };<br>[/ccWN]<br>接下来再分享一个坑<br>我在测试第一种方法时，发现怎么也通不过语法检测，最后发现是因为我当前测试机vhosts/里我有统一配置nginx_status.conf文件，和这个fastcgi_pass冲突导致，请朋友们测试时一定要注意这里。<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>  location ~ ^/(php-fpm_status|php-fpm_ping)$ {<h1 id="fastcgi_pass_127-0-0-1_3A9000_3B"><a href="#fastcgi_pass_127-0-0-1_3A9000_3B" class="headerlink" title="fastcgi_pass 127.0.0.1:9000;"></a>fastcgi_pass 127.0.0.1:9000;</h1><pre><code>include fastcgi.conf;
+access_log   off;
+allow 127.0.0.1;
+allow 10.0.0.0/8;
+deny all;
+</code></pre>  }<br>[/ccWN]</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>场景<br>在大部分企业中都遇到一组服务器多个业务复用的现象，比如以下场景<br>www.a.com www.b.com 都使用了同一组web服务器，在代理上，我们传统的配置方法是这样的 ：</p>
+<p>www.a.com.conf<br>[ccWN lang=”bash]]>
+    </summary>
+    
+      <category term="WEB应用" scheme="http://www.elain.org/categories/WEB%E5%BA%94%E7%94%A8/"/>
+    
+      <category term="敏捷运维" scheme="http://www.elain.org/categories/WEB%E5%BA%94%E7%94%A8/%E6%95%8F%E6%8D%B7%E8%BF%90%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[转]程序员可以在周末做的8件事]]></title>
+    <link href="http://www.elain.org/2014/10/20/'%5B%E8%BD%AC%5D%E7%A8%8B%E5%BA%8F%E5%91%98%E5%8F%AF%E4%BB%A5%E5%9C%A8%E5%91%A8%E6%9C%AB%E5%81%9A%E7%9A%848%E4%BB%B6%E4%BA%8B'/"/>
+    <id>http://www.elain.org/2014/10/20/'[转]程序员可以在周末做的8件事'/</id>
+    <published>2014-10-20T03:32:53.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>在过去的几十年里已经有许多国家有一二天的周末。周末是拔掉的日常工作得到充电的重要时刻。他们也提供了更深入地思考事情的好机会。</p>
+<p>程序员（开发商或软件工程师）是非常特殊的职业比其他人，尽管有很多工作需要使用计算机。<br>灵感来自“成功人士在周末做的14件事“杰奎琳史密斯写的，在这里我总结的程序员可以在周末做有益的事情。</p>
+<p>我希望，如果你是一个程序员，你的周末计划，可以说一下你的想法。</p>
+<p>1. 把时间给家人和朋友。</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2014/10/1.png"><img src="http://www.elain.org/wp-content/uploads/2014/10/1.png" alt="1"></a></p>
+<p>在平日技术领域的程序员通常都很忙,所以周末的时间就留给你的家人和朋友。这也是其他领域的人该做的。</p>
+<p>2. 一天没有电脑（无电脑日）</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2014/10/2.png"><img src="http://www.elain.org/wp-content/uploads/2014/10/2.png" alt="2"></a></p>
+<p>有些人曾试图没有科技，这意味着在白天不使用任何技术。电脑完全断开这可能是不现实的，<br>但至少有一些是可以避免的。不接触电脑基本上意味着没有电脑有关的工作(比如敲代码)。</p>
+<p>3. 户外活动：出去旅行，自行车，跑步，钓鱼，划船。</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2014/10/3.gif"><img src="http://www.elain.org/wp-content/uploads/2014/10/3.gif" alt="3"></a></p>
+<p>可以利用的周末的时间去运动，现在公园到处都是，你应该去做一些运动，加强自己的身体<br><a id="more"></a></p>
+<p>4.在家里做家务</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2014/10/4.gif"><img src="http://www.elain.org/wp-content/uploads/2014/10/4.gif" alt="4"></a></p>
+<p>可以利用的周末的时间在家里和家人一起做饭，一起照顾花花草草。</p>
+<p>5.读书</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2014/10/5.png"><img src="http://www.elain.org/wp-content/uploads/2014/10/5.png" alt="5"></a></p>
+<p>有研究表明，阅读对大脑很有好处。它不仅可以让你变得善解人意，有魅力，有教养，感染周围的人。<br>而且还可以让你的心理健康，思维敏捷。<br>找一个安静的环境是很重要的，你可以去学校或公共图书馆去读书。</p>
+<p>6.写日记/博客。</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2014/10/6.gif"><img src="http://www.elain.org/wp-content/uploads/2014/10/6.gif" alt="6"></a></p>
+<p>写作可以帮助你理清思路,思路更清晰。</p>
+<p>7.画一些导图,使困难的事情变得简单。</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2014/10/7.png"><img src="http://www.elain.org/wp-content/uploads/2014/10/7.png" alt="7"></a><br>如果写作是太旧的方式，你也可以玩画一些图表。你可以在纸上画。也有许多很好的在线工具制作漂亮的图，如lucidchart，infographics，MindMeister， Sea Quail DatabaseDiagram工具等。</p>
+<p>8.人际关系</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2014/10/8.png"><img src="http://www.elain.org/wp-content/uploads/2014/10/8.png" alt="8"></a><br>人际关系很重要！我们要积累人脉！这些不仅是商务人士应该做的，我们程序员也应该具备这样的能力！</p>
+<p>原文地址：<a href="http://www.programcreek.com/2012/10/8-things-programmers-can-do-at-weekends/" target="_blank" rel="external">原文</a></p>
+<p>译文由IT江湖翻译！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在过去的几十年里已经有许多国家有一二天的周末。周末是拔掉的日常工作得到充电的重要时刻。他们也提供了更深入地思考事情的好机会。</p>
+<p>程序员（开发商或软件工程师）是非常特殊的职业比其他人，尽管有很多工作需要使用计算机。<br>灵感来自“成功人士在周末做的14件事“杰奎琳史密斯写的，在这里我总结的程序员可以在周末做有益的事情。</p>
+<p>我希望，如果你是一个程序员，你的周末计划，可以说一下你的想法。</p>
+<p>1. 把时间给家人和朋友。</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2014/10/1.png"><img src="http://www.elain.org/wp-content/uploads/2014/10/1.png" alt="1"></a></p>
+<p>在平日技术领域的程序员通常都很忙,所以周末的时间就留给你的家人和朋友。这也是其他领域的人该做的。</p>
+<p>2. 一天没有电脑（无电脑日）</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2014/10/2.png"><img src="http://www.elain.org/wp-content/uploads/2014/10/2.png" alt="2"></a></p>
+<p>有些人曾试图没有科技，这意味着在白天不使用任何技术。电脑完全断开这可能是不现实的，<br>但至少有一些是可以避免的。不接触电脑基本上意味着没有电脑有关的工作(比如敲代码)。</p>
+<p>3. 户外活动：出去旅行，自行车，跑步，钓鱼，划船。</p>
+<p><a href="http://www.elain.org/wp-content/uploads/2014/10/3.gif"><img src="http://www.elain.org/wp-content/uploads/2014/10/3.gif" alt="3"></a></p>
+<p>可以利用的周末的时间去运动，现在公园到处都是，你应该去做一些运动，加强自己的身体<br>]]>
+    
+    </summary>
+    
+      <category term="休息" scheme="http://www.elain.org/tags/%E4%BC%91%E6%81%AF/"/>
+    
+      <category term="心情" scheme="http://www.elain.org/tags/%E5%BF%83%E6%83%85/"/>
+    
+      <category term="时间" scheme="http://www.elain.org/tags/%E6%97%B6%E9%97%B4/"/>
+    
+      <category term="杂文随笔" scheme="http://www.elain.org/categories/%E6%9D%82%E6%96%87%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[转]VIM命令小抄，很不错]]></title>
+    <link href="http://www.elain.org/2013/08/17/'%5B%E8%BD%AC%5DVIM%E5%91%BD%E4%BB%A4%E5%B0%8F%E6%8A%84%EF%BC%8C%E5%BE%88%E4%B8%8D%E9%94%99'/"/>
+    <id>http://www.elain.org/2013/08/17/'[转]VIM命令小抄，很不错'/</id>
+    <published>2013-08-17T02:42:06.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>   今天看到一篇文章，作者整理了一张图，很不错，分享给大家，让更多的人来学习使用VIM </p>
+<p><img src="http://thinkinside.tk/images/2013/vim_addon_manager/vi-vim-cheat-sheet-list.png" alt=""></p>
+<p>转自：<a href="http://thinkinside.tk/2013/05/23/vim_addon_manager.html" target="_blank" rel="external">http://thinkinside.tk/2013/05/23/vim_addon_manager.html</a></p>
+<p>下载地址：<br>git@gitcafe.com:elain/notes.git<br><a href="http://thinkinside.tk/images/2013/vim_addon_manager/vi-vim-cheat-sheet-list.png" target="_blank" rel="external">http://thinkinside.tk/images/2013/vim_addon_manager/vi-vim-cheat-sheet-list.png</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>   今天看到一篇文章，作者整理了一张图，很不错，分享给大家，让更多的人来学习使用VIM </p>
+<p><img src="http://thinkinside.tk/images/2013/vim_addon_manager/vi-vim-cheat-sheet-lis]]>
+    </summary>
+    
+      <category term="vim" scheme="http://www.elain.org/tags/vim/"/>
+    
+      <category term="命令总结" scheme="http://www.elain.org/categories/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="基础补充" scheme="http://www.elain.org/categories/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/"/>
+    
+      <category term="经验技巧" scheme="http://www.elain.org/categories/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/%E7%BB%8F%E9%AA%8C%E6%8A%80%E5%B7%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[puppet管理之用户与SSH信任关系管理]]></title>
+    <link href="http://www.elain.org/2013/06/25/puppet%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8ESSH%E4%BF%A1%E4%BB%BB%E5%85%B3%E7%B3%BB%E7%AE%A1%E7%90%86/"/>
+    <id>http://www.elain.org/2013/06/25/puppet管理之用户与SSH信任关系管理/</id>
+    <published>2013-06-25T07:29:34.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>cat manifests/modules.pp</p>
+<pre>
+import "users"
+</pre>
+
+<p>cat manifests/nodes.pp</p>
+<pre>
+node base {
+        include hosts,sysctl,cron::puppet_cron,puppet
+}
+
+#puppet test
+node "puppettest01.bj","puppettest02.bj" inherits base {
+        include users::elain
+}
+
+</pre>
+
+<p>cat modules/users/manifests/init.pp</p>
+<pre>
+class users::elain {
+    group { "elain":
+            gid =&gt; 11001,
+            ensure =&gt;present;   
+    }
+    user { "elain":
+            ensure =&gt; "present",
+            uid =&gt; 11001,
+            gid =&gt; 11001,
+            groups =&gt; elain,
+            shell =&gt;"/bin/bash",
+            home =&gt; "/home/elain",
+            managehome =&gt;"true",
+            require =&gt; Group["elain"];
+    }
+
+    ssh_authorized_key{ "hh-b2c-console01.bj":
+            ensure=&gt;present,
+            type=&gt;"ssh-rsa",
+            key=&gt;"AAAAB3NzaC1yc2EAAAABIwAAAQEAxzWKPyeYFPGZXNIRdz4a7BK6c+xK7xKBgM1HO1OImDi0QFJ0wtxLHIbV9AUcf9dsehQOyfjVhasgJNCoOlHzf7plQ6UmsK5cUmmMUYcN4pw13CqEwYQ/JuwWt2neZ9u6YD+v6/uzi9CclFFlqmNHtL+EIXY/ncrUexikAZlCLvErXIGILnRAUEILmz/IEujU0XuR6CDt54l6gu8/hgAKqmKGkrR2vysCYykQamGr9muvnJ6E4sCawQGNunhmIbmmHV6ub4sp17CSObehqTvtBKXu9T0sVHlBp981soTO2+BQnpjBf7GjSkbyqFYT0s3cqHTvjOGKv7lD2ZK/v3cL0w==",
+            name=&gt;"console01.bj",
+            target=&gt;"/home/elain/.ssh/authorized_keys",
+            user=&gt;''''''''elain'''''''',
+    }
+}
+
+</pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>cat manifests/modules.pp</p>
+<pre>
+import "users"
+</pre>
+
+<p>cat manifests/nodes.pp</p>
+<pre>
+node base {
+        include hosts,sysctl,cr]]>
+    </summary>
+    
+      <category term="puppet" scheme="http://www.elain.org/tags/puppet/"/>
+    
+      <category term="puppet使用" scheme="http://www.elain.org/categories/puppet%E4%BD%BF%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Puppet常用模块]]></title>
+    <link href="http://www.elain.org/2013/05/30/puppet%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97/"/>
+    <id>http://www.elain.org/2013/05/30/puppet常用模块/</id>
+    <published>2013-05-30T09:40:44.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>下面这些都是工作中常用的一些模块：</p>
+<p>#create files</p>
+<p><pre class="brush: applescript; gutter: true; first-line: 1">file { “/tmp/elain.txt”:<br>content=&gt;”I’’’’’’’’m test puppet”;<br>}</pre></p>
+<p>#create directory</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1; html-script: true">file {<br>“/tmp/puppetDir”:<br>ensure =&gt; absent,<br>force =&gt; true<br>}</pre></p>
+<p>#create link</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1">file { “/tmp/FileForlink”:<br>ensure =&gt; link,<br>target =&gt; “/var/log/messages”<br>}</pre></p>
+<p>file { “/tmp/rc.local.txt”:<br>ensure =&gt; “/etc/rc.local”<br>}</p>
+<p>#add cron</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1">cron { “update time add by elain”:<br>command =&gt; “/usr/sbin/ntpdate ntp1.pt.elain.org &gt;/dev/null 2&gt;&amp;1”,<br>minute =&gt; ‘’0’’,<br>hour =&gt; ‘’<em>/3’’,<br>monthday =&gt; ‘’</em>‘’,<br>ensure =&gt; present,<br>}<br>cron { “每三小时重启nginx add by elain”:<br>command =&gt; “/etc/init.d/nginx restart”,<br>minute =&gt; ‘’<em>‘’,<br>hour =&gt; [‘’2-4’’],<br>monthday =&gt; ‘’</em>‘’,<br>ensure =&gt; present,<br>}</pre><br><a id="more"></a>#exec scripts</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1">exec { “mkdir test”:<br>cwd =&gt; “/opt/shell”,<br>command =&gt; “sh /opt/shell/mkdir.sh”,<br>user =&gt; “root”,<br>path =&gt; “/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin”,<br>}</pre></p>
+<p>#restart services</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1">service {“postfix”:<br>ensure =&gt; running;<br>“rsyslog”:<br>ensure =&gt; stopped;<br>}</pre></p>
+<p>#sync files</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1">file { “/etc/hosts”:<br>owner =&gt; “root”,<br>group =&gt; “root”,<br>mode =&gt; “644”,<br>source =&gt; “puppet://master.elain.org/conf/sysfiles/hosts”,<br>}<br>file { “/etc/resolv.conf”:<br>owner =&gt; “root”,<br>group =&gt; “root”,<br>mode =&gt; “644”,<br>ensure =&gt; “present”,<br>backup =&gt; “.bak”,<br>source =&gt; “puppet://master.elain.org/conf/sysfiles/resolv.conf”,<br>}</pre></p>
+<p>#sync directory</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1">file { “/data/www/www.elain.org”:<br>source =&gt; “puppet://master.elain.org/files/sysfiles/www.elain.org”,<br>owner =&gt;root,<br>group =&gt;root,<br>mode =&gt;0744,<br>ignore =&gt; “.svn”,<br>recurse =&gt; “true”,<br>ensure =&gt;present,<br>purge =&gt;”true”,<br>force =&gt;”true”,<br>}</pre></p>
+<p>#install package</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1">package { [“nginx”,”httpd”]:<br>ensure =&gt;installed,<br>}</pre></p>
+<p>#remove pachage</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1">package { [“httpd”,”httpd-tools”]:<br>ensure =&gt; absent;<br>}</pre></p>
+<p>#add random cron</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1">class cron::puppet_cron {<br>define cron_random( $command, $hour) {<br>cron { $name:<br>command =&gt; $command,<br>minute =&gt; inline_template(“&lt;%= (hostname+name).hash.abs % 60 %&gt;”),<br>ensure =&gt; “present”,<br>}<br>}<br>cron_random { “running puppet add by elain”:<br>command =&gt; “/usr/sbin/puppetd –test –server=master.puppet.com &gt;/dev/null 2&gt;&amp;1”,<br>hour =&gt; ‘’’’’’’’1’’’’’’’’,<br>}<br>service {“crond”:<br>ensure =&gt; running;<br>}<br>}</pre></p>
+<div></div>]]></content>
+    <summary type="html">
+    <![CDATA[<p>下面这些都是工作中常用的一些模块：</p>
+<p>#create files</p>
+<p><pre class="brush: applescript; gutter: true; first-line: 1">file { “/tmp/elain.txt”:<br>content=&gt;”I’’’’’’’’m test puppet”;<br>}</pre></p>
+<p>#create directory</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1; html-script: true">file {<br>“/tmp/puppetDir”:<br>ensure =&gt; absent,<br>force =&gt; true<br>}</pre></p>
+<p>#create link</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1">file { “/tmp/FileForlink”:<br>ensure =&gt; link,<br>target =&gt; “/var/log/messages”<br>}</p>
+<p>file { “/tmp/rc.local.txt”:<br>ensure =&gt; “/etc/rc.local”<br>}</pre></p>
+<p>#add cron</p>
+<p><pre class="brush: actionscript3; gutter: true; first-line: 1">cron { “update time add by elain”:<br>command =&gt; “/usr/sbin/ntpdate ntp1.pt.elain.org &gt;/dev/null 2&gt;&amp;1”,<br>minute =&gt; ‘’0’’,<br>hour =&gt; ‘’<em>/3’’,<br>monthday =&gt; ‘’</em>‘’,<br>ensure =&gt; present,<br>}<br>cron { “每三小时重启nginx add by elain”:<br>command =&gt; “/etc/init.d/nginx restart”,<br>minute =&gt; ‘’<em>‘’,<br>hour =&gt; [‘’2-4’’],<br>monthday =&gt; ‘’</em>‘’,<br>ensure =&gt; present,<br>}</pre><br>]]>
+    
+    </summary>
+    
+      <category term="puppet" scheme="http://www.elain.org/tags/puppet/"/>
+    
+      <category term="puppet使用" scheme="http://www.elain.org/categories/puppet%E4%BD%BF%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[在Puppet使用中针对域名形式主机名取$hostname的问题]]></title>
+    <link href="http://www.elain.org/2013/05/29/%E5%9C%A8puppet%E4%BD%BF%E7%94%A8%E4%B8%AD%E9%92%88%E5%AF%B9%E5%9F%9F%E5%90%8D%E5%BD%A2%E5%BC%8F%E4%B8%BB%E6%9C%BA%E5%90%8D%E5%8F%96$hostname%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://www.elain.org/2013/05/29/在puppet使用中针对域名形式主机名取$hostname的问题/</id>
+    <published>2013-05-29T03:44:58.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>今天测试使用puppet中的if来针对同一node组里不同hostname配件不同的文件，由于同一node组里多个class 一样，且是一个WEB集群，只有一台需要添加一个调试跟踪工具，配置有所不同，所以使用if判断去做匹配，不想把它再独立成一个node.</p>
+<p>node配置如下：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>node base {<br>include hosts,sysctl<br>}</p>
+<p>#puppet test<br>node “puppettest01.bj”,”puppettest02.bj” inherits base {<br>if $hostname == “puppettest02.bj” {<br>include php::hd_1<br>} else {<br>include php::hd_2<br>}<br>}<br>[/ccWN]<br>没试不通过，怀疑是变量获取有问题，于是在puppettest01.bj 上执行 facter 来查看变量<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
+<h1 id="facter"><a href="#facter" class="headerlink" title="facter"></a>facter</h1><p>architecture = x86_64<br>domain =bj<br>fqdn = puppettest01.bj<br>hostname = puppettest01<br>[/ccWN]<br>而我的puppettest01.bj的服务器上查看是这样的<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
+<p>#hostname<br>puppettest01.bj<br>[/ccWN]<br>从上面信息可以看到我们的 $hostname 是puppettest01 ,而非 puppettest01.bj , facter 获取hostname时截断了.bj,  即：$hostname=puppettest01 ,而我在上面的配置里是使用的 puppettest01.bj</p>
+<p>所以无法匹配到，于是改成了下面的配置<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>node base {<br>include hosts,sysctl<br>}</p>
+<p>#puppet test<br>node “puppettest01.bj”,”puppettest02.bj” inherits base {<br>if $hostname == “puppettest02” {<br>include php::hd_1<br>} else {<br>include php::hd_2<br>}<br>}<br>[/ccWN]<br>测试通过。<br>注：此案例只针对像 puppettest01.bj 这样使用域名方式的主机名有效。</p>
+<p>第二种解决方法：<br>也可使用 $fqdn 变量来匹配，代码如下：<a id="more"></a><br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>node base {<br>include hosts,sysctl<br>}</p>
+<p>#puppet test<br>node “puppettest01.bj”,”puppettest02.bj” inherits base {<br>if $fqdn == “puppettest02.bj” {<br>include php::hd_1<br>} else {<br>include php::hd_2<br>}<br>}<br>[/ccWN]<br>注：此方法不太推荐，因为FQDN 不是由本机决定的，是由 DNS 决定的，这需要DNS的保障才可广泛使用。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>今天测试使用puppet中的if来针对同一node组里不同hostname配件不同的文件，由于同一node组里多个class 一样，且是一个WEB集群，只有一台需要添加一个调试跟踪工具，配置有所不同，所以使用if判断去做匹配，不想把它再独立成一个node.</p>
+<p>node配置如下：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>node base {<br>include hosts,sysctl<br>}</p>
+<p>#puppet test<br>node “puppettest01.bj”,”puppettest02.bj” inherits base {<br>if $hostname == “puppettest02.bj” {<br>include php::hd_1<br>} else {<br>include php::hd_2<br>}<br>}<br>[/ccWN]<br>没试不通过，怀疑是变量获取有问题，于是在puppettest01.bj 上执行 facter 来查看变量<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
+<h1 id="facter"><a href="#facter" class="headerlink" title="facter"></a>facter</h1><p>architecture = x86_64<br>domain =bj<br>fqdn = puppettest01.bj<br>hostname = puppettest01<br>[/ccWN]<br>而我的puppettest01.bj的服务器上查看是这样的<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
+<p>#hostname<br>puppettest01.bj<br>[/ccWN]<br>从上面信息可以看到我们的 $hostname 是puppettest01 ,而非 puppettest01.bj , facter 获取hostname时截断了.bj,  即：$hostname=puppettest01 ,而我在上面的配置里是使用的 puppettest01.bj</p>
+<p>所以无法匹配到，于是改成了下面的配置<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>node base {<br>include hosts,sysctl<br>}</p>
+<p>#puppet test<br>node “puppettest01.bj”,”puppettest02.bj” inherits base {<br>if $hostname == “puppettest02” {<br>include php::hd_1<br>} else {<br>include php::hd_2<br>}<br>}<br>[/ccWN]<br>测试通过。<br>注：此案例只针对像 puppettest01.bj 这样使用域名方式的主机名有效。</p>
+<p>第二种解决方法：<br>也可使用 $fqdn 变量来匹配，代码如下：]]>
+    
+    </summary>
+    
+      <category term="puppet" scheme="http://www.elain.org/tags/puppet/"/>
+    
+      <category term="puppet使用" scheme="http://www.elain.org/categories/puppet%E4%BD%BF%E7%94%A8/"/>
+    
+      <category term="敏捷运维" scheme="http://www.elain.org/categories/puppet%E4%BD%BF%E7%94%A8/%E6%95%8F%E6%8D%B7%E8%BF%90%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[转]自己活，也让别人活]]></title>
+    <link href="http://www.elain.org/2013/04/18/'%5B%E8%BD%AC%5D%E8%87%AA%E5%B7%B1%E6%B4%BB%EF%BC%8C%E4%B9%9F%E8%AE%A9%E5%88%AB%E4%BA%BA%E6%B4%BB'/"/>
+    <id>http://www.elain.org/2013/04/18/'[转]自己活，也让别人活'/</id>
+    <published>2013-04-18T07:27:19.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>人活世上，为了利益和开心而已。在顾及自己的利益之后，还需顾及他人的利益。</p>
+<p>已过不惑之年的我，人生阅历虽谈不上丰富，但因生于贫苦人家，少不了遭遇坎坷曲折，体验世态炎凉、阅睹众生百态，也取得了一定的成就，于是乎对人生有所感悟。兹略表一二，与诸君共勉。</p>
+<p>1、要相信天生我材必有用。每个人都有自己的长处和优点，都有自己独特的一份价值，只要勤奋努力，发挥自己的长处，利用自己的优点，总会有所成就，对社会有所贡献的。</p>
+<p>2、不仅仅是为自己而活着。我们每个人的身体和生命受之于父母，有兄弟姐妹、亲人朋友、邻居同事、长辈后代，我们的生命中时刻都离不开家人和朋友， 离不开社会。所以，我们要认真地活着，这不仅是为自己活，也是为自己的亲人活，为关心你、牵挂你的所有人活。一个轻视自己生命的人，可以说是极端自私的 人，对自己、他人和社会都不负责任的人。</p>
+<p>3、努力了，就没有后悔。谋事在人，成事在天。只要自己努力了，没有错过你面前的每一个机会，你就对得起自己，即使失败也无怨无悔。人生重在态度，重在过程，结果都是次要的。</p>
+<p>4、做最好的准备，做最坏的打算。凡事预则立，不预则废。成功与收获总是垂青于那些有充分准备的人。所以未雨要绸缪，笨鸟要先飞，不要打无准备之 仗。当然，许多事情是人算不如天算，计划赶不上变化，最后的结果往往难以预料，所以要对你所做的任何一件事做各种可能的预测，以便能采取应急措施，并能从 容面对任何可能的结果。</p>
+<p>5、做人要有自己的原则和底线。无规矩不成方圆。人不能太放纵自己，无论遇到什么情况，受到多大诱惑，遭遇多大困难，都要守住自己的底线，坚持自己做人的原则，否则会阴沟翻船，后悔莫及。</p>
+<p>6、多一点慈善之心。这个世界上有太多的苦难，有太多可怜无助的人，按圣经上说，他们都是你的兄弟姊妹，需要你的关爱和帮助。当你有能力去帮助他们的时候，就应该力所能及，给他们一点温暖与爱心。这样，当你也需要帮助的时候，别人也会来帮助你。关爱他人，也是在关爱自己。</p>
+<p>7、自己活，也让别人活。己所不欲，勿施于人。他人的利益与生命应该得到同样的尊重，不要只为了一己之利而以邻为壑，你死我活，幸灾乐祸，把自己的幸福建立在别人的痛苦之上，其结果往往适得其反。</p>
+<p>8、付出才有收获。不要总想着天下会掉馅饼，也不要只看到贼吃肉，看不到贼挨打，成功总是在艰辛和付出之后。靠自己脚踏实地、努力打拼取得成功总会比靠投机取巧、靠运气、靠他人不劳而获要光彩、有意义。</p>
+<p>9、功名利禄身外物，健康活着就是最大的幸福与快乐。人生在世几十年，荣华富贵、功名利禄如过眼云烟，生不带来，死不带走。所以对这些身外之物不要 太执著，否则身受其累，深受其害。但身体是自己的，身体健康比什么都重要。在忙于工作与事业的同时，要注意身体的锻炼与健康的保养。有健康的身体，才能延 续自己的存在，才能享受快乐与幸福。</p>
+<p>10、辩证看问题。世界上没有绝对的事情，也没有永恒的东西。看问题要一分为二，要辨证地看，要用发展的眼光看，否极则泰来，坏事可能变好事，好事 可能变坏事。许多事情，在当时看来可能是坏事，但事后回过头来再看可能就不一定是坏事，甚至可以说是一件好事，反之一样。三十年河东，三十年河西！历史上 不是有越王勾践灭吴、司马迁受宫刑著《史记》吗？我们不是常说生于忧患、死于安乐吗？</p>
+<p>11、既要唯物，也要唯心。唯物主义与唯心主义斗争了几千年，至今也没有决出个胜负。我想，存在的就是合理的，简单地肯定一方而否定另一方是不明智的。相信一点超自然的力量未尝不可，或许能给你带来意想不到的收获。</p>
+<p>12、永远保持一颗年轻的心态。生理的年龄任何人是无法抗拒的，但心理应该永远保持年轻。心理年轻的人，往往朝气蓬勃，活泼开朗，精力充沛，热爱生活，还能抗拒生理的衰老。老顽童胜过小老头啊！</p>
+<p>13、活到老，学到老。人生犹如一大课堂，社会就是知识的海洋，有学不完的知识，用不完的智慧。所以，人一辈子都要做学生，活到老，学到老；向书本 学，向他人学；从实践中学，从社会中学；学知识，学做人。毛泽东曾经说过，他一日不学习，赶不上少奇同志。古人云，不进则退！每个人都要有危机感，时刻保 持进取心。如果不思进取，就随时被淘汰的可能。如果放松学习，不充实自己的头脑，就会变得空虚无聊，人生的质量就要打折扣。</p>
+<p>14、孝敬好父母。父母是生命之源，是对自己孩子最无私的人，为了孩子，父母可以献出一切，包括自己的生命。孝敬父母应该是人的本能，是你的美德。在孝敬父母中你能得到快乐，并在你也为人父（母）时得到同样回报。</p>
+<p>15、凡事三思而后行。要谨言慎行，思前想后，运筹帷幄，心中有数，切忌一意孤行，孤注一掷，卤莽草率。</p>
+<p>转载自:<a href="http://www.fufuok.com/best-life-15.html" target="_blank" rel="external">http://www.fufuok.com/best-life-15.html</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>人活世上，为了利益和开心而已。在顾及自己的利益之后，还需顾及他人的利益。</p>
+<p>已过不惑之年的我，人生阅历虽谈不上丰富，但因生于贫苦人家，少不了遭遇坎坷曲折，体验世态炎凉、阅睹众生百态，也取得了一定的成就，于是乎对人生有所感悟。兹略表一二，与诸君共勉。</p>
+<p]]>
+    </summary>
+    
+      <category term="杂文随笔" scheme="http://www.elain.org/categories/%E6%9D%82%E6%96%87%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[转]40岁后才明白的道理:人一生奋斗余地很有限]]></title>
+    <link href="http://www.elain.org/2013/03/26/'%5B%E8%BD%AC%5D40%E5%B2%81%E5%90%8E%E6%89%8D%E6%98%8E%E7%99%BD%E7%9A%84%E9%81%93%E7%90%86:%E4%BA%BA%E4%B8%80%E7%94%9F%E5%A5%8B%E6%96%97%E4%BD%99%E5%9C%B0%E5%BE%88%E6%9C%89%E9%99%90'/"/>
+    <id>http://www.elain.org/2013/03/26/'[转]40岁后才明白的道理:人一生奋斗余地很有限'/</id>
+    <published>2013-03-26T03:16:14.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>四十岁后才明白的道理，你可以现在就知道。虽然有些道理不切身体会，就没法真正明白，但起码可以试着去体会。人生四十岁是一个重要的里程碑。孔子说四十不惑，显然有夸张的成份，不过，如果说人过四十应该明白许多道理，还是有道理的。</p>
+<p>四十岁后，我明白的道理越来越多，但是，困惑其实也越来越多。没有经历人生体验的道理，年轻时口头上也会说，但是那说的仍然是人家的道理，而不是自己的。四十岁之后，我的感悟主要是这些：</p>
+<p>1、人一生的命运并不完全是由自己决定的。四十岁后大致可看到自己的一生究竟会以怎样的方式终结。年轻时雄心勃勃，以为自己只要奋斗，就无所不能，其实是一种错觉。人可以追求自己所想的，却不可以获得自己所要的。人一生中其实可以奋斗的余地很有限。</p>
+<p>尤其是在中国这样的社会里，从出生的时代、地域、籍贯到家庭出身，其实你的命脉大致定了，能够改变的只是很小的空间，只有极少数富有智慧的人，能够将这个有限的空间与时间充分利用。</p>
+<p>2、人不可以将自己与他人相比，只能够与自己相比。每个人都存在一个最好的自己，因此，每个人都可以做最好的自己，却很难说他是人群中最优秀的。理由基于上面的原因。</p>
+<p>3、生命中与生俱来的都是最为珍贵的。不必为自己的生理缺陷而烦恼。年轻时为自己个子不够高而苦恼，四十岁后发现，矮个子其实最有利于保护脊椎不受损害，也有利于心脏的健康。三十岁之前为个子矮小而苦恼，四十岁之后为个子不高而庆幸。</p>
+<p>4、性福是很重要的幸福之源。然而这必须以年轻时不纵欲为前提。放纵性与将性做为交换，人的性福感将会提前结束。四十岁之后还对异性来电，说明他的生命活力不错。性福取决于质量而不是数量。学会在年轻时珍藏千金良宵，留待老年时回忆，这是年轻时需要努力去做的。</p>
+<p>5、知识不是越多越好。书也不是读得越多越好。在这里质量同样重于数量。怎样读远比读什么重要。运用知识信息的能力，比单纯地记住知识重要。</p>
+<p>6、能够自己给自己定标准，不再以外在的标准为自己的标准。更不为别人的脸色而活，而是按照自己内心的定律与命令去执行。</p>
+<p>7、知道死亡是人生中必须面对的必然事实。四十岁之后因身体的变化，已经可以触摸到死亡的影子。父母中已经有人不在人世，从他们的离世，能够深切体验到生命的历程。</p>
+<a id="more"></a>
+<p>8、不再忧愁，特别是不为明天的事情而忧愁。今天的忧愁就今天当。人没有被当天的忧愁与痛苦而压垮的，人却常常被一个未知的担心而压垮。许多时候，其实事情发展并不会那样糟糕。回顾自己四十多年的经历。那些曾经令人痛苦不堪的事情，其实都如过眼烟云，而且绝大多数并没有真正发生。原来只是虚惊一场而已。</p>
+<p>9、虽然出生的时代与家庭常常会在自己的命运中打下深深的烙印，但是，不必为这些遗憾。贫穷曲折的人生经历，可能令你的生活更有滋有味，回味无穷。</p>
+<p>10、时间。年轻时常常不知愁滋味，却常常对天悲叹：少壮不努力，老大徒伤悲。四十岁之后才知道，时间其实只有被自己浪费才是真正属于自己的。做个率性的人，做自己喜欢做的事情。那个时间才是真正属于你的。只有时间属于你自己，你才是在做真正的自己。而且只有这样才能够做出成效来。</p>
+<p>11、金钱。金钱是个好东西。能够更加客观理性地明白的金钱的内涵。然而金钱只有在自己努力挣来的时候，你才会深刻体验金钱的意义。钱，只要在被你花掉了的时候，才算是真正属于你的。除此之外，无论放在股票上、证券上，还是存在银行里，甚至放在钱包里，都不能够证明这些金钱就是你的。金钱的良性循环应该是在健康的市场规则里，而不是在别处。</p>
+<p>12、爱情，可遇不可求。世界上总有一些人是非常适合你的，可是，那需要适当的时间与恰当的地方与时机。四十岁之后会遇到适合你的人，然而，大多数情况下，只能够相逢只恨未娶(嫁)时。年轻时有真爱的时候，常常会让人胆怯。因此，心怡已久的那个人，常常不敢去碰。绝大多数找到的伴侣，其实都是缺乏真爱的。</p>
+<p>13、家庭。组建家庭，与你相伴的人，学历、经济状况、高矮胖瘦，甚至美丑都不是最重要的。再美的人，也经不住你年复一年，日复一日地反复观察。因此，与你相伴的人，一定要在内心里与你一致。特别是基本的价值取向与你一致。心灵伴侣，才是真正可靠的伴侣。这样的人，能够贫富相守，风雨同舟。</p>
+<p>14、无论怎样，都要充分接纳自己，原谅自己的过错。认为自己就是世界上最好的。有一点点自恋，是有自信心的表现。好好爱护自己，才有能力去爱他人，才能够担负起相应的责任。</p>
+<p>15、幸福与快乐是自己的终极目标。尽量不要让自己烦心。如果有一些外在因素要让你不高兴，那么，你就学会换个角度看问题。比如，失败与成功也是平等的。</p>
+<p>16、四十岁的人，如果还没有体验过思想智慧的乐趣，那是一种悲哀。因为四十岁是智慧成熟的季节。学习与思考状态应该是四十岁的常态。</p>
+<p>17、不要急，死亡总有一天会等待到你的。悠着点。慢慢走，观赏啊，好好体验此时此刻的感受。四十岁之后，人对时间的感觉常常会发生很大的变化。那就是越来越快了。四十岁之后的神态应该是淡定与宁静。水流深处自然静。</p>
+<p>18、学会向一切优秀人物学习——而不是简单模仿。学会尊重一个人，包括自己。这是获得他人尊重的重要前提。对他人尊重，也就是对自己尊重。也不将自己的想法强加于人，即使可能真是好的想法。给他人自由，也就是给自己自由。但是，如果你意外获得影响力，那应该是你的一些想法获得了他人的共鸣。</p>
+<p>博文转自:<a href="http://caofeiyan.com/post/120.html" target="_blank" rel="external">http://caofeiyan.com/post/120.html</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>四十岁后才明白的道理，你可以现在就知道。虽然有些道理不切身体会，就没法真正明白，但起码可以试着去体会。人生四十岁是一个重要的里程碑。孔子说四十不惑，显然有夸张的成份，不过，如果说人过四十应该明白许多道理，还是有道理的。</p>
+<p>四十岁后，我明白的道理越来越多，但是，困惑其实也越来越多。没有经历人生体验的道理，年轻时口头上也会说，但是那说的仍然是人家的道理，而不是自己的。四十岁之后，我的感悟主要是这些：</p>
+<p>1、人一生的命运并不完全是由自己决定的。四十岁后大致可看到自己的一生究竟会以怎样的方式终结。年轻时雄心勃勃，以为自己只要奋斗，就无所不能，其实是一种错觉。人可以追求自己所想的，却不可以获得自己所要的。人一生中其实可以奋斗的余地很有限。</p>
+<p>尤其是在中国这样的社会里，从出生的时代、地域、籍贯到家庭出身，其实你的命脉大致定了，能够改变的只是很小的空间，只有极少数富有智慧的人，能够将这个有限的空间与时间充分利用。</p>
+<p>2、人不可以将自己与他人相比，只能够与自己相比。每个人都存在一个最好的自己，因此，每个人都可以做最好的自己，却很难说他是人群中最优秀的。理由基于上面的原因。</p>
+<p>3、生命中与生俱来的都是最为珍贵的。不必为自己的生理缺陷而烦恼。年轻时为自己个子不够高而苦恼，四十岁后发现，矮个子其实最有利于保护脊椎不受损害，也有利于心脏的健康。三十岁之前为个子矮小而苦恼，四十岁之后为个子不高而庆幸。</p>
+<p>4、性福是很重要的幸福之源。然而这必须以年轻时不纵欲为前提。放纵性与将性做为交换，人的性福感将会提前结束。四十岁之后还对异性来电，说明他的生命活力不错。性福取决于质量而不是数量。学会在年轻时珍藏千金良宵，留待老年时回忆，这是年轻时需要努力去做的。</p>
+<p>5、知识不是越多越好。书也不是读得越多越好。在这里质量同样重于数量。怎样读远比读什么重要。运用知识信息的能力，比单纯地记住知识重要。</p>
+<p>6、能够自己给自己定标准，不再以外在的标准为自己的标准。更不为别人的脸色而活，而是按照自己内心的定律与命令去执行。</p>
+<p>7、知道死亡是人生中必须面对的必然事实。四十岁之后因身体的变化，已经可以触摸到死亡的影子。父母中已经有人不在人世，从他们的离世，能够深切体验到生命的历程。</p>]]>
+    
+    </summary>
+    
+      <category term="杂文随笔" scheme="http://www.elain.org/categories/%E6%9D%82%E6%96%87%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[转]世界上最健康的作息时间表]]></title>
+    <link href="http://www.elain.org/2013/03/26/'%5B%E8%BD%AC%5D%E4%B8%96%E7%95%8C%E4%B8%8A%E6%9C%80%E5%81%A5%E5%BA%B7%E7%9A%84%E4%BD%9C%E6%81%AF%E6%97%B6%E9%97%B4%E8%A1%A8'/"/>
+    <id>http://www.elain.org/2013/03/26/'[转]世界上最健康的作息时间表'/</id>
+    <published>2013-03-26T03:15:23.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>7:30：起床。英国威斯敏斯特大学的研究人员发现，那些在早上5:22―7:21 分起床的人，其血液中有一种能引起心脏病的物质含量较高，因此，在7:21之后起床对身体健康更加有益。</p>
+<p>打开台灯。“一醒来，就将灯打开，这样将会重新调整体内的生物钟，调整睡眠和醒来模式。”拉夫堡大学睡眠研究中心教授吉姆·霍恩说。</p>
+<p>喝一杯水。水是身体内成千上万化学反应得以进行的必需物质。早上喝一杯清水，可以补充晚上的缺水状态。</p>
+<p>7:30―8:00：在早饭之前刷牙。“在早饭之前刷牙可以防止牙齿的腐蚀，因为刷牙之后，可以在牙齿外面涂上一层含氟的保护层。要么，就等早饭之后半小时再刷牙。”英国牙齿协会健康和安全研究人员戈登·沃特金斯说。</p>
+<p>8:00―8:30：吃早饭。“早饭必须吃，因为它可以帮助你维持血糖水平的稳定。”伦敦大学国王学院营养师凯文·威尔伦说。早饭可以吃燕麦粥等，这类食物具有较低的血糖指数。</p>
+<p>8:30―9:00：避免运动。来自布鲁奈尔大学的研究人员发现，在早晨进行锻炼的运动员更容易感染疾病，因为免疫系统在这个时间的功能最弱。步行上班。马萨诸塞州大学医学院的研究人员发现，每天走路的人，比那些久坐不运动的人患感冒病的几率低25%。</p>
+<p>9:30：开始一天中最困难的工作。纽约睡眠中心的研究人员发现，大部分人在每天醒来的一两个小时内头脑最清醒。</p>
+<p>10:30：让眼睛离开屏幕休息一下。如果你使用电脑工作，那么每工作一小时，就让眼睛休息3分钟。</p>
+<p>11:00：吃点水果。这是一种解决身体血糖下降的好方法。吃一个橙子或一些红色水果，这样做能同时补充体内的铁含量和维生素C含量。</p>
+<p>13:00：在面包上加一些豆类蔬菜。你需要一顿可口的午餐，并且能够缓慢地释放能量。“烘烤的豆类食品富含纤维素，番茄酱可以当作是蔬菜的一部分。”维伦博士说。</p>
+<p>14:30―15:30：午休一小会儿。雅典的一所大学研究发现，那些每天中午午休30分钟或更长时间，每周至少午休3次的人，因心脏病死亡的几率会下降37%。</p>
+<p>16:00：喝杯酸奶。这样做可以稳定血糖水平。在每天三餐之间喝些酸牛奶，有利于心脏健康。</p>
+<p>17:00―19:00：锻炼身体。根据体内的生物钟，这个时间是运动的最佳时间，舍菲尔德大学运动学医生瑞沃·尼克说。</p>
+<p>19:30：晚餐少吃点。晚饭吃太多，会引起血糖升高，并增加消化系统的负担，影响睡眠。晚饭应该多吃蔬菜，少吃富含卡路里和蛋白质的食物。吃饭时要细嚼慢咽。</p>
+<p>21:45：看会电视。这个时间看会儿电视放松一下，有助于睡眠，但要注意，尽量不要躺在床上看电视，这会影响睡眠质量。</p>
+<p>23:00：洗个热水澡。“体温的适当降低有助于放松和睡眠。”拉夫堡大学睡眠研究中心吉姆·霍恩教授说。</p>
+<p>23:30：上床睡觉。如果你早上7点30起床，现在入睡可以保证你享受8小时充足的睡眠。</p>
+<p>任何试图更改生物钟的行为，都将给身体留下莫名其妙的疾病，20、30年之后再后悔，已经来不及了。</p>
+<p>一、晚上9-11点为免疫系统（淋巴）排毒时间，此段时间应安静或听音乐。</p>
+<p>二、晚间11-凌晨1点，肝的排毒，需在熟睡中进行。</p>
+<p>三、凌晨1-3点，胆的排毒，亦同。<a id="more"></a></p>
+<p>四、凌晨3-5点，肺的排毒。此即为何咳嗽的人在这段时间咳得最剧烈，因排毒动作已走到肺；不应用止咳药，以免抑制废积物的排除。</p>
+<p>五、凌晨5-7点，大肠的排毒，应上厕所排便。</p>
+<p>六、凌晨7-9点，小肠大量吸收营养的时段，应吃早餐。疗病者最好早吃，在６点半前，养生者在７点半前，不吃早餐者应改变习惯，即使拖到9、10点吃都比不吃好。</p>
+<p>七、半夜至凌晨4点为脊椎造血时段，必须熟睡，不宜熬夜。</p>
+<p>记住身体健康作息时间表，安排好你的生活，让你的人生丰富多彩！</p>
+<p>转自：<a href="http://www.80sa.org/?p=142" target="_blank" rel="external">http://www.80sa.org/?p=142</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>7:30：起床。英国威斯敏斯特大学的研究人员发现，那些在早上5:22―7:21 分起床的人，其血液中有一种能引起心脏病的物质含量较高，因此，在7:21之后起床对身体健康更加有益。</p>
+<p>打开台灯。“一醒来，就将灯打开，这样将会重新调整体内的生物钟，调整睡眠和醒来模式。”拉夫堡大学睡眠研究中心教授吉姆·霍恩说。</p>
+<p>喝一杯水。水是身体内成千上万化学反应得以进行的必需物质。早上喝一杯清水，可以补充晚上的缺水状态。</p>
+<p>7:30―8:00：在早饭之前刷牙。“在早饭之前刷牙可以防止牙齿的腐蚀，因为刷牙之后，可以在牙齿外面涂上一层含氟的保护层。要么，就等早饭之后半小时再刷牙。”英国牙齿协会健康和安全研究人员戈登·沃特金斯说。</p>
+<p>8:00―8:30：吃早饭。“早饭必须吃，因为它可以帮助你维持血糖水平的稳定。”伦敦大学国王学院营养师凯文·威尔伦说。早饭可以吃燕麦粥等，这类食物具有较低的血糖指数。</p>
+<p>8:30―9:00：避免运动。来自布鲁奈尔大学的研究人员发现，在早晨进行锻炼的运动员更容易感染疾病，因为免疫系统在这个时间的功能最弱。步行上班。马萨诸塞州大学医学院的研究人员发现，每天走路的人，比那些久坐不运动的人患感冒病的几率低25%。</p>
+<p>9:30：开始一天中最困难的工作。纽约睡眠中心的研究人员发现，大部分人在每天醒来的一两个小时内头脑最清醒。</p>
+<p>10:30：让眼睛离开屏幕休息一下。如果你使用电脑工作，那么每工作一小时，就让眼睛休息3分钟。</p>
+<p>11:00：吃点水果。这是一种解决身体血糖下降的好方法。吃一个橙子或一些红色水果，这样做能同时补充体内的铁含量和维生素C含量。</p>
+<p>13:00：在面包上加一些豆类蔬菜。你需要一顿可口的午餐，并且能够缓慢地释放能量。“烘烤的豆类食品富含纤维素，番茄酱可以当作是蔬菜的一部分。”维伦博士说。</p>
+<p>14:30―15:30：午休一小会儿。雅典的一所大学研究发现，那些每天中午午休30分钟或更长时间，每周至少午休3次的人，因心脏病死亡的几率会下降37%。</p>
+<p>16:00：喝杯酸奶。这样做可以稳定血糖水平。在每天三餐之间喝些酸牛奶，有利于心脏健康。</p>
+<p>17:00―19:00：锻炼身体。根据体内的生物钟，这个时间是运动的最佳时间，舍菲尔德大学运动学医生瑞沃·尼克说。</p>
+<p>19:30：晚餐少吃点。晚饭吃太多，会引起血糖升高，并增加消化系统的负担，影响睡眠。晚饭应该多吃蔬菜，少吃富含卡路里和蛋白质的食物。吃饭时要细嚼慢咽。</p>
+<p>21:45：看会电视。这个时间看会儿电视放松一下，有助于睡眠，但要注意，尽量不要躺在床上看电视，这会影响睡眠质量。</p>
+<p>23:00：洗个热水澡。“体温的适当降低有助于放松和睡眠。”拉夫堡大学睡眠研究中心吉姆·霍恩教授说。</p>
+<p>23:30：上床睡觉。如果你早上7点30起床，现在入睡可以保证你享受8小时充足的睡眠。</p>
+<p>任何试图更改生物钟的行为，都将给身体留下莫名其妙的疾病，20、30年之后再后悔，已经来不及了。</p>
+<p>一、晚上9-11点为免疫系统（淋巴）排毒时间，此段时间应安静或听音乐。</p>
+<p>二、晚间11-凌晨1点，肝的排毒，需在熟睡中进行。</p>
+<p>三、凌晨1-3点，胆的排毒，亦同。]]>
+    
+    </summary>
+    
+      <category term="杂文随笔" scheme="http://www.elain.org/categories/%E6%9D%82%E6%96%87%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[转]30岁以前不要去在乎的30件事]]></title>
+    <link href="http://www.elain.org/2013/03/26/'%5B%E8%BD%AC%5D30%E5%B2%81%E4%BB%A5%E5%89%8D%E4%B8%8D%E8%A6%81%E5%8E%BB%E5%9C%A8%E4%B9%8E%E7%9A%8430%E4%BB%B6%E4%BA%8B'/"/>
+    <id>http://www.elain.org/2013/03/26/'[转]30岁以前不要去在乎的30件事'/</id>
+    <published>2013-03-26T03:14:34.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://www.elain.org/?attachment_id=815"><img src="http://www.elain.org/wp-content/uploads/2013/03/174648_nfPh_55302-640x480.jpg" alt=""></a></p>
+<p>1.放弃</p>
+<p>把握的反面就是放弃，选择了一个机会，就等于放弃了其他所有的可能。<br>2.失恋<br>不是不在乎，是在乎不起。三十岁前最怕失去的不是已经拥有的东西，而是梦想。爱情如果只是一个过程，那么正是这个年龄应当经历的，如果要承担结果，三十岁 以后，可能会更有能力，更有资格。其实，三十岁之前我们要做的事情很多，稍纵即逝，过久地沉溺在已经干涸的爱河的河床中，与这个年龄的生命节奏不合。</p>
+<p>3.离婚<br>不是不在乎，是一切还来得及。一位三十八岁的女友与老公结婚十五年，冷战十三年，终于分手。她说：「如果说后来不愿意离婚是为了孩子，那他第一次提出离婚 我没有同意，现在想来真不知道为什么。如果那个时候早分手，我的生活绝不会是今天这个样子。现在再重新开始，总觉得一切都晚了。」</p>
+<p>4.漂泊<br>漂泊不是一种不幸，而是一种资格。趁着没有家室拖累，趁着身体健康，此时不飘何时飘？当然，漂泊的不一定是身体，也许只是幻想和梦境。新世纪的时尚领袖是飘一代，渴望漂泊的人惟一不飘的是那颗心。</p>
+<p>5.失业<br>三十岁以前就尝到失业的滋味当然是一件不幸的事，但不一定是坏事。三十岁之前就过早地固定在一个职业上终此一生也许才是最大的不幸。失业也许让你想起埋藏很久而尘封的梦想，也许会唤醒连你自己都从未知道的潜能。也许你本来就没什么梦想，这时候也会逼着你去做梦。</p>
+<p>6.时尚<br>不要追赶时尚。按说青年人应该是最时尚的，但是独立思考和个性生活更重要。在这个物质社会，其实对时尚的追求早已经成为对金钱的追求。今天，时尚是物欲和世俗的同义语。</p>
+<p>7.格调<br>这是小资的东西，「小资」这个词在今天又二度流行，追求格调就是他们的专利。小资们说，有格调要满足四大要件：智慧、素养、自信和金钱。 格调就是把「高尚」理解成穿着、气质、爱好的品味和室内装潢。也就是大老粗只会表现谈吐的庸俗，「小资」们已经有能力庸俗他们的心灵了。<br>主流观念倒不是非要另类，另类已经成为年轻人观念的主流了，在今天，老土倒显得另类。关键是当今社会是一个创造观念的时代，而不是一个固守陈旧观念的时代。</p>
+<p>8.评价<br>我们最不应该做出的牺牲就是因为别人的评价而改变自我，因为那些对你指手画脚的人自己也不知道他们遵从的规则是什么。千万不要只遵从规矩做事，规矩还在创造之中，要根据自己的判断做每一件事，虽然这样会麻烦一点。<a id="more"></a></p>
+<p>9.幼稚<br>不要怕人说我们幼稚，这正说明你还年轻，还充满活力。「成熟」是个吓人的词儿，也是个害人的词儿。成熟和幼稚是对一个人最大而无当、最不负责任、最没用的 概括。那些庸人，绝不会有人说他们幼稚。不信，到哪天你被生活压得老气横秋，暮气沉沉的时候，人们一定会说你成熟了，你就会知道「成熟」是个什么东西。</p>
+<p>10.不适应<br>在一首摇滚有这么一句：「这个城市改变了我，这个城市不需要我。」<br>不要盲目地适应你生存的环境，因为很可能这环境自身已经不适应这个社会的发展了。</p>
+<p>11.失败<br>我的老师曾经跟我说，一个人起码要在感情上失恋一次，在事业上失败一次，在选择上失误一次，才能长大。不要说失败是成功之母那样的老话，失败来得越早越好，要是三十岁，四十岁之后再经历失败，有些事，很可能就来不及了。</p>
+<p>12.错误<br>这是年轻人的专利。</p>
+<p>13.浅薄<br>如果每看一次《泰坦尼克号》就流一次眼泪，每看一次《大话西游》就笑得直不起腰，就会有人笑你浅薄。其实那只能说明你的神经依旧非常敏锐，对哪怕非常微弱的刺激都会迅速做出适应的反应；等你的感觉迟钝了，人们就会说你深沉了。</p>
+<p>14.明星<br>不是不必在乎，是不能在乎。明星在商品社会是一种消费品，花了钱，听了歌，看了电影，明星们的表现再好，不过是物超所值而己，也不值得崇拜呀？就像你在地摊上花五十块钱买的裙子，别人都猜是八百块钱买的，物超所值了吧？你就崇拜上这身裙子了？</p>
+<p>15.代价<br>不是不计代价，而是要明白做任何事都要付出代价。对我们这个年龄的人来说，绝不是一句废话。否则，要到三十岁的时候才会明白自己曾经付出了多少代价，却不明白为什么付出，更不明白自己得到了多少，得到什么。</p>
+<p>16.孤独<br>这是为自由付出的代价。</p>
+<p>17.失意<br>包括感情上的，事业上的，也许仅仅是今天花了冤枉钱没买到可心的东西，朋友家高朋满座自己却插不上一句话。过分在乎失意的感受不是拿命运的捉弄来捉弄自己，就是拿别人的错误来惩罚自己。</p>
+<p>18.缺陷<br>也许你个子矮，也许你长得不好看，也许你的嗓音像唐老鸭……那么你的优势就是你不会被自己表面的浅薄的亮点所耽搁，少花一些时间，少走一些弯，直接发现你内在的优势，直接挖掘自己深层的潜能。</p>
+<p>19.误会<br>如果出于恶意，那么解释也没有用；如果出于善意，就不需要解释。专门说到「误会」倒不是因为一个人在三十岁之前被人误会的时候更多，而是这个年龄的人想不开的时候更多。</p>
+<p>20.谣言<br>这是一种传染病，沈默是最好的疫苗。除非你能找出传染源，否则解释恰恰会成为病毒传播最理想的条件。</p>
+<p>21.疯狂<br>这是年轻人最好的心理调适，只能说明你精力旺盛，身心健康。说你「疯狂」是某些生活压抑、心力交瘁的中老年人恶意的评价，他们就像一部年久修的机器，最需要调适，但只能微调，一次大修就会让他们完全报废。</p>
+<p>22.稳定<br>三十岁之前就在乎稳定的生活，那只有两种可能，要么就是中了彩票，要么就是未老先衰。</p>
+<p>23.压力<br>中年人能够承受多大压力检验的是他的韧性；年轻人能承受多大压力，焕发的是他的潜能。</p>
+<p>24.出国<br>也许是个机会，也许是个陷阱。除非从考大学的那一刻你就抱着这个目标，否则，对待出国的态度应该像对待爱情一样，努力争取，成败随缘。</p>
+<p>25.薪水<br>只是给人打工，薪水再高也高不到哪儿去。所以在三十岁之前，机会远比金钱重要，事业远比金钱重要，将来远比金钱重要。对大多数人来说，三十岁之前干事业的首要目标绝不是挣钱，而是挣未来。</p>
+<p>26.存款<br>这倒不一定是因为我们钱少，年轻人现在谁都知道钱是有生命的。机会这么多，条件这么好，可以拿钱去按揭，做今天的事，花明天的钱；也可以拿钱去投资，拿钱去「充电」。钱只有在它流通的过程中才是钱，否则只是一迭世界上质量最好的废纸。</p>
+<p>27.房子<br>除非你买房子是为了升值，要么就是你结婚了。我有个同学，家在外地，大学毕业之后，单位没有宿舍，家里就给他买了一套房子。他曾经有过去北京工作的机会， 但是他觉得刚买了房子就离开这座城市说不过去，就放弃了。到现在他工作稳定，但一事无成。唯一的成就就是结婚了，并且有了孩子，因为他觉得不该让这房子永 远空着，所以房子变成了家。房子是都市生活的寓言，这个寓言不应该过早的和我们相关。</p>
+<p>28.年龄<br>女孩子一过二十五就开始隐瞒自己的年龄，其实大可不必。现在青年期都延迟到四十五岁了，二十五又算得了什么呢？</p>
+<p>29.在乎</p>
+<p>这是一种拿不起、放不下的心态，它的反面不是放弃，而是天马行空，自由自在，永远保持革命乐观主义的精神。</p>
+<p>30.你所在意的一切<br>听听刘欢的《从头再来》，“一切只不过从头再来”。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="http://www.elain.org/?attachment_id=815"><img src="http://www.elain.org/wp-content/uploads/2013/03/174648_nfPh_55302-640x480.jpg" alt=""></a></p>
+<p>1.放弃</p>
+<p>把握的反面就是放弃，选择了一个机会，就等于放弃了其他所有的可能。<br>2.失恋<br>不是不在乎，是在乎不起。三十岁前最怕失去的不是已经拥有的东西，而是梦想。爱情如果只是一个过程，那么正是这个年龄应当经历的，如果要承担结果，三十岁 以后，可能会更有能力，更有资格。其实，三十岁之前我们要做的事情很多，稍纵即逝，过久地沉溺在已经干涸的爱河的河床中，与这个年龄的生命节奏不合。</p>
+<p>3.离婚<br>不是不在乎，是一切还来得及。一位三十八岁的女友与老公结婚十五年，冷战十三年，终于分手。她说：「如果说后来不愿意离婚是为了孩子，那他第一次提出离婚 我没有同意，现在想来真不知道为什么。如果那个时候早分手，我的生活绝不会是今天这个样子。现在再重新开始，总觉得一切都晚了。」</p>
+<p>4.漂泊<br>漂泊不是一种不幸，而是一种资格。趁着没有家室拖累，趁着身体健康，此时不飘何时飘？当然，漂泊的不一定是身体，也许只是幻想和梦境。新世纪的时尚领袖是飘一代，渴望漂泊的人惟一不飘的是那颗心。</p>
+<p>5.失业<br>三十岁以前就尝到失业的滋味当然是一件不幸的事，但不一定是坏事。三十岁之前就过早地固定在一个职业上终此一生也许才是最大的不幸。失业也许让你想起埋藏很久而尘封的梦想，也许会唤醒连你自己都从未知道的潜能。也许你本来就没什么梦想，这时候也会逼着你去做梦。</p>
+<p>6.时尚<br>不要追赶时尚。按说青年人应该是最时尚的，但是独立思考和个性生活更重要。在这个物质社会，其实对时尚的追求早已经成为对金钱的追求。今天，时尚是物欲和世俗的同义语。</p>
+<p>7.格调<br>这是小资的东西，「小资」这个词在今天又二度流行，追求格调就是他们的专利。小资们说，有格调要满足四大要件：智慧、素养、自信和金钱。 格调就是把「高尚」理解成穿着、气质、爱好的品味和室内装潢。也就是大老粗只会表现谈吐的庸俗，「小资」们已经有能力庸俗他们的心灵了。<br>主流观念倒不是非要另类，另类已经成为年轻人观念的主流了，在今天，老土倒显得另类。关键是当今社会是一个创造观念的时代，而不是一个固守陈旧观念的时代。</p>
+<p>8.评价<br>我们最不应该做出的牺牲就是因为别人的评价而改变自我，因为那些对你指手画脚的人自己也不知道他们遵从的规则是什么。千万不要只遵从规矩做事，规矩还在创造之中，要根据自己的判断做每一件事，虽然这样会麻烦一点。]]>
+    
+    </summary>
+    
+      <category term="杂文随笔" scheme="http://www.elain.org/categories/%E6%9D%82%E6%96%87%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[转]2012年Linux Journal读者选择奖结果公布]]></title>
+    <link href="http://www.elain.org/2012/12/18/'%5B%E8%BD%AC%5D2012%E5%B9%B4LinuxJournal%E8%AF%BB%E8%80%85%E9%80%89%E6%8B%A9%E5%A5%96%E7%BB%93%E6%9E%9C%E5%85%AC%E5%B8%83'/"/>
+    <id>http://www.elain.org/2012/12/18/'[转]2012年LinuxJournal读者选择奖结果公布'/</id>
+    <published>2012-12-18T02:55:12.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>还剩十几天，2012年就要过去了。Linux 业界知名的杂志 Linux Journal 近日在其官网公布了今年Linux Journal读者选择奖（Readers’ Choice Awards）投票结果。投票覆盖 Linux Journal 一年内报道的产品、服务和公司。<br>在今年，Python 再次成为“最佳编程语言（Best Programming Language）”和“最佳脚本语言（Best Scripting Language）”，Eclipse 是“最佳 IDE”。<br>今年投票主题分类有  52 种，以下是部分分类结果：<br>Best Linux Distribution 最佳 Linux 发行版<br>① Ubuntu (any flavor, Kubuntu, Edubuntu, etc.): 30.1%  ② Debian: 14.7%；③ Linux Mint: 13.4% ④ Arch Linux: 10% ⑤ Fedora: 8.6% ⑥ OpenSUSE: 4.2%……</p>
+<p>Best Distribution for Netbooks/Limited Hardware<br>①  Ubuntu Netbook Remix (any flavor): 25.9% ② Debian: 14.9% ③ Android OS: 14.1% ④ ArchLinux: 12.7% ……</p>
+<p>Best Mobile Linux OS  → Android<br>Best Desktop Environment → KDE<br>Best Web Browser<br>① Firefox: 50.3% ② Chrome/Chromium: 40.8% ③ Opera: 4.7% ……</p>
+<p>Best E-mail Client 最佳邮件客户端<br>① Thunderbird: 40.2%  ② Gmail Web client: 31.3% ③ Evolution: 7.5%……</p>
+<p>Best IM Client 最佳即时通讯软件客户端<br>① Pidgin (formerly Gaim): 56% ② Skype: 15.1% ③ Empathy: 9.2%……</p>
+<p>Best IRC Client 最佳 IRC 客户端<br>① pidgin: 31.2%  ② XChat: 27.8% ③ Irssi: 13.2%……</p>
+<p>Best Office Suite<br>① LibreOffice: 73.3% 、② Google Docs: 12%、③ OpenOffice.org: 8.4%……</p>
+<p>Best Graphics/Design Tool<br>① GIMP: 67.8% 、② Inkscape: 13.3%、③ Blender: 8% ……</p>
+<p>Best Digital Photo Management Tool<br>① digiKam: 22.5、② Picasa: 22.2%、③ Shotwell: 17.3% ……</p>
+<p>Best Audio Tool ：Audacity<br>Best Audio Player：VLC: 24.9%</p>
+<p> Best On-line Collaboration Tool<br>①Google Docs: 61.3%、② Wikis: 18.5%、③ Other: 6.9%……</p>
+<p>Best Cloud-Based File Storage：Dropbox: 53.4%<br>Best Kid-Friendly Application：Tux Paint: 42.8%<br>Best SQL Database<br>① MySQL: 47.4%、② PostgreSQL: 28.8%、③ SQLite: 12.2%……</p>
+<p> Best NoSQL Database<br>① MongoDB: 33.4%、② CouchDB: 22.3%、③ Cassandra: 21.9%、④ Other: 12.2%、⑤ Redis: 6.6%、⑥ Dynomite: 1.8%、⑦ Riak: 1.8%</p>
+<p>Best Monitoring Application：Nagios<br>Best Revision Control System<br>① Git: 63%、② Subversion: 18.6%、③ Mercurial: 6.6%、④ CVS: 6.2%、⑤ Other: 2.7%</p>
+<p>Best Programming Language 最佳编程语言<br>① Python: 28%、② C++: 19%、③ C: 18.9%、④ Java: 8.9%、⑤ Perl: 8.2%<br>Other: 6.1%、Ruby: 4%、JavaScript: 3.1%、C#: 2.4%、Erlang: .7%、Haskell: .7%</p>
+<p>Best Scripting Language 最佳脚本语言<br>① Python: 36.3%、② Bash: 24.4%、③ Perl: 14.2%、④ PHP: 13.8%、⑤ Ruby: 4.8%、⑥ Awk: 2.2%、⑦ Other: 2.2%、⑧ Lua: 1.6%、⑨ Groovy: 0.4%</p>
+<p>（译注：针对这个投票结果，尤其是“最佳编程语言（Best Programming Language）”和“最佳脚本语言（Best Scripting Language）”，Reddit 上有些人在讨论并吐槽 → 链接。）</p>
+<p>Best IDE 最佳集成开发环境（IDE）<br>Eclipse: 26.7%、vim: 25.6%、Geany: 7.5%、Other: 6.9%*、QtCreator: 6.1%、NetBeans: 5.4%、KDevelop: 4.1%、Sublime 2: 3.1%、IntelliJ IDEA: 1.3%、Anjuta: 1.2%、MonoDevelop: .6%、Codewarrior: .5%、Zend Studio: .3%、Eric4: .1%</p>
+<p>Best Open-Source Configuration Management Tool | 最佳开源配置管理工具：Puppet<br>Best Platform for Developing Rich Internet Apps ：HTML5<br>Best Package Management Application：apt<br>Best RSS Reader：Gmail RSS reader</p>
+<p>Best Java App Server<br>tomcat: 60.1%、jboss: 21.9%、Other: 10.9%*、glassfish: 7.1%</p>
+<p>Best Content Management System 最佳内容管理系统<br>WordPress: 34.9%、Drupal: 27.8%、Joomla!: 15.3%、Other: 8.1%……</p>
+<p>最佳Linux图书 《Linux in Nutshell》 </p>
+<p>英文来源： Linux Journal，编译：伯乐在线——黄利民<br>文章链接：<a href="http://blog.jobbole.com/31329/" target="_blank" rel="external">http://blog.jobbole.com/31329/</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>还剩十几天，2012年就要过去了。Linux 业界知名的杂志 Linux Journal 近日在其官网公布了今年Linux Journal读者选择奖（Readers’ Choice Awards）投票结果。投票覆盖 Linux Journal 一年内报道的产品、服务和公司。]]>
+    </summary>
+    
+      <category term="杂文随笔" scheme="http://www.elain.org/categories/%E6%9D%82%E6%96%87%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[转]创业公司老板管理常识]]></title>
+    <link href="http://www.elain.org/2012/12/06/'%5B%E8%BD%AC%5D%E5%88%9B%E4%B8%9A%E5%85%AC%E5%8F%B8%E8%80%81%E6%9D%BF%E7%AE%A1%E7%90%86%E5%B8%B8%E8%AF%86'/"/>
+    <id>http://www.elain.org/2012/12/06/'[转]创业公司老板管理常识'/</id>
+    <published>2012-12-06T02:36:08.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>本文摘录并整理自创业家杂志</p>
+<p>一、管人</p>
+<p>1、招聘</p>
+<p>招三流学历一流素质的人才，干二流的工作，发一流的工资。当然，以上一流三流都是相对的。</p>
+<p>大部分人对待新工作职位及待遇都是只能上不能下。</p>
+<p>宁可漏过一千，不可错招一个。</p>
+<p>亲戚朋友能少用就少用。</p>
+<p>对于下岗职工我个人有一定偏见。大部分下岗职工，特别是岁数稍大的国营单位下岗职工基本上牢骚满腹，觉得社会对他不公，而且把不满情绪及原单位的种种不良习气都带到新公司，觉得公司给他什么福利都是应该的，别人都欠他的，很难融入新公司，踏实肯干的占少一部分。大概私营企业不适合下岗职工吧。</p>
+<p>2、授权</p>
+<p>哪怕员工只能做到你的70%。有时候真着急啊，明明能谈下的客户销售人员就是差那么一点谈不下来，恨不得立刻自己冲上去，该忍还得忍，要不手下员工如何进步。</p>
+<p>团长看见某个士兵有问题，绝对不会骂士兵，他只会骂士兵所在营的营长，营长则再骂连长，一级管理一级，最后班长把该士兵剥皮了事。所以军队尽管有千军万马，依然能做到令行禁止。</p>
+<p>3、关键人：有的钱不能省。</p>
+<p>下辈子再办公司，公司只要有4个人，一定是一个老板，一个会计，一个出纳，一个库管，打死再不省那点钱了。</p>
+<p>4、管理者–矬子里拔将军。</p>
+<p>5、留住骨干：小公司如何留住骨干、涨工资。</p>
+<p>我就只满足公司20%的骨干。<br>首先发展骨干员工入股：我将公司股份买一送一，半价销售给骨干员工，五年内退股只退还本金，五年以上退股我三倍赎回。每年拿出利润的60%分红。反正有钱大家赚，但股东一旦做了对不起公司的事，加倍惩罚，由股金中扣除。这招还真好使，在近5年里没有一个股东离职，而且公司重点岗位都有股东，省了我不少精力。</p>
+<p>二、管钱</p>
+<p>1、财务制度之签字与凭证</p>
+<p>财务制度一定要健全并被严格执行，公司大了，人员素质参差不齐，如果财务制度上有漏洞，难免有人会加以利用并非法得利，这样不仅公司利益受到损失，而且起了一个坏的带头作用，其他员工会觉得自己不利用公司财务漏洞相对来说就是吃亏，如此下去公司风气越来越坏，老板到时哭都来不急了。</p>
+<p>2、按时发工资</p>
+<p>其实这一条是当老板最基本的素质。估计每一个老板都不会反对这一点(至少在口头上不会反对)，但实际情况是很多公司做不到这一点。</p>
+<p>拖欠工资这事有点像吸毒，有一回就会有第二回，只要资金一紧张老板就会用拖欠员工工资来缓解，结果员工对公司和老板的信任荡然无存。调查表明，员工对于公司最无法容忍的就是拖欠工资，这也经常是某些企业人员流动的最主要因素。</p>
+<p>3、福利：发劳保用品</p>
+<p>“这你就不明白了吧，我过节发这些东西让员工拿回家，员工家属一看就觉得咱公司福利待遇好，员工多有面子啊，这些东西摊到每人头上才一百多元看起来又一大堆，多合算呀。</p>
+<p>但基本五险一金先到位。别本还没做到就想做花。</p>
+<p>4、股份、年终奖、计提</p>
+<p>头些年我每年将公司当年盈利的30%用于分红，虽然总数不少，但对于小股东来说，有些不疼不痒。近两年听取高人建议，一方面公司自有资金目前足够支撑日常运转，另一方面最近通货膨胀率太高，我索性将年底分红的比例提高到当年净利润的60%，消息一公布，公司小股东乐得嘴都合不拢了，一些原来犹豫的员工也纷纷向我打听入股的事。</p>
+<p>年终奖从前一向是我亲自分配，现在公司人多了，我不可能了解公司每个员工在这一年里的工作细节，因此，公司就根据当年效益定个年终奖总数，我再根据年终奖总数及各部门贡献和部门人数按比例分配到各个部门，让各部门经理与人力资源经理参照考核标准分配到每个员工，最后我只要根据每个部门这一年的工作业绩评定部门经理的年终奖就可以了。</p>
+<p>以前年底分红与年终奖财务上都是作为费用在第二年按月摊销，方法不甚科学，现改为当年按月计提，每月在利润中将这部分费用预留出来，这样年底发奖金时就能做到心中有数，每部门在计算年终奖总数时也有依据了。</p>
+<p>三、通用管理原则</p>
+<p>1、原则底线建立：当老板和开车</p>
+<p>办公司和开车很像，老板就好比驾驶员，车在路上跑，只要在本车道的两条白线内就OK，不必时刻调整方向盘，否则司机累，乘客累，车还画龙易出危险，费力不讨好。同样办公司只要公司运营在可控范围内不犯大错，政策就应稳定执行，保持连贯性，让员工心里有底。小公司老板权力集于一身，缺乏监督，制定政策更应该小心谨慎，不然公司总在调整，员工缺乏稳定感，不跑光才怪呢。</p>
+<p>看见别的公司有什么新章程常常一拍脑门拿来就用，过段时间发现效果不好又推倒重来，弄得公司员工无所适从。原有的提成奖励方法有的已经很好，经过实践检验较为合理，员工也认可，偏偏听完什么专家讲座或看完某本管理书后，不经过深思熟虑并结合公司实际情况进行改造照搬照抄，立刻重新制定政策，结果会计抱怨不好操作，员工抱怨政策不合理，一通折腾后又改回原样。</p>
+<p>学会说“不”<br>公司有规定，公司的钱一律不借个人。”他还不甘心，又问：“对骨干员工也这样?”。我说：“对所有人公司一视同仁，骨干员工工资奖金可以多发，可以优惠条件入股，但对于这项规定谁也不能例外。</p>
+<p>不要在公司内部奢望交朋友<br>一切按规章制度来，只要管理好公司，让大家尽量拿到更多的工资奖金，人人都上保险，骨干员工入股共享公司发展成果，对得起自己的良心就完了。老板本来就是个孤独的职业，交朋友就在公司以外吧。</p>
+<p>2、政策的制定</p>
+<p>有些领导(包括我原来就经常想少发奖金，多给员工讲人生哲理)在台上给员工做报告大道理一套一套，说的话有时自己都不信，现在谁比谁傻呀，无利可图，政策不对头再讲大道理也没用。上个世纪农村实行土地承包制改革，一包就灵，归根到底还是因为政策终于符合了人的本性。</p>
+<p>避免当场做决定<br>两头听，不要听一面之词。</p>
+<p>3、政策准线透明：有些事情越透明越好。</p>
+<p>只要不涉及个人隐私不影响公司根本利益，我公司各项事务基本都是透明的。商品的底价向所有业务员公开，只是事先向他们说明物流仓储税金等各项费用的计算摊销方法，规定销售最低价，其他一概由业务员自己做主，这样不仅增强了员工与公司双方之间的相互信任而且简化了很多销售中间环节，提高了反应速度。但一定要保证公司底线和根本利益，不能一古脑越透明越好</p>
+<p>四、日常管理技巧</p>
+<p>1、老板尽量唱红脸</p>
+<p>日本公司总经理很少骂公司普通员工，对公司底层员工可和蔼了，但他经常当着员工的面训斥公司中层干部，而普通员工犯错误则由该员工的直接领导负责处理，当然月底发工资时总经理心里可不含糊，这样公司不仅管理得井井有条，而且员工心里也比较平衡。</p>
+<p>2、充分运用科技手段进行管理</p>
+<p>指纹打卡软件；网络财务、库存、报销软件；呼叫中心录音软件。</p>
+<p>3、从结果管理到过程管理</p>
+<p>于是我们将业务部门的报表改为一周一汇总，每周一必须将上周每人的业务开展情况及任务实际完成情况总结并核实，对于异常现象立刻采取措施，对于任务完成较差的员工马上单独交流，弄清原因，及时解决问题。新措施实行了一段时间后，我感觉公司对市场反应速度大大提高了，对业务方面的实际情况各级经理也基本做到心里有底，当月问题不必积压到下月初才被发现解决了。</p>
+<p>转自：<a href="http://blog.csdn.net/david_lv/article/details/8252433" target="_blank" rel="external">http://blog.csdn.net/david_lv/article/details/8252433</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本文摘录并整理自创业家杂志</p>
+<p>一、管人</p>
+<p>1、招聘</p>
+<p>招三流学历一流素质的人才，干二流的工作，发一流的工资。当然，以上一流三流都是相对的。</p>
+<p>大部分人对待新工作职位及待遇都是只能上不能下。</p>
+<p>宁可漏过一千，不可错招]]>
+    </summary>
+    
+      <category term="杂文随笔" scheme="http://www.elain.org/categories/%E6%9D%82%E6%96%87%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[转]如何摆脱低智商的社会，让自己脱颖而出？]]></title>
+    <link href="http://www.elain.org/2012/11/28/'%5B%E8%BD%AC%5D%E5%A6%82%E4%BD%95%E6%91%86%E8%84%B1%E4%BD%8E%E6%99%BA%E5%95%86%E7%9A%84%E7%A4%BE%E4%BC%9A%EF%BC%8C%E8%AE%A9%E8%87%AA%E5%B7%B1%E8%84%B1%E9%A2%96%E8%80%8C%E5%87%BA%EF%BC%9F'/"/>
+    <id>http://www.elain.org/2012/11/28/'[转]如何摆脱低智商的社会，让自己脱颖而出？'/</id>
+    <published>2012-11-28T04:11:27.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>如何摆脱低智商的社会，让自己脱颖而出？<br>看了大前研一的【低智商社会】后深有感触，日本如此发达的社会，大前研一却对于日本年轻人沉溺于动漫、网络游戏、网络社交，出现集体智商衰退的现象忧国忧民。日本人真的是一代不如一代？按照大前研一的说法，就是现在日本已经进入到了“低智商社会”。本书从日本的政治、经济、网络社会、教育等各个范畴去分析，点出了各种现实存在的低智商现象，给想在21世纪生存下去的日本人最后的当头棒喝，也给其他国家的人们一个强烈的警示，从而使我们反思面对的问题。<br>其实在中国更严重，在IT团队跟更更严重！<br>我经常对我的同事们讲的一个观点:在IT界成功真是太容易了。<br>1.最容易成功和获得一份不错薪资的行业就是IT，只要你有学习能力，因为你所有要学的东西，都在网上，通过Google可以获得你想要提高的所有东西。<br>2.只要你坚持不断的写程序，少说多写，你就很容易脱颖而出，因为你周围大部分人都在玩，有的在看垃圾小说，有的在聊天和微博，有的在低头玩弄智能手机。很少有人能够驱动自己从头到尾，从前端到后端，从页面到数据库，独立写一个完整的软件，并为之不断的改进。<br>网络是个让人又爱又恨的地方，我们写软件无法摆脱网络，但是网络让我们效率是如此的低下。<br>十一国庆，我在家，老婆孩子会娘家了，没有一个人打扰我，我发誓要在8天之内，用C#重写原来的通信服务器软件。<br>可是这8天内我做了什么呢？<br>1.因为在家，很松弛，我发现我非常不愿意动手写代码，我愿意查资料，我也不愿意写代码，结果第一天我查了和下载了一通资料和代码；<br>2.第二天，好声音决赛，我在优酷上把好声音看了够；<br>3.第三天我的负罪感加深了，我决定建立个工程，开始写代码，我有了初步的进展，有一个工程了，并把以前的C++的代码翻看了一遍，思考要改进的地方，写下了自己的设计思路，画了2张草图，并写了Socket的公用库。这距离我的目标还很遥远，中间我又花时间升级了我的android手机还看了个电视剧，白天想着晚上有时间，到晚上吃完饭犯困，9点多就睡了。<br>4.第四天我觉得写底层代码，推进太慢，从界面驱动入手，要让自己的工程可以运行和测试，从而不断的推进自己的工作。在写完界面后，我有点得意，放下工作，又犯了浏览网络博客的老毛病，看了很多精彩的博客文章，并放入自己的Evernote中。<br>5.后面的几天，老婆孩子回来了，工作效率更低了，基本上写了界面和底层的协议库，软件从整体上没有运行起来。<br>6.上班后，坐在办公室的感觉真好，由花了一个星期的时间，总算运行起来了。这个工作总共花费了15天，实际上我估算，如果集中精神，每天工作满8个小时，7天就完事了。<br>在现实中，我们的注意力都无法保持一个稳定的状态，网上的东西太多了，如果没有外界的压力，我们的工作效率就更低了，如果我们能超越这一点，我们就能做到和周边的人不一样，这样我们就能很容易脱颖而出得到上司的注意。因为别人都手慢，而你手快，你执行力强，你能够很快的写出一个可以运行的东西,上司就愿意委以重任。<br>现在几乎所有的项目经理在制定计划时，都会迁就我们低效的工作状态，美名其曰，留出冗余。其实我们很多的功能，如果半天完成，必定一天，如果两天能完事，必定要三天、四天的这样拖着。很多人都像有毒瘾一样，从上学开始，大学中，考试前几天，才开始看书，项目中总是在Milestone的最后时刻，才开始稍微动作起来。<br>大部分人几乎整年的不看书不买书，经常在网上浏览文章，会造成知识的碎片化，微博就更加严重，一本好书是从头到尾的让你系统化。无论是技术还是项目管理的书都是这样。我们不能满足于一点点的技巧性的文章。你有没有发现让你解释个东西的时候，你会结结巴巴的，无法从头到尾系统的阐述某个东西。<br>大部分人的能力和知识面都很局限，看看下面，自己能不能做到：<br>1.有没有自己一个人写过一个完整的可以运行的软件，B/S或C/S都行;<br>2.有没有完整的看过非小说的书，如测试驱动、配置管理、项目管理等等；<br>3.知不知道时间管理，想不想对改进自己的时间管理的能力，有没有使用过GTD或番茄时间管理法之类的工具，把自己的事情系统的整理一下；<br>4.有没有持续集中自己的注意力，不浏览网络，写一个小时代码的经历。</p>
+<p>我只是想深刻的反省自己，并提高自己，和大家做个分享，如果我们8个小时能够做到高效率，我们的生活不会那么苦，反而会获得升迁和提拔。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>如何摆脱低智商的社会，让自己脱颖而出？<br>看了大前研一的【低智商社会】后深有感触，日本如此发达的社会，大前研一却对于日本年轻人沉溺于动漫、网络游戏、网络社交，出现集体智商衰退的现象忧国忧民。日本人真的是一代不如一代？按照大前研一的说法，就是现在日本已经进入到了“低智商社]]>
+    </summary>
+    
+      <category term="杂文随笔" scheme="http://www.elain.org/categories/%E6%9D%82%E6%96%87%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[[转]为什么IT人难以拿高薪]]></title>
+    <link href="http://www.elain.org/2012/11/12/'%5B%E8%BD%AC%5D%E4%B8%BA%E4%BB%80%E4%B9%88IT%E4%BA%BA%E9%9A%BE%E4%BB%A5%E6%8B%BF%E9%AB%98%E8%96%AA'/"/>
+    <id>http://www.elain.org/2012/11/12/'[转]为什么IT人难以拿高薪'/</id>
+    <published>2012-11-12T05:45:49.000Z</published>
+    <updated>2016-02-02T06:18:15.000Z</updated>
+    <content type="html"><![CDATA[<p>最近在论坛里看到很多人发牢骚，说薪水少，可在我看来，你们这样的人拿得到高薪才怪！<br>我先问一句：这里有多少人是本科的？有多少人是正规本科的（不算自考，成考和专升本）？有多少人是有学位的？有多少有学位的是拿着网大排名前 50所大学的学位的？恐怕是少之又少吧！在中国，薪水和学位的关系对于应届生来说是绝对的，即使对于以后的发展，学位也很重要，要不那些低学历的人评职称为什么吃亏呢？你可以告诉我这不合理，不错，这确实不合理，但却是现实。如果你不能改变现实，那还是适应它吧！你也可以告诉我低学历一样可以拿高薪，我承认，不过你要准备比别人多付出10倍以上的努力。<br>接下来是语言，这里恐怕是有不少人没有过四级没学位的吧？有多少过六级的？有多少过专四专八的？有多少有其它英语证书的？你不要和我说你的水平好，可不喜欢中国的考试制度，所以没证书。在中国，毕业一开始的几年就是靠证书，你有本事跳过１楼２楼造３楼吗？如果你英语不行，你有其它二外吗？要知道，老外对于IT的重视可是比国内那些买的电脑做装饰品的土老帽要强得多。<br>其实这些都不是最重要的，最重要的做人的风格，现在很多IT人除了技术什么都不懂，整天得罪人。哪怕你是四个CCIE全考出的，我不用你难道地球就不转了？中国多的是人，技术有什么了不起的？更何况很多技术是根本用不到的。</p>
+<p>现在总看到一些所谓的“技术牛人”在误导新人，你们知不知道你们是在误人子弟啊！自己混不出头，还要去害别人，今天要和你们好好算算账。<br>先自我介绍一下，我是98年从上海交大毕业的，在Microsoft（MS）工作了6年，现在在一家系统集成公司工作。<br>第一个意见：读书最重要，就是为文凭。我承认大学里确实学不到什么东西，但为了文凭请一定要认真读。这个社会要文凭，没办法。还有大学成绩要读好一些，像MS, Cisco, Oracle这些大公司是会看的。读大学还有一个好处是大学很空，你可以自己去学想学的东西，不过学校的功课永远是最重要的。那些大专的不要以为本科生学不好技术，确切得说并没有几个优秀的学生是书呆子。没有什么规定说大专生学技术有优势。<br>第二个意见：好好读英语，要想在IT立足，英语是必须的。至少要过六级，如果能有专八或者中高口证书或者BEC什么的就更好，最好还要有二外，可以考虑德语或者日语。作IT一定要去外企，国企绝对没前途。<br>第三个意见：要认真选择入的行业。IT是非常广泛的概念，网络只是其中一个非常小的（而且也是非常没有前途的）领域。IT最有前途的领域是什么？是开发，开发中最有前途的是什么？是硬件开发，也就是电子工程，那些家伙的月薪差不多是我的年薪（我现在月薪是税后10K）；其次是软件开发，不过很苦，而且需要不错的数学基础，不过在中国不要去搞通用件开发，一盗版全完，最好是搞ERP类的专用系统开发，连开发带维护都有了。如果你没有数学基础，却有不错的美学功底，那就去搞设计，Photoshop也好，AutoCAD也好，3DsMAX也好,Flash也好，视屏后期处理也好，但不要搞网页设计（无论是前台还是后台），因为一个人作的模扳一万个人用，不会有好的收入的。再不行就来搞网络和系统，这个方面最好搞数据库，不过这样又要涉及到开发，如果搞网络也要搞部署（系统集成），或者去大公司作技术支持，最差的就是作维护了。<br>为什么说维护是最次的？因为无论是什么公司，维护都不是主营业务，或者说，不会为公司带来收入。在公司，能直接影响利润的部门收入才高，所以说任何企业，最重要的是销售和市场，其次是研发和生产，至于我们维护部门，不过是和扫垃圾的和扫厕所的一个级别而已。<br>维护虽然是最差的，但不代表不能拿高薪。首先，要去大的外企，他们对于IT部门的重视程度高。第二，要学会为人处世，我们本来就是服务部门，所以对其它部门的人要热情一些，主动一些，不要老摆个“高手”的臭架子。要知道，技术如果不能换钱，那不过是垃圾而已。第三，不要老是问老板要钱换设备，我们已经不能产生利益了，就要让老板感觉我们能节约管理成本，我们的任务是最大限度利用现有的设备，而不是整天采购新的设备。<a id="more"></a><br>即使如此，我所谓的高薪不过是在维护这个领域里的高薪而已，和其它主要部门是不能比的。所以最好还是跳出这个行业的好，去作系统部署。而作系统部署不要去做部署人员（即使暂时作，将来也一定要做项目经理），这是民工都可以做的。或者就是做方案销售，这样你就是企业的主营业务了。<br>顺便说一下我对认证的看法，相对与学历和英语，它是最不重要的。当年我去MS，靠的不是什么MCSE，而是我的专八和名校学历。MS的面试并不关心你的技术，而是关心你是否聪明，是否能溶入企业文化。还有，国内好像很多人对MS不满，因为软件太贵了，这些钱都进了我们这些技术支持的口袋了，不错，MS的员工薪水很高，可这是我们努力工作换来的，我们每天都要工作12小时左右，XP刚发行那段日子XP组的工程师都要工作到凌晨2-3点，白天还是 9点上班，难道我们不该拿高薪吗？至于MSCE我是进MS后再考的，没有看过书，全是靠<strong>*</strong>过的，也就是你们所说的paper，不过我想说一句，对于应届生，你不用在意自己是不是paper，因为企业已经默认你是paper了，所以无所谓的。<br>总结一下，IT界不是没有高薪，而且IT的高薪在所有理工类行业中是高的。关键是看你自己的能力。对于还没毕业的同学，我希望你们能先认真读书，至少拿个学士出来（最好是名校的），然后看看能不能考上好的大学的硕士，同时学好英语，多参加社会活动，即使你作IT，技术也不过只有20%的比重而已，重要的是沟通和为人处世的技巧。对于刚出来的大学生，我的意见是先苦几年，多考一些外语和IT的证书，准备向外企跳。<br>最后一句，我所说的也许确实不好听，但事实如此，你可以举很多反例来反驳我（中专生拿高薪之类的），但这些例子是不能反映总体情况的，不信我们可以抽样调查。还有，中国有很多现状是不合理的，但你不能改变它，那要么你适应它，要么你毁灭。在沙漠里谁能活下来？是万物之长的人还是骆驼？</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>最近在论坛里看到很多人发牢骚，说薪水少，可在我看来，你们这样的人拿得到高薪才怪！<br>我先问一句：这里有多少人是本科的？有多少人是正规本科的（不算自考，成考和专升本）？有多少人是有学位的？有多少有学位的是拿着网大排名前 50所大学的学位的？恐怕是少之又少吧！在中国，薪水和学位的关系对于应届生来说是绝对的，即使对于以后的发展，学位也很重要，要不那些低学历的人评职称为什么吃亏呢？你可以告诉我这不合理，不错，这确实不合理，但却是现实。如果你不能改变现实，那还是适应它吧！你也可以告诉我低学历一样可以拿高薪，我承认，不过你要准备比别人多付出10倍以上的努力。<br>接下来是语言，这里恐怕是有不少人没有过四级没学位的吧？有多少过六级的？有多少过专四专八的？有多少有其它英语证书的？你不要和我说你的水平好，可不喜欢中国的考试制度，所以没证书。在中国，毕业一开始的几年就是靠证书，你有本事跳过１楼２楼造３楼吗？如果你英语不行，你有其它二外吗？要知道，老外对于IT的重视可是比国内那些买的电脑做装饰品的土老帽要强得多。<br>其实这些都不是最重要的，最重要的做人的风格，现在很多IT人除了技术什么都不懂，整天得罪人。哪怕你是四个CCIE全考出的，我不用你难道地球就不转了？中国多的是人，技术有什么了不起的？更何况很多技术是根本用不到的。</p>
+<p>现在总看到一些所谓的“技术牛人”在误导新人，你们知不知道你们是在误人子弟啊！自己混不出头，还要去害别人，今天要和你们好好算算账。<br>先自我介绍一下，我是98年从上海交大毕业的，在Microsoft（MS）工作了6年，现在在一家系统集成公司工作。<br>第一个意见：读书最重要，就是为文凭。我承认大学里确实学不到什么东西，但为了文凭请一定要认真读。这个社会要文凭，没办法。还有大学成绩要读好一些，像MS, Cisco, Oracle这些大公司是会看的。读大学还有一个好处是大学很空，你可以自己去学想学的东西，不过学校的功课永远是最重要的。那些大专的不要以为本科生学不好技术，确切得说并没有几个优秀的学生是书呆子。没有什么规定说大专生学技术有优势。<br>第二个意见：好好读英语，要想在IT立足，英语是必须的。至少要过六级，如果能有专八或者中高口证书或者BEC什么的就更好，最好还要有二外，可以考虑德语或者日语。作IT一定要去外企，国企绝对没前途。<br>第三个意见：要认真选择入的行业。IT是非常广泛的概念，网络只是其中一个非常小的（而且也是非常没有前途的）领域。IT最有前途的领域是什么？是开发，开发中最有前途的是什么？是硬件开发，也就是电子工程，那些家伙的月薪差不多是我的年薪（我现在月薪是税后10K）；其次是软件开发，不过很苦，而且需要不错的数学基础，不过在中国不要去搞通用件开发，一盗版全完，最好是搞ERP类的专用系统开发，连开发带维护都有了。如果你没有数学基础，却有不错的美学功底，那就去搞设计，Photoshop也好，AutoCAD也好，3DsMAX也好,Flash也好，视屏后期处理也好，但不要搞网页设计（无论是前台还是后台），因为一个人作的模扳一万个人用，不会有好的收入的。再不行就来搞网络和系统，这个方面最好搞数据库，不过这样又要涉及到开发，如果搞网络也要搞部署（系统集成），或者去大公司作技术支持，最差的就是作维护了。<br>为什么说维护是最次的？因为无论是什么公司，维护都不是主营业务，或者说，不会为公司带来收入。在公司，能直接影响利润的部门收入才高，所以说任何企业，最重要的是销售和市场，其次是研发和生产，至于我们维护部门，不过是和扫垃圾的和扫厕所的一个级别而已。<br>维护虽然是最差的，但不代表不能拿高薪。首先，要去大的外企，他们对于IT部门的重视程度高。第二，要学会为人处世，我们本来就是服务部门，所以对其它部门的人要热情一些，主动一些，不要老摆个“高手”的臭架子。要知道，技术如果不能换钱，那不过是垃圾而已。第三，不要老是问老板要钱换设备，我们已经不能产生利益了，就要让老板感觉我们能节约管理成本，我们的任务是最大限度利用现有的设备，而不是整天采购新的设备。]]>
+    
+    </summary>
+    
+      <category term="it" scheme="http://www.elain.org/tags/it/"/>
+    
+      <category term="职业规划，规划，职业" scheme="http://www.elain.org/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92%EF%BC%8C%E8%A7%84%E5%88%92%EF%BC%8C%E8%81%8C%E4%B8%9A/"/>
+    
+      <category term="杂文随笔" scheme="http://www.elain.org/categories/%E6%9D%82%E6%96%87%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   

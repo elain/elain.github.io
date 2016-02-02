@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[转载]Kickstart配置文件详解 | Elain&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="kickstart是什么许多系统管理员宁愿使用自动化的安装方法来安装红帽企业 Linux.为了满足这种需要,红帽创建了kickstart安装方法.使用kickstart,系统管理员可以创建一个文件,这个文件包含了在典型的安装过程中所遇 到的问题的答案.Kickstart文件可以存放于单一的服务器上,在安装过程中被独立的机器所读取.这个安装方法可以支持使用单一kickstart文件在多台机器上安装红">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[转载]Kickstart配置文件详解">
+<meta property="og:url" content="http://www.elain.org/2011/10/19/'[转载]kickstart配置文件详解'/index.html">
+<meta property="og:site_name" content="Elain'blog">
+<meta property="og:description" content="kickstart是什么许多系统管理员宁愿使用自动化的安装方法来安装红帽企业 Linux.为了满足这种需要,红帽创建了kickstart安装方法.使用kickstart,系统管理员可以创建一个文件,这个文件包含了在典型的安装过程中所遇 到的问题的答案.Kickstart文件可以存放于单一的服务器上,在安装过程中被独立的机器所读取.这个安装方法可以支持使用单一kickstart文件在多台机器上安装红">
+<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[转载]Kickstart配置文件详解">
+<meta name="twitter:description" content="kickstart是什么许多系统管理员宁愿使用自动化的安装方法来安装红帽企业 Linux.为了满足这种需要,红帽创建了kickstart安装方法.使用kickstart,系统管理员可以创建一个文件,这个文件包含了在典型的安装过程中所遇 到的问题的答案.Kickstart文件可以存放于单一的服务器上,在安装过程中被独立的机器所读取.这个安装方法可以支持使用单一kickstart文件在多台机器上安装红">
+  
+    <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: true
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">elain</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">致力于LINUX技术研究交流!开源一切,免费一切!!!</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:elain2012@hotmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="/elain2012" title="新浪微博"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/IT，健康/" style="font-size: 10px;">IT，健康</a> <a href="/tags/LINUX/" style="font-size: 18.89px;">LINUX</a> <a href="/tags/PXE/" style="font-size: 10px;">PXE</a> <a href="/tags/RHEL/" style="font-size: 10px;">RHEL</a> <a href="/tags/access/" style="font-size: 10px;">access</a> <a href="/tags/apache/" style="font-size: 15.56px;">apache</a> <a href="/tags/arping/" style="font-size: 10px;">arping</a> <a href="/tags/awstats/" style="font-size: 10px;">awstats</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/bashrc/" style="font-size: 11.11px;">bashrc</a> <a href="/tags/cacti/" style="font-size: 12.22px;">cacti</a> <a href="/tags/centos/" style="font-size: 12.22px;">centos</a> <a href="/tags/chattr/" style="font-size: 10px;">chattr</a> <a href="/tags/chkconfig/" style="font-size: 10px;">chkconfig</a> <a href="/tags/chmod/" style="font-size: 10px;">chmod</a> <a href="/tags/chroot/" style="font-size: 10px;">chroot</a> <a href="/tags/cobbler/" style="font-size: 10px;">cobbler</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/crontab/" style="font-size: 10px;">crontab</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/cwrsync/" style="font-size: 10px;">cwrsync</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/ddos/" style="font-size: 10px;">ddos</a> <a href="/tags/drbd/" style="font-size: 10px;">drbd</a> <a href="/tags/eaccelerator/" style="font-size: 10px;">eaccelerator</a> <a href="/tags/earth/" style="font-size: 10px;">earth</a> <a href="/tags/efk/" style="font-size: 12.22px;">efk</a> <a href="/tags/elasticsearch/" style="font-size: 14.44px;">elasticsearch</a> <a href="/tags/elk/" style="font-size: 11.11px;">elk</a> <a href="/tags/es/" style="font-size: 11.11px;">es</a> <a href="/tags/etc/" style="font-size: 10px;">etc</a> <a href="/tags/facebook/" style="font-size: 11.11px;">facebook</a> <a href="/tags/fetion/" style="font-size: 11.11px;">fetion</a> <a href="/tags/find/" style="font-size: 10px;">find</a> <a href="/tags/firefox/" style="font-size: 11.11px;">firefox</a> <a href="/tags/fluentd/" style="font-size: 12.22px;">fluentd</a> <a href="/tags/free/" style="font-size: 10px;">free</a> <a href="/tags/fstab/" style="font-size: 10px;">fstab</a> <a href="/tags/ganglia/" style="font-size: 10px;">ganglia</a> <a href="/tags/geany/" style="font-size: 10px;">geany</a> <a href="/tags/gedit/" style="font-size: 11.11px;">gedit</a> <a href="/tags/getots/" style="font-size: 10px;">getots</a> <a href="/tags/gnome/" style="font-size: 10px;">gnome</a> <a href="/tags/gnome-player/" style="font-size: 10px;">gnome player</a> <a href="/tags/graphicsmagick/" style="font-size: 10px;">graphicsmagick</a> <a href="/tags/grub/" style="font-size: 10px;">grub</a> <a href="/tags/gstm/" style="font-size: 10px;">gstm</a> <a href="/tags/ha/" style="font-size: 11.11px;">ha</a> <a href="/tags/hadoop/" style="font-size: 11.11px;">hadoop</a> <a href="/tags/heartbeat/" style="font-size: 11.11px;">heartbeat</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/httpd/" style="font-size: 11.11px;">httpd</a> <a href="/tags/imagemagick/" style="font-size: 10px;">imagemagick</a> <a href="/tags/inittab/" style="font-size: 10px;">inittab</a> <a href="/tags/innodb/" style="font-size: 10px;">innodb</a> <a href="/tags/iostat/" style="font-size: 13.33px;">iostat</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ipv6/" style="font-size: 10px;">ipv6</a> <a href="/tags/it/" style="font-size: 10px;">it</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/keepalived/" style="font-size: 11.11px;">keepalived</a> <a href="/tags/kibana/" style="font-size: 12.22px;">kibana</a> <a href="/tags/kibana4/" style="font-size: 10px;">kibana4</a> <a href="/tags/kickstart/" style="font-size: 11.11px;">kickstart</a> <a href="/tags/lamp/" style="font-size: 12.22px;">lamp</a> <a href="/tags/last/" style="font-size: 10px;">last</a> <a href="/tags/lemp/" style="font-size: 11.11px;">lemp</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/log/" style="font-size: 11.11px;">log</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/logstash/" style="font-size: 10px;">logstash</a> <a href="/tags/lvs/" style="font-size: 13.33px;">lvs</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/memcache/" style="font-size: 10px;">memcache</a> <a href="/tags/memcached/" style="font-size: 10px;">memcached</a> <a href="/tags/michael-jackson/" style="font-size: 10px;">michael jackson</a> <a href="/tags/mongodb/" style="font-size: 14.44px;">mongodb</a> <a href="/tags/moosefs/" style="font-size: 10px;">moosefs</a> <a href="/tags/mpstat/" style="font-size: 12.22px;">mpstat</a> <a href="/tags/myisam/" style="font-size: 10px;">myisam</a> <a href="/tags/mysql/" style="font-size: 18.89px;">mysql</a> <a href="/tags/nagios/" style="font-size: 14.44px;">nagios</a> <a href="/tags/nc/" style="font-size: 10px;">nc</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/nginx/" style="font-size: 16.67px;">nginx</a> <a href="/tags/nosql/" style="font-size: 10px;">nosql</a> <a href="/tags/nrpe/" style="font-size: 10px;">nrpe</a> <a href="/tags/openfetion/" style="font-size: 10px;">openfetion</a> <a href="/tags/openssh/" style="font-size: 10px;">openssh</a> <a href="/tags/pagespeed/" style="font-size: 10px;">pagespeed</a> <a href="/tags/parted/" style="font-size: 10px;">parted</a> <a href="/tags/passwd/" style="font-size: 11.11px;">passwd</a> <a href="/tags/php/" style="font-size: 15.56px;">php</a> <a href="/tags/phpmyadmin/" style="font-size: 10px;">phpmyadmin</a> <a href="/tags/piranha/" style="font-size: 10px;">piranha</a> <a href="/tags/pop3/" style="font-size: 10px;">pop3</a> <a href="/tags/pptpd/" style="font-size: 10px;">pptpd</a> <a href="/tags/prework/" style="font-size: 10px;">prework</a> <a href="/tags/psmouse/" style="font-size: 10px;">psmouse</a> <a href="/tags/puppet/" style="font-size: 13.33px;">puppet</a> <a href="/tags/qq/" style="font-size: 10px;">qq</a> <a href="/tags/rabbitvcs/" style="font-size: 10px;">rabbitvcs</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/root/" style="font-size: 10px;">root</a> <a href="/tags/rrdtool/" style="font-size: 10px;">rrdtool</a> <a href="/tags/rsync/" style="font-size: 13.33px;">rsync</a> <a href="/tags/rsyslog/" style="font-size: 11.11px;">rsyslog</a> <a href="/tags/sar/" style="font-size: 11.11px;">sar</a> <a href="/tags/screen/" style="font-size: 10px;">screen</a> <a href="/tags/search-guard/" style="font-size: 10px;">search-guard</a> <a href="/tags/sersync/" style="font-size: 10px;">sersync</a> <a href="/tags/shadow/" style="font-size: 11.11px;">shadow</a> <a href="/tags/shell/" style="font-size: 17.78px;">shell</a> <a href="/tags/showslow/" style="font-size: 10px;">showslow</a> <a href="/tags/slave/" style="font-size: 10px;">slave</a> <a href="/tags/smtp/" style="font-size: 10px;">smtp</a> <a href="/tags/snort/" style="font-size: 10px;">snort</a> <a href="/tags/sort/" style="font-size: 10px;">sort</a> <a href="/tags/ssh/" style="font-size: 13.33px;">ssh</a> <a href="/tags/subversion/" style="font-size: 11.11px;">subversion</a> <a href="/tags/svn/" style="font-size: 13.33px;">svn</a> <a href="/tags/tar/" style="font-size: 10px;">tar</a> <a href="/tags/td-agent/" style="font-size: 10px;">td-agent</a> <a href="/tags/tetngine/" style="font-size: 10px;">tetngine</a> <a href="/tags/thunderbird/" style="font-size: 11.11px;">thunderbird</a> <a href="/tags/tomcat/" style="font-size: 11.11px;">tomcat</a> <a href="/tags/tomcat，多实例/" style="font-size: 10px;">tomcat，多实例</a> <a href="/tags/top/" style="font-size: 11.11px;">top</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a> <a href="/tags/ubunut/" style="font-size: 10px;">ubunut</a> <a href="/tags/unity/" style="font-size: 10px;">unity</a> <a href="/tags/varnish/" style="font-size: 11.11px;">varnish</a> <a href="/tags/vbox/" style="font-size: 10px;">vbox</a> <a href="/tags/vi/" style="font-size: 11.11px;">vi</a> <a href="/tags/vim/" style="font-size: 13.33px;">vim</a> <a href="/tags/vmstat/" style="font-size: 12.22px;">vmstat</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/web/" style="font-size: 16.67px;">web</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/wine/" style="font-size: 10px;">wine</a> <a href="/tags/worker/" style="font-size: 10px;">worker</a> <a href="/tags/xhprof/" style="font-size: 10px;">xhprof</a> <a href="/tags/yakuake/" style="font-size: 10px;">yakuake</a> <a href="/tags/yslow/" style="font-size: 10px;">yslow</a> <a href="/tags/yum/" style="font-size: 12.22px;">yum</a> <a href="/tags/zend/" style="font-size: 10px;">zend</a> <a href="/tags/主从同步/" style="font-size: 10px;">主从同步</a> <a href="/tags/休息/" style="font-size: 10px;">休息</a> <a href="/tags/内核/" style="font-size: 10px;">内核</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/心情/" style="font-size: 10px;">心情</a> <a href="/tags/敏捷/" style="font-size: 10px;">敏捷</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/漏洞/" style="font-size: 10px;">漏洞</a> <a href="/tags/翻墙/" style="font-size: 11.11px;">翻墙</a> <a href="/tags/职业规划，规划，职业/" style="font-size: 11.11px;">职业规划，规划，职业</a> <a href="/tags/面板/" style="font-size: 10px;">面板</a> <a href="/tags/颜色/" style="font-size: 10px;">颜色</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">elain</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/avatar.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">elain</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">致力于LINUX技术研究交流!开源一切,免费一切!!!</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:elain2012@hotmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="/elain2012" title="新浪微博"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-&#39;[转载]kickstart配置文件详解&#39;" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2011/10/19/'[转载]kickstart配置文件详解'/" class="article-date">
+      <time datetime="2011-10-19T09:11:03.000Z" itemprop="datePublished">2011-10-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [转载]Kickstart配置文件详解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/敏捷运维/">敏捷运维</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kickstart/">kickstart</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>kickstart是什么<br>许多系统管理员宁愿使用自动化的安装方法来安装红帽企业 Linux.为了满足这种需要,红帽创建了kickstart安装方法.使用kickstart,系统管理员可以创建一个文件,这个文件包含了在典型的安装过程中所遇 到的问题的答案.<br>Kickstart文件可以存放于单一的服务器上,在安装过程中被独立的机器所读取.这个安装方法可以支持使用单一kickstart文件在多台机器上安装红帽企业Linux,这对于网络和系统管理员来说是个理想的选择.<br>Kickstart给用户提供了一种自动化安装红帽企业Linux的方法.</p>
+<p>如何执行kickstart安装<br>kickstart 安装可以使用本地光盘,本地硬盘驱动器,或通过 NFS,FTP,HTTP 来执行.<br>要使用 kickstart,必须:<br>1.创建一个kickstart文件.<br>2.创建有kickstart文件的引导介质或者使这个文件在网络上可用.<br>3.筹备安装树.<br>4.开始kickstart安装.<br><a id="more"></a></p>
+<p>创建kickstart文件<br>kickstart文件是一个简单的文本文件,它包含了一个项目列表,每个项目由一个关键字来识别.可以用「Kickstart 配置」应用程序创建它或是自己从头编写.红帽企业Linux安装程序也根据在安装过程中的选择创建一个简单的kickstart文件,这个文件被写入到/root/anaconda-ks.cfg.可以用任何能够把文件保存为ASCII文本的文本编辑器或字处理器来编辑它.<br>首先,在创建kickstart文件时留意下列问题:<br>1.每节必须按顺序指定.除非特别申明,每节内的项目则不必按序排列.小节的顺序为:<br>命令部分,这里应该包括必需的选项.<br>%packages部分,这部分选择需要安装的软件包.<br>%pre和%post部分,这两个部分可以按任何顺序排列而且不是必需的.<br>2.不必需的项目可以被省略.<br>3.如果忽略任何必需的项目,安装程序会提示用户输入相关的项目的选择,就象用户在典型的安装过程中所遇到的一样.一旦用户进行了选择,安装会以非交互的方式(unattended)继续(除非找到另外一个没有指定的项目).<br>4.以井号(“#”)开头的行被当作注释行并被忽略.<br>对于 kickstart 升级,下列项目是必需的:<br>1.语言<br>2.安装方法<br>3.设备规格(如果这个设备是在安装过程中所需要的)<br>4.键盘设置<br>5.upgrade 关键字<br>6.引导装载程序配置<br>7.如果任何其他的项目被指定为upgrade,这些项目将被忽略(注意这包括了软件包选择).</p>
+<p>kickstart命令选项<br>下面的选项可以放入kickstart文件.如果喜欢使用图形化的界面来创建kickstart文件,可以使用”Kickstart 配置”应用程序.(注:如果某选项后面跟随了一个等号(=),它后面就必须指定一个值.在示例命令中,括号([])中的选项是命令的可选参数.)</p>
+<p>autopart(可选)<br>自动创建分区,大于1GB的根分区(/),交换分区和适合于不同体系结构的引导分区.一个或多个缺省分区的大小可以用part指令重新定义.</p>
+<p>ignoredisk(可选)<br>导致安装程序忽略指定的磁盘.如果使用自动分区并希望忽略某些磁盘的话,这就很有用.<br>例如,没有ignoredisk,如要试图在SAN-cluster系统里部署,kickstart就会失败,因为安装程序检测到SAN不返回分区表的被动路径(passive path).<br>如果有磁盘的多个路径时,ignoredisk选项也有用处.<br>语法是:<br>ignoredisk –drives=drive1,drive2,…<br>这里driveN是sda,sdb… hda等等中的一个.</p>
+<p>autostep(可选)<br>和interactive相似,除了它进入下一屏幕,它通常用于调试.<br>–autoscreenshot,安装过程中的每一步都截屏并在安装完成后把图片复制到/root/anaconda-screenshots.这对于制作文档很有用.</p>
+<p>auth或authconfig(必需)<br>为系统设置验证选项.这和在安装后运行的authconfig命令相似.在缺省情况下,密码通常被加密但不使用影子文件(shadowed).<br>–enablemd5,每个用户口令都使用md5加密.<br>–enablenis,启用NIS支持.在缺省情况下,–enablenis使用在网络上找到的域.域应该总是用–nisdomain=选项手工设置.<br>–nisdomain=,用在NIS服务的NIS域名.<br>–nisserver=,用来提供NIS服务的服务器(默认通过广播).<br>–useshadow或–enableshadow,使用屏蔽口令.<br>–enableldap,在/etc/nsswitch.conf启用LDAP支持,允许系统从LDAP目录获取用户的信息(UIDs,主目录,shell 等等).要使用这个选项,必须安装nss_ldap软件包.也必须用–ldapserver=和–ldapbasedn=指定服务器和base DN(distinguished name).<br>–enableldapauth,把LDAP作为一个验证方法使用.这启用了用于验证和更改密码的使用LDAP目录的pam_ldap模块.要使用这个选项,必须安装nss_ldap软件包.也必须用–ldapserver=和–ldapbasedn=指定服务器和base DN.<br>–ldapserver=,如果指定了–enableldap或–enableldapauth,使用这个选项来指定所使用的LDAP服务器的名字.这个选项在/etc/ldap.conf文件里设定.<br>–ldapbasedn=,如果指定了–enableldap或–enableldapauth,使用这个选项来指定用户信息存放的LDAP目录树里的DN.这个选项在/etc/ldap.conf文件里设置.<br>–enableldaptls,使用TLS(传输层安全)查寻.该选项允许LDAP在验证前向LDAP服务器发送加密的用户名和口令.<br>–enablekrb5,使用Kerberos 5验证用户.Kerberos自己不知道主目录,UID或shell.如果启用了Kerberos,必须启用LDAP,NIS,Hesiod或者使用/usr/sbin/useradd命令来使这个工作站获知用户的帐号.如果使用这个选项,必须安装pam_krb5软件包.<br>–krb5realm=,工作站所属的Kerberos 5领域.<br>–krb5kdc=,为领域请求提供服务的KDC.如果的领域内有多个KDC,使用逗号(,)来分隔它们.<br>–krb5adminserver=,领域内还运行kadmind的KDC.该服务器处理改变口令以及其它管理请求.如果有不止一个KDC,该服务器必须是主KDC.<br>–enablehesiod,启用Hesiod支持来查找用户主目录,UID 和 shell.在网络中设置和使用 Hesiod 的更多信息,可以在 glibc 软件包里包括的 /usr/share/doc/glibc-2.x.x/README.hesiod里找到.Hesiod是使用DNS记录来存储用户,组和其他信息的 DNS 的扩展.<br>–hesiodlhs,Hesiod LHS(“left-hand side”)选项在/etc/hesiod.conf里设置.Hesiod 库使用这个选项来决定查找信息时搜索DNS的名字,类似于LDAP对 base DN的使用.<br>–hesiodrhs,Hesiod RHS(“right-hand side”)选项在/etc/hesiod.conf里设置.Hesiod 库使用这个选项来决定查找信息时搜索DNS的名字,类似于LDAP对base DN的使用.<br>–enablesmbauth,启用对SMB服务器(典型的是Samba或Windows服务器)的用户验证.SMB验证支持不知道主目录,UID 或 shell.如果启用SMB,必须通过启用LDAP,NIS,Hesiod或者用/usr/sbin/useradd命令来使用户帐号为工作站所知.要使用这个选项,必须安装pam_smb软件包.<br>–smbservers=,用来做SMB验证的服务器名称.要指定不止一个服务器,用逗号(,)来分隔它们.<br>–smbworkgroup=,SMB服务器的工作组名称.<br>–enablecache,启用nscd服务.nscd服务缓存用户,组和其他类型的信息.如果选择在网络上用NIS,LDAP或hesiod分发用户和组的信息,缓存就尤其有用.</p>
+<p>bootloader(必需)<br>指定引导装载程序怎样被安装.对于安装和升级,这个选项都是必需的.<br>–append=,指定内核参数.要指定多个参数,使用空格分隔它们.<br>例如:bootloader –location=mbr –append=”hdd=ide-scsi ide=nodma”<br>–driveorder,指定在BIOS引导顺序中居首的驱动器.<br>例如:bootloader –driveorder=sda,hda<br>–location=,指定引导记录被写入的位置.有效的值如下:mbr(缺省),partition(在包含内核的分区的第一个扇区安装引导装载程序)或none(不安装引导装载程序).<br>–password=,如果使用GRUB,把GRUB引导装载程序的密码设置到这个选项指定的位置.这应该被用来限制对可以传入任意内核参数的GRUB shell的访问.<br>–md5pass=,如果使用GRUB,这和–password=类似,只是密码已经被加密.<br>–upgrade,升级现存的引导装载程序配置,保留其中原有的项目.该选项仅可用于升级.<br>clearpart(可选)<br>在创建新分区之前,从系统上删除分区.默认不会删除任何分区.<br>注:如果使用了clearpart命令,–onpart命令就不能够用在逻辑分区上.<br>–all,删除系统上所有分区.<br>–drives=,指定从哪个驱动器上清除分区.<br>例如,下面的命令清除了主IDE控制器上的前两个驱动器上所有分区<br>clearpart –drives=hda,hdb –all<br>–initlabel,根据不同体系结构把磁盘标签初始化为缺省设置(例如,msdos用于x86而gpt用于Itanium).当安装到一个崭新的硬盘时,这很有用,安装程序不会询问是否应该初始化磁盘标签.<br>–linux,删除所有Linux分区.<br>–none(缺省),不要删除任何分区.</p>
+<p>cmdline(可选)<br>在完全的非交互式的命令行模式下进行安装.任何交互式的提示都会终止安装.这个模式对于有x3270控制台的IBM System z系统很有用.</p>
+<p>device(可选)<br>在多数的PCI系统里,安装程序会正确地自动探测以太网卡和SCSI卡.然而,在老的系统和某些PCI系统里,kickstart需要提示来找到正确的设备.device命令用来告诉安装程序安装额外的模块,它有着这样的格式:<br>device  –opts=<br>,用scsi或eth代替<br>,使用应该被安装的内核模块的名称来替换.<br>–opts=,传递给内核模块的选项.注意,如果把选项放在引号里,可以传递多个选项.<br>例如:–opts=”aic152x=0x340 io=11”</p>
+<p>driverdisk(可选)<br>可以在kickstart安装过程中使用驱动软盘.必须把驱动软盘的内容复制到系统的硬盘分区的根目录下.然后必须使用driverdisk 命令来告诉安装程序到哪去寻找驱动磁盘.<br>driverdisk  [–type=]<br>另外,也可以为驱动程序盘指定一个网络位置:<br>driverdisk –source=ftp://path/to/dd.img<br>driverdisk –source=<a href="http://path/to/dd.img" target="_blank" rel="external">http://path/to/dd.img</a><br>driverdisk –source=nfs:host:/path/to/img<br>,包含驱动程序盘的分区.<br>–type=,文件系统类型(如:vfat,ext2,ext3).</p>
+<p>firewall(可选)<br>这个选项对应安装程序里的「防火墙配置」屏幕:<br>firewall –enabled|–disabled [–trust=]  [–port=]<br>–enabled或者–enable,拒绝不是答复输出请求如DNS答复或DHCP请求的进入连接.如果需要使用在这个机器上运行的服务,可以选择允许指定的服务穿过防火墙.<br>–disabled或–disable,不要配置任何iptables规则.<br>–trust=,在此列出设备,如eth0,这允许所有经由这个设备的数据包通过防火墙.如果需要列出多个设备,使用–trust eth0 –trust eth1.不要使用以逗号分隔的格式,如–trust eth0, eth1.<br>,使用以下服务中的一个或多个来替换,从而允许指定的服务穿过防火墙.<br>–ssh<br>–telnet<br>–smtp<br>–http<br>–ftp<br>–port=,可以用端口:协议(port:protocal)格式指定允许通过防火墙的端口.<br>例如,如果想允许IMAP通过的防火墙,可以指定imap:tcp.还可以具体指定端口号码,要允许UDP分组在端口1234通过防火墙,输入1234:udp.要指定多个端口,用逗号将它们隔开.</p>
+<p>firstboot(可选)<br>决定是否在系统第一次引导时启动”设置代理”.如果启用,firstboot软件包必须被安装.如果不指定,这个选项是缺省为禁用的.<br>–enable或–enabled,系统第一次引导时,启动”设置代理”.<br>–disable或–disabled,系统第一次引导时,不启动”设置代理”.<br>–reconfig,在系统引导时在重配置(reconfiguration)模式下启用”设置代理”.这个模式启用了语言,鼠标,键盘,根密码,安全级别,时区和缺省网络配置之外的选项.</p>
+<p>halt(可选)<br>在成功地完成安装后关闭系统.这和手工安装相似,手工安装的anaconda会显示一条信息并等待用户按任意键来重启系统.在kickstart安装过程中,如果没有指定完成方法(completion method),将缺省使用reboot选项.<br>halt选项基本和shutdown -h命令相同.<br>关于其他的完成方法,请参考kickstart的poweroff,reboot和shutdown选项.</p>
+<p>graphical(可选)<br>在图形模式下执行kickstart安装.kickstart安装默认在图形模式下安装.</p>
+<p>install(可选)<br>告诉系统来安装全新的系统而不是在现有系统上升级.这是缺省的模式.必须指定安装的类型,如cdrom,harddrive,nfs或url(FTP 或HTTP安装).install命令和安装方法命令必须处于不同的行上.</p>
+<p>cdrom<br>从系统上的第一个光盘驱动器中安装.</p>
+<p>harddrive<br>从本地驱动器的vfat或ext2格式的红帽安装树来安装.<br>–biospart=,从BIOS分区来安装(如82).<br>–partition=,从分区安装(如sdb2).<br>–dir=,包含安装树的variant目录的目录.<br>例如:harddrive –partition=hdb2 –dir=/tmp/install-tree</p>
+<p>nfs<br>从指定的NFS服务器安装.<br>–server=,要从中安装的服务器(主机名或IP).<br>–dir=,包含安装树的variant目录的目录.<br>–opts=,用于挂载NFS输出的Mount选项(可选).<br>例如:nfs –server=nfsserver.example.com –dir=/tmp/install-tree</p>
+<p>url<br>通过FTP或HTTP从远程服务器上的安装树中安装.<br>例如:url –url http:///<br>或:url –url ftp://@/</p>
+<p>ignore disk(可选)<br>用来指定在分区,格式化和清除时anaconda不应该访问的磁盘.这个命令有一个必需的参数,就是用逗号隔开的需要忽略的驱动器列表.<br>例如:ignoredisk –drives=[disk1,disk2,…]</p>
+<p>interactive(可选)<br>在安装过程中使用kickstart文件里提供的信息,但允许检查和修改给定的值.将遇到安装程序的每个屏幕以及kickstart文件里给出的值.通过点击”下一步”接受给定的值或是改变值后点击”下一步”继续.请参考autostep命令.</p>
+<p>iscsi(可选)<br>issci –ipaddr= [options].<br>–target<br>–port=<br>–user=<br>–password=</p>
+<p>iscsiname(可选)</p>
+<p>key(可选)<br>指定安装密钥,它在软件包选择和获取支持时设别系统的时候是必需的.这个命令是红帽企业Linux-specific,它对Fedora来说没有意义并且会被忽略.<br>–skip,跳过输入密钥.通常,如果没有key命令,anaconda将暂停并提示输入密钥.如果没有密钥或不想提供它,这个选项允许继续自动化安装.</p>
+<p>keyboard(必需)<br>设置系统键盘类型.这里是 i386,Itanium,和 Alpha 机器上可用键盘的列表:<br>be-latin1, bg, br-abnt2, cf, cz-lat2, cz-us-qwertz, de, de-latin1,<br>de-latin1-nodeadkeys, dk, dk-latin1, dvorak, es, et, fi, fi-latin1,<br>fr, fr-latin0, fr-latin1, fr-pc, fr_CH, fr_CH-latin1, gr, hu, hu101,<br>is-latin1, it, it-ibm, it2, jp106, la-latin1, mk-utf, no, no-latin1,<br>pl, pt-latin1, ro_win, ru, ru-cp1251, ru-ms, ru1, ru2,  ru_win,<br>se-latin1, sg, sg-latin1, sk-qwerty, slovene, speakup,  speakup-lt,<br>sv-latin1, sg, sg-latin1, sk-querty, slovene, trq, ua,  uk, us, us-acentos<br>文件/usr/lib/python2.2/site-packages/rhpl/keyboard_models.py 也包含这个列表而且是 rhpl 软件包的一部分.</p>
+<p>lang(必需)<br>设置在安装过程中使用的语言以及系统的缺省语言.例如,要把语言设置为英语,kickstart文件应该包含下面的一行:<br>lang en_US<br>文件/usr/share/system-config-language/locale-list里每一行的第一个字段提供了一个有效语言代码的列表,它是system-config-language软件包的一部分.<br>文本模式的安装过程不支持某些语言(主要是中文,日语,韩文和印度的语言).如果用lang命令指定这些语言中的一种,安装过程仍然会使用英语,但是系统会缺省使用指定的语言.</p>
+<p>langsupport(不赞成)<br>langsupport关键字已经被取消而且使用它将导致屏幕出现错误信息及终止安装.作为代替,应该在kickstart文件里的%packages 部分列出所支持的语言的支持软件包组.例如,要支持法语,应该把下面的语句加入到<br>%packages:<br>@french-support</p>
+<p>logvol(可选)<br>使用以下语法来为逻辑卷管理(LVM)创建逻辑卷:<br>logvol  –vgname= –size= –name=&amp;<br>这些选项如下所示:<br>–noformat,使用一个现存的逻辑卷,不进行格式化.<br>–useexisting,使用一个现存的逻辑卷,重新格式化它.<br>–fstype=,为逻辑卷设置文件系统类型.合法值有:ext2,ext3,swap和vfat.<br>–fsoptions=,为逻辑卷设置文件系统类型.合法值有:ext2,ext3,swap和vfat.<br>–bytes-per-inode=,指定在逻辑卷上创建的文件系统的节点的大小.因为并不是所有的文件系统都支持这个选项,所以在其他情况下它都被忽略.<br>–grow=,告诉逻辑卷使用所有可用空间(若有),或使用设置的最大值.<br>–maxsize=,当逻辑卷被设置为可扩充时,以MB为单位的分区最大值.在这里指定一个整数值,不要在数字后加MB.<br>–recommended=,自动决定逻辑卷的大小.<br>–percent=,用卷组里可用空间的百分比来指定逻辑卷的大小.<br>首先创建分区,然后创建逻辑卷组,再创建逻辑卷.<br>例如:<br>part pv.01 –size 3000<br>volgroup myvg pv.01<br>logvol / –vgname=myvg –size=2000 –name=rootvol</p>
+<p>logging(可选)<br>这个命令控制安装过程中anaconda的错误日志.它对安装好的系统没有影响.<br>–host=,发送日志信息到给定的远程主机,这个主机必须运行配置为可接受远程日志的syslogd进程.<br>–port=,如果远程的syslogd进程没有使用缺省端口,这个选项必须被指定.<br>–level=,debug,info,warning,error或critical中的一个.<br>指定tty3上显示的信息的最小级别.然而,无论这个级别怎么设置,所有的信息仍将发送到日志文件.</p>
+<p>mediacheck(可选)<br>如果指定的话,anaconda将在安装介质上运行mediacheck.这个命令只适用于交互式的安装,所以缺省是禁用的.</p>
+<p>monitor(可选)<br>如果monitor命令没有指定,anaconda将使用X来自动检测的显示器设置.请在手工配置显示器之前尝试这个命令.<br>–hsync=,指定显示器的水平频率.<br>–vsync=,指定显示器的垂直频率.<br>–monitor=,使用指定的显示器；显示器的名字应该在hwdata软件包里的/usr/share/hwdata/MonitorsDB列表上.这个显示器的列表也可以在Kickstart Configurator的X配置屏幕上找到.如果提供了–hsync或–vsync,它将被忽略.如果没有提供显示器信息,安装程序将自动探测显示器.<br>–noprobe=,不要试图探测显示器.</p>
+<p>mouse(已取消)<br>mouse 关键字已经被取消,使用它将导致屏幕出现错误信息并终止安装.</p>
+<p>network(可选)<br>为系统配置网络信息.如果 kickstart安装不要求联网(换句话说,不从NFS,HTTP或FTP安装),就不需要为系统配置网络.如果安装要求联网而kickstart文件里没有提供网络信息,安装程序会假定从eth0通过动态IP地址(BOOTP/DHCP)来安装,并配置安装完的系统动态决定IP地址.network选项为通过网络的kickstart安装以及所安装的系统配置联网信息.<br>–bootproto=,dhcp,bootp或static中的一种,缺省值是dhcp.bootp和dhcp被认为是相同的.<br>static方法要求在kickstart文件里输入所有的网络信息.顾名思义,这些信息是静态的且在安装过程中和安装后所有.静态网络的设置行更为复杂,因为必须包括所有的网络配置信息.必须指定IP地址,网络,网关和命名服务器.<br>例如(“\”表示连续的行):<br>network –bootproto=static –ip=10.0.2.15 –netmask=255.255.255.0 \<br>–gateway=10.0.2.254 –nameserver=10.0.2.1<br>如果使用静态方法,请注意以下两个限制:<br>所有静态联网配置信息都必须在一行上指定,不能使用反斜线来换行.<br>在这里只能够指定一个命名服务器.然而,如果需要的话,可以使用kickstart文件的%post段落来添加更多的命名服务器.<br>–device=,用来选择用于安装的特定的以太设备.注意,除非kickstart文件是一个本地文件(如ks=floppy),否则–device=的使用是无效的.这是因为安装程序会配置网络来寻找kickstart文件.<br>例如: network –bootproto=dhcp –device=eth0<br>–ip=,要安装的机器的IP地址.<br>–gateway=,IP地址格式的默认网关.<br>–nameserver=,主名称服务器,IP地址格式.<br>–nodns,不要配置任何 DNS 服务器.<br>–netmask=,安装的系统的子网掩码.<br>–hostname=,安装的系统的主机名.<br>–ethtool=,指定传给ethtool程序的网络设备的其他底层设置.<br>–essid=,无线网络的网络ID.<br>–wepkey=,无线网络的加密密钥.<br>–onboot=,是否在引导时启用该设备.<br>–class=,DHCP类型.<br>–mtu=,该设备的MTU.<br>–noipv4=,禁用此设备的IPv4.<br>–noipv6=,禁用此设备的IPv6.</p>
+<p>multipath(可选)<br>multipath –name= –device= –rule=</p>
+<p>part或partition(对于安装是必需的,升级可忽略).<br>在系统上创建分区.<br>如果不同分区里有多个红帽企业Linux系统,安装程序会提示用户升级哪个系统.<br>警告:作为安装过程的一部分,所有被创建的分区都会被格式化,除非使用了–noformat和–onpart.<br>,是分区的挂载点,它必须是下列形式中的一种:<br>/,例如,/,/usr,/home<br>swap,该分区被用作交换空间,要自动决定交换分区的大小,使用–recommended选项.<br>swap –recommended<br>自动生成的交换分区的最小值大于系统内存的数量,但小于系统内存的两倍.<br>raid.,该分区用于 software RAID(参考 raid).<br>pv.,该分区用于 LVM(参考 logvol).<br>–size=,以MB为单位的分区最小值.在此处指定一个整数值,如500.不要在数字后面加MB.<br>–grow,告诉分区使用所有可用空间(若有),或使用设置的最大值.<br>–maxsize=,当分区被设置为可扩充时,以MB为单位的分区最大值.在这里指定一个整数值,不要在数字后加MB.<br>–noformat,用–onpart命令来告诉安装程序不要格式化分区.<br>–onpart=或–usepart=,把分区放在已存在的设备上.<br>例如:partition /home –onpart=hda1,把/home置于必须已经存在的/dev/hda1上.<br>–ondisk=或–ondrive=,强迫分区在指定磁盘上创建.<br>例如:–ondisk=sdb把分区置于系统的第二个SCSI磁盘上.<br>–asprimary,强迫把分区分配为主分区,否则提示分区失败.<br>–type=(用fstype代替),这个选项不再可用了.应该使用fstype.<br>–fstype=,为分区设置文件系统类型.有效的类型为ext2,ext3,swap和vfat.<br>–start=,指定分区的起始柱面,它要求用–ondisk=或ondrive=指定驱动器.它也要求用–end=指定结束柱面或用–size=指定分区大小.<br>–end=,指定分区的结束柱面.它要求用–start=指定起始柱面.<br>–bytes-per-inode=,指定此分区上创建的文件系统的节点大小.不是所有的文件系统都支持这个选项,所以在其他情况下它都被忽略.<br>–recommended,自动决定分区的大小.<br>–onbiosdisk,强迫在 BIOS 找到的特定磁盘上创建分区.<br>注:如果因为某种原因分区失败了,虚拟终端3上会显示诊断信息.</p>
+<p>poweroff(可选)<br>在安装成功后关闭系统并断电.通常,在手工安装过程中,anaconda会显示一条信息并等待用户按任意键来重新启动系统.在kickstart的安装过程中,如果没有指定完成方法,将使用缺省的reboot选项.</p>
+<p>raid(可选)<br>组成软件RAID设备.该命令的格式是:<br>raid  –level= –device=<br>,RAID文件系统被挂载的位置.如果是/,除非已经有引导分区存在(/boot),RAID级别必须是1.如果已经有引导分区,/boot分区必须是级别1且根分区(/)可以是任何可用的类型.(这表示可以有多个分区)列出了加入到RAID阵列的RAID标识符.<br>–level=,要使用的RAID级别(0,1,或5).<br>–device=,要使用的RAID设备的名称(如md0或md1).RAID设备的范围从md0直到md7,每个设备只能被使用一次.<br>–bytes-per-inode=,指定RAID设备上创建的文件系统的节点大小.不是所有的文件系统都支持这个选项,所以对于那些文件系统它都会被忽略.<br>–spares=,指定RAID阵列应该被指派N个备用驱动器.备用驱动器可以被用来在驱动器失败时重建阵列.<br>–fstype=,为RAID阵列设置文件系统类型.合法值有:ext2,ext3,swap和vfat.<br>–fsoptions=,指定当挂载文件系统时使用的free form字符串.这个字符串将被复制到系统的/etc/fstab文件里且应该用引号括起来.<br>–noformat,使用现存的RAID设备,不要格式化RAID阵列.<br>–useexisting,使用现存的RAID设备,重新格式化它.</p>
+<p>reboot(可选)<br>在成功完成安装(没有参数)后重新启动.通常,kickstart会显示信息并等待用户按任意键来重新启动系统.</p>
+<p>repo(可选)<br>配置用于软件包安装来源的额外的yum库.可以指定多个repo行.<br>repo –name= [–baseline=| –mirrorlist=]<br>–name=,repo id.这个选项是必需的.<br>–baseurl=,库的URL.这里不支持yum repo配置文件里使用的变量.可以使用它或者–mirrorlist,亦或两者都不使用.<br>–mirrorlist=,指向库镜像的列表的URL.这里不支持yum repo配置文件里可能使用的变量.可以使用它或者–baseurl,亦或两者都不使用.</p>
+<p>rootpw(必需)<br>把系统的根口令设置为参数.<br>rootpw [–iscrypted]<br>–iscrypted,如果该选项存在,口令就会假定已被加密.</p>
+<p>selinux(可选)<br>在系统里设置SELinux状态.在anaconda里,SELinux缺省为enforcing.<br>selinux [–disabled|–enforcing|–permissive]<br>–enforcing,启用SELinux,实施缺省的targeted policy.<br>注:如果kickstart文件里没有selinux选项,SELinux将被启用并缺省设置为–enforcing.<br>–permissive,输出基于SELinux策略的警告,但实际上不执行这个策略.<br>–disabled,在系统里完全地禁用 SELinux.</p>
+<p>services(可选)<br>修改运行在缺省运行级别下的缺省的服务集.在disabled列表里列出的服务将在enabled列表里的服务启用之前被禁用.<br>–disabled,禁用用逗号隔开的列表里的服务.<br>–enabled,启用用逗号隔开的列表里的服务.</p>
+<p>shutdown(可选)<br>在成功完成安装后关闭系统.在kickstart安装过程中,如果没有指定完成方法,将使用缺省的reboot选项.</p>
+<p>skipx(可选)<br>如果存在,安装的系统上就不会配置X.</p>
+<p>text(可选)<br>在文本模式下执行kickstart安装. kickstart安装默认在图形模式下安装.</p>
+<p>timezone(可选)<br>把系统时区设置为,它可以是timeconfig列出的任何时区.<br>timezone [–utc]<br>–utc,如果存在,系统就会假定硬件时钟被设置为UTC(格林威治标准)时间.</p>
+<p>upgrade(可选)<br>告诉系统升级现有的系统而不是安装一个全新的系统.必须指定 cdrom,harddrive,nfs或url(对于FTP和HTTP而言)中的一个作为安装树的位置.详情请参考 install.</p>
+<p>user(可选)<br>在系统上创建新用户.<br>user –name= [–groups=] [–homedir=] [–password=] [–iscrypted] [–shell=] [–uid=]<br>–name=,提供用户的名字.这个选项是必需的.<br>–groups=,除了缺省的组以外,用户应该属于的用逗号隔开的组的列表.<br>–homedir=,用户的主目录.如果没有指定,缺省为/home/.<br>–password=,新用户的密码.如果没有指定,这个帐号将缺省被锁住.<br>–iscrypted=,所提供的密码是否已经加密？<br>–shell=,用户的登录shell.如果不提供,缺省为系统的缺省设置.<br>–uid=,用户的UID.如果未提供,缺省为下一个可用的非系统 UID.</p>
+<p>vnc(可选)<br>允许通过VNC远程地查看图形化的安装.文本模式的安装通常更喜欢使用这个方法,因为在文本模式下有某些大小和语言的限制.如果为no,这个命令将启动不需要密码的VNC服务器并打印出需要用来连接远程机器的命令.<br>vnc [–host=] [–port=] [–password=]<br>–host=,不启动VNC服务器,而是连接至给定主机上的VNC viewer进程.<br>–port=,提供远程VNC viewer进程侦听的端口.如果不提供,anaconda将使用VNC的缺省端口.<br>–password=,设置连接VNC会话必需的密码.这是可选的,但却是我们所推荐的选项.</p>
+<p>volgroup(可选)<br>用来创建逻辑卷管理(LVM)组,其语法格式为:<br>volgroup<br>这些选项如下所示:<br>–noformat,使用一个现存的卷组,不要格式化它.<br>–useexisting,使用一个现存的卷组,重新格式化它.<br>–pesize=,设置物理分区(physical extent)的大小.<br>首先创建分区,然后创建逻辑卷组,再创建逻辑卷.例如:</p>
+<p>xconfig(可选)<br>配置X Window 系统.如果没有指定这个选项且安装了X,用户必须在安装过程中手工配置X；如果最终系统里没有安装X,这个选项不应该被使用.<br>–driver,指定用于视频硬件的 X 驱动.<br>–videoram=,指定显卡的显存数量.<br>–defaultdesktop=,指定GNOME或KDE作为缺省的桌面(假设已经通过%packages安装了GNOME或KDE桌面环境).<br>–startxonboot,在安装的系统上使用图形化登录.<br>–resolution=,指定安装的系统上X窗口系统的默认分辨率.有效值有:640x480,800x600,1024x768,1152x864, 1280x1024,1400x1050,1600x1200.请确定指定与视频卡和显示器兼容的分辨率.<br>–depth=,指定安装的系统上的 X 窗口系统的默认色彩深度.有效值有:8,16,24,和 32.请确定指定与视频卡和显示器兼容的色彩深度.</p>
+<p>zerombr(可选)<br>如果指定了zerombr且yes是它的唯一参数,任何磁盘上的无效分区表都将被初始化.这会毁坏有无效分区表的磁盘上的所有内容.这个命令的格式应该如下:<br>zerombr yes<br>其它格式均无效.</p>
+<p>zfcp(可选)<br>zfcp [–devnum=] [–fcplun=] [–scsiid=] [–scsilun=] [–wwpn=]</p>
+<p>%include<br>使用 %include/path/to/file命令可以把其他文件的内容包含在kickstart文件里,就好像这些内容出现在kickstart文件的%include命令后一样.</p>
+<p>kickstart的软件包选择<br>在kickstart文件里使用%packages命令来列出想安装的软件包(仅用于全新安装,升级安装时不支持软件包指令).<br>可以指定单独的软件包名或是组,以及使用星号通配符.安装程序可以定义包含相 关软件包的组.关于组的列表,请参考第一张红帽企业 Linux光盘里的 variant/repodata/comps-*.xml. 每个组都有一个编号,用户可见性的值,名字,描述和软件包列表.在软件包列表里,如果这个组被选择的话,组里的标记为”mandatory”的软件包就必须被安装；标记为”default”的软件包缺省被选择；而标记为”optional”的软件包必须被明确地选定才会被安装.<br>多数情况下,只需要列出想安装的组而不是单个的软件包.注意Core和Base组总是缺省被选择,所以并不需要在%packages部分指定它们.<br>这里是一个 %packages 选择的示例:<br>%packages<br>@ X Window System<br>@ GNOME Desktop Environment<br>@ Graphical Internet<br>@ Sound and Video dhcp<br>如所看到的,组被指定了,每个占用一行,用@符号开头,后面是comps.xml文件里给出的组全名.组也可以用组的id指定,如gnome-desktop.不需要额外字符就可以指定单独的软件包(上例里的dhcp行就是一个单独的软件包).<br>%packages 指令也支持下面的选项:<br>–nobase,不要安装@Base 组.如果想创建一个很小的系统,可以使用这个选项.<br>–resolvedeps,选项已经被取消了.目前依赖关系可以自动地被解析.<br>–ignoredeps,选项已经被取消了.目前依赖关系可以自动地被解析.<br>–ignoremissing,忽略缺少的软件包或软件包组,而不是暂停安装来向用户询问是中止还是继续安装.<br>例如:%packages –ignoremissing</p>
+<p>kickstart预安装脚本<br>可以在 ks.cfg文件被解析后马上加入要运行的命令.这个部分必须处于kickstart文件的最后(在命令部分之后)而且必须用%pre命令开头.可以在%pre部分访问网络；然而,此时命名服务还未被配置,所以只能使用IP地址.<br>注:预安装脚本不在改换了的根环境(chroot)中运行.<br>–interpreter /usr/bin/python,允许指定不同的脚本语言,如Python.把/usr/bin/python替换成想使用的脚本语言.</p>
+<p>kickstart安装后脚本<br>也可以加入在系统安装完毕后运行的命令.这部分内容必须在kickstart的最后而且用%post命令开头.它被用于实现某些功能,如安装其他的软件和配置其他的命名服务器.<br>注:如果用静态IP信息和命名服务器配置网络,可以在%post部分访问和解析IP地址.如果使用DHCP配置网络,当安装程序执行到%post部分时,/etc/resolv.conf文件还没有准备好.此时,可以访问网络,但是不能解析IP地址.因此,如果使用DHCP,必须在%post部分指定IP地址.<br>注:post-install 脚本是在 chroot 环境里运行的.因此,某些任务如从安装介质复制脚本或RPM将无法执行.<br>–nochroot,允许指定想在chroot环境之外运行的命令.<br>下例把/etc/resolv.conf文件复制到刚安装的文件系统里.<br>%post –nochroot cp /etc/resolv.conf /mnt/sysimage/etc/resolv.conf<br>–interpreter /usr/bin/python<br>允许指定不同的脚本语言,如Python.把/usr/bin/python替换成想使用的脚本语言.</p>
+<p>开始kickstart安装<br>要开始kickstart安装,必须从制作的引导介质或红帽企业Linux光盘引导系统,并输入在引导提示下输入特殊的引导命令.如果ks命令行参数被传递给内核,安装程序将寻找kickstart文件.<br>第一张光盘和软盘<br>如果ks.cfg文件位于软盘的vfat或ext2文件系统里,而且从红帽企业Linux光盘引导的话,也可以使用linux ks=floppy命令.<br>另外一个引导方法是,从红帽企业Linux光盘引导并使用软盘上的vfat或ext2文件系统里的kickstart文件.要实现这样的方法,在boot:提示下输入下面的命令:linux ks=hd:fd0:/ks.cfg<br>使用驱动程序盘<br>如果要使用带有kickstart的驱动盘,需要指定dd选项.<br>例如,从软盘引导并使用驱动盘,可以在boot:提示下输入命令linux ks=floppy dd<br>引导光盘<br>如果kickstart文件位于引导光盘上,把光盘插入机器,引导系统并在boot:提示下输入命令linux ks=cdrom:/ks.cfg<br>其它启动 kickstart 安装的方法如下列举:<br>askmethod,如果我们没有在的光驱里检测到红帽企业Linux光盘的话,请不要自动地把光盘作为安装来源.<br>autostep,使kickstart成为非交互式的.<br>debug,马上启动pdb.<br>dd,使用驱动盘.<br>dhcpclass=,发送自定义的DHCP vendor class identifier.ISC的dhcpcd可以用”option vendor-class-identifier”来查看这个值.<br>dns=,用逗号隔开的用于网络安装的命名服务器列表.<br>driverdisk,和’dd’相同.<br>expert,启用特殊的功能,允许对可移除介质(removable media)进行分区和提示驱动盘<br>gateway=,用于网络安装的网关.<br>graphical,强制图形化安装.ftp/http 安装模式时必须使用图形化界面.<br>isa,提示用户输入ISA设备配置.<br>ip=,用于网络安装的IP地址,对于DHCP使用’dhcp’.<br>keymap=,使用的键盘格式.有效值是那些可以用于’keyboard’ kickstart命令的值.<br>ks=nfs::/,安装程序在NFS服务器上的里寻找kickstart文件.安装程序使用DHCP来配置以太网卡.例如,如果的NFS服务器是server.example.com且kickstart文件是NFS共享目录的里/mydir/ks.cfg,正确的引导命令应该是ks=nfs:server.example.com:/mydir/ks.cfg.<br>ks=<a href="http:///,安装程序在HTTP服务器上的里寻找kickstart文件.安装程序使用DHCP来配置以太网卡.例如,如果的HTTP服务器是server.example.com且kickstart文件是HTTP目录的里/mydir/ks.cfg,正确的引导命令应该是ks=http://server.example.com/mydir/ks.cfg" target="_blank" rel="external">http:///,安装程序在HTTP服务器上的里寻找kickstart文件.安装程序使用DHCP来配置以太网卡.例如,如果的HTTP服务器是server.example.com且kickstart文件是HTTP目录的里/mydir/ks.cfg,正确的引导命令应该是ks=http://server.example.com/mydir/ks.cfg</a>.<br>ks=floppy,安装程序在/dev/fd0里的软盘上的vfat或ext2文件系统里寻找ks.cfg文件.<br>ks=floppy:/,安装程序在/dev/fd0里的软盘上以寻找kickstart文件.<br>ks=hd::/,安装程序把文件系统挂载在(必须是vfat或ext2),而且在该文件系统里以来寻找 kickstart 文件,如ks=hd:sda3:/mydir/ks.cfg.<br>ks=file:/,安装程序试图从文件系统里读取;并没有挂载任何文件.如果kickstart文件已经在initrd映像里时我们通常使用这个方法.<br>ks=cdrom:/,安装程序以在光盘上寻找kickstart文件.<br>ks,如果单独使用ks,安装程序将配置以太网卡使用DHCP.kickstart文件从DHCP应答的”bootServer”里读取,就像是NFS服务器共享kickstart文件一样.在缺省情况下,bootServer与DHCP服务器是同一个.kickstart文件的名字是下列之一:<br>如果指定了DHCP且引导文件以/开头,DHCP提供的引导文件将在NFS服务器上寻找.<br>如果指定了DHCP且引导文件不以/开头,DHCP提供的引导文件将在NFS服务器的/kickstart目录里寻找.<br>如果DHCP没有指定引导文件,安装程序将试图读取/kickstart/1.2.3.4-kickstart,这里的1.2.3.4是被安装的机器的数字化IP地址.<br>ksdevice=,安装程序使用这个网络设备来连接网络.如要使用通过eth1设备连接至系统的NFS服务器上的kickstart文件来启动kickstart安装,可以在boot:提示下使用ks=nfs::/ ksdevice=eth1命令.<br>kssendmac,把HTTP头加到对设置系统有帮助的ks=<a href="http://请求里.在CGI环境变量里包括所有网卡的MAC地址,如:&quot;X-RHN-Provisioning-MAC-0" target="_blank" rel="external">http://请求里.在CGI环境变量里包括所有网卡的MAC地址,如:&quot;X-RHN-Provisioning-MAC-0</a>: eth0 01:23:45:67:89:ab”.<br>lang=,安装时使用的语言.这应该是’lang’ kickstart命令可以使用的有效语言之一.<br>loglevel=,设置记录日志信息的最低级别.的值可以是debug,info,warning,error和critical.缺省值是info.<br>lowres,强制图形用户界面安装程序运行在640x480分辨率下.<br>mediacheck,激活加载者代码,可以允许用户选择测试安装介质(如果是基于ISO的方法)的完整性.<br>method=cdrom,执行基于光盘的安装.<br>method=ftp://,使用来进行FTP安装.<br>method=hd:///,用上的进行基于硬盘驱动器的安装.<br>method=<a href="http://,用来进行基于HTTP的安装" target="_blank" rel="external">http://,用来进行基于HTTP的安装</a>.<br>method=nfs:,用来进行NFS安装.<br>netmask=,用于网络安装的掩码.<br>nofallback,如果图形化用户界面退出时失败.<br>nofb,不要载入某些语言进行文本安装时所需要的 VGA16 帧缓冲.<br>nofirewire,不要装载对防火墙设备的支持.<br>noipv6,在安装过程中禁用 IPv6 网络.<br>nokill,当发生致命错误时,阻止anaconda终止所有运行程序的调试选项.<br>nomount,不要在救援模式下自动挂载任何已安装的Linux分区.<br>nonet,不要自动探测网络设备.<br>noparport,不要试图装载对并行端口的支持.<br>nopass,不要把键盘和鼠标信息传递给安装程序的第二阶段.当执行网络安装时,它可以用来在安装的第二阶段测试鼠标和键盘配置屏幕.<br>nopcmcia,忽略系统上的任何PCMCIA控制器.<br>noprobe,提示用户输入而不要试图检测硬件.<br>noshell,安装过程中tty2上不要出现shell.<br>nostorage,不要自动探测存储设备(SCSI,IDE,RAID).<br>nousb,不要装载USB支持(如果安装过程在早些时候挂起,这会有帮助).<br>nousbstorage,不要在安装程序的载入程序中禁止载入usbstorage模块.它对SCSI系统上的设备排序可能有帮助.<br>rescue,运行救援环境.<br>resolution=,在指定模式下运行安装程序,如’1024x768’模式.<br>serial,启用串行控制台支持.<br>skipddc,跳过对显示器的DDC探测,如果系统被挂起的这可能有帮助.<br>syslog=[:],一旦安装过程被启动并运行,发送日志信息到的可选端口上的syslog进程.这要求远程syslog进程接受连接(-r 选项).<br>text,强制文本模式的安装.<br>updates,提示包含更新(bug修复)的软盘.<br>updates=ftp://,基于FTP的包含更新的映像文件.<br>updates=<a href="http://,基于HTTP的包含更新的映像文件" target="_blank" rel="external">http://,基于HTTP的包含更新的映像文件</a>.<br>upgradeany,不需要符合升级所期望的语法的/etc/redhat-release.<br>vnc,启用基于vnc的安装.将需要连接到使用vnc客户端程序的机器.<br>vncconnect=[:],一旦安装过程开始启动并运行,连接到上的vnc客户端,也可以使用可选端口.也要求’vnc’ 选项被指定.<br>vncpassword=,启用vnc连接的密码.这将阻止其他人无意地连接到基于vnc的安装上.也要求’vnc’选项被指定.</p>
+<p>一个简单完整的实例<br>install<br>cdrom<br>key 2515dd4e215225dd<br>lang en_US.UTF-8<br>keyboard us<br>xconfig –startxonboot<br>network –device eth0 –bootproto static –ip 192.168.100.8 –netmask 255.255.255.0 –gateway 192.168.100.2 –nameserver 122.70.138.10 –hostname test.huabo.org<br>rootpw –iscrypted $1$BPHqwNav$CjjfBezv5OuecU3rNkdDb/<br>firewall –enabled –port=22:tcp<br>authconfig –enableshadow –enablemd5<br>selinux –enforcing<br>timezone Asia/Chongqing<br>bootloader –location=mbr –driveorder=sda –append=”rhgb quiet”</p>
+<p>clearpart –drives=sda,sdb,sdc,sdd –initlabel<br>part    /boot    –fstype ext3    –size=100    –ondrive=sda<br>part    /        –fstype ext3    –size=4000  –ondrive=sda<br>part    swap    –size=512      –ondrive=sda<br>part    raid.11  –size=1  –grow  –asprimary  –ondrive=sdb<br>part    raid.21  –size=1  –grow  –asprimary  –ondrive=sdc<br>part    raid.31  –size=1  –grow  –asprimary  –ondrive=sdd<br>raid    pv.01  –device=md0 –level=RAID5 raid.11 raid.21 raid.31<br>volgroup  vgname  pv.01<br>logvol  /home  –fstype=ext3 –vgname=vgname  –size=4000  –name=home</p>
+<p>%packages<br>@gnome-desktop<br>@core<br>@base-x<br>@chinese-support<br>xorg-x11-utils<br>xorg-x11-server-Xnest</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2011/10/19/'[转载]kickstart配置文件详解'/">[转载]Kickstart配置文件详解</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
+        <p><span>发布时间:</span>2011年10月19日 - 17时11分</p>
+        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2011/10/19/'[转载]kickstart配置文件详解'/" title="[转载]Kickstart配置文件详解">http://www.elain.org/2011/10/19/&#39;[转载]kickstart配置文件详解&#39;/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/10/19/&#39;[转载]kickstart配置文件详解&#39;/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2011/10/25/'[跟我学中小企业架构部署]之五：WEB服务器LNMP部署'/">
+                    [跟我学中小企业架构部署]之五：WEB服务器LNMP部署
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2011/10/18/'[跟我学中小企业架构部署]之四：WEB服务器LAMP部署'/">
+                    [跟我学中小企业架构部署]之四：WEB服务器LAMP部署
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2011/10/19/&#39;[转载]kickstart配置文件详解&#39;/" data-title="[转载]Kickstart配置文件详解" data-url="http://www.elain.org/2011/10/19/&#39;[转载]kickstart配置文件详解&#39;/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"elain"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2011/10/25/'[跟我学中小企业架构部署]之五：WEB服务器LNMP部署'/" title="上一篇: [跟我学中小企业架构部署]之五：WEB服务器LNMP部署">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2011/10/18/'[跟我学中小企业架构部署]之四：WEB服务器LAMP部署'/" title="下一篇: [跟我学中小企业架构部署]之四：WEB服务器LAMP部署">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/02/01/使用rsyslog来收集常用日志/">使用Rsyslog来收集常用日志</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/Rsyslog的使用/">Rsyslog的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/EFK日志收集丢失率测试报告/">EFK日志收集丢失率测试报告</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/16/给EFK日志系统添加kafka队列中遇到的time问题解决/">给EFK日志系统添加kafka队列中遇到的time问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/01/给kibana4中配置中国地图(添加最新版4.3.1修改方法)/">给kibana4中配置中国地图(添加最新版4.3.1修改方法)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/31/Elasticsearch免费认证插件Search-guard的部署安装及策略配置/">Elasticsearch 免费认证插件Search-Guard的部署安装及策略配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/04/15/多业务复用同组WEB通过独立upstream来敏捷运维/">多业务复用同组WEB通过独立upstream来敏捷运维</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/20/'[转]程序员可以在周末做的8件事'/">[转]程序员可以在周末做的8件事</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/08/17/'[转]VIM命令小抄，很不错'/">[转]VIM命令小抄，很不错</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/06/25/puppet管理之用户与SSH信任关系管理/">puppet管理之用户与SSH信任关系管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/05/30/puppet常用模块/">Puppet常用模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/05/29/在puppet使用中针对域名形式主机名取$hostname的问题/">在Puppet使用中针对域名形式主机名取$hostname的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/04/18/'[转]自己活，也让别人活'/">[转]自己活，也让别人活</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/03/26/'[转]40岁后才明白的道理:人一生奋斗余地很有限'/">[转]40岁后才明白的道理:人一生奋斗余地很有限</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/03/26/'[转]世界上最健康的作息时间表'/">[转]世界上最健康的作息时间表</a></li><li class="post-list-item"><a class="post-list-link" href="/2013/03/26/'[转]30岁以前不要去在乎的30件事'/">[转]30岁以前不要去在乎的30件事</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/12/18/'[转]2012年LinuxJournal读者选择奖结果公布'/">[转]2012年Linux Journal读者选择奖结果公布</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/12/06/'[转]创业公司老板管理常识'/">[转]创业公司老板管理常识</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/11/28/'[转]如何摆脱低智商的社会，让自己脱颖而出？'/">[转]如何摆脱低智商的社会，让自己脱颖而出？</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/11/12/'[转]为什么IT人难以拿高薪'/">[转]为什么IT人难以拿高薪</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/11/12/[转]IT职业生涯规划–职涯路/">[转]IT职业生涯规划–职涯路</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/10/22/[转]简明Vim练级攻略/">[转]简明Vim练级攻略</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/08/25/修改.bashrc文件错误导致系统大部分命令失效的解决方法/">修改.Bashrc文件错误导致系统大部分命令失效的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/08/11/Puppet的使用与管理ppt分享/">Puppet的使用与管理 Ppt分享</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/07/31/使用openssh的新特性构建chroot环境/">使用Openssh的新特性构建chroot环境</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/06/27/闰秒BUG可能导致Linux服务器重启/">闰秒BUG可能导致Linux服务器重启</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/06/16/'[转]不同技术团队的配合问题及DevOps'/">[转]不同技术团队的配合问题及DevOps</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/06/06/'[新闻]IPv6今日正式上线中国支持IPv6网站占比达65%'/">[新闻]IPv6今日正式上线中国支持IPv6网站占比达65%</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/05/19/'ubuntu软件---RabbitVCS/">Ubuntu软件---RabbitVCS : TortoiseSVN 的替代者</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/04/26/ubuntu12.04正式版官方发布/">Ubuntu12.04正式版官方发布</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/04/24/'[转]我在Facebook的十点经验分享'/">[转]我在Facebook的十点经验分享</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/03/29/批量修改远程主机root密码脚本/">批量修改远程主机Root密码脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/03/23/'[转]如何学习技术？---献给有志之士'/">[转]如何学习技术？ ---献给有志之士</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/03/21/ubuntu游戏推荐-AlienArena-7.53/">Ubuntu游戏推荐-Alien Arena-7.53</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/03/17/[转]让你的Ubuntu10.10装扮成MacOSX风格/">[转]让你的Ubuntu10.10装扮成MacOSX风格</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/03/05/'[转]logrotate工具的使用'/">[转]Logrotate工具的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/02/27/'[转]一声叹息：两台服务器是为失败者准备的'/">[转]一声叹息：两台服务器是为失败者准备的</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/02/13/帮朋友招聘运维工程师（小米科技）/">帮朋友招聘运维工程师（小米科技）</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/02/03/'[PHP又暴重大漏洞]多语言拒绝服务漏洞事件预警'/">[PHP又暴重大漏洞]多语言拒绝服务漏洞事件预警</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/30/MongoDB实战系列之六：mongodb的高可用集群设计实战/">MongoDB实战系列之六：mongodb的高可用集群设计实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/17/MongoDB实战系列之五：mongodb的分片配置/">MongoDB实战系列之五：mongodb的分片配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/13/推荐三款nagios客户端，覆盖所有系统平台/">推荐三款Nagios客户端，覆盖所有系统平台</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/13/MongoDB实战系列之四：mongodb副本集部署/">MongoDB实战系列之四：mongodb副本集部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/12/'[新闻]PHP5.3.9正式版发布！'/">[新闻]PHP 5.3.9正式版发布！</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/08/MongoDB实战系列之三：MongoDB的主从部署/">MongoDB实战系列之三：MongoDB的主从部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2012/01/01/MongoDB实战系列之二：MongoDB的常用操作/">MongoDB实战系列之二：MongoDB的常用操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/12/31/MongoDB实战系列之一：MongoDB安装部署/">MongoDB实战系列之一：MongoDB安装部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/12/23/'[新闻]IT网站被黑引数据恐慌5000万用户信息外泄'/">[新闻]IT网站被黑引数据恐慌 5000万用户信息外泄</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/12/04/'[转]MySQL出错代码列表'/">[转]MySQL出错代码列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/12/03/'[新闻]淘宝Web服务器Tengine正式开源'/">[新闻]淘宝Web服务器Tengine正式开源</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/29/'[跟我学中小企业架构部署]之八：备份服务器部署'/">[跟我学中小企业架构部署]之八：备份服务器部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/26/'[转]每天两分钟远离电脑病'/">[转]每天两分钟 远离电脑病</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/25/监控WEB页面不正常报警脚本/">监控WEB页面不正常报警脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/24/'[转]网站页面性能优化的34条黄金守则'/">[转]网站页面性能优化的 34条黄金守则</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/21/'[跟我学中小企业架构部署]之七：监控系统cacti部署'/">[跟我学中小企业架构部署]之七：监控系统Cacti部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/09/'[转]keepalived.conf文件详解'/">[转]keepalived.conf 文件详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/07/'[跟我学中小企业架构部署]之六：监控系统nagios部署'/">[跟我学中小企业架构部署]之六：监控系统Nagios部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/05/无聊中安装的MACOS截图欣赏/">无聊中安装的MAC OS截图欣赏</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/04/'[转]浮夸'/">[转]浮夸</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/11/04/Redis的部署使用文档/">Redis的部署使用文档</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/29/用Piranha来实现WEB的负载均衡/">用Piranha来实现WEB的负载均衡</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/28/SSH另类安全加固/">SSH另类安全加固</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/25/'[跟我学中小企业架构部署]之五：WEB服务器LNMP部署'/">[跟我学中小企业架构部署]之五：WEB服务器LNMP部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/19/'[转载]kickstart配置文件详解'/">[转载]Kickstart配置文件详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/18/'[跟我学中小企业架构部署]之四：WEB服务器LAMP部署'/">[跟我学中小企业架构部署]之四：WEB服务器LAMP部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/14/'[跟我学中小企业架构部署]之三：数据库多实例部署'/">[跟我学中小企业架构部署]之三：数据库多实例部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/13/Ubuntu 11.10 正式版抢先体验(附下载地址)/">Ubuntu 11.10 正式版抢先体验(附下载地址)</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/11/CentOS下nagios报警飞信部署四步走/">CentOS下nagios报警飞信部署四步走</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/11/'[跟我学中小企业架构部署]之二：负载均衡部署'/">[跟我学中小企业架构部署]之二：负载均衡部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/09/'[跟我学中小企业架构部署]之一：整体架构设计'/">[跟我学中小企业架构部署]之一：整体架构设计</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/06/奥巴马总统对乔布斯的悼念--向伟大的SteveJobs致敬/">奥巴马总统对乔布斯的悼念--向伟大的Steve Jobs致敬</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/10/04/成功中国网即将重新上线！！！/">成功中国网即将重新上线！！！</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/27/'[转]Facebook背后的软件'/">[转]Facebook背后的软件</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/26/Hadoop系列之一：hadoop部署安装/">Hadoop系列之一：hadoop部署安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/20/LVS+Heartbeat安装部署文档/">LVS+Heartbeat安装部署文档</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/14/'[转载]轻松吧！重要人生启示'/">[转载]轻松吧！重要人生启示 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/13/phpmyadmin-MYSQL管理工具安装/">Phpmyadmin-MYSQL管理工具安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/08/分享神作《甩饼歌》/">分享神作《甩饼歌》</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/07/Memcached安装部署/">Memcached安装部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/05/SVN服务端数据定时备份脚本/">SVN服务端数据定时备份脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/09/02/多服务器访问日志合并脚本/">多服务器访问日志合并脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/29/'[转]袁萌：我国普及Linux的回顾与展望'/">[转]袁萌：我国普及Linux的回顾与展望</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/29/LEMP部署安装for RHEL AS4.6/">LEMP部署安装for RHEL AS4.6</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/25/'[转]快讯：Apache全系爆拒绝服务漏洞'/">[转]快讯：Apache 全系爆拒绝服务漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/25/apache+tomcat安装配置/">Apache+tomcat安装配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/18/分布式文件系统MooseFS的部署安装/">分布式文件系统MooseFS的部署安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/18/awstats日志分析工具部署/">Awstats日志分析工具部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/17/分享两个超级震撼的视频/">分享两个超级震撼的视频</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/16/检测MYSQL不同步发邮件通知的脚本/">检测MYSQL不同步发邮件通知的脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/16/PHP扩展缓存加速安装/">PHP扩展缓存加速安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/16/飞信forLinux安装/">飞信forLinux安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/15/'[客户端]批量部署监控客户端，多机分发'/">[客户端]批量部署监控客户端，多机分发 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/11/ubuntu运行wineQQ(比较完美)/">Ubuntu运行wine QQ(比较完美)</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/11/CentOS5.5下升级内核到2.6.38/">CentOS5.5下升级内核到2.6.38</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/09/分享ubuntu文档汇总/">分享Ubuntu文档汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/09/'[转载]Heartbeat详解'/">[转载]Heartbeat详解 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/08/ganglia监控的搭建部署/">Ganglia监控的搭建部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/08/ubuntu下使用gSTM+Firefox实现翻墙/">ubuntu下使用gSTM+Firefox实现翻墙</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/08/WINDOWS下使用SecureCRT+FireFox代理实现翻墙/">WINDOWS下使用SecureCRT+FireFox代理实现翻墙</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/07/earth-song-by-michael-jackson/">Earth Song by Michael Jackson</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/07/仅有内网IP的IDC的机器如何能够连到外网/">仅有内网IP的IDC的机器如何能够连到外网</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/05/you-are-not-alone-by-michael-jackson/">You Are Not Alone by Michael Jackson</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/04/screen命令的使用/">Screen命令的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/04/PHP安装xhprof扩展/">PHP安装xhprof扩展</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/04/GraphicsMagick扩展配置安装/">GraphicsMagick扩展配置安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/03/实战生产环境下使用parted给大于2T以上硬盘分区/">实战生产环境下使用parted给大于2T以上硬盘分区</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/01/编写脚本时以年月日为目录时值得注意的地方/">编写脚本时以年月日为目录时值得注意的地方</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/01/ubuntu面板恢复方法/">Ubuntu面板恢复方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/08/01/ubuntu下使用windows字体/">Ubuntu下使用windows字体</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/29/检查NGINX配置文件修改后自动reload脚本/">检查NGINX配置文件修改后自动reload脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/29/'[推荐]LINUX运维工程师学习资料[elain整理]'/">[推荐]LINUX运维工程师学习资料[elain整理] </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/28/pptpd安装部署文档/">Pptpd安装部署文档</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/26/Varnish安装部署文档/">Varnish安装部署文档</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/25/SVN在另类环境中实现自动提交的方法/">SVN在另类环境中实现自动提交的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/24/'[转载]职场人如何让老板舍不得你'/">[转载]职场人如何让老板舍不得你 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/23/ssh无密码登录验证技术/">Ssh 无密码登录验证技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/22/'实现linux作为server时与windows间的数据同步'/">实现Linux作为server时与windows间的数据同步 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/22/监控性能方面命令大总结/">监控性能方面命令大总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/22/'CentOS5.5下SVN部署文档'/">CentOS5.5下SVN部署文档 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/22/ubuntu下yakuake使用设置技巧/">Ubuntu下yakuake使用设置技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/21/CentOs5.4设置DVD为本地yum源/">CentOs5.4设置DVD为本地yum源</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/21/网络传输边传输边压缩方法/">网络传输边传输边压缩方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/21/'日志归总脚本部署思路'/">日志归总脚本部署思路 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/07/NGINX多域名日志切割备份脚本/">NGINX 多域名日志切割备份脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/07/01/nginx.conf文件详解及调优/">nginx.conf文件详解及调优</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/06/17/http错误代码大全/">Http错误代码大全</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/06/13/'[转]Nginx发现重大漏洞'/">[转]Nginx发现重大漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/06/01/ubuntu下禁用笔记本触摸板方法/">Ubuntu下禁用笔记本触摸板方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/05/27/屏蔽优酷烦人的广告方法/">屏蔽优酷烦人的广告方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/05/14/ubuntu11.04的侧边栏消失的解决方法！/">ubuntu11.04的侧边栏消失的解决方法！</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/05/10/'[转]shell程序设计小知识'/">[转]Shell程序设计小知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/05/09/'ubuntu必备软件精选[elain推荐]更新20111020'/">Ubuntu必备软件精选[elain推荐]更新20111020</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/05/09/mysql常用操作命令/">Mysql常用操作命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/04/22/查看各软件配置参数/">查看各软件配置参数</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/04/18/'[转]查看Apache并发请求数及其TCP连接状态故障排除'/">[转]查看Apache并发请求数及其TCP连接状态故障排除</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/04/14/内网邮件服务器测试外网收信/">内网邮件服务器测试外网收信</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/04/02/mysql常用引擎MyISAM和innodb的几点简单特性/">Mysql 常用引擎MyISAM和innodb的几点简单特性</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/04/02/gnomemplayer乱码解决/">Gnome Mplayer乱码解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/04/02/ubuntu里vbox里不能使用USB的解决方法/">ubuntu里vbox里不能使用USB的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/24/thunderbird导入通讯录乱码问题解决/">Thunderbird 导入通讯录乱码问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/23/献给正在为未来打拼的人/">献给正在为未来打拼的人</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/22/vsftpd服务器虚拟用户配置/">Vsftpd服务器虚拟用户配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/20/'[转]Shell中有特殊含义的字符'/">[转]Shell中有特殊含义的字符 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/20/分享elain.org数据备份脚本/">分享elain.org 数据备份脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/18/推荐一款在UBUNTU下使用的编辑器/">推荐一款在UBUNTU下使用的编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/18/'汉化thunderbird英文版及最小化到托盘的设置方法'/">汉化Thunderbird英文版及最小化到托盘的设置方法 </a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/16/'UBUNTU完美运行TM,RTX,MSOffice,迅雷'/">UBUNTU完美运行TM,RTX,MSOffice,迅雷</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/14/监控性能方面常用系统命令总结/">监控性能方面常用系统命令总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/14/让YUM只安装64位的RPM包设置方法/">让YUM只安装64位的RPM包设置方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/14/vim的一般使用技巧/">Vim的一般使用技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/14/VIM颜色设置/">VIM颜色设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/14/TOP命令详解/">TOP 命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/08/'[varnish]Varnish安装部署'/">[varnish]Varnish安装部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/08/'[MYSQL]mysql优化'/">[MYSQL]mysql优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/08/LINUX下的查找命令-find命令详解/">LINUX下的查找命令-Find命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/08/ApacheHTTPServer与Tomcat的三种连接方式介绍/">ApacheHTTPServer与Tomcat的三种连接方式介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/08/'[MYSQL]Mysql数据库丢失root密码恢复'/">[MYSQL]Mysql 数据库丢失Root密码恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/06/apache两种工作模式详解/">Apache两种工作模式详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/06/Linux系统服务详解/">Linux系统服务详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/06/Linux配置文件系统路径/">Linux配置文件系统路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/06/snort规则编写/">Snort 规则编写</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/05/Linux命令大总结（哭泣之剑学习时的笔记）/">Linux命令大总结（哭泣之剑学习时的笔记）</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/05/LINUX三个必背的文件/">LINUX三个必背的文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/05/打造LINUX系统安全/">打造LINUX系统安全</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/05/RHEL利用 CentOS更新 yum源/">RHEL利用 CentOS更新 Yum源</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/04/ubuntu面板恢复命令/">Ubuntu面板恢复命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/04/showslow性能测试平台搭建/">Showslow 性能测试平台搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/04/arping命令详解/">Arping命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/04/PXE+cobbler+kickstart全自动无人值守网络安装系统/">PXE+cobbler+kickstart全自动无人值守网络安装系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/03/iostat命令详解/">Iostat命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/03/vmstat命令详解/">Vmstat命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/03/mpstat命令详解/">Mpstat命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/03/sar命令详解/">Sar命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/'Linux主机名颜色设置,ps1设置,然linux有颜色'/">Linux主机名颜色设置,ps1设置,然linux有颜色</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/'Linux中变量$#,$@,$0,$1,$2的含义'/">Linux中变量$#,$@,$0,$1,$2的含义</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/解析选项getopts的用法及例子/">解析选项Getopts的用法及例子</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/Linux批量生成生成帐户脚本/">Linux批量生成生成帐户脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/tomcat多实例配置/">Tomcat 多实例配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/rsync命令详解/">Rsync命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/让gedit自动识别文件编码/">让Gedit自动识别文件编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2011/03/02/IT人士十大不良饮食习惯及改进建议/">IT人士十大不良饮食习惯及改进建议</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 elain
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <style>
+        body {
+          background: lightgray;
+        }
+        #container .left-col {
+          background: white;
+        }
+        .article-inner {
+          background: white;
+          margin-bottom: 1em;
+        }
+        .post-nav-button {
+          background: #ececec;
+        }
+        #header .header-nav .social #GitHub {
+          background-color: #bfd3ec;
+        }
+        #post-nav-button a {
+          background: rgba(215, 216, 215, .2);
+        }
+        .post-list {
+          background: white;
+        }
+    </style>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
