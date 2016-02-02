@@ -6,8 +6,8 @@
  * @link http://chopstack.com
  */
 body {
-  background-color: #FFF;
-  color: #444;
+  background-color: #000;
+  color: #FFF;
   font-family: "TIBch", "Classic Grotesque W01", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -609,9 +609,10 @@ div {
 
 /* syntax highlight*/
 figure.highlight {
-  background: #333333;
+  background: #f7f8f8;
   margin: 10px 0;
   line-height: 1.2em;
+  color: #333;
   color: #FFFFFF;
   padding-top: 15px;
   overflow: hidden; }
