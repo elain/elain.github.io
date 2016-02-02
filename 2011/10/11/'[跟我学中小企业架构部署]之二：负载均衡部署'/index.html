@@ -96,6 +96,8 @@ rz 上传软件
         
         <p class="header-subtitle">致力于LINUX技术研究交流!开源一切,免费一切!!!</p>
         
+        
+        <form><input type="text" class="search" placeholder=" Search..."></form>
                 
 
 
@@ -509,6 +511,22 @@ rz 上传软件
     }
 </script>
 
+
+    <style>
+        .toc {
+            white-space: nowrap;
+            overflow-x: hidden;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $(".toc li a").mouseover(function() {
+                var title = $(this).attr('href');
+                $(this).attr("title", title);
+            });
+        })
+    </script>
 
 
 

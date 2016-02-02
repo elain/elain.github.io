@@ -70,6 +70,8 @@ md01    10.0.0.11        mastermd02    10.0.0.12        slavemd03    10.0.0.14  
         
         <p class="header-subtitle">致力于LINUX技术研究交流!开源一切,免费一切!!!</p>
         
+        
+        <form><input type="text" class="search" placeholder=" Search..."></form>
                 
 
 
@@ -411,6 +413,22 @@ md01    10.0.0.11        mastermd02    10.0.0.12        slavemd03    10.0.0.14  
     }
 </script>
 
+
+    <style>
+        .toc {
+            white-space: nowrap;
+            overflow-x: hidden;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $(".toc li a").mouseover(function() {
+                var title = $(this).attr('href');
+                $(this).attr("title", title);
+            });
+        })
+    </script>
 
 
 

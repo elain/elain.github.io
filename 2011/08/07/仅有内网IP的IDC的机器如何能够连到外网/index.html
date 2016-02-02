@@ -115,6 +115,8 @@ sed -i &amp;amp;#039;s#net.ipv4.ip_forward = 0#net.ipv4.ip_forward = 1#&amp;amp;
         
         <p class="header-subtitle">致力于LINUX技术研究交流!开源一切,免费一切!!!</p>
         
+        
+        <form><input type="text" class="search" placeholder=" Search..."></form>
                 
 
 
@@ -445,6 +447,22 @@ route add default gw 172.16.10.2
     }
 </script>
 
+
+    <style>
+        .toc {
+            white-space: nowrap;
+            overflow-x: hidden;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $(".toc li a").mouseover(function() {
+                var title = $(this).attr('href');
+                $(this).attr("title", title);
+            });
+        })
+    </script>
 
 
 
