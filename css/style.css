@@ -609,7 +609,7 @@ div {
 
 /* syntax highlight*/
 figure.highlight {
-  background: #f7f8f8;
+  background: #000000;
   margin: 10px 0;
   line-height: 1.2em;
   color: #333;
