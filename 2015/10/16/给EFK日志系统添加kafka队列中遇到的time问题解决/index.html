@@ -20,7 +20,7 @@
 在fluentd中使用fluent-plugin-kafka收集日志到kafka中，日志正常；然后使用 elasticsearch-river-kafka 来把kafka中的数据写入到ES中，查看正常；再使用kibana 来读取ES中的数据来展示，问题来了，怎么调试也不能成功的展示数据；
 问题在于 fluent-plu">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2015/10/efk.jpg">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-02T13:37:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="给EFK日志系统添加kafka队列中遇到的time问题解决">
 <meta name="twitter:description" content="以下是我在生产环境中的EFK 架构
@@ -294,39 +294,11 @@
 <p>问题在于 fluent-plugin-kafka 默认没有收集日志中的time字段，打开 output_include_time 选项后<br>就可出现time字段，但并不是日志中的格式，而是转换成了 unix time(例如：1444961965)<br>而在es中date字段，首先尝试dateOptionalTime，失败的话会尝试UNIX-MS(例如：1444961965000)，但是收集到的日志时间是UNIX time，少了毫秒（少了000），所以计算出的时间是在1970年左右，而我在Kibana默认的time tickper是 最近15分钟，于是乎我把时间拉到了最近50年，看到了数据。</p>
 <p>查找网上并没找到解决方法，于是自己动手：</p>
 <p>修改 out_kafka.rb 如下：</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<p>config_param :client_id, :string, :default =&gt; ‘kafka’<br>config_param :output_data_type, :string, :default =&gt; ‘json’<br>config_param :output_include_tag, :bool, :default =&gt; false</p>
-<ul>
-<li>config_param :output_include_time, :bool, :default =&gt; false</li>
-</ul>
-<ul>
-<li>#config_param :output_include_time, :bool, :default =&gt; false</li>
-<li>config_param :logstash_format, :bool, :default =&gt; false</li>
-</ul>
-<h1 id="poseidon_producer_options"><a href="#poseidon_producer_options" class="headerlink" title="poseidon producer options"></a>poseidon producer options</h1><p>config_param :max_send_retries, :integer, :default =&gt; 3<br>@@ -130,7 +131,17 @@ def emit(tag, es, chain)<br>begin<br>chain.next<br>es.each do |time,record|</p>
-<ul>
-<li>record[‘time’] = time if @output_include_time</li>
-</ul>
-<ul>
-<li>if @logstash_format</li>
-<li>if record.has_key?(“@timestamp”)</li>
-<li>time = Time.parse record[“@timestamp”]</li>
-<li>elsif record.has_key?(@time_key)</li>
-<li>time = Time.parse record[@time_key]</li>
-<li>record[‘@timestamp’] = record[@time_key]</li>
-<li>else</li>
-<li>record.merge!({“@timestamp” =&gt; Time.at(time).to_datetime.to_s})</li>
-<li>end</li>
-<li>end</li>
-<li>#record[‘time’] = time if @output_include_time<br>record[‘tag’] = tag if @output_include_tag<br>topic = record[‘topic’] || self.default_topic || tag<br>partition_key = record[‘partition_key’] || @default_partition_key</li>
-</ul>
-<p>[/ccWN]<a id="more"></a></p>
-<p>有同样需求的同学，请对比修改，完成后在td-agent.conf 的相应位置 添加</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">config_param <span class="symbol">:client_id</span>, <span class="symbol">:string</span>, <span class="symbol">:default</span> =&amp;gt; <span class="string">'kafka'</span></span><br><span class="line">config_param <span class="symbol">:output_data_type</span>, <span class="symbol">:string</span>, <span class="symbol">:default</span> =&amp;gt; <span class="string">'json'</span></span><br><span class="line">config_param <span class="symbol">:output_include_tag</span>, <span class="symbol">:bool</span>, <span class="symbol">:default</span> =&amp;gt; <span class="keyword">false</span></span><br><span class="line">- config_param <span class="symbol">:output_include_time</span>, <span class="symbol">:bool</span>, <span class="symbol">:default</span> =&amp;gt; <span class="keyword">false</span></span><br><span class="line">+ <span class="comment">#config_param :output_include_time, :bool, :default =&amp;gt; false</span></span><br><span class="line">+ config_param <span class="symbol">:logstash_format</span>, <span class="symbol">:bool</span>, <span class="symbol">:default</span> =&amp;gt; <span class="keyword">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># poseidon producer options</span></span><br><span class="line">config_param <span class="symbol">:max_send_retries</span>, <span class="symbol">:integer</span>, <span class="symbol">:default</span> =&amp;gt; <span class="number">3</span></span><br><span class="line">@@ -<span class="number">130</span>,<span class="number">7</span> +<span class="number">131</span>,<span class="number">17</span> @@ <span class="function"><span class="keyword">def</span> <span class="title">emit</span><span class="params">(tag, es, chain)</span></span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">chain.<span class="keyword">next</span></span><br><span class="line">es.each <span class="keyword">do</span> |time,record|</span><br><span class="line">- record[<span class="string">'time'</span>] = time <span class="keyword">if</span> <span class="variable">@output_include_time</span></span><br><span class="line">+ <span class="keyword">if</span> <span class="variable">@logstash_format</span></span><br><span class="line">+ <span class="keyword">if</span> record.has_key?(<span class="string">"@timestamp"</span>)</span><br><span class="line">+ time = <span class="constant">Time</span>.parse record[<span class="string">"@timestamp"</span>]</span><br><span class="line">+ <span class="keyword">elsif</span> record.has_key?(<span class="variable">@time_key</span>)</span><br><span class="line">+ time = <span class="constant">Time</span>.parse record[<span class="variable">@time_key</span>]</span><br><span class="line">+ record[<span class="string">'@timestamp'</span>] = record[<span class="variable">@time_key</span>]</span><br><span class="line">+ <span class="keyword">else</span></span><br><span class="line">+ record.merge!(&#123;<span class="string">"@timestamp"</span> =&amp;gt; <span class="constant">Time</span>.at(time).to_datetime.to_s&#125;)</span><br><span class="line">+ <span class="keyword">end</span></span><br><span class="line">+ <span class="keyword">end</span></span><br><span class="line">+ <span class="comment">#record['time'] = time if <span class="doctag">@output</span>_include_time</span></span><br><span class="line">record[<span class="string">'tag'</span>] = tag <span class="keyword">if</span> <span class="variable">@output_include_tag</span></span><br><span class="line">topic = record[<span class="string">'topic'</span>] || <span class="keyword">self</span>.default_topic || tag</span><br><span class="line">partition_key = record[<span class="string">'partition_key'</span>] || <span class="variable">@default_partition_key</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line">有同样需求的同学，请对比修改，完成后在td-agent.conf 的相应位置 添加</span><br></pre></td></tr></table></figure>
 <p>type kafka</p>
 <p>: # Omit configuration about fluent-plugin-kafka</p>
 <p>logstash_format true</p>
-<p>[/ccWN]</p>
+<p>```</p>
 <p>github:<a href="https://github.com/elain/fluent-plugin-kafka/commit/2ca46cd00f61e0dc63717b20a6c70e90510ac731" target="_blank" rel="external">https://github.com/elain/fluent-plugin-kafka/commit/2ca46cd00f61e0dc63717b20a6c70e90510ac731</a></p>
 <p>&nbsp;</p>
 
@@ -340,7 +312,7 @@
         <p><span>本文标题:</span><a href="/2015/10/16/给EFK日志系统添加kafka队列中遇到的time问题解决/">给EFK日志系统添加kafka队列中遇到的time问题解决</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2015年10月16日 - 15时34分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月02日 - 21时37分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2015/10/16/给EFK日志系统添加kafka队列中遇到的time问题解决/" title="给EFK日志系统添加kafka队列中遇到的time问题解决">http://www.elain.org/2015/10/16/给EFK日志系统添加kafka队列中遇到的time问题解决/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2015/10/16/给EFK日志系统添加kafka队列中遇到的time问题解决/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -376,7 +348,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#poseidon_producer_options"><span class="toc-number">1.</span> <span class="toc-text">poseidon producer options</span></a></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {
