@@ -7,26 +7,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="BAK 服务器部署
 所需软件：PortmapNfsRsync
-[ccWN lang=”bash” width=”99%” height=”100%”]mkdir -p /backup /www                     #创建网站图片、附件存储目录mkdir -p /backup/data /backup/www   [/ccWN]        #创建网站备份目录、数据库备份目以w">
+12mkdir -p /backup /www                     #创建网站图片、附件存储目录mkdir -p /backup/data /backup/www
+#创建网站备份目录、数据库备份目
+以wiki为例：wiki 程序下的附件、图片目录有 /data/attachment  /uploads那我们需在BAK">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[跟我学中小企业架构部署]之八：备份服务器部署">
 <meta property="og:url" content="http://www.elain.org/2011/11/29/'[跟我学中小企业架构部署]之八：备份服务器部署'/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="BAK 服务器部署
 所需软件：PortmapNfsRsync
-[ccWN lang=”bash” width=”99%” height=”100%”]mkdir -p /backup /www                     #创建网站图片、附件存储目录mkdir -p /backup/data /backup/www   [/ccWN]        #创建网站备份目录、数据库备份目以w">
+12mkdir -p /backup /www                     #创建网站图片、附件存储目录mkdir -p /backup/data /backup/www
+#创建网站备份目录、数据库备份目
+以wiki为例：wiki 程序下的附件、图片目录有 /data/attachment  /uploads那我们需在BAK">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2011/11/17.png">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2011/11/22.png">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2011/11/32.png">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2011/11/42-640x96.png">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2011/11/52.png">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2011/11/61.png">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T05:53:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[跟我学中小企业架构部署]之八：备份服务器部署">
 <meta name="twitter:description" content="BAK 服务器部署
 所需软件：PortmapNfsRsync
-[ccWN lang=”bash” width=”99%” height=”100%”]mkdir -p /backup /www                     #创建网站图片、附件存储目录mkdir -p /backup/data /backup/www   [/ccWN]        #创建网站备份目录、数据库备份目以w">
+12mkdir -p /backup /www                     #创建网站图片、附件存储目录mkdir -p /backup/data /backup/www
+#创建网站备份目录、数据库备份目
+以wiki为例：wiki 程序下的附件、图片目录有 /data/attachment  /uploads那我们需在BAK">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -284,28 +290,55 @@
           
         <p>BAK 服务器部署</p>
 <p>所需软件：<br>Portmap<br>Nfs<br>Rsync</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]mkdir -p /backup /www                     #创建网站图片、附件存储目录<br>mkdir -p /backup/data /backup/www   [/ccWN]        #创建网站备份目录、数据库备份目<br>以wiki为例：<br>wiki 程序下的附件、图片目录有 /data/attachment  /uploads<br>那我们需在BAK服务器上建立这两个文件目录，用NFS共享，<br>[ccWN lang=”bash” width=”99%” height=”100%”]cd  /www/<br>mkdir -p wiki/uploads wiki/data/attachment<br>chmod –R 777  www<br>rpm -qa  portmap nfs                  #查看是否安装，默认是安装的，直接启动即可<br>service portmap start<br>chkconfig portmap on<br>service nfs start<br>chkconfig nfs on[/ccWN]<br>为LNMP服务器共享目录为可读写：<br>[ccWN lang=”bash” width=”99%” height=”100%”]echo “/www/wiki/uploads/  10.0.10.84(rw,sync,anonuid=1,anongid=1)” &gt;&gt;/etc/exports<br>echo “/www/wiki/data/attachment/  10.0.10.84(rw,sync,anonuid=1,anongid=1)”  &gt;&gt;/etc/exports[/ccWN]<a id="more"></a><br>[ccWN lang=”bash” width=”99%” height=”100%”]service nfs restart                      #重启NFS服务使其生效[/ccWN]</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /<span class="operator"><span class="keyword">backup</span> /www                     #创建网站图片、附件存储目录</span><br><span class="line">mkdir -<span class="keyword">p</span> /<span class="keyword">backup</span>/<span class="keyword">data</span> /<span class="keyword">backup</span>/www</span></span><br></pre></td></tr></table></figure>
+<pre><code>#创建网站备份目录、数据库备份目
+</code></pre><p>以wiki为例：<br>wiki 程序下的附件、图片目录有 /data/attachment  /uploads<br>那我们需在BAK服务器上建立这两个文件目录，用NFS共享，</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cd  /www/</span><br><span class="line">mkdir -p wiki/uploads wiki/data/attachment</span><br><span class="line">chmod –R <span class="number">777</span>  www</span><br><span class="line">rpm -qa  portmap nfs                  <span class="comment">#查看是否安装，默认是安装的，直接启动即可</span></span><br><span class="line">service portmap <span class="built_in">start</span></span><br><span class="line">chkconfig portmap <span class="command"><span class="keyword">on</span></span></span><br><span class="line">service nfs <span class="built_in">start</span></span><br><span class="line">chkconfig nfs <span class="command"><span class="keyword">on</span></span></span><br></pre></td></tr></table></figure>
+<p>为LNMP服务器共享目录为可读写：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">"/www/wiki/uploads/  10.0.10.84(rw,sync,anonuid=1,anongid=1)"</span> <span class="prompt">&gt;&gt;</span>/etc/exports</span><br><span class="line">echo <span class="string">"/www/wiki/data/attachment/  10.0.10.84(rw,sync,anonuid=1,anongid=1)"</span>  <span class="prompt">&gt;&gt;</span>/etc/exports</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">service</span> nfs restart                      <span class="comment">#重启NFS服务使其生效</span></span><br></pre></td></tr></table></figure>
 <p><a href="http://www.elain.org/?attachment_id=558"><img src="http://www.elain.org/wp-content/uploads/2011/11/17.png" alt=""></a>看到上图说明共享成功！！</p>
-<p>LNMP上操作<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>killall nginx                                  #停止WEB服务，防止打包不完整<br>cd /www/htdocs/wiki<br>tar zcvf data.tar.gz data/<br>tar zcvf uploads.tar.gz uploads/<br>mv data databak<br>mv uploads uploadsbak<br>service portmap start                        #启动portmap nfs服务并添加到开机自启动<br>chkconfig portmap on<br>service nfs start<br>chkconfig nfs on<br>showmount –e 10.0.10.85                   #查看BAK服务器共享的目录</p>
-<p>[/ccWN]<a href="http://www.elain.org/?attachment_id=559"><img src="http://www.elain.org/wp-content/uploads/2011/11/22.png" alt=""></a></p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]mkdir -p data uploads<br>mount -t nfs 10.0.10.85:/www/wiki/data ./data            #挂载共享目录到本地<br>mount -t nfs 10.0.10.85:/www/wiki/uploads ./uploads[/ccWN]</p>
-<p><a href="http://www.elain.org/?attachment_id=560"><img src="http://www.elain.org/wp-content/uploads/2011/11/32.png" alt=""></a>上图提示，挂载成功！！<br>回到BAK服务器上操作<br>[ccWN lang=”bash” width=”99%” height=”100%”]cd /www/wiki/<br>scp 10.0.10.84:/www/htdocs/wiki/data.tar.gz ./<br>scp 10.0.10.84:/www/htdocs/wiki/uploads.tar.gz ./<br>tar zxvf data.tar.gz<br>tar zxvf uploads.tar.gz[/ccWN]</p>
+<p>LNMP上操作</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">killall nginx                                  <span class="comment">#停止WEB服务，防止打包不完整</span></span><br><span class="line">cd /www/htdocs/wiki</span><br><span class="line">tar zcvf data.tar.gz data/</span><br><span class="line">tar zcvf uploads.tar.gz uploads/</span><br><span class="line">mv data databak</span><br><span class="line">mv uploads uploadsbak</span><br><span class="line">service portmap <span class="built_in">start</span>                        <span class="comment">#启动portmap nfs服务并添加到开机自启动</span></span><br><span class="line">chkconfig portmap <span class="command"><span class="keyword">on</span></span></span><br><span class="line">service nfs <span class="built_in">start</span></span><br><span class="line">chkconfig nfs <span class="command"><span class="keyword">on</span></span></span><br><span class="line">showmount –e <span class="number">10.0</span><span class="number">.10</span><span class="number">.85</span>                   <span class="comment">#查看BAK服务器共享的目录</span></span><br></pre></td></tr></table></figure>
+<p><a href="http://www.elain.org/?attachment_id=559"><img src="http://www.elain.org/wp-content/uploads/2011/11/22.png" alt=""></a></p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p data uploads</span><br><span class="line">mount -t nfs <span class="number">10.0</span>.<span class="number">10.85</span><span class="symbol">:/www/wiki/data</span> ./data            <span class="comment">#挂载共享目录到本地</span></span><br><span class="line">mount -t nfs <span class="number">10.0</span>.<span class="number">10.85</span><span class="symbol">:/www/wiki/uploads</span> ./uploads</span><br></pre></td></tr></table></figure>
+<p><a href="http://www.elain.org/?attachment_id=560"><img src="http://www.elain.org/wp-content/uploads/2011/11/32.png" alt=""></a>上图提示，挂载成功！！<br>回到BAK服务器上操作</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /www/wiki/</span><br><span class="line">scp <span class="number">10.0</span>.<span class="number">10.84</span><span class="symbol">:/www/htdocs/wiki/data</span>.tar.gz ./</span><br><span class="line">scp <span class="number">10.0</span>.<span class="number">10.84</span><span class="symbol">:/www/htdocs/wiki/uploads</span>.tar.gz ./</span><br><span class="line">tar zxvf data.tar.gz</span><br><span class="line">tar zxvf uploads.tar.gz</span><br></pre></td></tr></table></figure>
 <p>#以上操作是把LNMP上打包的目录拷贝回来，解压到相应目录。</p>
 <p>LNMP上操作<br>用 ls 命令查看，发现目录里都有文件<a href="http://www.elain.org/?attachment_id=561"><img src="http://www.elain.org/wp-content/uploads/2011/11/42-640x96.png" alt=""></a></p>
 <p>启动nginx，用浏览器访问 <a href="http://wiki.cgzg.net" target="_blank" rel="external">http://wiki.cgzg.net</a></p>
 <p><a href="http://www.elain.org/?attachment_id=562"><img src="http://www.elain.org/wp-content/uploads/2011/11/52.png" alt=""></a>看到图片都正常显示，即NFS 部署网站附件、图片到BAK服务器成功！！<br>作为发布程序的BAK服务器，还需有直接发送数据到WEB服务器上的功能，这里使用ssh 无密码登录验证技术实现。</p>
 <p>首先在要添加信任关系的每台服务器上修改hosts文件<br>vi /etc/hosts<br>在下面添加：<br>把各服务器的IP和主机名一一对应添加,注意区分大小写<a href="http://www.elain.org/?attachment_id=563"><img src="http://www.elain.org/wp-content/uploads/2011/11/61.png" alt=""></a></p>
-<p>LAMP上操作<br>建立rsa key<br>[ccWN lang=”bash” width=”99%” height=”100%”]ssh-keygen -t dsa         #直接一路回车<br>cd /root/.ssh/<br>mv id_dsa.pub authorized.keys    #修改公钥[/ccWN]</p>
-<p>BAK上操作<br>建立rsa key<br>[ccWN lang=”bash” width=”99%” height=”100%”]ssh-keygen -t dsa         #直接一路回车<br>cd /root/.ssh/<br>cat id_dsa.pub[/ccWN]<br>把BAK里id_dsa.pub里的密钥复制 到 LAMP的authorized_keys里 即可。<br>登陆验证<br>[ccWN lang=”bash” width=”99%” height=”100%”]ssh lamp[/ccWN]<br>此时，已经无需输入密码了。</p>
+<p>LAMP上操作<br>建立rsa key</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t dsa         #直接一路回车</span><br><span class="line">cd /root/.ssh/</span><br><span class="line">mv id_dsa<span class="class">.pub</span> authorized<span class="class">.keys</span>    #修改公钥</span><br></pre></td></tr></table></figure>
+<p>BAK上操作<br>建立rsa key</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t dsa         <span class="comment">#直接一路回车</span></span><br><span class="line"><span class="built_in">cd</span> /root/.ssh/</span><br><span class="line">cat id_dsa.pub</span><br></pre></td></tr></table></figure>
+<p>把BAK里id_dsa.pub里的密钥复制 到 LAMP的authorized_keys里 即可。<br>登陆验证</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">ssh</span> lamp</span><br></pre></td></tr></table></figure>
+<p>此时，已经无需输入密码了。</p>
 <p>注：关于无密码验证可参考本人另一篇文章：<a href="http://www.elain.org/?p=275">http://www.elain.org/?p=275</a></p>
-<p>LNMP上操作<br>建立rsa key<br>[ccWN lang=”bash” width=”99%” height=”100%”]ssh-keygen -t dsa         #直接一路回车<br>cd /root/.ssh/<br>mv id_dsa.pub authorized.keys    #修改公钥[/ccWN]<br>把BAK里id_dsa.pub里的密钥复制 到 LNMP的authorized_keys里 即可。<br>在BAK主机上登陆验证<br>[ccWN lang=”bash” width=”99%” height=”100%”]ssh lnmp[/ccWN]<br>其它服务器都依次做即可！<br>这时发现  bak 既可以登录lamp，又可以登录lnmp<br>DB 服务器同理操作即可，这里就不一一操作了</p>
-<p>MYSQL 数据备份，通常我们在从服务器上备份<br>在db2上备份3306的数据<br>[ccWN lang=”bash” width=”99%” height=”100%”]mkdir –p /www/data<br>mysqldump -uroot -p’’elain’’ -S /data/3306/mysql.sock wiki |gzip &gt;/www/data/www<em><code>/bin/date +%Y%m%d%H%M</code>.sql.gz[/ccWN]<br>在db1上备份3307的数据<br>[ccWN lang=”bash” width=”99%” height=”100%”]mkdir –p /www/data<br>mysqldump -uroot -p’’elain’’ -S /data/3307/mysql.sock blog |gzip &gt;/www/data/bbs</em><code>/bin/date +%Y%d%m%H%M</code>.sql.gz[/ccWN]</p>
-<p>在各DB上做好定时任务<br>在db1上<br>[ccWN lang=”bash” width=”99%” height=”100%”]Crontab –e<br>00 04 <em> </em> <em> mysqldump -uroot -p’’elain’’ -S /data/3307/mysql.sock blog |gzip &gt;/www/data/blog<em><code>/bin/date +%Y%d%m%H%M</code></em>.sql.gz[/ccWN]<br>在db2上<br>[ccWN lang=”bash” width=”99%” height=”100%”]00 04 </em> <em> </em> mysqldump -uroot -p’’elain’’ -S /data/3306/mysql.sock wiki |gzip &gt;/www/data/www_<code>/bin/date +%Y%m%d%H%M</code>.sql.gz[/ccWN]</p>
-<p>接下来就是做定时任务，把备份好的数据按时传送到bak服务器上<br>[ccWN lang=”bash” width=”99%” height=”100%”]rpm -qa |grep rsync                  #检查系统是否安装（默认一般都已安装）[/ccWN]</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]rsync -avzrtopg –delete –progress  web01:/www/data/  /backup/data/mysql/bbs[/ccWN]</p>
-<p>#对lamp上的MYSQL备份执行增量备份到BAK服务器上<br>[ccWN lang=”bash” width=”99%” height=”100%”]rsync -avzrtopg –delete –progress  web02:/www/data/  /backup/data/mysql/www[/ccWN]</p>
+<p>LNMP上操作<br>建立rsa key</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t dsa         #直接一路回车</span><br><span class="line">cd /root/.ssh/</span><br><span class="line">mv id_dsa<span class="class">.pub</span> authorized<span class="class">.keys</span>    #修改公钥</span><br></pre></td></tr></table></figure>
+<p>把BAK里id_dsa.pub里的密钥复制 到 LNMP的authorized_keys里 即可。<br>在BAK主机上登陆验证</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">ssh</span> lnmp</span><br></pre></td></tr></table></figure>
+<p>其它服务器都依次做即可！<br>这时发现  bak 既可以登录lamp，又可以登录lnmp<br>DB 服务器同理操作即可，这里就不一一操作了</p>
+<p>MYSQL 数据备份，通常我们在从服务器上备份<br>在db2上备份3306的数据</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir –p <span class="regexp">/www/</span>data</span><br><span class="line">mysqldump -uroot -p<span class="string">''</span>elain<span class="string">''</span> -S <span class="regexp">/data/</span><span class="number">3306</span><span class="regexp">/mysql.sock wiki |gzip &gt;/</span>www<span class="regexp">/data/</span>www_`<span class="regexp">/bin/</span>date +%Y%m%d%H%M`.sql.gz</span><br></pre></td></tr></table></figure>
+<p>在db1上备份3307的数据</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir –p <span class="regexp">/www/</span>data</span><br><span class="line">mysqldump -uroot -p<span class="string">''</span>elain<span class="string">''</span> -S <span class="regexp">/data/</span><span class="number">3307</span><span class="regexp">/mysql.sock blog |gzip &gt;/</span>www<span class="regexp">/data/</span>bbs_`<span class="regexp">/bin/</span>date +%Y%d%m%H%M`.sql.gz</span><br></pre></td></tr></table></figure>
+<p>在各DB上做好定时任务<br>在db1上</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Crontab –e</span><br><span class="line"><span class="number">00</span> <span class="number">04</span> * * * mysqldump -uroot -p<span class="string">''</span>elain<span class="string">''</span> -S /data/<span class="number">3307</span>/mysql.sock blog |gzip &gt;/www/data/blog<span class="number">_</span>`/bin/date +<span class="decorator">%Y</span><span class="decorator">%d</span><span class="decorator">%m</span><span class="decorator">%H</span><span class="decorator">%M</span>`<span class="number">_</span>.sql.gz</span><br></pre></td></tr></table></figure>
+<p>在db2上</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">00</span> <span class="number">04</span> * * * mysqldump -uroot -p<span class="string">''</span>elain<span class="string">''</span> -S /data/<span class="number">3306</span>/mysql.sock wiki |gzip &gt;/www/data/www<span class="number">_</span>`/bin/date +<span class="decorator">%Y</span><span class="decorator">%m</span><span class="decorator">%d</span><span class="decorator">%H</span><span class="decorator">%M</span>`.sql.gz</span><br></pre></td></tr></table></figure>
+<p>接下来就是做定时任务，把备份好的数据按时传送到bak服务器上</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa |<span class="keyword">grep</span> rsync                  <span class="comment">#检查系统是否安装（默认一般都已安装）</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzrtopg --<span class="keyword">delete</span> --progress  web01:<span class="regexp">/www/</span>data<span class="regexp">/  /</span>backup<span class="regexp">/data/my</span>sql<span class="regexp">/bbs</span></span><br></pre></td></tr></table></figure>
+<p>#对lamp上的MYSQL备份执行增量备份到BAK服务器上</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzrtopg --<span class="keyword">delete</span> --progress  web02:<span class="regexp">/www/</span>data<span class="regexp">/  /</span>backup<span class="regexp">/data/my</span>sql<span class="regexp">/www</span></span><br></pre></td></tr></table></figure>
 <p>#对lnmp上的MYSQL备份执行增量备份到BAK服务器上</p>
-<p>做成定时任务为：<br>在bak服务器上<br>[ccWN lang=”bash” width=”99%” height=”100%”]crontab –e<br>30 04 <em> </em> <em>  rsync -avzrtopg –delete –progress  web01:/www/data/  /backup/data/mysql/bbs<br>00 05 </em> <em> </em>  rsync -avzrtopg –delete –progress  web02:/www/data/  /backup/data/mysql/www[/ccWN]</p>
+<p>做成定时任务为：<br>在bak服务器上</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">crontab –e</span><br><span class="line"><span class="number">30</span> <span class="number">04</span> * * *  rsync -avzrtopg --delete --progress  <span class="string">web01:</span><span class="regexp">/www/</span>data<span class="regexp">/  /</span>backup<span class="regexp">/data/</span>mysql/bbs</span><br><span class="line"><span class="number">00</span> <span class="number">05</span> * * *  rsync -avzrtopg --delete --progress  <span class="string">web02:</span><span class="regexp">/www/</span>data<span class="regexp">/  /</span>backup<span class="regexp">/data/</span>mysql/www</span><br></pre></td></tr></table></figure>
 <p>到此，所有服务器都已经部署完毕，望大家学业有成！<br>作者：elain         MSN:elain2012@hotmail.com<br>个人博客:<a href="http://www.elain.org">http://www.elain.org</a><br>成功中国网   <a href="http://www.cgzg.net/" target="_blank" rel="external">http://www.cgzg.net/</a><br>2010年08月27日于北京</p>
 
       
@@ -318,7 +351,7 @@
         <p><span>本文标题:</span><a href="/2011/11/29/'[跟我学中小企业架构部署]之八：备份服务器部署'/">[跟我学中小企业架构部署]之八：备份服务器部署</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年11月29日 - 11时25分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 13时53分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/11/29/'[跟我学中小企业架构部署]之八：备份服务器部署'/" title="[跟我学中小企业架构部署]之八：备份服务器部署">http://www.elain.org/2011/11/29/&#39;[跟我学中小企业架构部署]之八：备份服务器部署&#39;/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/11/29/&#39;[跟我学中小企业架构部署]之八：备份服务器部署&#39;/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

@@ -6,18 +6,27 @@
   <title>CentOS下nagios报警飞信部署四步走 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="今天 帮群里一兄弟配了下nagios上的飞信，这个东西 我个人感觉很是很实用的，不过好久没配了，今天配置了一遍，顺便 就把过程记录下来了，供大家学习！！！
-一、安装飞信[ccWN lang=”bash” width=”99%” height=”100%”]cd /root/toolswget http://ebook.elain.org/tools/fetion20101205.tar.gz [/">
+一、安装飞信
+12cd /root/toolswget http://ebook.elain.org/tools/fetion20101205.tar.gz
+安装步骤略，软件包中有添加要接收报警短信的手机号为飞信好友
+12/usr/local/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS下nagios报警飞信部署四步走">
 <meta property="og:url" content="http://www.elain.org/2011/10/11/CentOS下nagios报警飞信部署四步走/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="今天 帮群里一兄弟配了下nagios上的飞信，这个东西 我个人感觉很是很实用的，不过好久没配了，今天配置了一遍，顺便 就把过程记录下来了，供大家学习！！！
-一、安装飞信[ccWN lang=”bash” width=”99%” height=”100%”]cd /root/toolswget http://ebook.elain.org/tools/fetion20101205.tar.gz [/">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+一、安装飞信
+12cd /root/toolswget http://ebook.elain.org/tools/fetion20101205.tar.gz
+安装步骤略，软件包中有添加要接收报警短信的手机号为飞信好友
+12/usr/local/">
+<meta property="og:updated_time" content="2016-02-03T05:54:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS下nagios报警飞信部署四步走">
 <meta name="twitter:description" content="今天 帮群里一兄弟配了下nagios上的飞信，这个东西 我个人感觉很是很实用的，不过好久没配了，今天配置了一遍，顺便 就把过程记录下来了，供大家学习！！！
-一、安装飞信[ccWN lang=”bash” width=”99%” height=”100%”]cd /root/toolswget http://ebook.elain.org/tools/fetion20101205.tar.gz [/">
+一、安装飞信
+12cd /root/toolswget http://ebook.elain.org/tools/fetion20101205.tar.gz
+安装步骤略，软件包中有添加要接收报警短信的手机号为飞信好友
+12/usr/local/">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -278,14 +287,20 @@
       
           
         <p>今天 帮群里一兄弟配了下nagios上的飞信，这个东西 我个人感觉很是很实用的，不过好久没配了，今天配置了一遍，顺便 就把过程记录下来了，供大家学习！！！</p>
-<p>一、安装飞信<br>[ccWN lang=”bash” width=”99%” height=”100%”]cd /root/tools<br>wget <a href="http://ebook.elain.org/tools/fetion20101205.tar.gz" target="_blank" rel="external">http://ebook.elain.org/tools/fetion20101205.tar.gz</a> [/ccWN]<br>安装步骤略，软件包中有<br>添加要接收报警短信的手机号为飞信好友<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>/usr/local/fetion/fetion –mobile=137xxxxxxxx –pwd=1111111 –to=138xxxxxxxx –msg-type=1 –msg-utf8=”The Fetion test is ok”</p>
-<p>[/ccWN]</p>
+<p>一、安装飞信</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="regexp">/root/</span>tools</span><br><span class="line">wget <span class="string">http:</span><span class="comment">//ebook.elain.org/tools/fetion20101205.tar.gz</span></span><br></pre></td></tr></table></figure>
+<p>安装步骤略，软件包中有<br>添加要接收报警短信的手机号为飞信好友</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/usr/local/fetion/fetion</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">mobile=137xxxxxxxx</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">pwd=1111111</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">to=138xxxxxxxx</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">msg</span><span class="literal">-</span><span class="comment">type=1</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">msg</span><span class="literal">-</span><span class="comment">utf8="The</span> <span class="comment">Fetion</span> <span class="comment">test</span> <span class="comment">is</span> <span class="comment">ok"</span></span><br></pre></td></tr></table></figure>
 <p>注：第一次要输入验证码，生成验证码后，另开一终端把图片下载下来，打开查看，注意区分大小写！！！</p>
-<p>二、vi commands.cfg  添加<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>define command{<br>command_name notify-host-by-fetion<br>command_line /usr/local/fetion/fetion –mobile=137xxxxxxxx –pwd=1111111 –to=138xxxxxxxx –msg-type=1 –msg-utf8=”<strong> $NOTIFICATIONTYPE$ Host Alert: $HOSTNAME$ is $HOSTSTATE$ </strong>“<br>}</p>
-<p>define command{<br>command_name notify-service-by-fetion<br>command_line /usr/local/fetion/fetion –mobile=137xxxxxxxx –pwd=1111111 –to=138xxxxxxxx –msg-type=1 –msg-utf8=”<strong>$NOTIFICATIONTYPE$\n\nService: $SERVICEDESC$\nHost: $HOSTALIAS$\nAddress: $HOSTADDRESS$\nState: $SERVICESTATE$\n\nDate/Time: $LONGDATETIME$\n\nAdditional Info:\n\n$SERVICEOUTPUT$ </strong>“<br>}<br>[/ccWN]<br><a id="more"></a><br>三、vi templates.cfg<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>define contact{<br>…………<br>service_notification_commands   notify-service-by-fetion<br>host_notification_commands      notify-host-by-fetion<br>…………<br>}<br>[/ccWN]</p>
-<p>四、 vi contacts.cfg<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>define contact {<br>contact_name                   elain<br>alias                          sa<br>service_notification_period    24x7<br>host_notification_period       24x7<br>service_notification_options   w,u,c,r<br>host_notification_options      d,u,r<br>service_notification_commands  notify-service-by-email,service-notify-by-fetion<br>host_notification_commands     notify-host-by-email,host-notify-by-fetion<br>email                          elain2012@hotmail.com<br>pager                          138xxxxxxxx<br>}<br>[/ccWN]<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<p>/etc/init.d/nagios  checkconfig    #检查配置文件 正确性</p>
-<p>/etc/nit.d/nagios reload                 #重新加载配置文件<br>[/ccWN]<br>停服务做测试！！！</p>
+<p>二、vi commands.cfg  添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">define <span class="built_in">command</span>&#123;</span><br><span class="line"><span class="built_in">command</span>_name notify-host-by-fetion</span><br><span class="line"><span class="built_in">command</span>_line /usr/<span class="built_in">local</span>/fetion/fetion --mobile=<span class="number">137</span>xxxxxxxx --pwd=<span class="number">1111111</span> --to=<span class="number">138</span>xxxxxxxx --msg-type=<span class="number">1</span> --msg-utf8=<span class="string">"** <span class="variable">$NOTIFICATIONTYPE</span>$ Host Alert: <span class="variable">$HOSTNAME</span>$ is <span class="variable">$HOSTSTATE</span>$ **"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">define <span class="built_in">command</span>&#123;</span><br><span class="line"><span class="built_in">command</span>_name notify-service-by-fetion</span><br><span class="line"><span class="built_in">command</span>_line /usr/<span class="built_in">local</span>/fetion/fetion --mobile=<span class="number">137</span>xxxxxxxx --pwd=<span class="number">1111111</span> --to=<span class="number">138</span>xxxxxxxx --msg-type=<span class="number">1</span> --msg-utf8=<span class="string">"**<span class="variable">$NOTIFICATIONTYPE</span>$\n\nService: <span class="variable">$SERVICEDESC</span>$\nHost: <span class="variable">$HOSTALIAS</span>$\nAddress: <span class="variable">$HOSTADDRESS</span>$\nState: <span class="variable">$SERVICESTATE</span>$\n\nDate/Time: <span class="variable">$LONGDATETIME</span>$\n\nAdditional Info:\n\n<span class="variable">$SERVICEOUTPUT</span>$ **"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>三、vi templates.cfg</p>
+<figure class="highlight mizar"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">define</span> contact&#123;</span><br><span class="line">…………</span><br><span class="line">service_notification_commands   notify-service-<span class="keyword">by</span>-fetion</span><br><span class="line">host_notification_commands      notify-host-<span class="keyword">by</span>-fetion</span><br><span class="line">…………</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>四、 vi contacts.cfg</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">define contact &#123;</span><br><span class="line">contact_name                   elain</span><br><span class="line">alias                          <span class="keyword">sa</span></span><br><span class="line">service_notification_period    24x7</span><br><span class="line">host_notification_period       24x7</span><br><span class="line">service_notification_options   w,<span class="keyword">u</span>,c,<span class="literal">r</span></span><br><span class="line">host_notification_options      <span class="keyword">d</span>,<span class="keyword">u</span>,<span class="literal">r</span></span><br><span class="line">service_notification_commands  notify-service-<span class="keyword">by</span>-email,service-notify-<span class="keyword">by</span>-fetion</span><br><span class="line">host_notification_commands     notify-host-<span class="keyword">by</span>-email,host-notify-<span class="keyword">by</span>-fetion</span><br><span class="line">email                          elain2012@hotmail.com</span><br><span class="line">pager                          138xxxxxxxx</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="sqf">/etc/init.d/nagios  checkconfig    <span class="preprocessor">#检查配置文件 正确性</span></span><br><span class="line"></span><br><span class="line">/etc/nit.d/nagios <span class="built_in">reload</span>                 <span class="preprocessor">#重新加载配置文件</span></span></span><br></pre></td></tr></table></figure>
+<p>停服务做测试！！！</p>
 
       
     </div>
@@ -297,7 +312,7 @@
         <p><span>本文标题:</span><a href="/2011/10/11/CentOS下nagios报警飞信部署四步走/">CentOS下nagios报警飞信部署四步走</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年10月11日 - 21时56分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 13时54分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/10/11/CentOS下nagios报警飞信部署四步走/" title="CentOS下nagios报警飞信部署四步走">http://www.elain.org/2011/10/11/CentOS下nagios报警飞信部署四步走/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/10/11/CentOS下nagios报警飞信部署四步走/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

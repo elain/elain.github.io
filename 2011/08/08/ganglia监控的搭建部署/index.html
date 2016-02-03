@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="简述：Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。Ganglia的核心包含gmond、gmetad以及一个Web前端。主要是用来监控系统性能，由RRDTool工具处理数据，并生成相应的的图形显示，以Web方式直观的提供给客户端。如：cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，通过曲线很容易见到每个节点的工作状态，对合理调整、分配系统">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2011/08/111-640x418.png">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ganglia监控的搭建部署">
 <meta name="twitter:description" content="简述：Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。Ganglia的核心包含gmond、gmetad以及一个Web前端。主要是用来监控系统性能，由RRDTool工具处理数据，并生成相应的的图形显示，以Web方式直观的提供给客户端。如：cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，通过曲线很容易见到每个节点的工作状态，对合理调整、分配系统">
@@ -332,9 +332,9 @@ chown -R apache.apache /var/www/html/ganglia
 
 cp gmond/gmond.init /etc/rc.d/init.d/gmond
 </code></pre><p>#开机自启动</p>
-<pre><code>chkconfig&amp;nbsp; gmetad on
+<pre><code>chkconfig  gmetad on
 
-chkconfig&amp;nbsp; gmond on
+chkconfig  gmond on
 </code></pre><p>#被监控端的配置文件</p>
 <pre><code>gmond/gmond -t | tee /usr/local/ganglia/gmond.conf
 </code></pre><p>#生成服务器端的配置文件</p>
@@ -342,7 +342,7 @@ chkconfig&amp;nbsp; gmond on
 </code></pre><p>#存放rrdtool数据的目录</p>
 <pre><code>mkdir -p /var/lib/ganglia/rrds
 
-mkdir -p /var/lib/ganglia/dwoo/&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+mkdir -p /var/lib/ganglia/dwoo/                                                                      
 
 chown apache:apache /var/lib/ganglia/dwoo
 
@@ -375,7 +375,7 @@ chown apache:apache /var/lib/ganglia/rrds
         <p><span>本文标题:</span><a href="/2011/08/08/ganglia监控的搭建部署/">Ganglia监控的搭建部署</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年08月08日 - 13时35分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/08/08/ganglia监控的搭建部署/" title="Ganglia监控的搭建部署">http://www.elain.org/2011/08/08/ganglia监控的搭建部署/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/08/08/ganglia监控的搭建部署/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

@@ -391,8 +391,7 @@
       
           
               <p>系统环境是: CentOS 5.5 x86_64<br>vsftpd有三种用户模式：匿名用户、本地用户、虚拟用户。本次我们来讲解虚拟用户，它的优点是安全性高，便于管理。</p>
-<h1 id="u901A_u8FC7yum_u76F4_u63A5_u5728_u7EBF_u88C5vsftpd_28rpm_u7248_u672C_29"><a href="#u901A_u8FC7yum_u76F4_u63A5_u5728_u7EBF_u88C5vsftpd_28rpm_u7248_u672C_29" class="headerlink" title="通过yum直接在线装vsftpd(rpm版本)"></a>通过yum直接在线装vsftpd(rpm版本)</h1><blockquote>
-<p>yum -y install vsftpd db4-utils</p>
+<h1 id="u901A_u8FC7yum_u76F4_u63A5_u5728_u7EBF_u88C5vsftpd_28rpm_u7248_u672C_29"><a href="#u901A_u8FC7yum_u76F4_u63A5_u5728_u7EBF_u88C5vsftpd_28rpm_u7248_u672C_29" class="headerlink" title="通过yum直接在线装vsftpd(rpm版本)"></a>通过yum直接在线装vsftpd(rpm版本)</h1><p>yum -y install vsftpd db4-utils</p>
 <h1 id="u521B_u5EFAvsftp_u7684_u7CFB_u7EDF_u7528_u6237"><a href="#u521B_u5EFAvsftp_u7684_u7CFB_u7EDF_u7528_u6237" class="headerlink" title="创建vsftp的系统用户"></a>创建vsftp的系统用户</h1><p>useradd vuser -s /sbin/nologin</p>
 <h1 id="u521B_u5EFA_u7CFB_u7EDF_u7528_u6237_u7684_u5217_u8868_2C__u4E00_u884C_u4E00_u4E2A"><a href="#u521B_u5EFA_u7CFB_u7EDF_u7528_u6237_u7684_u5217_u8868_2C__u4E00_u884C_u4E00_u4E2A" class="headerlink" title="创建系统用户的列表, 一行一个"></a>创建系统用户的列表, 一行一个</h1><p>touch /etc/vsftpd/chroot_list<br>
           

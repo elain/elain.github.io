@@ -6,18 +6,30 @@
   <title>MongoDB实战系列之二：MongoDB的常用操作 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="恭祝大家元旦快乐！
-#以服务方式启动mongodb，要求验证[ccWN lang=”bash” width=”99%” height=”100%”]/elain/apps/mongodb/bin/mongod –fork –port 27001 –auth –dbpath /elain/data/mongodb/db/ –logpath /elain/logs/mongodb/mongodb.lo">
+#以服务方式启动mongodb，要求验证
+1/elain/apps/mongodb/bin/mongod --fork --port 27001 --auth --dbpath /elain/data/mongodb/db/ --logpath /elain/logs/mongodb/mongodb.log
+#注：参数中用到的目录需创建
+#停止
+1kill -2 `ps -ef">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MongoDB实战系列之二：MongoDB的常用操作">
 <meta property="og:url" content="http://www.elain.org/2012/01/01/MongoDB实战系列之二：MongoDB的常用操作/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="恭祝大家元旦快乐！
-#以服务方式启动mongodb，要求验证[ccWN lang=”bash” width=”99%” height=”100%”]/elain/apps/mongodb/bin/mongod –fork –port 27001 –auth –dbpath /elain/data/mongodb/db/ –logpath /elain/logs/mongodb/mongodb.lo">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+#以服务方式启动mongodb，要求验证
+1/elain/apps/mongodb/bin/mongod --fork --port 27001 --auth --dbpath /elain/data/mongodb/db/ --logpath /elain/logs/mongodb/mongodb.log
+#注：参数中用到的目录需创建
+#停止
+1kill -2 `ps -ef">
+<meta property="og:updated_time" content="2016-02-03T06:19:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB实战系列之二：MongoDB的常用操作">
 <meta name="twitter:description" content="恭祝大家元旦快乐！
-#以服务方式启动mongodb，要求验证[ccWN lang=”bash” width=”99%” height=”100%”]/elain/apps/mongodb/bin/mongod –fork –port 27001 –auth –dbpath /elain/data/mongodb/db/ –logpath /elain/logs/mongodb/mongodb.lo">
+#以服务方式启动mongodb，要求验证
+1/elain/apps/mongodb/bin/mongod --fork --port 27001 --auth --dbpath /elain/data/mongodb/db/ --logpath /elain/logs/mongodb/mongodb.log
+#注：参数中用到的目录需创建
+#停止
+1kill -2 `ps -ef">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -274,51 +286,57 @@
       
           
         <p>恭祝大家元旦快乐！</p>
-<p>#以服务方式启动mongodb，要求验证<br>[ccWN lang=”bash” width=”99%” height=”100%”]/elain/apps/mongodb/bin/mongod –fork –port 27001 –auth –dbpath /elain/data/mongodb/db/ –logpath /elain/logs/mongodb/mongodb.log[/ccWN]</p>
+<p>#以服务方式启动mongodb，要求验证</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/elain/</span>apps<span class="regexp">/mongodb/</span>bin<span class="regexp">/mongod --fork --port 27001 --auth --dbpath /</span>elain<span class="regexp">/data/m</span>ongodb<span class="regexp">/db/</span> --logpath <span class="regexp">/elain/</span>logs<span class="regexp">/mongodb/m</span>ongodb.log</span><br></pre></td></tr></table></figure>
 <p>#注：参数中用到的目录需创建</p>
-<p>#停止<br>[ccWN lang=”bash” width=”99%” height=”100%”]kill -2 <code>ps -ef|grep mongod|grep -v grep|awk &#39;&#39;{print $2}&#39;&#39;</code>[/ccWN]</p>
-<p>#验证启动<br>[ccWN lang=”bash” width=”99%” height=”100%”][root@md01 ~]# netstat -ln<br>Active Internet connections (only servers)<br>Proto Recv-Q Send-Q Local Address               Foreign Address             State<br>tcp        0      0 0.0.0.0:28001               0.0.0.0:<em>                   LISTEN<br>tcp        0      0 0.0.0.0:27001               0.0.0.0:</em>                   LISTEN[/ccWN]</p>
+<p>#停止</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -<span class="number">2</span> `ps -ef|grep mongod|grep -v grep|awk <span class="string">''</span>&#123;print <span class="variable">$2</span>&#125;<span class="string">''</span></span><br></pre></td></tr></table></figure>
+<p>`</p>
+<p>#验证启动</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr_selector">[root@md01 ~]</span># <span class="tag">netstat</span> <span class="tag">-ln</span></span><br><span class="line"><span class="tag">Active</span> <span class="tag">Internet</span> <span class="tag">connections</span> (<span class="tag">only</span> <span class="tag">servers</span>)</span><br><span class="line"><span class="tag">Proto</span> <span class="tag">Recv-Q</span> <span class="tag">Send-Q</span> <span class="tag">Local</span> <span class="tag">Address</span>               <span class="tag">Foreign</span> <span class="tag">Address</span>             <span class="tag">State</span></span><br><span class="line"><span class="tag">tcp</span>        0      0 0<span class="class">.0</span><span class="class">.0</span><span class="class">.0</span><span class="pseudo">:28001</span>               0<span class="class">.0</span><span class="class">.0</span><span class="class">.0</span>:*                   <span class="tag">LISTEN</span></span><br><span class="line"><span class="tag">tcp</span>        0      0 0<span class="class">.0</span><span class="class">.0</span><span class="class">.0</span><span class="pseudo">:27001</span>               0<span class="class">.0</span><span class="class">.0</span><span class="class">.0</span>:*                   <span class="tag">LISTEN</span></span><br></pre></td></tr></table></figure>
 <p>还可以通过访问：<a href="http://ip:28001/" target="_blank" rel="external">http://ip:28001/</a>  浏览</p>
-<p>#远程登录：<br>[ccWN lang=”bash” width=”99%” height=”100%”]mongo –host serverip:27001[/ccWN]</p>
-<p>#本机登录：<br>[ccWN lang=”bash” width=”99%” height=”100%”]mongo –port 27001[/ccWN]</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”][root@md01 ~]# mongo –host localhost:27001<br>MongoDB shell version: 2.0.0<br>connecting to: localhost:27001/test</p>
-<blockquote>
-<p>[/ccWN]<a id="more"></a></p>
-</blockquote>
-<p>#获取MongoDB服务器统计信息<br>[ccWN lang=”bash” width=”99%” height=”100%”]&gt; db.runCommand({“serverStatus” : 1})[/ccWN]</p>
-<p>#使用实时监控工具<br>[ccWN lang=”bash” width=”99%” height=”100%”]mongostat -h localhost:27001[/ccWN]</p>
-<p>#查看版本<br>[ccWN lang=”bash” width=”99%” height=”100%”]&gt; db.version()<br>2.0.0[/ccWN]</p>
+<p>#远程登录：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo <span class="comment">--host serverip:27001</span></span><br></pre></td></tr></table></figure>
+<p>#本机登录：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo <span class="comment">--port 27001</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@md01 ~]<span class="preprocessor"># mongo --host localhost:<span class="number">27001</span></span></span><br><span class="line">MongoDB shell version: <span class="number">2.0</span><span class="number">.0</span></span><br><span class="line">connecting to: localhost:<span class="number">27001</span>/test</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>#获取MongoDB服务器统计信息</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.<span class="function"><span class="title">runCommand</span><span class="params">(&#123;<span class="string">"serverStatus"</span> : <span class="number">1</span>&#125;)</span></span></span><br></pre></td></tr></table></figure>
+<p>#使用实时监控工具</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongostat -h localhost:<span class="number">27001</span></span><br></pre></td></tr></table></figure>
+<p>#查看版本</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="tag">db</span><span class="class">.version</span>()</span><br><span class="line">2<span class="class">.0</span><span class="class">.0</span></span><br></pre></td></tr></table></figure>
 <p>用户管理：</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]&gt; db.addUser(“root”,”123456”);    #添加管理员root[/ccWN]</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]&gt; use test<br>switched to db test</p>
-<blockquote>
-<p>db.addUser(“test_w”,”123456”);  #为TEST库添加普通用户test_w[/ccWN]</p>
-</blockquote>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]&gt; use test<br>switched to db test</p>
-<blockquote>
-<p>db.addUser(“test_r”, “123456”, true);   #为TEST库添加只读用户test_r<br>db.system.users.remove({“user”: “test_w”});    #删除名为test_w的用户<br>db.auth(“test_w”, “123456”);            #验证并切换用户身份<br>db.system.users.find();                 #查看当前库的所有用户<br>show users;                             #查看当前库的所有用户[/ccWN]</p>
-</blockquote>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]&gt; use admin</p>
-<blockquote>
-<p>db.runCommand({“buildInfo”:1})          #查看系统信息与mongodb版本[/ccWN]</p>
-</blockquote>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.addUser(<span class="string">"root"</span>,<span class="string">"123456"</span>);    <span class="preprocessor">#添加管理员root</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">use</span> <span class="keyword">test</span></span><br><span class="line">switched to <span class="keyword">db</span> <span class="keyword">test</span></span><br><span class="line">&gt; <span class="keyword">db</span>.addUser(<span class="string">"test_w"</span>,<span class="string">"123456"</span>);  #为<span class="keyword">TEST</span>库添加普通用户test_w</span><br></pre></td></tr></table></figure>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; use test</span><br><span class="line">switched <span class="built_in">to</span> db test</span><br><span class="line">&gt; db.addUser(<span class="string">"test_r"</span>, <span class="string">"123456"</span>, <span class="constant">true</span>);   <span class="comment">#为TEST库添加只读用户test_r</span></span><br><span class="line">&gt; db.<span class="keyword">system</span>.users.remove(&#123;<span class="string">"user"</span>: <span class="string">"test_w"</span>&#125;);    <span class="comment">#删除名为test_w的用户</span></span><br><span class="line">&gt; db.auth(<span class="string">"test_w"</span>, <span class="string">"123456"</span>);            <span class="comment">#验证并切换用户身份</span></span><br><span class="line">&gt; db.<span class="keyword">system</span>.users.find();                 <span class="comment">#查看当前库的所有用户</span></span><br><span class="line">&gt; show users;                             <span class="comment">#查看当前库的所有用户</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; use admin</span><br><span class="line">&gt; db.<span class="function"><span class="title">runCommand</span><span class="params">(&#123;<span class="string">"buildInfo"</span>:<span class="number">1</span>&#125;)</span></span>          #查看系统信息与mongodb版本</span><br></pre></td></tr></table></figure>
 <p>数据管理：</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]&gt;use elain         #建库</p>
-<blockquote>
-<p>db.elain.insert({name:’’elain’’});    #数据插入<br>db.elain.remove({name:’’elain’’});    #数据删除<br>db.elain.remove({name:’’elain’’});    #数据删除(永久删除)<br>show dbs;           #显示数据库<br>show collections;   #显示表<br>db.elain.find();    #数据查询<br>db.elain.findOne(); #只查一行<br>db                  #查看当前所在库<br>db.collection.count();  #统计colleciton的数量<br>db.collection.drop();   #删除此colleciton<br>db.foo.find().count    #某个数据的数量<br>db.deliver_status.dataSize();         #查看collection数据的大小<br>db.deliver_status.stats();            #查看colleciont状态<br>db.deliver_status.totalIndexSize();   #查询所有索引的大小[/ccWN]</p>
-</blockquote>
-<p>#删除数据库<br>[ccWN lang=”bash” width=”99%” height=”100%”]use elain;<br>db.dropDatabase();[/ccWN]</p>
-<p>#修复数据库<br>[ccWN lang=”bash” width=”99%” height=”100%”]db.repairDatabase();[/ccWN]</p>
-<p>#删除表<br>[ccWN lang=”bash” width=”99%” height=”100%”]db.elain.drop();[/ccWN]</p>
-<p>#查看profiling<br>[ccWN lang=”bash” width=”99%” height=”100%”]show profile[/ccWN]</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]&gt;db.test.find({},{“_id”:0});  #不显示id列</p>
-<blockquote>
-<p>db.test.find({‘’name’’:/mp/i});  #正则查找忽略大小写[/ccWN]</p>
-</blockquote>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]db.elain.ensureIndex({“name”:1});        #建立索引<br>db.elain.dropIndex({“name”:1});                #删除索引<br>db.elain.find({“name”:”elain”}).explain();  #查看索引[/ccWN]</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">use</span> <span class="tag">elain</span>         #建库</span><br><span class="line">&gt;<span class="tag">db</span><span class="class">.elain</span><span class="class">.insert</span>(<span class="rules">&#123;<span class="rule"><span class="attribute">name</span>:<span class="value"><span class="string">''</span>elain<span class="string">''</span></span></span></span>&#125;);    #数据插入</span><br><span class="line">&gt;<span class="tag">db</span><span class="class">.elain</span><span class="class">.remove</span>(<span class="rules">&#123;<span class="rule"><span class="attribute">name</span>:<span class="value"><span class="string">''</span>elain<span class="string">''</span></span></span></span>&#125;);    #数据删除</span><br><span class="line">&gt;<span class="tag">db</span><span class="class">.elain</span><span class="class">.remove</span>(<span class="rules">&#123;<span class="rule"><span class="attribute">name</span>:<span class="value"><span class="string">''</span>elain<span class="string">''</span></span></span></span>&#125;);    #数据删除(永久删除)</span><br><span class="line">&gt;<span class="tag">show</span> <span class="tag">dbs</span>;           #显示数据库</span><br><span class="line">&gt;<span class="tag">show</span> <span class="tag">collections</span>;   #显示表</span><br><span class="line">&gt;<span class="tag">db</span><span class="class">.elain</span><span class="class">.find</span>();    #数据查询</span><br><span class="line">&gt;<span class="tag">db</span><span class="class">.elain</span><span class="class">.findOne</span>(); #只查一行</span><br><span class="line">&gt;<span class="tag">db</span>                  #查看当前所在库</span><br><span class="line">&gt;<span class="tag">db</span><span class="class">.collection</span><span class="class">.count</span>();  #统计<span class="tag">colleciton</span>的数量</span><br><span class="line">&gt;<span class="tag">db</span><span class="class">.collection</span><span class="class">.drop</span>();   #删除此<span class="tag">colleciton</span></span><br><span class="line">&gt;<span class="tag">db</span><span class="class">.foo</span><span class="class">.find</span>()<span class="class">.count</span>    #某个数据的数量</span><br><span class="line">&gt;<span class="tag">db</span><span class="class">.deliver_status</span><span class="class">.dataSize</span>();         #查看<span class="tag">collection</span>数据的大小</span><br><span class="line">&gt;<span class="tag">db</span><span class="class">.deliver_status</span><span class="class">.stats</span>();            #查看<span class="tag">colleciont</span>状态</span><br><span class="line">&gt;<span class="tag">db</span><span class="class">.deliver_status</span><span class="class">.totalIndexSize</span>();   #查询所有索引的大小</span><br></pre></td></tr></table></figure>
+<p>#删除数据库</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use elain<span class="comment">;</span></span><br><span class="line">db.dropDatabase()<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>#修复数据库</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">db</span><span class="class">.repairDatabase</span>();</span><br></pre></td></tr></table></figure>
+<p>#删除表</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">db</span><span class="class">.elain</span><span class="class">.drop</span>();</span><br></pre></td></tr></table></figure>
+<p>#查看profiling</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">show</span> profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;db.test.find(&#123;&#125;,&#123;<span class="string">"_id"</span><span class="symbol">:</span><span class="number">0</span>&#125;);  <span class="comment">#不显示id列</span></span><br><span class="line">&gt;db.test.find(&#123;<span class="string">''</span>name<span class="string">''</span><span class="symbol">:/mp/i</span>&#125;);  <span class="comment">#正则查找忽略大小写</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.elain.ensureIndex(&#123;<span class="string">"name"</span>:<span class="number">1</span>&#125;);        <span class="preprocessor">#建立索引</span></span><br><span class="line">db.elain.dropIndex(&#123;<span class="string">"name"</span>:<span class="number">1</span>&#125;);                <span class="preprocessor">#删除索引</span></span><br><span class="line">db.elain.find(&#123;<span class="string">"name"</span>:<span class="string">"elain"</span>&#125;).explain();  <span class="preprocessor">#查看索引</span></span><br></pre></td></tr></table></figure>
 <hr>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]”$lt”          &lt;<br>“$lte”         &lt;=<br>“$gt”          &gt;<br>“$gte”         &gt;=<br>“$ne”          &lt;&gt;<br>“$in”          一个键匹配多个值<br>“$nin”         一个键不匹配多个值<br>$not           不匹配<br>$all           匹配数组全值<br>$size          数组长度<br>$slice         返子集合 {“$slice”:10}  -10   [10,20]<br>.              内嵌文档 {“name.first”：“xxx”}</p>
-<h2 id="24where_*_u901A_u5E38_u60C5_u51B5_u4E0B_u4E0D_u5EFA_u8BAE_u4F7F_u7528_5B/ccWN_5D"><a href="#24where_*_u901A_u5E38_u60C5_u51B5_u4E0B_u4E0D_u5EFA_u8BAE_u4F7F_u7528_5B/ccWN_5D" class="headerlink" title="$where         *通常情况下不建议使用[/ccWN]"></a>$where         *通常情况下不建议使用[/ccWN]</h2><p>备份恢复：<br>数据导出：<br>[ccWN lang=”bash” width=”99%” height=”100%”]/elain/apps/mongodb/bin/mongoexport -h 127.0.0.1:27001 -uroot -p -d elain -c -o elain elain_con.csv[/ccWN]<br>数据导入：<br>[ccWN lang=”bash” width=”99%” height=”100%”]/elain/apps/mongodb/bin/mongoimport -h 127.0.0.1:27001 -uroot -p -d elain -c elain elain_con.csv[/ccWN]<br>备份数据库:<br>[ccWN lang=”bash” width=”99%” height=”100%”]mongodump -h 127.0.0.1:27001 -uroot -p -d elain -o /elain/backup/mongodb[/ccWN]<br>恢复数据库:<br>[ccWN lang=”bash” width=”99%” height=”100%”]mongorestore -h 127.0.0.1:27001 -uroot -p -d elain /elain/backup/mongodb/elain[/ccWN]<br>恢复数据库(恢复前清除已有数据):<br>[ccWN lang=”bash” width=”99%” height=”100%”]mongorestore -h 127.0.0.1:27001 -uroot -p -d elain –drop /elain/backup/mongodb/elain[/ccWN]</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"$lt"</span>          &lt;</span><br><span class="line"><span class="string">"$lte"</span>         &lt;=</span><br><span class="line"><span class="string">"$gt"</span>          &gt;</span><br><span class="line"><span class="string">"$gte"</span>         &gt;=</span><br><span class="line"><span class="string">"$ne"</span>          &lt;&gt;</span><br><span class="line"><span class="string">"$in"</span>          一个键匹配多个值</span><br><span class="line"><span class="string">"$nin"</span>         一个键不匹配多个值</span><br><span class="line"><span class="variable">$not</span>           不匹配</span><br><span class="line"><span class="variable">$all</span>           匹配数组全值</span><br><span class="line"><span class="variable">$size</span>          数组长度</span><br><span class="line"><span class="variable">$slice</span>         返子集合 &#123;<span class="string">"$slice”:10&#125;  -10   [10,20]</span><br><span class="line">.              内嵌文档 &#123;“name.first”：“xxx”&#125;</span><br><span class="line">$where         *通常情况下不建议使用</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>备份恢复：<br>数据导出：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/elain/apps/mongodb/bin/mongoexport -h <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">27001</span> -uroot -p -d elain -c -o elain elain_con.csv</span><br></pre></td></tr></table></figure>
+<p>数据导入：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/elain/apps/mongodb/bin/mongoimport -h <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">27001</span> -uroot -p -d elain -c elain elain_con.csv</span><br></pre></td></tr></table></figure>
+<p>备份数据库:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongodump -h <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">27001</span> -uroot -p -d elain -o /elain/backup/mongodb</span><br></pre></td></tr></table></figure>
+<p>恢复数据库:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongorestore -h <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">27001</span> -uroot -p -d elain /elain/backup/mongodb/elain</span><br></pre></td></tr></table></figure>
+<p>恢复数据库(恢复前清除已有数据):</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongorestore -h <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">27001</span> -uroot -p -d elain --drop /elain/backup/mongodb/elain</span><br></pre></td></tr></table></figure>
 <p>性能测试：<br>备份方面：mongodump的速度和压缩率都最好，每秒125M的数据，压缩率达28%<br>恢复方面：<br>mongoimport速度较快，但不保证数据完整导入<br>mongorestore，速度较慢，比mongoimport慢2.5倍左右，但是根据mongodump导出的数据，可以完整导入数据。</p>
 <p>主从复制常用操作：<br>见本人主从部署文档</p>
 
@@ -332,7 +350,7 @@
         <p><span>本文标题:</span><a href="/2012/01/01/MongoDB实战系列之二：MongoDB的常用操作/">MongoDB实战系列之二：MongoDB的常用操作</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2012年01月01日 - 11时03分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2012/01/01/MongoDB实战系列之二：MongoDB的常用操作/" title="MongoDB实战系列之二：MongoDB的常用操作">http://www.elain.org/2012/01/01/MongoDB实战系列之二：MongoDB的常用操作/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2012/01/01/MongoDB实战系列之二：MongoDB的常用操作/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -368,7 +386,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#24where_*_u901A_u5E38_u60C5_u51B5_u4E0B_u4E0D_u5EFA_u8BAE_u4F7F_u7528_5B/ccWN_5D"><span class="toc-number">1.</span> <span class="toc-text">$where         *通常情况下不建议使用[/ccWN]</span></a></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {

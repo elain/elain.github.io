@@ -33,7 +33,7 @@ cd linux-2.6.38.8
 2.下载热点内核标准配置文件
 
 wget http://vbets.googlecode.com/">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS5.5下升级内核到2.6.38">
 <meta name="twitter:description" content="1.下载内核
@@ -332,7 +332,7 @@ make menuconfig
 
 1)、通过make menuconfig选中以下对应的选项
 
-General setup &amp;ndash;&amp;gt;
+General setup &amp;ndash;&gt;
 
 [*] enable deprecated sysfs features to support old userspace tools
 
@@ -372,11 +372,11 @@ insmod /lib/dm-region-hash.ko
 
 5.从新打包内核
 
-find .|cpio -c -o &amp;gt; ../initrd
+find .|cpio -c -o &gt; ../initrd
 
 cd ../
 
-gzip -9 &amp;lt; initrd &amp;gt; initrd-2.6.38.8.img
+gzip -9 &lt; initrd &gt; initrd-2.6.38.8.img
 
 rm -rf /boot/initrd-2.6.38.8.img
 
@@ -406,7 +406,7 @@ reboot
         <p><span>本文标题:</span><a href="/2011/08/11/CentOS5.5下升级内核到2.6.38/">CentOS5.5下升级内核到2.6.38</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年08月11日 - 09时33分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/08/11/CentOS5.5下升级内核到2.6.38/" title="CentOS5.5下升级内核到2.6.38">http://www.elain.org/2011/08/11/CentOS5.5下升级内核到2.6.38/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/08/11/CentOS5.5下升级内核到2.6.38/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

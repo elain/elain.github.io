@@ -29,7 +29,7 @@ phpMyAdmin-2.11.11-all-languages.tar.gz
 mysql-5.0.56.tar.gz
 
 mcrypt-2.6.8.ta">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Phpmyadmin-MYSQL管理工具安装">
 <meta name="twitter:description" content="简述：phpMyAdmin 是一个用PHP编写的，可以通过 web 方式控制和操作 MySQL 数据库。通过 phpMyAdmin 可以完全对数据库进行操作，例如建立、复制、删除数据等等。
@@ -316,7 +316,7 @@ libmcrypt-2.5.8.tar.gz
 
 mhash-0.9.9.9.tar.bz2
 
-&amp;nbsp;
+
 
 MYSQL安装
 
@@ -369,8 +369,6 @@ cd mysql-5.0.56
 --with-mysqld-ldflags=-all-static \
 
 --with-client-ldflags=-all-static
-
-&amp;nbsp;
 </code></pre><a id="more"></a>
 <pre><code>make
 
@@ -388,7 +386,7 @@ chgrp -R mysql /usr/local/mysql
 
 ps -ef |grep mysql
 
-echo &amp;quot;export PATH=$PATH:/usr/local/mysql/bin/&amp;quot;&amp;gt;&amp;gt;/etc/profile
+echo &amp;quot;export PATH=$PATH:/usr/local/mysql/bin/&amp;quot;&gt;&gt;/etc/profile
 
 source /etc/profile
 
@@ -402,7 +400,7 @@ service mysqld restart
 
 cd ..
 
-&amp;nbsp;
+
 
 mysqladmin -uroot password elain
 
@@ -412,11 +410,11 @@ mysql -uroot -p
 
 yum install -y httpd
 
-&amp;nbsp;
+
 
 yum install -y php*
 
-&amp;nbsp;
+
 
 phpMyAdmin安装
 
@@ -424,13 +422,13 @@ wget http://cdnetworks-kr-2.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/3.4
 
 tar zxvf phpMyAdmin-2.11.11-all-languages.tar.gz
 
-&amp;nbsp;
+
 
 mv phpMyAdmin-2.11.11-all-languages phpmyadmiin
 
 cp -Rf phpmyadmin /var/www/html/
 
-&amp;nbsp;
+
 
 cd /var/www/html/phpmyadmin
 
@@ -438,39 +436,37 @@ cp config.sample.inc.php config.inc.php
 
 vi config.inc.php
 
-&amp;nbsp;
+
 
 17 $cfg[&apos;blowfish_secret&apos;] = &amp;#039;elain&amp;#039;;
 
-&amp;nbsp;
+
 
 31 $cfg[&apos;Servers&apos;][$i][&apos;host&apos;] = &amp;#039;127.0.0.1&amp;#039;;
 
-&amp;nbsp;
+
 
 37 // $cfg[&apos;Servers&apos;][$i][&apos;controluser&apos;] = &amp;#039;root&amp;#039;;
 
-&amp;nbsp;
+
 
 38 // $cfg[&apos;Servers&apos;][$i][&apos;controlpass&apos;] = &amp;#039;elain&amp;#039;;
 
-&amp;nbsp;
+
 
 修改以上四行即可
 
-&amp;nbsp;
+
 
 重启httpd
 
-&amp;nbsp;
 
-用浏览器访问http://ip/phpadmin &amp;nbsp;
+
+用浏览器访问http://ip/phpadmin  
 
 扩展阅读：
 
 http://www.phpmyadmin.net（英文站点）
-
-&amp;nbsp;
 </code></pre>
       
     </div>
@@ -482,7 +478,7 @@ http://www.phpmyadmin.net（英文站点）
         <p><span>本文标题:</span><a href="/2011/09/13/phpmyadmin-MYSQL管理工具安装/">Phpmyadmin-MYSQL管理工具安装</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年09月13日 - 09时19分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/09/13/phpmyadmin-MYSQL管理工具安装/" title="Phpmyadmin-MYSQL管理工具安装">http://www.elain.org/2011/09/13/phpmyadmin-MYSQL管理工具安装/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/09/13/phpmyadmin-MYSQL管理工具安装/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

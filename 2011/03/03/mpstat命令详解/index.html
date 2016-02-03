@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="描述：mpstat是MultiProcessor Statistics的缩写，是实时系统监控工具。其报告与CPU的一些统计信息，这些信息存放在/proc/stat文件中。在多CPUs系统里，其不但能查看所有CPU的平均状况信息，而且能够查看特定CPU的信息。mpstat的语法如下：
 语法：[root@kqzj ~]# mpstat –helpUsage: mpstat [ options… ] [">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mpstat命令详解">
 <meta name="twitter:description" content="描述：mpstat是MultiProcessor Statistics的缩写，是实时系统监控工具。其报告与CPU的一些统计信息，这些信息存放在/proc/stat文件中。在多CPUs系统里，其不但能查看所有CPU的平均状况信息，而且能够查看特定CPU的信息。mpstat的语法如下：
@@ -278,7 +278,7 @@
       
           
         <p>描述：<br>mpstat是MultiProcessor Statistics的缩写，是实时系统监控工具。其报告与CPU的一些统计信息，这些信息存放在/proc/stat文件中。<br>在多CPUs系统里，其不但能查看所有CPU的平均状况信息，而且能够查看特定CPU的信息。mpstat的语法如下：</p>
-<p>语法：<br>[root@kqzj ~]# mpstat –help<br>Usage: mpstat [ options… ] [ &lt;interval&gt; [ &lt;count&gt; ] ]<br>Options are:<br>[ -P { &lt;cpu&gt; | ALL } ] [ -V ]<a id="more"></a></p>
+<p>语法：<br>[root@kqzj ~]# mpstat –help<br>Usage: mpstat [ options… ] [ <interval> [ <count> ] ]<br>Options are:<br>[ -P { <cpu> | ALL } ] [ -V ]<a id="more"></a></cpu></count></interval></p>
 <p>[root@kqzj ~]# mpstat<br>Linux 2.6.18-194.el5 (kqzj)     2011年01月13日<br>23时47分13秒  CPU   %user   %nice    %sys %iowait    %irq   %soft  %steal   %idle    intr/s<br>23时47分13秒  all    0.19    0.02    0.41    0.20    0.09   53.61    0.00   45.48    714.95</p>
 <p>各値详解：<br>%user 在internal时间段里，用户态的CPU时间（%），不包含 nice值为负 进程 (usr/total)<em>100<br>%nice 在internal时间段里，nice值为负进程的CPU时间（%）   (nice/total)</em>100<br>%sys  在internal时间段里，核心时间（%）   (system/total)<em>100<br>%iowait 在internal时间段里，硬盘IO等待时间（%） (iowait/total)</em>100<br>%irq 在internal时间段里，硬中断时间（%）      (irq/total)<em>100<br>%soft 在internal时间段里，软中断时间（%）    (softirq/total)</em>100<br>%idle 在internal时间段里，CPU除去等待磁盘IO操作外的因为任何原因而空闲的时间闲置时间（%）(idle/total)<em>100<br>%intr/s 在internal时间段里，每秒CPU接收的中断的次数intr/total)</em>100</p>
 <p>计算公式：<br>total_cur=user+system+nice+idle+iowait+irq+softirq<br>total_pre=pre_user+ pre_system+ pre_nice+ pre_idle+ pre_iowait+ pre_irq+ pre_softirq<br>user=user_cur – user_pre<br>total=total_cur-total_pre</p>
@@ -299,7 +299,7 @@
         <p><span>本文标题:</span><a href="/2011/03/03/mpstat命令详解/">Mpstat命令详解</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年03月03日 - 00时13分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/03/03/mpstat命令详解/" title="Mpstat命令详解">http://www.elain.org/2011/03/03/mpstat命令详解/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/03/03/mpstat命令详解/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

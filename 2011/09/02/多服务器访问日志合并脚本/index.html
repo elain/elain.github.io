@@ -6,33 +6,33 @@
   <title>多服务器访问日志合并脚本 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="环境：CentOS 5.5 x64
-四台WEB&amp;nbsp; web01&amp;nbsp; web02&amp;nbsp; web03&amp;nbsp; web04
-一台日志服务器&amp;amp;nbsp; log01
+四台WEB  web01  web02  web03  web04
+一台日志服务器  log01
 需求：
 每天定时把四台WEB上的NGINX 访问日志合并后传入给awstats系统分析处理
 
-Info&amp;nbsp;&amp;nbsp; : merge log for many server log# Author">
+Info   : merge log for many server log# Author : dingtm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多服务器访问日志合并脚本">
 <meta property="og:url" content="http://www.elain.org/2011/09/02/多服务器访问日志合并脚本/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="环境：CentOS 5.5 x64
-四台WEB&amp;nbsp; web01&amp;nbsp; web02&amp;nbsp; web03&amp;nbsp; web04
-一台日志服务器&amp;amp;nbsp; log01
+四台WEB  web01  web02  web03  web04
+一台日志服务器  log01
 需求：
 每天定时把四台WEB上的NGINX 访问日志合并后传入给awstats系统分析处理
 
-Info&amp;nbsp;&amp;nbsp; : merge log for many server log# Author">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+Info   : merge log for many server log# Author : dingtm">
+<meta property="og:updated_time" content="2016-02-03T06:19:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多服务器访问日志合并脚本">
 <meta name="twitter:description" content="环境：CentOS 5.5 x64
-四台WEB&amp;nbsp; web01&amp;nbsp; web02&amp;nbsp; web03&amp;nbsp; web04
-一台日志服务器&amp;amp;nbsp; log01
+四台WEB  web01  web02  web03  web04
+一台日志服务器  log01
 需求：
 每天定时把四台WEB上的NGINX 访问日志合并后传入给awstats系统分析处理
 
-Info&amp;nbsp;&amp;nbsp; : merge log for many server log# Author">
+Info   : merge log for many server log# Author : dingtm">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -293,33 +293,30 @@ Info&amp;nbsp;&amp;nbsp; : merge log for many server log# Author">
       
           
         <p>环境：CentOS 5.5 x64</p>
-<p>四台WEB&nbsp; web01&nbsp; web02&nbsp; web03&nbsp; web04</p>
-<pre><code>一台日志服务器&amp;nbsp; log01
+<p>四台WEB  web01  web02  web03  web04</p>
+<pre><code>一台日志服务器  log01
 </code></pre><p>需求：</p>
 <pre><code>每天定时把四台WEB上的NGINX 访问日志合并后传入给awstats系统分析处理
 </code></pre><blockquote>
-<h1 id="Info_26nbsp_3B_26nbsp_3B__3A_merge_log_for_many_server_log"><a href="#Info_26nbsp_3B_26nbsp_3B__3A_merge_log_for_many_server_log" class="headerlink" title="Info&nbsp;&nbsp; : merge log for many server log"></a>Info&nbsp;&nbsp; : merge log for many server log</h1><pre><code># Author : dingtm&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+<h1 id="Info__3A_merge_log_for_many_server_log"><a href="#Info__3A_merge_log_for_many_server_log" class="headerlink" title="Info   : merge log for many server log"></a>Info   : merge log for many server log</h1><pre><code># Author : dingtm                                                                                                    
 
-# CTime&amp;nbsp; : 2011.03.01 &amp;nbsp;
-</code></pre><p>DAY=<code>date -d &amp;#039;-1 day&amp;#039; +%Y/%m/%d</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</p>
-<pre><code>mkdir -p /data/logs/$DAY/merge_logs/&amp;nbsp;&amp;nbsp; #建立合并后的日志文件存放目录
-</code></pre><p>OldLog=/data/logs/$DAY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #各服务器的日志文件，以日期为目录，各服务器主机名为子目录</p>
-<pre><code>NewLog=/data/logs/$DAY/merge_logs&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+# CTime  : 2011.03.01  
+</code></pre><p>DAY=<code>date -d &amp;#039;-1 day&amp;#039; +%Y/%m/%d</code>                                                                 </p>
+<pre><code>mkdir -p /data/logs/$DAY/merge_logs/   #建立合并后的日志文件存放目录
+</code></pre><p>OldLog=/data/logs/$DAY                 #各服务器的日志文件，以日期为目录，各服务器主机名为子目录</p>
+<pre><code>NewLog=/data/logs/$DAY/merge_logs      
 </code></pre><p>for log in access_ebook.elain.org.log access_www.elain.org.log access_blog.elain.org.log access_books.elain.org.log access_bbs.elain.org.log</p>
-<pre><code>&amp;nbsp; do
+<pre><code>  do
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; sort -m -t &amp;quot; &amp;quot; -k 4 -o&amp;nbsp; $NewLog/$log $OldLog/web01/$log $OldLog/web02/$log $OldLog/web03$log $OldLog/web04/$log
+    sort -m -t &amp;quot; &amp;quot; -k 4 -o  $NewLog/$log $OldLog/web01/$log $OldLog/web02/$log $OldLog/web03$log $OldLog/web04/$log
 
 done
 </code></pre></blockquote>
-<p>&nbsp;</p>
 <a id="more"></a>
 <p>注：日志多可以写一个日志文件名列表，在脚本中逐行读此列表即可</p>
-<p>&nbsp;</p>
 <p>脚本见附件下载</p>
 <p><a href="http://www.elain.org/?attachment_id=425">merge_log.sh.tar</a></p>
 <blockquote>
-<p>&nbsp;</p>
 </blockquote>
 
       
@@ -332,7 +329,7 @@ done
         <p><span>本文标题:</span><a href="/2011/09/02/多服务器访问日志合并脚本/">多服务器访问日志合并脚本</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年09月02日 - 13时08分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/09/02/多服务器访问日志合并脚本/" title="多服务器访问日志合并脚本">http://www.elain.org/2011/09/02/多服务器访问日志合并脚本/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/09/02/多服务器访问日志合并脚本/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -368,7 +365,7 @@ done
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Info_26nbsp_3B_26nbsp_3B__3A_merge_log_for_many_server_log"><span class="toc-number">1.</span> <span class="toc-text">Info   : merge log for many server log</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Info__3A_merge_log_for_many_server_log"><span class="toc-number">1.</span> <span class="toc-text">Info   : merge log for many server log</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {

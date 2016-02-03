@@ -27,7 +27,7 @@ CentOS release 5.5 (Final) x64
 IP：10.0.0.110
 #安装部署
 检查是否安装了低版本">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS5.5下SVN部署文档 ">
 <meta name="twitter:description" content="简述：
@@ -306,34 +306,15 @@ IP：10.0.0.110
 <pre><code>CentOS release 5.5 (Final) x64
 </code></pre><p>IP：10.0.0.110</p>
 <p>#安装部署</p>
-<p>检查是否安装了低版本的SVN</p>
-<pre><code>rpm -qa subversion&lt;!--more--&gt;
-
-[root@Svn tools#]rpm -qa subversion
-
-subversion-1.4.2-4.el5_3.1
-
-subversion-1.4.2-4.el5_3.1 subversion-1.4.2-4
-</code></pre><p>#卸载</p>
-<pre><code>yum remove subversion
-</code></pre><p>安装svn</p>
-<pre><code>yum install subversion&amp;nbsp; -y
-</code></pre><p>mkdir -p /elain/data/{svndata,svnpasswd}</p>
-<p>启动SVN服务指定服务的SVN根目录</p>
-<pre><code>svnserve -d&amp;nbsp; -r /elain/data/svndata/ --pid-file=/elain/data/svndata/svn.pid
-</code></pre><p>查看 SVN 进程:</p>
-<pre><code>[root@Svn tools#]ps -ef|grep svn|grep -v grep
-
-root&amp;nbsp;&amp;nbsp; 27543&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 1&amp;nbsp; 0 14:10 ? 00:00:00 svnserve -d -r /elain/data/svndata/ --pid-file=/elain/data/svndata/svn.pid
-</code></pre><p>检测 SVN 端口:</p>
-<pre><code>[root@Svn tools#]netstat -ln |grep 3690
-
-tcp&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 0&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 0 :::3690&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; :::*&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; LISTEN
-</code></pre><p>建立版本库</p>
+<p>检查是否安装了低版本的SVN<br><a id="more"></a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa subversion</span><br><span class="line"></span><br><span class="line">[root@Svn tools<span class="preprocessor">#]rpm -qa subversion</span></span><br><span class="line"></span><br><span class="line">subversion-<span class="number">1.4</span><span class="number">.2</span>-<span class="number">4.</span>el5_3<span class="number">.1</span></span><br><span class="line"></span><br><span class="line">subversion-<span class="number">1.4</span><span class="number">.2</span>-<span class="number">4.</span>el5_3<span class="number">.1</span> subversion-<span class="number">1.4</span><span class="number">.2</span>-<span class="number">4</span></span><br></pre></td></tr></table></figure></p>
+<p>#卸载<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">remove</span> subversion</span><br></pre></td></tr></table></figure></p>
+<p>安装svn<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	yum install subversion  -y</span><br><span class="line"></span><br><span class="line"><span class="title">mkdir</span> -p /elain/<span class="typedef"><span class="keyword">data</span>/<span class="container">&#123;<span class="title">svndata</span>,<span class="title">svnpasswd</span>&#125;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>启动SVN服务指定服务的SVN根目录<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnserve -d  -r <span class="regexp">/elain/</span>data<span class="regexp">/svndata/</span> --pid-<span class="keyword">file</span>=<span class="regexp">/elain/</span>data<span class="regexp">/svndata/</span>svn.pid</span><br></pre></td></tr></table></figure></p>
+<p>查看 SVN 进程:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@Svn tools<span class="preprocessor">#]ps -ef|grep svn|grep -v grep</span></span><br><span class="line"></span><br><span class="line">root   <span class="number">27543</span>     <span class="number">1</span>  <span class="number">0</span> <span class="number">14</span>:<span class="number">10</span> ? <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> svnserve -d -r /elain/data/svndata/ --pid-file=/elain/data/svndata/svn.pid</span><br></pre></td></tr></table></figure></p>
+<p>检测 SVN 端口:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@Svn tools<span class="preprocessor">#]netstat -ln |grep <span class="number">3690</span></span></span><br><span class="line"></span><br><span class="line">tcp        <span class="number">0</span>      <span class="number">0</span> :::<span class="number">3690</span>                     :::*                        LISTEN</span><br></pre></td></tr></table></figure></p>
+<p>建立版本库</p>
 <pre><code>创建一个新的 Subversion 项目 trunk
-
-svnadmin create /elain/data/svndata/trunk
-</code></pre><p>配置允许用户 elain 读写访问</p>
+</code></pre><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="escape">``</span><span class="escape">`	</span>svnadmin create /elain/data/svndata/trunk</span><br><span class="line"></span><br><span class="line">配置允许用户 elain 读写访问</span><br></pre></td></tr></table></figure>
 <p>cd /elain/data/svndata/trunk/conf/</p>
 <pre><code>vi svnserve.conf 修改
 
@@ -352,65 +333,38 @@ svnadmin create /elain/data/svndata/trunk
 /etc/init.d/httpd start
 
 注: svnserve.conf 中每个参数都要顶格写,开头不能有空格。
-</code></pre><p>cp authz passwd /elain/data/svnpasswd/</p>
-<p>authz 的配置:</p>
+</code></pre><p>cp authz passwd /elain/data/svnpasswd/<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">authz</span> 的配置:</span><br></pre></td></tr></table></figure></p>
 <pre><code>cd /elain/data/svnpasswd/
 
 vi authz
-
-添加
-
-#################################
+</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">添加</span><br></pre></td></tr></table></figure>
+<pre><code>#################################
 
 [groups]
 
 #定义组
 
 g_webadmin = elain
-</code></pre><p>#定义目录</p>
+</code></pre><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#定义目录</span></span><br></pre></td></tr></table></figure>
 <pre><code>[trunk:/]
 
 @g_webadmin = rw
-
-#################################
-
-提示:注意 authz 权限格式的写法
-
-1.authz 中每个参数都要顶格写,开头不能有空格。
-
-2.对于组,要@开头,用户不需要@开头。
-</code></pre><p>passwd 文件用户及密码的设置</p>
-<p>vi passwd</p>
-<pre><code>添加：
-
-#######################
+</code></pre><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">###</span><br><span class="line"></span><br><span class="line">	提示:注意 authz 权限格式的写法</span><br><span class="line"></span><br><span class="line">	1.authz 中每个参数都要顶格写,开头不能有空格。</span><br><span class="line"></span><br><span class="line">	2.对于组,要@开头,用户不需要@开头。</span><br><span class="line"></span><br><span class="line">passwd 文件用户及密码的设置</span><br><span class="line"></span><br><span class="line">vi passwd</span><br><span class="line"></span><br><span class="line">	添加：</span></span><br></pre></td></tr></table></figure>
+<pre><code>#######################
 
 # user=passwd
 
 elain=elain
 
 ######################
-
-提示:
-
-1.等号前为 SVN 帐号,等号后为 svn 密码
-
-2.更改 svnserve.conf 时,需要重起 SVN,更改 authz,passwd 文件时不需要重启
-</code></pre><p>重启 SVN 命令&lt;非必需&gt;</p>
+</code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	提示:</span><br><span class="line"></span><br><span class="line">	<span class="number">1.</span>等号前为 SVN 帐号,等号后为 svn 密码</span><br><span class="line"></span><br><span class="line">	<span class="number">2.</span>更改 svnserve.conf 时,需要重起 SVN,更改 authz,passwd 文件时不需要重启</span><br><span class="line"></span><br><span class="line">重启 SVN 命令&lt;非必需&gt;</span><br></pre></td></tr></table></figure>
 <pre><code>kill -USR1 `cat /elain/data/svndata/svn.pid`
 
 svnserve -d -r /elain/data/svndata/ --pid-file=/elain/data/svndata/svn.pid
-
-提示:当更改 svnserve.conf 时,需要重起 SVN,更改 authz,passwd 文件时不需要重起
-</code></pre><p>到此服务器部署完成</p>
-<p>客户端安装</p>
-<p>客户端软件</p>
-<pre><code>TortoiseSVN-1.6.5.16974-win32-svn-1.6.5.msi
-</code></pre><p>连接:</p>
+</code></pre><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	提示:当更改 <span class="tag">svnserve</span><span class="class">.conf</span> 时,需要重起 <span class="tag">SVN</span>,更改 <span class="tag">authz</span>,<span class="tag">passwd</span> 文件时不需要重起</span><br><span class="line"></span><br><span class="line">到此服务器部署完成</span><br><span class="line"></span><br><span class="line">客户端安装</span><br><span class="line"></span><br><span class="line">客户端软件</span><br><span class="line"></span><br><span class="line">	<span class="tag">TortoiseSVN-1</span><span class="class">.6</span><span class="class">.5</span><span class="class">.16974-win32-svn-1</span><span class="class">.6</span><span class="class">.5</span><span class="class">.msi</span></span><br><span class="line"></span><br><span class="line">连接:</span><br></pre></td></tr></table></figure>
 <pre><code>svn://10.0.0.110/trunk
+</code></pre><p>```<br>    用户名 elain 密码 elain</p>
 
-用户名 elain 密码 elain
-</code></pre>
       
     </div>
     
@@ -421,7 +375,7 @@ svnserve -d -r /elain/data/svndata/ --pid-file=/elain/data/svndata/svn.pid
         <p><span>本文标题:</span><a href="/2011/07/22/'CentOS5.5下SVN部署文档'/">CentOS5.5下SVN部署文档 </a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年07月22日 - 17时44分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/07/22/'CentOS5.5下SVN部署文档'/" title="CentOS5.5下SVN部署文档 ">http://www.elain.org/2011/07/22/&#39;CentOS5.5下SVN部署文档&#39;/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/07/22/&#39;CentOS5.5下SVN部署文档&#39;/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

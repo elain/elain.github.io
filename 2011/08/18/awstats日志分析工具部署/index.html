@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="简述：AWStats 是一个免费的强大而有个性的工具,带来先进的网络,流量，FTP或邮件服务器统计图. 本日志分析器作为CGI或从命令行在数个图形网页中显示你日志中包含的所有可能信息. 它利用一部分档案资料就能经常很快地处理大量日志档案, 它能分析日志文件来自从各大服务器工具 ,如 Apache日志档案 s (NCSA combined/XLF/ELF log format or common/C">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2011/08/Screenshot1-640x387.png">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Awstats日志分析工具部署">
 <meta name="twitter:description" content="简述：AWStats 是一个免费的强大而有个性的工具,带来先进的网络,流量，FTP或邮件服务器统计图. 本日志分析器作为CGI或从命令行在数个图形网页中显示你日志中包含的所有可能信息. 它利用一部分档案资料就能经常很快地处理大量日志档案, 它能分析日志文件来自从各大服务器工具 ,如 Apache日志档案 s (NCSA combined/XLF/ELF log format or common/C">
@@ -283,8 +283,8 @@
 <pre><code>LAMP 环境部署 (略过)
 
 PS：本人建议部署什么业务的服务器根据不同的业务选择主辅，比如部署WEB，那我会选择LEMP或LAMP源码安装，安装时加适当的优化;若部署监控系统，我会选择LAMP或LEMP用yum安装方式，因为在监控系统上WEB环境无需花太多时间去调优，默认即可，提高工作效率！
-</code></pre><p>apache网站根目录&nbsp; /elain/data/htdocs</p>
-<pre><code>apache运行用户与组&amp;nbsp; www www
+</code></pre><p>apache网站根目录  /elain/data/htdocs</p>
+<pre><code>apache运行用户与组  www www
 </code></pre><p>安装前准备：</p>
 <pre><code>yum -y install perl perl-URI perl-Geo-IP perl-Geo-IP-PurePerl perl-Geo-IPfree geoip perl-Net-XWhois
 </code></pre><a id="more"></a>
@@ -299,7 +299,7 @@ mv awstats-7.0 /elain/data/htdocs/awstats
 </code></pre><p>#建立awstats日志路径</p>
 <pre><code>mkdir /data/logs/awstats
 
-chown -R www.www&amp;nbsp; /data/logs/awstats
+chown -R www.www  /data/logs/awstats
 
 cd /elain/data/htdocs
 
@@ -311,7 +311,7 @@ cd awstats/tools
 
 按步骤输入
 
-/elain/apps/httpd/conf/httpd.conf&amp;nbsp; &amp;nbsp;
+/elain/apps/httpd/conf/httpd.conf   
 
 输入Y
 
@@ -319,22 +319,22 @@ cd awstats/tools
 
 其它默认即可
 </code></pre><p>系统集成</p>
-<pre><code>ln -s /elain/data/htdocs/awstats/tools/*.pl&amp;nbsp; /usr/local/bin
+<pre><code>ln -s /elain/data/htdocs/awstats/tools/*.pl  /usr/local/bin
 </code></pre><p>配置awstats</p>
 <pre><code>至此为止，利用awsats_configure.pl脚本进行安装的工作已经完成，接下来手动编辑配置文件，修改如下选项
 
 vi /elain/data/htdocs/awstats/conf/awstats.www.elain.org.conf
 
-LogFile=&amp;quot;/var/log/httpd/mylog.log&amp;quot;&amp;nbsp; (约51行)
+LogFile=&amp;quot;/var/log/httpd/mylog.log&amp;quot;  (约51行)
 
 修改为
 
 LogFile=&amp;quot;/data/logs/nginx/access_www.elain.org_20110316.log&amp;quot;
-</code></pre><p>DirData=&quot;/var/logs/awstats&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; （约203行）</p>
+</code></pre><p>DirData=&quot;/var/logs/awstats&quot;          （约203行）</p>
 <pre><code>修改为
 
 DirData=&amp;quot;/data/logs/awstats/&amp;quot;
-</code></pre><p>AllowToUpdateStatsFromBrowser=0&nbsp; （约239行）</p>
+</code></pre><p>AllowToUpdateStatsFromBrowser=0  （约239行）</p>
 <pre><code>修改为
 
 AllowToUpdateStatsFromBrowser=1
@@ -351,11 +351,11 @@ cp awstats.www.elain.org.conf awstats.ebook.elain.org.conf
 </code></pre><p>WEB访问</p>
 <pre><code>http://awstats.elain.net/awstats/awstats.pl?config=ebook.elain.org
 </code></pre><p>添加定时任务</p>
-<pre><code># Info&amp;nbsp;&amp;nbsp; : 每天定时分析日志
+<pre><code># Info   : 每天定时分析日志
 
 # Author : dingtm
 
-# CTime&amp;nbsp; : 2011.06.13
+# CTime  : 2011.06.13
 
 00 08 * * * /root/scripts/awstats.sh
 </code></pre><p>cat /root/scripts/awstats.sh</p>
@@ -365,37 +365,37 @@ cp awstats.www.elain.org.conf awstats.ebook.elain.org.conf
 </code></pre><p>/elain/data/htdocs/awstats/wwwroot/cgi-bin/awstats.pl -update -config=www.elain.org</p>
 <pre><code>/elain/data/htdocs/awstats/wwwroot/cgi-bin/awstats.pl -update -config=ebook.elain.org
 </code></pre><p>如果有多个站点可以使用awstats提供的批量更新状态的程序</p>
-<pre><code>00 08 * * * /elain/data/htdocs/awstats/tools/awstats_updateall.pl now 2&amp;gt;&amp;amp;1&amp;gt;/dev/null
+<pre><code>00 08 * * * /elain/data/htdocs/awstats/tools/awstats_updateall.pl now 2&gt;&amp;amp;1&gt;/dev/null
 </code></pre><p>设置awstats安全登录</p>
 <pre><code>htpasswd -c /etc/httpd/awstatspass awstats
 </code></pre><p>#apache 安全配置</p>
 <pre><code>vi /etc/httpd/conf/httpd.conf
 
-&amp;lt;Directory &amp;quot;/elain/data/htdocs/awstats/wwwroot&amp;quot;&amp;gt;
+&lt;Directory &amp;quot;/elain/data/htdocs/awstats/wwwroot&amp;quot;&gt;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; AllowOverride None
+    AllowOverride None
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; Order allow,deny
+    Order allow,deny
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; Allow from all
+    Allow from all
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; Options IncludesNoExec
+    Options IncludesNoExec
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; AuthType Basic
+    AuthType Basic
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; AuthName &amp;quot;The elain Awstats Web Login&amp;quot;
+    AuthName &amp;quot;The elain Awstats Web Login&amp;quot;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; AuthUserFile &amp;quot;/etc/httpd/awstatspass&amp;quot;
+    AuthUserFile &amp;quot;/etc/httpd/awstatspass&amp;quot;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; Require User awstats
+    Require User awstats
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; AllowOverride None
+    AllowOverride None
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; Order allow,deny
+    Order allow,deny
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; Allow from 10.0.0.0/24
+    Allow from 10.0.0.0/24
 
-&amp;lt;/Directory&amp;gt;
+&lt;/Directory&gt;
 </code></pre><p>重新启动apache</p>
 <pre><code>/etc/init.d/httpd restart
 </code></pre><p>访问awstats页面</p>
@@ -407,9 +407,7 @@ cp awstats.www.elain.org.conf awstats.ebook.elain.org.conf
 </code></pre><p>Error: Couldn&#39;t open config file &quot;awstats.wappig.com.conf&quot; nor &quot;awstats.conf&quot; after searching in path &quot;wwwroot/cgi-bin,/etc/awstats,/usr/local/etc/awstats,/etc,/etc/opt/awstats&quot;: No such file or directory</p>
 <pre><code>处理方法：
 </code></pre><p>修改 vi wwwroot/cgi-bin/awstats.pl 1715行修改为：</p>
-<pre><code>1715&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;quot;/elain/data/htdocs/awstats/conf&amp;quot;,
-
-&amp;nbsp;
+<pre><code>1715                         &amp;quot;/elain/data/htdocs/awstats/conf&amp;quot;,
 </code></pre>
       
     </div>
@@ -421,7 +419,7 @@ cp awstats.www.elain.org.conf awstats.ebook.elain.org.conf
         <p><span>本文标题:</span><a href="/2011/08/18/awstats日志分析工具部署/">Awstats日志分析工具部署</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年08月18日 - 10时48分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/08/18/awstats日志分析工具部署/" title="Awstats日志分析工具部署">http://www.elain.org/2011/08/18/awstats日志分析工具部署/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/08/18/awstats日志分析工具部署/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

@@ -8,7 +8,7 @@
   <meta name="description" content="简述：MongoDB是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。
 环境：CentOS 5.5 x64
 安装：
-[ccWN lang=”bash” width=”99%” height=”100%”]cd /root/toolswget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64">
+123456cd /root/toolswget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.0.0.tgztar zxvf mongodb-linux-x86_6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MongoDB实战系列之一：MongoDB安装部署">
 <meta property="og:url" content="http://www.elain.org/2011/12/31/MongoDB实战系列之一：MongoDB安装部署/index.html">
@@ -16,14 +16,14 @@
 <meta property="og:description" content="简述：MongoDB是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。
 环境：CentOS 5.5 x64
 安装：
-[ccWN lang=”bash” width=”99%” height=”100%”]cd /root/toolswget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+123456cd /root/toolswget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.0.0.tgztar zxvf mongodb-linux-x86_6">
+<meta property="og:updated_time" content="2016-02-03T05:54:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB实战系列之一：MongoDB安装部署">
 <meta name="twitter:description" content="简述：MongoDB是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。
 环境：CentOS 5.5 x64
 安装：
-[ccWN lang=”bash” width=”99%” height=”100%”]cd /root/toolswget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64">
+123456cd /root/toolswget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.0.0.tgztar zxvf mongodb-linux-x86_6">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -286,25 +286,28 @@
         <p>简述：MongoDB是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
 <p>环境：CentOS 5.5 x64</p>
 <p>安装：</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]cd /root/tools<br>wget <a href="http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.0.0.tgz" target="_blank" rel="external">http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.0.0.tgz</a><br>tar zxvf mongodb-linux-x86_64-2.0.0.tgz<br>mv mongodb-linux-x86_64-2.0.0 /elain/apps/mongodb-linux-x86_64-2.0.0<br>ln -s /elain/apps/mongodb-linux-x86_64-2.0.0 /elain/apps/mongodb<br>ln -s /elain/apps/mongodb/bin/*  /bin/[/ccWN]</p>
-<p>#添加用户组<br>[ccWN lang=”bash” width=”99%” height=”100%”]/usr/sbin/groupadd -g 690 mongodb<br>/usr/sbin/useradd -g mongodb mongodb -u 690 -s /sbin/nologin[/ccWN]</p>
-<p>#创建存储目录<br>[ccWN lang=”bash” width=”99%” height=”100%”]mkdir -p /elain/data/mongodb/db/<br>chown -R mongodb.mongodb /elain/data/mongodb/db/[/ccWN]</p>
-<p>#启动运行<br>[ccWN lang=”bash” width=”99%” height=”100%”]nohup mongod –dbpath /elain/data/mongodb/db &amp;[/ccWN]</p>
-<p><a id="more"></a>#开机自启动<br>[ccWN lang=”bash” width=”99%” height=”100%”]echo “mongod –dbpath /elain/data/db” &gt;&gt;/etc/rc.local[/ccWN]</p>
-<p>#以服务方式启动mongodb，要求验证<br>[ccWN lang=”bash” width=”99%” height=”100%”]/elain/apps/mongodb/bin/mongod –fork –port 27001 –auth –dbpath /elain/data/mongodb/db/ –logpath /elain/logs/mongodb/mongodb.log[/ccWN]</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd /root/tools</span><br><span class="line">wget http:<span class="comment">//fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.0.0.tgz</span></span><br><span class="line">tar zxvf mongodb-linux-x86_64-<span class="number">2.0</span><span class="number">.0</span>.tgz</span><br><span class="line">mv mongodb-linux-x86_64-<span class="number">2.0</span><span class="number">.0</span> /elain/apps/mongodb-linux-x86_64-<span class="number">2.0</span><span class="number">.0</span></span><br><span class="line">ln -s /elain/apps/mongodb-linux-x86_64-<span class="number">2.0</span><span class="number">.0</span> /elain/apps/mongodb</span><br><span class="line">ln -s /elain/apps/mongodb/bin<span class="comment">/*  /bin/</span></span><br></pre></td></tr></table></figure>
+<p>#添加用户组</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>sbin/groupadd -g <span class="number">690</span> mongodb</span><br><span class="line"><span class="regexp">/usr/</span>sbin<span class="regexp">/useradd -g mongodb mongodb -u 690 -s /</span>sbin/nologin</span><br></pre></td></tr></table></figure>
+<p>#创建存储目录</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p <span class="regexp">/elain/</span>data<span class="regexp">/mongodb/</span>db/</span><br><span class="line">chown -R mongodb.mongodb <span class="regexp">/elain/</span>data<span class="regexp">/mongodb/</span>db/</span><br></pre></td></tr></table></figure>
+<p>#启动运行</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup mongod --dbpath <span class="regexp">/elain/</span>data<span class="regexp">/mongodb/</span>db &amp;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>#开机自启动<br><br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">"mongod --dbpath /elain/data/db"</span> <span class="prompt">&gt;&gt;</span>/etc/rc.local</span><br></pre></td></tr></table></figure>
+<p>#以服务方式启动mongodb，要求验证</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/elain/</span>apps<span class="regexp">/mongodb/</span>bin<span class="regexp">/mongod --fork --port 27001 --auth --dbpath /</span>elain<span class="regexp">/data/m</span>ongodb<span class="regexp">/db/</span> --logpath <span class="regexp">/elain/</span>logs<span class="regexp">/mongodb/m</span>ongodb.log</span><br></pre></td></tr></table></figure>
 <p>#注：参数中用到的目录需创建</p>
-<p>#停止<br>[ccWN lang=”bash” width=”99%” height=”100%”]kill -2 <code>ps -ef|grep mongod|grep -v grep|awk &#39;&#39;{print $2}&#39;&#39;</code>[/ccWN]</p>
-<p>#验证启动<br>[ccWN lang=”bash” width=”99%” height=”100%”][root@md01 ~]# netstat -ln<br>Active Internet connections (only servers)<br>Proto Recv-Q Send-Q Local Address               Foreign Address             State<br>tcp        0      0 0.0.0.0:28001               0.0.0.0:<em>                   LISTEN<br>tcp        0      0 0.0.0.0:27001               0.0.0.0:</em>                   LISTEN[/ccWN]</p>
+<p>#停止</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -<span class="number">2</span> `ps -ef|grep mongod|grep -v grep|awk <span class="string">''</span>&#123;print <span class="variable">$2</span>&#125;<span class="string">''</span></span><br></pre></td></tr></table></figure>
+<p>`</p>
+<p>#验证启动</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr_selector">[root@md01 ~]</span># <span class="tag">netstat</span> <span class="tag">-ln</span></span><br><span class="line"><span class="tag">Active</span> <span class="tag">Internet</span> <span class="tag">connections</span> (<span class="tag">only</span> <span class="tag">servers</span>)</span><br><span class="line"><span class="tag">Proto</span> <span class="tag">Recv-Q</span> <span class="tag">Send-Q</span> <span class="tag">Local</span> <span class="tag">Address</span>               <span class="tag">Foreign</span> <span class="tag">Address</span>             <span class="tag">State</span></span><br><span class="line"><span class="tag">tcp</span>        0      0 0<span class="class">.0</span><span class="class">.0</span><span class="class">.0</span><span class="pseudo">:28001</span>               0<span class="class">.0</span><span class="class">.0</span><span class="class">.0</span>:*                   <span class="tag">LISTEN</span></span><br><span class="line"><span class="tag">tcp</span>        0      0 0<span class="class">.0</span><span class="class">.0</span><span class="class">.0</span><span class="pseudo">:27001</span>               0<span class="class">.0</span><span class="class">.0</span><span class="class">.0</span>:*                   <span class="tag">LISTEN</span></span><br></pre></td></tr></table></figure>
 <p>还可以通过访问：<a href="http://ip:28001/" target="_blank" rel="external">http://ip:28001/</a>  浏览</p>
-<p>#登录：<br>[ccWN lang=”bash” width=”99%” height=”100%”]mongo –host serverip:27001[/ccWN]</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”][root@md01 ~]# mongo –host localhost:27001<br>MongoDB shell version: 2.0.0<br>connecting to: localhost:27001/test</p>
-<blockquote>
-<p>[/ccWN]</p>
-</blockquote>
-<p>#测试<br>[ccWN lang=”bash” width=”99%” height=”100%”][root@md02 mongodb]# mongo<br>MongoDB shell version: 1.8.3<br>connecting to: test<br>Thu Sep  8 22:16:13 [initandlisten] connection accepted from 127.0.0.1:43643 #2</p>
-<blockquote>
-<p>db.foo.save( { a : 1 } )<br>db.foo.find()<br>{ “_id” : ObjectId(“4e68ce01f4be44b5812e7f9a”), “a” : 1 }[/ccWN]</p>
-</blockquote>
+<p>#登录：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo <span class="comment">--host serverip:27001</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@md01 ~]<span class="preprocessor"># mongo --host localhost:<span class="number">27001</span></span></span><br><span class="line">MongoDB shell version: <span class="number">2.0</span><span class="number">.0</span></span><br><span class="line">connecting to: localhost:<span class="number">27001</span>/test</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<p>#测试</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@md02 mongodb]<span class="preprocessor"># mongo</span></span><br><span class="line">MongoDB shell version: <span class="number">1.8</span><span class="number">.3</span></span><br><span class="line">connecting to: test</span><br><span class="line">Thu Sep  <span class="number">8</span> <span class="number">22</span>:<span class="number">16</span>:<span class="number">13</span> [initandlisten] connection accepted from <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">43643</span> <span class="preprocessor">#<span class="number">2</span></span></span><br><span class="line">&gt;db.foo.save( &#123; a : <span class="number">1</span> &#125; )</span><br><span class="line">&gt;db.foo.find()</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"4e68ce01f4be44b5812e7f9a"</span>), <span class="string">"a"</span> : <span class="number">1</span> &#125;</span><br></pre></td></tr></table></figure>
 <p>附录一：<br>mongodb的bin下各工具的用途：</p>
 <p>mongod：数据库服务端，类似mysqld，每个实例启动一个进程，可以fork为Daemon运行<br>mongo：客户端命令行工具，类似sqlplus/mysql，其实也是一个js解释器，支持js语法<br>mongodump/mongorestore：将数据导入为bson格式的文件/将bson文件恢复为数据库，类似xtracbackup<br>mongoexport/mongoimport：将collection导出为json/csv格式数据/将数据导入数据库，类似mysqldump/mysqlimport<br>bsondump：将bson格式的文件转储为json格式的数据<br>mongos：分片路由，如果使用了sharding功能，则应用程序连接的是mongos而不是mongod<br>mongofiles：GridFS管理工具<br>mongostat：实时监控工具</p>
 <p>附录二：<br>mongod的主要参数有：</p>
@@ -320,7 +323,7 @@
         <p><span>本文标题:</span><a href="/2011/12/31/MongoDB实战系列之一：MongoDB安装部署/">MongoDB实战系列之一：MongoDB安装部署</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年12月31日 - 09时24分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 13时54分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/12/31/MongoDB实战系列之一：MongoDB安装部署/" title="MongoDB实战系列之一：MongoDB安装部署">http://www.elain.org/2011/12/31/MongoDB实战系列之一：MongoDB安装部署/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/12/31/MongoDB实战系列之一：MongoDB安装部署/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

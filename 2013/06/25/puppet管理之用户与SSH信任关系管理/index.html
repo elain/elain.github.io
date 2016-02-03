@@ -35,7 +35,7 @@ node base {
 
 #puppet test
 node &quot;puppettest01.bj&quot;,&quot;puppettest02.bj&quot; inherits b">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="puppet管理之用户与SSH信任关系管理">
 <meta name="twitter:description" content="cat manifests/modules.pp
@@ -332,27 +332,27 @@ node "puppettest01.bj","puppettest02.bj" inherits base {
 <pre>
 class users::elain {
     group { "elain":
-            gid =&gt; 11001,
-            ensure =&gt;present;   
+            gid => 11001,
+            ensure =>present;   
     }
     user { "elain":
-            ensure =&gt; "present",
-            uid =&gt; 11001,
-            gid =&gt; 11001,
-            groups =&gt; elain,
-            shell =&gt;"/bin/bash",
-            home =&gt; "/home/elain",
-            managehome =&gt;"true",
-            require =&gt; Group["elain"];
+            ensure => "present",
+            uid => 11001,
+            gid => 11001,
+            groups => elain,
+            shell =>"/bin/bash",
+            home => "/home/elain",
+            managehome =>"true",
+            require => Group["elain"];
     }
 
     ssh_authorized_key{ "hh-b2c-console01.bj":
-            ensure=&gt;present,
-            type=&gt;"ssh-rsa",
-            key=&gt;"AAAAB3NzaC1yc2EAAAABIwAAAQEAxzWKPyeYFPGZXNIRdz4a7BK6c+xK7xKBgM1HO1OImDi0QFJ0wtxLHIbV9AUcf9dsehQOyfjVhasgJNCoOlHzf7plQ6UmsK5cUmmMUYcN4pw13CqEwYQ/JuwWt2neZ9u6YD+v6/uzi9CclFFlqmNHtL+EIXY/ncrUexikAZlCLvErXIGILnRAUEILmz/IEujU0XuR6CDt54l6gu8/hgAKqmKGkrR2vysCYykQamGr9muvnJ6E4sCawQGNunhmIbmmHV6ub4sp17CSObehqTvtBKXu9T0sVHlBp981soTO2+BQnpjBf7GjSkbyqFYT0s3cqHTvjOGKv7lD2ZK/v3cL0w==",
-            name=&gt;"console01.bj",
-            target=&gt;"/home/elain/.ssh/authorized_keys",
-            user=&gt;''''''''elain'''''''',
+            ensure=>present,
+            type=>"ssh-rsa",
+            key=>"AAAAB3NzaC1yc2EAAAABIwAAAQEAxzWKPyeYFPGZXNIRdz4a7BK6c+xK7xKBgM1HO1OImDi0QFJ0wtxLHIbV9AUcf9dsehQOyfjVhasgJNCoOlHzf7plQ6UmsK5cUmmMUYcN4pw13CqEwYQ/JuwWt2neZ9u6YD+v6/uzi9CclFFlqmNHtL+EIXY/ncrUexikAZlCLvErXIGILnRAUEILmz/IEujU0XuR6CDt54l6gu8/hgAKqmKGkrR2vysCYykQamGr9muvnJ6E4sCawQGNunhmIbmmHV6ub4sp17CSObehqTvtBKXu9T0sVHlBp981soTO2+BQnpjBf7GjSkbyqFYT0s3cqHTvjOGKv7lD2ZK/v3cL0w==",
+            name=>"console01.bj",
+            target=>"/home/elain/.ssh/authorized_keys",
+            user=>''''''''elain'''''''',
     }
 }
 
@@ -367,7 +367,7 @@ class users::elain {
         <p><span>本文标题:</span><a href="/2013/06/25/puppet管理之用户与SSH信任关系管理/">puppet管理之用户与SSH信任关系管理</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2013年06月25日 - 15时29分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2013/06/25/puppet管理之用户与SSH信任关系管理/" title="puppet管理之用户与SSH信任关系管理">http://www.elain.org/2013/06/25/puppet管理之用户与SSH信任关系管理/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2013/06/25/puppet管理之用户与SSH信任关系管理/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

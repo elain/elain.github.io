@@ -6,18 +6,30 @@
   <title>SSH另类安全加固 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="第一步：编辑ssh服务端配置文件
-[ccWN lang=”bash” width=”99%” height=”100%”]vi  /etc/ssh/sshd_config[/ccWN][ccWN lang=”bash” width=”99%” height=”100%”]ListenAddress 10.0.0.23:22ListenAddress 202.106.0.20:2012[/ccWN]">
+1vi  /etc/ssh/sshd_config
+123ListenAddress 10.0.0.23:22ListenAddress 202.106.0.20:2012
+第二步：重启ssh，并检查端口是否开启
+12/etc/init.d/sshd restart
+123netstat -lntptcp        0      0 202.106.0.20:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSH另类安全加固">
 <meta property="og:url" content="http://www.elain.org/2011/10/28/SSH另类安全加固/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="第一步：编辑ssh服务端配置文件
-[ccWN lang=”bash” width=”99%” height=”100%”]vi  /etc/ssh/sshd_config[/ccWN][ccWN lang=”bash” width=”99%” height=”100%”]ListenAddress 10.0.0.23:22ListenAddress 202.106.0.20:2012[/ccWN]">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+1vi  /etc/ssh/sshd_config
+123ListenAddress 10.0.0.23:22ListenAddress 202.106.0.20:2012
+第二步：重启ssh，并检查端口是否开启
+12/etc/init.d/sshd restart
+123netstat -lntptcp        0      0 202.106.0.20:">
+<meta property="og:updated_time" content="2016-02-03T05:53:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSH另类安全加固">
 <meta name="twitter:description" content="第一步：编辑ssh服务端配置文件
-[ccWN lang=”bash” width=”99%” height=”100%”]vi  /etc/ssh/sshd_config[/ccWN][ccWN lang=”bash” width=”99%” height=”100%”]ListenAddress 10.0.0.23:22ListenAddress 202.106.0.20:2012[/ccWN]">
+1vi  /etc/ssh/sshd_config
+123ListenAddress 10.0.0.23:22ListenAddress 202.106.0.20:2012
+第二步：重启ssh，并检查端口是否开启
+12/etc/init.d/sshd restart
+123netstat -lntptcp        0      0 202.106.0.20:">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -278,8 +290,17 @@
       
           
         <p>第一步：编辑ssh服务端配置文件</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]vi  /etc/ssh/sshd_config[/ccWN]<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>ListenAddress 10.0.0.23:22<br>ListenAddress 202.106.0.20:2012<br>[/ccWN]<br>第二步：重启ssh，并检查端口是否开启<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>/etc/init.d/sshd restart[/ccWN]<br>[ccWN lang=”bash” width=”99%” height=”100%”]netstat -lntp<br>tcp        0      0 202.106.0.20:2012        0.0.0.0:<em>            LISTEN      31702/sshd<br>tcp        0      0 10.0.0.23:22             0.0.0.0:</em>            LISTEN      31702/sshd<br>[/ccWN]<br>第三步：登录测试</p>
-<p>在另一台外网机上通常外网telnet测试<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>telnet 202.106.0.20 2012<br>Trying 202.106.0.20…<br>Connected to 202.106.0.20.<br>Escape character is ‘’^]’’.<br>SSH-2.0-OpenSSH_4.3<br>[/ccWN]<br>在10网段telnet测试<br>[ccWN lang=”bash” width=”99%” height=”100%”]telnet 10.0.0.23 22<br>Trying 10.0.0.23…<br>Connected to 10.0.0.23.<br>Escape character is ‘’^]’’.<br>SSH-2.0-OpenSSH_4.3<br>[/ccWN]<br>说明：此方法用于内网需22端口，但为安全外网启另一端口给SSH用，互不影响，从而对服务器安全做了进一步的加固！</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi  <span class="regexp">/etc/</span>ssh<span class="regexp">/sshd_config</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ListenAddress <span class="number">10.0</span><span class="number">.0</span><span class="number">.23</span>:<span class="number">22</span></span><br><span class="line">ListenAddress <span class="number">202.106</span><span class="number">.0</span><span class="number">.20</span>:<span class="number">2012</span></span><br></pre></td></tr></table></figure>
+<p>第二步：重启ssh，并检查端口是否开启</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="regexp">/etc/i</span>nit.d<span class="regexp">/sshd restart</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netstat -lntp</span><br><span class="line">tcp        <span class="number">0</span>      <span class="number">0</span> <span class="number">202.106</span><span class="number">.0</span><span class="number">.20</span>:<span class="number">2012</span>        <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:*            LISTEN      <span class="number">31702</span>/sshd</span><br><span class="line">tcp        <span class="number">0</span>      <span class="number">0</span> <span class="number">10.0</span><span class="number">.0</span><span class="number">.23</span>:<span class="number">22</span>             <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:*            LISTEN      <span class="number">31702</span>/sshd</span><br></pre></td></tr></table></figure>
+<p>第三步：登录测试</p>
+<p>在另一台外网机上通常外网telnet测试</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="title">telnet</span> <span class="number">202.106.0.20</span> <span class="number">2012</span></span><br><span class="line">Trying <span class="number">202.106.0.20</span>...</span><br><span class="line">Connected to <span class="number">202.106.0.20</span>.</span><br><span class="line">Escape character is <span class="string">''</span>^]<span class="string">''</span>.</span><br><span class="line">SSH-<span class="number">2</span>.<span class="number">0</span>-OpenSSH_4.<span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>在10网段telnet测试</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">telnet</span> <span class="number">10.0.0.23</span> <span class="number">22</span></span><br><span class="line">Trying <span class="number">10.0.0.23</span>...</span><br><span class="line">Connected to <span class="number">10.0.0.23</span>.</span><br><span class="line">Escape character is <span class="string">''</span>^]<span class="string">''</span>.</span><br><span class="line">SSH-<span class="number">2</span>.<span class="number">0</span>-OpenSSH_4.<span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>说明：此方法用于内网需22端口，但为安全外网启另一端口给SSH用，互不影响，从而对服务器安全做了进一步的加固！</p>
 
       
     </div>
@@ -291,7 +312,7 @@
         <p><span>本文标题:</span><a href="/2011/10/28/SSH另类安全加固/">SSH另类安全加固</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年10月28日 - 17时11分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 13时53分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/10/28/SSH另类安全加固/" title="SSH另类安全加固">http://www.elain.org/2011/10/28/SSH另类安全加固/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/10/28/SSH另类安全加固/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

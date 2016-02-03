@@ -7,20 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="此脚本用于在SVN 服务器上，用户通过SVN 客户端提交后，服务端利用hooks脚本自动更新检出数据的备份！
 
-#!/bin/bash&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;">
+#!/bin/bash                                                                                                               
+#Author  :elain">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVN服务端数据定时备份脚本">
 <meta property="og:url" content="http://www.elain.org/2011/09/05/SVN服务端数据定时备份脚本/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="此脚本用于在SVN 服务器上，用户通过SVN 客户端提交后，服务端利用hooks脚本自动更新检出数据的备份！
 
-#!/bin/bash&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+#!/bin/bash                                                                                                               
+#Author  :elain">
+<meta property="og:updated_time" content="2016-02-03T06:19:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVN服务端数据定时备份脚本">
 <meta name="twitter:description" content="此脚本用于在SVN 服务器上，用户通过SVN 客户端提交后，服务端利用hooks脚本自动更新检出数据的备份！
 
-#!/bin/bash&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;">
+#!/bin/bash                                                                                                               
+#Author  :elain">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -282,40 +285,36 @@
           
         <p>此脚本用于在SVN 服务器上，用户通过SVN 客户端提交后，服务端利用hooks脚本自动更新检出数据的备份！</p>
 <blockquote>
-<p>#!/bin/bash&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</p>
-<pre><code>#Author&amp;nbsp; :elain&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+<p>#!/bin/bash                                                                                                               </p>
+<pre><code>#Author  :elain                                                                                                          
 
-#Ctime&amp;nbsp;&amp;nbsp; :20110805&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+#Ctime   :20110805                                                                                                        
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
 
-Bak_Dir=/data/svnbak&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+
+Bak_Dir=/data/svnbak                                                                                               
 
 Svn_Dir=/data/svndata
 
 Svn_data=/data/svnbak/svndata_`date +%Y%m%d`.tar.gz
 
 MailList=elain2012@hotmail.com
-</code></pre><h1 id="Info_26nbsp_3B_26nbsp_3B__3A__u6BCF_u5468_u5907_u4EFD_u4E00_u6B21svn_u6570_u636E"><a href="#Info_26nbsp_3B_26nbsp_3B__3A__u6BCF_u5468_u5907_u4EFD_u4E00_u6B21svn_u6570_u636E" class="headerlink" title="Info&nbsp;&nbsp; : 每周备份一次svn数据"></a>Info&nbsp;&nbsp; : 每周备份一次svn数据</h1><pre><code>/bin/tar zcf $Svn_data /data/svndata
-</code></pre><h1 id="Info_26nbsp_3B_26nbsp_3B__3A__u90AE_u4EF6_u6B63_u6587"><a href="#Info_26nbsp_3B_26nbsp_3B__3A__u90AE_u4EF6_u6B63_u6587" class="headerlink" title="Info&nbsp;&nbsp; : 邮件正文"></a>Info&nbsp;&nbsp; : 邮件正文</h1><pre><code>echo -e &amp;quot;==========`date +%Y年%m月%d日` SVN 备份数据==========&amp;quot; &amp;gt;$LogFile
+</code></pre><h1 id="Info__3A__u6BCF_u5468_u5907_u4EFD_u4E00_u6B21svn_u6570_u636E"><a href="#Info__3A__u6BCF_u5468_u5907_u4EFD_u4E00_u6B21svn_u6570_u636E" class="headerlink" title="Info   : 每周备份一次svn数据"></a>Info   : 每周备份一次svn数据</h1><pre><code>/bin/tar zcf $Svn_data /data/svndata
+</code></pre><h1 id="Info__3A__u90AE_u4EF6_u6B63_u6587"><a href="#Info__3A__u90AE_u4EF6_u6B63_u6587" class="headerlink" title="Info   : 邮件正文"></a>Info   : 邮件正文</h1><pre><code>echo -e &amp;quot;==========`date +%Y年%m月%d日` SVN 备份数据==========&amp;quot; &gt;$LogFile
 
-echo -e &amp;quot;SVN备份文件:\nsvndata_`date +%Y%m%d`.tar.gz \n大小:`du -sh $Svn_data |awk &amp;#039;{print $1}&amp;#039;`&amp;quot; &amp;gt;&amp;gt;$LogFile
+echo -e &amp;quot;SVN备份文件:\nsvndata_`date +%Y%m%d`.tar.gz \n大小:`du -sh $Svn_data |awk &amp;#039;{print $1}&amp;#039;`&amp;quot; &gt;&gt;$LogFile
 
-echo -e &amp;quot;==============by:elain www.elain.org=================\n详情参见附件!&amp;quot; &amp;gt;&amp;gt;$LogFile
-</code></pre><h1 id="Info_26nbsp_3B_26nbsp_3B__3A__u53D1_u9001_u90AE_u4EF6"><a href="#Info_26nbsp_3B_26nbsp_3B__3A__u53D1_u9001_u90AE_u4EF6" class="headerlink" title="Info&nbsp;&nbsp; : 发送邮件"></a>Info&nbsp;&nbsp; : 发送邮件</h1><pre><code>/usr/bin/sendEmail -f admin@elain.org -t $MailList -s mail.elain.org -xu &amp;#039;admin@elain.org&amp;#039; -xp &amp;#039;elain123we&amp;#039; -u &amp;quot;`date +%Y年%m月%d日` SVN备份数据&amp;quot; -m &amp;quot;`cat $LogFile`&amp;quot; -a $Svn_data
-</code></pre><h1 id="Info_26nbsp_3B_26nbsp_3B__3A__u5220_u9664_u4E03_u5929_u524D_u7684_u5907_u4EFD"><a href="#Info_26nbsp_3B_26nbsp_3B__3A__u5220_u9664_u4E03_u5929_u524D_u7684_u5907_u4EFD" class="headerlink" title="Info&nbsp;&nbsp; : 删除七天前的备份"></a>Info&nbsp;&nbsp; : 删除七天前的备份</h1><pre><code>find $Bak_Dir -mtime +7 | xargs rm -rf
-</code></pre><p>&nbsp;</p>
-</blockquote>
-<p>&nbsp;</p>
+echo -e &amp;quot;==============by:elain www.elain.org=================\n详情参见附件!&amp;quot; &gt;&gt;$LogFile
+</code></pre><h1 id="Info__3A__u53D1_u9001_u90AE_u4EF6"><a href="#Info__3A__u53D1_u9001_u90AE_u4EF6" class="headerlink" title="Info   : 发送邮件"></a>Info   : 发送邮件</h1><pre><code>/usr/bin/sendEmail -f admin@elain.org -t $MailList -s mail.elain.org -xu &amp;#039;admin@elain.org&amp;#039; -xp &amp;#039;elain123we&amp;#039; -u &amp;quot;`date +%Y年%m月%d日` SVN备份数据&amp;quot; -m &amp;quot;`cat $LogFile`&amp;quot; -a $Svn_data
+</code></pre><h1 id="Info__3A__u5220_u9664_u4E03_u5929_u524D_u7684_u5907_u4EFD"><a href="#Info__3A__u5220_u9664_u4E03_u5929_u524D_u7684_u5907_u4EFD" class="headerlink" title="Info   : 删除七天前的备份"></a>Info   : 删除七天前的备份</h1><pre><code>find $Bak_Dir -mtime +7 | xargs rm -rf
+</code></pre></blockquote>
 <a id="more"></a>
 <p>添加定时任务</p>
-<h1 id="Info_26nbsp_3B__26nbsp_3B__26nbsp_3B__3A__u6BCF_u5468_u516D_u5907_u4EFDSVN_u6570_u636E"><a href="#Info_26nbsp_3B__26nbsp_3B__26nbsp_3B__3A__u6BCF_u5468_u516D_u5907_u4EFDSVN_u6570_u636E" class="headerlink" title="Info&nbsp; &nbsp; &nbsp; : 每周六备份SVN数据"></a>Info&nbsp; &nbsp; &nbsp; : 每周六备份SVN数据</h1><pre><code># Author : elain
+<h1 id="Info__3A__u6BCF_u5468_u516D_u5907_u4EFDSVN_u6570_u636E"><a href="#Info__3A__u6BCF_u5468_u516D_u5907_u4EFDSVN_u6570_u636E" class="headerlink" title="Info      : 每周六备份SVN数据"></a>Info      : 每周六备份SVN数据</h1><pre><code># Author : elain
 
-# Ctime&amp;nbsp; : 2011.08.05
+# Ctime  : 2011.08.05
 
-00 2 * * 6&amp;nbsp; /bin/sh /root/scripts/bak_svn.sh
-
-&amp;nbsp;
+00 2 * * 6  /bin/sh /root/scripts/bak_svn.sh
 </code></pre><p>脚本见附件</p>
 <p><a href="http://www.elain.org/?attachment_id=428">bak_svn.sh</a></p>
 
@@ -329,7 +328,7 @@ echo -e &amp;quot;==============by:elain www.elain.org=================\n详情�
         <p><span>本文标题:</span><a href="/2011/09/05/SVN服务端数据定时备份脚本/">SVN服务端数据定时备份脚本</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年09月05日 - 13时14分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/09/05/SVN服务端数据定时备份脚本/" title="SVN服务端数据定时备份脚本">http://www.elain.org/2011/09/05/SVN服务端数据定时备份脚本/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/09/05/SVN服务端数据定时备份脚本/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -365,7 +364,7 @@ echo -e &amp;quot;==============by:elain www.elain.org=================\n详情�
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Info_26nbsp_3B_26nbsp_3B__3A__u6BCF_u5468_u5907_u4EFD_u4E00_u6B21svn_u6570_u636E"><span class="toc-number">1.</span> <span class="toc-text">Info   : 每周备份一次svn数据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Info_26nbsp_3B_26nbsp_3B__3A__u90AE_u4EF6_u6B63_u6587"><span class="toc-number">2.</span> <span class="toc-text">Info   : 邮件正文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Info_26nbsp_3B_26nbsp_3B__3A__u53D1_u9001_u90AE_u4EF6"><span class="toc-number">3.</span> <span class="toc-text">Info   : 发送邮件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Info_26nbsp_3B_26nbsp_3B__3A__u5220_u9664_u4E03_u5929_u524D_u7684_u5907_u4EFD"><span class="toc-number">4.</span> <span class="toc-text">Info   : 删除七天前的备份</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Info_26nbsp_3B__26nbsp_3B__26nbsp_3B__3A__u6BCF_u5468_u516D_u5907_u4EFDSVN_u6570_u636E"><span class="toc-number">5.</span> <span class="toc-text">Info      : 每周六备份SVN数据</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Info__3A__u6BCF_u5468_u5907_u4EFD_u4E00_u6B21svn_u6570_u636E"><span class="toc-number">1.</span> <span class="toc-text">Info   : 每周备份一次svn数据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Info__3A__u90AE_u4EF6_u6B63_u6587"><span class="toc-number">2.</span> <span class="toc-text">Info   : 邮件正文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Info__3A__u53D1_u9001_u90AE_u4EF6"><span class="toc-number">3.</span> <span class="toc-text">Info   : 发送邮件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Info__3A__u5220_u9664_u4E03_u5929_u524D_u7684_u5907_u4EFD"><span class="toc-number">4.</span> <span class="toc-text">Info   : 删除七天前的备份</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Info__3A__u6BCF_u5468_u516D_u5907_u4EFDSVN_u6570_u636E"><span class="toc-number">5.</span> <span class="toc-text">Info      : 每周六备份SVN数据</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {

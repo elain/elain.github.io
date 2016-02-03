@@ -21,7 +21,7 @@
 添加有策略有：rewrite_tag_filt">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2015/12/EFK_write_test.png">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2015/12/EFK_write_result.jpg">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EFK日志收集丢失率测试报告">
 <meta name="twitter:description" content="目前我们EFK日志系统接入了近10种日志类型，每天的日志量约1T，峰值时达到33W/s的写入，为了更好的服务，我对日志收集的完整度做了一次测试，现发出来，供大家参考！
@@ -296,7 +296,6 @@
 <p><a href="http://www.elain.org/wp-content/uploads/2015/12/EFK_write_result.jpg"><img src="http://www.elain.org/wp-content/uploads/2015/12/EFK_write_result.jpg" alt="EFK_write_result"></a><br>从测试结果来看：<br>fluentd 在无策略写文件时，无丢失，在添加一定策略后出现不同程度丢失，数据完整率保持在99.95%以上，原因有二：<br>1、和日志内容有关，不同的日志会出现不同的结果<br>2、和策略有关，有些策略本身的匹配度导致一些日志没匹配至丢弃<br>以上两个问题，也可通过日志收集客户端fluent的log_format,和策略的匹配精准度来解决。</p>
 <p>fluentd 在无策略写elasticsearch时除上面的两条原因外，还有一条是elasticsearch的mappings设置有关，比如某些字段不符合mappings设置的类型，elasticsearch就会报错，拒绝写入<br>最常见的有 “-“ 、”null” 、乱码等，可以通过调整mappings的方式来解决这个问题。</p>
 <p>总体而言，目前我们的应用场景已满足，都能保持在99.9%以上,</p>
-<p>&nbsp;</p>
 
       
     </div>
@@ -308,7 +307,7 @@
         <p><span>本文标题:</span><a href="/2015/12/17/EFK日志收集丢失率测试报告/">EFK日志收集丢失率测试报告</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2015年12月17日 - 05时36分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2015/12/17/EFK日志收集丢失率测试报告/" title="EFK日志收集丢失率测试报告">http://www.elain.org/2015/12/17/EFK日志收集丢失率测试报告/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2015/12/17/EFK日志收集丢失率测试报告/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

@@ -5,8 +5,7 @@
   
   <title>仅有内网IP的IDC的机器如何能够连到外网 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;nbsp;
-1.找个带外网和内网IP的机器做为网关GW
+  <meta name="description" content="1.找个带外网和内网IP的机器做为网关GW
 
 假定IP：
 
@@ -14,21 +13,26 @@ lan:10.0.0.110
 
 wan:172.16.10.2
 
-&amp;amp;nbsp;
+
 
 GW上执行：
 
-&amp;amp;nbsp;
+
 
 1.1 #开启转发
 
-sed -i &amp;amp;#039;s#net.ipv4.ip_forward = 0#net.ipv4.ip_forward = 1#&amp;amp;#039; /etc/sysc">
+sed -i &amp;amp;#039;s#net.ipv4.ip_forward = 0#net.ipv4.ip_forward = 1#&amp;amp;#039; /etc/sysctl.conf
+
+
+
+1.2 #使上面配置生效
+
+sy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="仅有内网IP的IDC的机器如何能够连到外网">
 <meta property="og:url" content="http://www.elain.org/2011/08/07/仅有内网IP的IDC的机器如何能够连到外网/index.html">
 <meta property="og:site_name" content="Elain'blog">
-<meta property="og:description" content="&amp;nbsp;
-1.找个带外网和内网IP的机器做为网关GW
+<meta property="og:description" content="1.找个带外网和内网IP的机器做为网关GW
 
 假定IP：
 
@@ -36,20 +40,25 @@ lan:10.0.0.110
 
 wan:172.16.10.2
 
-&amp;amp;nbsp;
+
 
 GW上执行：
 
-&amp;amp;nbsp;
+
 
 1.1 #开启转发
 
-sed -i &amp;amp;#039;s#net.ipv4.ip_forward = 0#net.ipv4.ip_forward = 1#&amp;amp;#039; /etc/sysc">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+sed -i &amp;amp;#039;s#net.ipv4.ip_forward = 0#net.ipv4.ip_forward = 1#&amp;amp;#039; /etc/sysctl.conf
+
+
+
+1.2 #使上面配置生效
+
+sy">
+<meta property="og:updated_time" content="2016-02-03T06:19:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="仅有内网IP的IDC的机器如何能够连到外网">
-<meta name="twitter:description" content="&amp;nbsp;
-1.找个带外网和内网IP的机器做为网关GW
+<meta name="twitter:description" content="1.找个带外网和内网IP的机器做为网关GW
 
 假定IP：
 
@@ -57,15 +66,21 @@ lan:10.0.0.110
 
 wan:172.16.10.2
 
-&amp;amp;nbsp;
+
 
 GW上执行：
 
-&amp;amp;nbsp;
+
 
 1.1 #开启转发
 
-sed -i &amp;amp;#039;s#net.ipv4.ip_forward = 0#net.ipv4.ip_forward = 1#&amp;amp;#039; /etc/sysc">
+sed -i &amp;amp;#039;s#net.ipv4.ip_forward = 0#net.ipv4.ip_forward = 1#&amp;amp;#039; /etc/sysctl.conf
+
+
+
+1.2 #使上面配置生效
+
+sy">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -325,8 +340,7 @@ sed -i &amp;amp;#039;s#net.ipv4.ip_forward = 0#net.ipv4.ip_forward = 1#&amp;amp;
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>&nbsp;</p>
-<pre><code>1.找个带外网和内网IP的机器做为网关GW
+        <pre><code>1.找个带外网和内网IP的机器做为网关GW
 
 假定IP：
 
@@ -334,42 +348,39 @@ lan:10.0.0.110
 
 wan:172.16.10.2
 
-&amp;nbsp;
+
 
 GW上执行：
 
-&amp;nbsp;
+
 
 1.1 #开启转发
 
 sed -i &amp;#039;s#net.ipv4.ip_forward = 0#net.ipv4.ip_forward = 1#&amp;#039; /etc/sysctl.conf
 
-&amp;nbsp;
+
 
 1.2 #使上面配置生效
 
 sysctl -p
 
-&amp;nbsp;
+
 
 1.3 #加个防火墙命令(内部ip伪装外部IP上网)
 
-/sbin/iptables -t nat -A POSTROUTING&amp;nbsp; -s 10.0.0.0/24 -j MASQUERADE
+/sbin/iptables -t nat -A POSTROUTING  -s 10.0.0.0/24 -j MASQUERADE
 </code></pre><a id="more"></a>
-<p>&nbsp;</p>
-<pre><code>&amp;nbsp;
-
-2.在仅有内网IP的IDC的机器 如数据库服务器上 添加默认网关 指向GW的内网IP
+<pre><code>2.在仅有内网IP的IDC的机器 如数据库服务器上 添加默认网关 指向GW的内网IP
 
 route add default gw 172.16.10.2
 
-&amp;nbsp;
 
-3.ping 172.16.10.2&amp;nbsp; 测试结果
 
-&amp;nbsp;
+3.ping 172.16.10.2  测试结果
 
-&amp;nbsp; ping 172.16.20.2&amp;nbsp; 能ping通
+
+
+  ping 172.16.20.2  能ping通
 </code></pre>
       
     </div>
@@ -381,7 +392,7 @@ route add default gw 172.16.10.2
         <p><span>本文标题:</span><a href="/2011/08/07/仅有内网IP的IDC的机器如何能够连到外网/">仅有内网IP的IDC的机器如何能够连到外网</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年08月07日 - 11时12分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/08/07/仅有内网IP的IDC的机器如何能够连到外网/" title="仅有内网IP的IDC的机器如何能够连到外网">http://www.elain.org/2011/08/07/仅有内网IP的IDC的机器如何能够连到外网/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/08/07/仅有内网IP的IDC的机器如何能够连到外网/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

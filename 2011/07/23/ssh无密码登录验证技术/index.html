@@ -6,40 +6,28 @@
   <title>Ssh 无密码登录验证技术 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="作为发布程序的BAK服务器，还需有直接发送数据到WEB服务器上的功能，这里使用ssh无密码登录验证技术实现。
-&amp;nbsp;
 首先在要添加信任关系的每台服务器上修改hosts文件
 vi /etc/hosts
 在下面添加：
-把各服务器的**IP和主机名一一对应添加,注意区分大小写 **
-
-&amp;nbsp;
-&amp;nbsp;">
+把各服务器的**IP和主机名一一对应添加,注意区分大小写 **">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ssh 无密码登录验证技术">
 <meta property="og:url" content="http://www.elain.org/2011/07/23/ssh无密码登录验证技术/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="作为发布程序的BAK服务器，还需有直接发送数据到WEB服务器上的功能，这里使用ssh无密码登录验证技术实现。
-&amp;nbsp;
 首先在要添加信任关系的每台服务器上修改hosts文件
 vi /etc/hosts
 在下面添加：
-把各服务器的**IP和主机名一一对应添加,注意区分大小写 **
-
-&amp;nbsp;
-&amp;nbsp;">
+把各服务器的**IP和主机名一一对应添加,注意区分大小写 **">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2011/07/11111.png">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ssh 无密码登录验证技术">
 <meta name="twitter:description" content="作为发布程序的BAK服务器，还需有直接发送数据到WEB服务器上的功能，这里使用ssh无密码登录验证技术实现。
-&amp;nbsp;
 首先在要添加信任关系的每台服务器上修改hosts文件
 vi /etc/hosts
 在下面添加：
-把各服务器的**IP和主机名一一对应添加,注意区分大小写 **
-
-&amp;nbsp;
-&amp;nbsp;">
+把各服务器的**IP和主机名一一对应添加,注意区分大小写 **">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -300,37 +288,26 @@ vi /etc/hosts
       
           
         <p>作为发布程序的BAK服务器，还需有直接发送数据到WEB服务器上的功能，这里使用ssh无密码登录验证技术实现。</p>
-<p>&nbsp;</p>
 <p>首先在要添加信任关系的每台服务器上修改hosts文件</p>
 <p>vi /etc/hosts</p>
 <p>在下面添加：</p>
 <p><strong>把各服务器的**</strong>IP<strong><strong>和主机名一一对应添加</strong></strong>,<strong><strong>注意区分大小写</strong></strong> **</p>
 <p><a href="http://www.elain.org/?attachment_id=291"><img src="http://www.elain.org/wp-content/uploads/2011/07/11111.png" alt="" title="1111"></a></p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 <p><strong><a id="more"></a></strong></p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 <p><strong>LAMP**</strong>上操作<strong>** </strong></p>
 <p>建立rsa key</p>
 <p>ssh-keygen -t dsa         //直接一路回车</p>
 <p>cd /root/.ssh/</p>
 <p>mv id_dsa.pub authorized_keys    //修改公钥</p>
-<p>&nbsp;</p>
 <p><strong>BAK**</strong>上操作<strong>** </strong></p>
 <p>建立rsa key</p>
 <p>ssh-keygen -t dsa         //直接一路回车</p>
 <p>cd /root/.ssh/</p>
 <p>cat id_dsa.pub</p>
-<p>&nbsp;</p>
 <p><strong>把**</strong>BAK<strong><strong>里</strong></strong>id_dsa.pub<strong><strong>里的密钥复制</strong></strong> <strong><strong>到</strong></strong>LAMP<strong><strong>的</strong></strong>authorized_keys<strong><strong>里</strong></strong> <strong><strong>即可。</strong></strong> **</p>
 <p>登陆验证</p>
 <p>ssh lamp</p>
 <p>此时，已经无需输入密码了。</p>
-<p>&nbsp;</p>
 <p><strong>LNMP**</strong>上操作<strong>** </strong></p>
 <p>建立rsa key</p>
 <p>ssh-keygen -t dsa         //直接一路回车</p>
@@ -340,7 +317,6 @@ vi /etc/hosts
 <p>在BAK主机上登陆验证</p>
 <p>ssh lnmp</p>
 <p>其它服务器都依次做即可！</p>
-<p>&nbsp;</p>
 
       
     </div>
@@ -352,7 +328,7 @@ vi /etc/hosts
         <p><span>本文标题:</span><a href="/2011/07/23/ssh无密码登录验证技术/">Ssh 无密码登录验证技术</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年07月23日 - 19时28分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/07/23/ssh无密码登录验证技术/" title="Ssh 无密码登录验证技术">http://www.elain.org/2011/07/23/ssh无密码登录验证技术/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/07/23/ssh无密码登录验证技术/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

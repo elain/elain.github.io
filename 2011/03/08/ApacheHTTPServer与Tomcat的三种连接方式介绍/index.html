@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="整合 Apache Http Server 和 Tomcat 可以提升对静态文件的处理性能、利用 Web 服务器来做负载均衡以及容错、无缝的升级应用程序。本文介绍了三种整合 Apache 和 Tomcat 的方式。
 首先我们先介绍一下为什么要让 Apache 与 Tomcat 之间进行连接。事实上 Tomcat 本身已经提供了 HTTP 服务，该服务默认的端口是 8080，装好 tomcat 后通">
-<meta property="og:updated_time" content="2016-02-02T08:04:26.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ApacheHTTPServer与Tomcat的三种连接方式介绍">
 <meta name="twitter:description" content="整合 Apache Http Server 和 Tomcat 可以提升对静态文件的处理性能、利用 Web 服务器来做负载均衡以及容错、无缝的升级应用程序。本文介绍了三种整合 Apache 和 Tomcat 的方式。
@@ -334,11 +334,8 @@
 <p>ProxyPass /css !</p>
 <p>ProxyPass /js !</p>
 <p>ProxyPass / balancer://example/</p>
-<p>&lt;Proxy balancer://example/&gt;</p>
-<p>BalancerMember <a href="http://server1:8080/" target="_blank" rel="external">http://server1:8080/</a></p>
-<p>BalancerMember <a href="http://server2:8080/" target="_blank" rel="external">http://server2:8080/</a></p>
-<p>BalancerMember <a href="http://server3:8080/" target="_blank" rel="external">http://server3:8080/</a></p>
-<p>&lt;/Proxy&gt;</p>
+<proxy balancer:="" example=""><br><br>BalancerMember <a href="http://server1:8080/" target="_blank" rel="external">http://server1:8080/</a><br><br>BalancerMember <a href="http://server2:8080/" target="_blank" rel="external">http://server2:8080/</a><br><br>BalancerMember <a href="http://server3:8080/" target="_blank" rel="external">http://server3:8080/</a><br><br></proxy>
+
 <p>配置比 JK 简单多了，而且它也可以通过一个页面来监控集群运行的状态，并做一些简单的维护设置。</p>
 <p>ajp_proxy</p>
 <p>ajp_proxy 连接方式其实跟 http_proxy 方式一样，都是由 mod_proxy  所提供的功能。配置也是一样，只需要把 http:// 换成 ajp:// ，同时连接的是 Tomcat 的 AJP Connector  所在的端口。上面例子的配置可以改为：</p>
@@ -346,11 +343,8 @@
 <p>ProxyPass /css !</p>
 <p>ProxyPass /js !</p>
 <p>ProxyPass / balancer://example/</p>
-<p>&lt;Proxy balancer://example/&gt;</p>
-<p>BalancerMember ajp://server1:8080/</p>
-<p>BalancerMember ajp://server2:8080/</p>
-<p>BalancerMember ajp://server3:8080/</p>
-<p>&lt;/Proxy&gt;</p>
+<proxy balancer:="" example=""><br><br>BalancerMember ajp://server1:8080/<br><br>BalancerMember ajp://server2:8080/<br><br>BalancerMember ajp://server3:8080/<br><br></proxy>
+
 <p>采用 proxy 的连接方式，需要在 Apache 上加载所需的模块，mod_proxy 相关的模块有  mod_proxy.so、mod_proxy_connect.so、mod_proxy_http.so、mod_proxy_ftp.so、  mod_proxy_ajp.so， 其中 mod_proxy_ajp.so 只在 Apache 2.2.x 中才有。如果是采用  http_proxy 方式则需要加载 mod_proxy.so 和 mod_proxy_http.so；如果是 ajp_proxy 则需要加载  mod_proxy.so 和 mod_proxy_ajp.so这两个模块。<br>三者比较</p>
 <p>相对于 JK 的连接方式，后两种在配置上是比较简单的，灵活性方面也一点都不逊色。但就稳定性而言就不像 JK  这样久经考验，毕竟 Apache 2.2.3 推出的时间并不长，采用这种连接方式的网站还不多，因此，如果是应用于关键的互联网网站，还是建议采用  JK 的连接方式。</p>
 <p>注：此文来自IBM中国技术中心，作者刘冬。</p>
@@ -365,7 +359,7 @@
         <p><span>本文标题:</span><a href="/2011/03/08/ApacheHTTPServer与Tomcat的三种连接方式介绍/">ApacheHTTPServer与Tomcat的三种连接方式介绍</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年03月08日 - 12时28分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 16时04分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/03/08/ApacheHTTPServer与Tomcat的三种连接方式介绍/" title="ApacheHTTPServer与Tomcat的三种连接方式介绍">http://www.elain.org/2011/03/08/ApacheHTTPServer与Tomcat的三种连接方式介绍/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/03/08/ApacheHTTPServer与Tomcat的三种连接方式介绍/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

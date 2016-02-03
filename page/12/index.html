@@ -264,7 +264,7 @@
       
           
               <p>Cacti 部署<br>所需软件：<br>beecrypt-4.1.2.tar.gz<br>net-snmp-5.4.2.1.tar.gz<br>rrdtool-1.4.4.tar.gz<br>cacti-0.8.7g.tar.gz<br>cacti-spine-0.8.7g.tar.gz</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]yum install cairo-devel libxml2-devel pango pango-devel libart_lgpl-devel mysql-server -y<br>rpm -qa cairo-devel libxml2-devel pango pango-devel libart_lgpl-devel mysql-server[/ccWN]</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="operator"><span class="keyword">install</span> cairo-devel libxml2-devel pango pango-devel libart_lgpl-devel mysql-<span class="keyword">server</span> -y</span><br><span class="line">rpm -qa cairo-devel libxml2-devel pango pango-devel libart_lgpl-devel mysql-<span class="keyword">server</span></span></span><br></pre></td></tr></table></figure>
 <p><a href="http://www.elain.org/?attachment_id=531"><img src="http://www.elain.org/wp-content/uploads/2011/11/11.png" alt=""></a></p>
 <p>安装 Snmp
           
@@ -398,10 +398,14 @@
       
           
               <p>Nagios 部署<br>所需软件：<br>nagios-3.2.2.tar.gz</p>
-<p>解决perl编译问题<br>[ccWN lang=”bash” width=”99%” height=”100%”]echo “export LC_ALL=C” &gt;&gt;/etc/profile<br>source /etc/profile<br>service iptables stop<br>chkconfig iptables off[/ccWN]</p>
-<p>#解决时间同步<br>[ccWN lang=”bash” width=”99%” height=”100%”]/usr/sbin/ntpdate pool.ntp.org<br>uptime[/ccWN]</p>
-<p>#安装Nagios所需要的基础软件包<br>[ccWN lang=”bash” width=”99%” height=”100%”]yum install gcc glibc glibc-common -y<br>yum install gd gd-devdel -y<br>yum install httpd php  –y[/ccWN]</p>
-<p>#安装后检查正确结果<br>[ccWN lang=”bash” width=”99%” height=”100%”]rpm -qa gcc glibc glibc-common gd gd-devel httpd php[/ccWN]</p>
+<p>解决perl编译问题</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">"export LC_ALL=C"</span> &gt;&gt;/etc/<span class="keyword">profile</span></span><br><span class="line"><span class="keyword">source</span> /etc/<span class="keyword">profile</span></span><br><span class="line">service iptables <span class="keyword">stop</span></span><br><span class="line">chkconfig iptables off</span><br></pre></td></tr></table></figure>
+<p>#解决时间同步</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/sbin/ntpdate pool<span class="class">.ntp</span><span class="class">.org</span></span><br><span class="line">uptime</span><br></pre></td></tr></table></figure>
+<p>#安装Nagios所需要的基础软件包</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> gcc glibc glibc-common -y</span><br><span class="line">yum <span class="keyword">install</span> gd gd-devdel -y</span><br><span class="line">yum <span class="keyword">install</span> httpd php  –y</span><br></pre></td></tr></table></figure>
+<p>#安装后检查正确结果</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">rpm</span> -qa gcc glibc glibc-<span class="preprocessor">common</span> gd gd-devel httpd php</span><br></pre></td></tr></table></figure>
 <p><img src="http://www.elain.org/wp-content/uploads/2011/11/1.png" alt="" title="1"></p>
 <p>看到上图结果，说基础软件包安装完成
           

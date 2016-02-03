@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="描述vmstat 命令报告关于内核线程、虚拟内存、磁盘、陷阱和 CPU 活动的统计信息。由 vmstat 命令生成的报告可以用于平衡系统负载活动。系统范围内的这些统计信息（所有的处理器中）都计算出以百分比表示的平均值，或者计算其总和。
 语法[root@kqzj ~]# vmstat –helpusage: vmstat [-V] [-n] [delay [count]]-V prints vers">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vmstat命令详解">
 <meta name="twitter:description" content="描述vmstat 命令报告关于内核线程、虚拟内存、磁盘、陷阱和 CPU 活动的统计信息。由 vmstat 命令生成的报告可以用于平衡系统负载活动。系统范围内的这些统计信息（所有的处理器中）都计算出以百分比表示的平均值，或者计算其总和。
@@ -287,7 +287,7 @@
 <p>IO<br>bi: 发送到块设备的块数，单位：块/秒<br>bo: 从块设备接收到的块数，单位：块/秒</p>
 <p>System<br>in: 每秒的中断数，包括时钟中断<br>cs: 每秒的环境（上下文）切换次数</p>
 <p>CPU<br>按 CPU 的总使用百分比来显示<br>us: CPU 使用时间<br>sy: CPU 系统使用时间<br>id: 闲置时间<br>wa:CPU 空闲时间，在此期间系统有未完成的磁盘/NFS I/O 请求。</p>
-<p>判断准测:<br>r&lt;5，b≈0，<br>system列，in，sy，cs会不断跳跃，这里没有明确的限制，唯一的就是这些值最少大于100<br>cpu列，us，sys，id和wa也是不确定的，最理想的状态是使cpu处于100%工作状态，单这只适合单用户的情况下。<br>如果在多用户环境中us＋sy》80，进程就会在运行队列中花费等待时间，响应时间和吞吐量就会下降。wa&gt;40表明磁盘io没有也许存在不合理的平衡，或者对磁盘操作比较频繁<br>如果 r经常大于 4 ，且id经常少于40，表示cpu的负荷很重。<br>如果pi，po 长期不等于0，表示内存不足。<br>如果disk 经常不等于0， 且在 b中的队列 大于3， 表示 io性能不好。</p>
+<p>判断准测:<br>r<5，b≈0， system列，in，sy，cs会不断跳跃，这里没有明确的限制，唯一的就是这些值最少大于100="" cpu列，us，sys，id和wa也是不确定的，最理想的状态是使cpu处于100%工作状态，单这只适合单用户的情况下。="" 如果在多用户环境中us＋sy》80，进程就会在运行队列中花费等待时间，响应时间和吞吐量就会下降。wa="">40表明磁盘io没有也许存在不合理的平衡，或者对磁盘操作比较频繁<br>如果 r经常大于 4 ，且id经常少于40，表示cpu的负荷很重。<br>如果pi，po 长期不等于0，表示内存不足。<br>如果disk 经常不等于0， 且在 b中的队列 大于3， 表示 io性能不好。</5，b≈0，></p>
 <p>示例</p>
 <p>1. 要显示引导后的统计信息摘要，请输入：</p>
 <p>vmstat</p>
@@ -316,7 +316,7 @@
         <p><span>本文标题:</span><a href="/2011/03/03/vmstat命令详解/">Vmstat命令详解</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年03月03日 - 00时13分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/03/03/vmstat命令详解/" title="Vmstat命令详解">http://www.elain.org/2011/03/03/vmstat命令详解/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/03/03/vmstat命令详解/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

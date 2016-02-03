@@ -15,7 +15,7 @@
 <meta property="og:description" content="一、简述：chroot 即 change root directory (更改 root 目录) 。在 linux 系统中，系统默认的目录结构都是以 /，即是以根 (root) 开始的。而在使用 chroot 之后，系统的目录结构将以指定的位置作为 / 位置。
 二、为什么要使用chroot
 在经过 chroot 之后，系统读取到的目录和文件将不在是真实系统根下的而是新根下(即被指定的新的位置)的目">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Openssh的新特性构建chroot环境">
 <meta name="twitter:description" content="一、简述：chroot 即 change root directory (更改 root 目录) 。在 linux 系统中，系统默认的目录结构都是以 /，即是以根 (root) 开始的。而在使用 chroot 之后，系统的目录结构将以指定的位置作为 / 位置。
@@ -291,20 +291,23 @@
 <p>三、目的：可开放chroot帐号供开发人员web服务器上查看日志，分析问题等。</p>
 <p>四、chroot环境部署</p>
 <p>如果是5.5的系统，需要升级openssh，本文是在6.2和5.5中都有使用。</p>
-<p>#建立帐号<br>[ccWN lang=”bash” width=”99%” height=”100%”]useradd rd<br>echo “www.elain.org” | passwd –stdin rd[/ccWN]</p>
-<p>#下载chroot环境<br>[ccWN lang=”bash” width=”99%” height=”100%”]cd /home<br>wget <a href="http://ebook.elain.org/tools/chroot_v1.0.tar.gz" target="_blank" rel="external">http://ebook.elain.org/tools/chroot_v1.0.tar.gz</a><br>tar zxvf chroot_v1.0.tar.gz<br>chown rd.rd /home/chroot/home/rd<br>rm -rf chroot_v1.0.tar.gz<br>[/ccWN]</p>
+<p>#建立帐号</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd <span class="built_in">rd</span></span><br><span class="line"><span class="keyword">echo</span> "www.elain.org" | passwd --stdin <span class="built_in">rd</span></span><br></pre></td></tr></table></figure>
+<p>#下载chroot环境</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /home</span><br><span class="line">wget http:<span class="comment">//ebook.elain.org/tools/chroot_v1.0.tar.gz</span></span><br><span class="line">tar zxvf chroot_v1.<span class="number">0</span><span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line">chown rd<span class="class">.rd</span> /home/chroot/home/rd</span><br><span class="line">rm -rf chroot_v1.<span class="number">0</span><span class="class">.tar</span><span class="class">.gz</span></span><br></pre></td></tr></table></figure>
 <p>#注：以上是我做好的chroot环境，大家可以直接下载使用，也可以自己去做。</p>
-<p>#启用ssh 的chroot<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<p>cat  &lt;&lt;EOF&gt;&gt;/etc/ssh/sshd_config</p>
-<p>#chroot<br>Match User rd<br>ChrootDirectory   /home/chroot<br>EOF</p>
-<p>/etc/init.d/sshd restart</p>
-<p>[/ccWN]</p>
-<p>#挂载日志目录<br>[ccWN lang=”bash” width=”99%” height=”100%”]mount –bind /data/logs /home/chroot/home/rd[/ccWN]</p>
-<p>使用rd登录测试！！！<br><a id="more"></a><br>五、openssh升级(for centos 5.5)<br>1.升级sshd前准备<br>[ccWN lang=”bash” width=”99%” height=”100%”]yum -y install gcc* make openssl openssl-devel perl pam pam-devel</p>
-<p>mkdir -p /opt/soft/src &amp;&amp; cd /opt/soft/src<br>wget <a href="http://ftp.bit.nl/mirror/openssh/portable/openssh-5.9p1.tar.gz" target="_blank" rel="external">http://ftp.bit.nl/mirror/openssh/portable/openssh-5.9p1.tar.gz</a><br>[/ccWN]</p>
-<p>#备份现有ssh<br>[ccWN lang=”bash” width=”99%” height=”100%”]mv /etc/ssh/ /etc/ssh.bak<br>cp /etc/init.d/sshd /etc/init.d/sshd.bak[/ccWN]</p>
-<p>2.安装sshd<br>[ccWN lang=”bash” width=”99%” height=”100%”]cd /opt/soft/src<br>tar zxf openssh-5.9p1.tar.gz<br>cd openssh-5.9p1<br>./configure –prefix=/usr –sysconfdir=/etc/ssh –with-pam –with-zlib –with-md5-passwords<br>make<br>rpm -e –nodeps openssh-server-4.3p2-41.el5<br>rpm -e –nodeps openssh-4.3p2-41.el5<br>make install<br>mv /etc/init.d/sshd.bak /etc/init.d/sshd<br>touch /etc/ssh/ssh_host_ecdsa_key<br>touch /etc/ssh/ssh_host_ecdsa_key.pub<br>mkdir -p /var/empty/sshd/etc<br>[/ccWN]</p>
-<p>#重启sshd.<br>[ccWN lang=”bash” width=”99%” height=”100%”]/etc/init.d/sshd restart[/ccWN]</p>
+<p>#启用ssh 的chroot</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="crmsh">cat  <span class="tag">&lt;&lt;EOF&gt;</span>&gt;/etc/ssh/sshd_config</span><br><span class="line"></span><br><span class="line"><span class="comment">#chroot</span></span><br><span class="line">Match <span class="keyword">User</span> <span class="title">rd</span></span><br><span class="line">ChrootDirectory   /home/chroot</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">/etc/init.d/sshd restart</span></span><br></pre></td></tr></table></figure>
+<p>#挂载日志目录</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount --bind <span class="regexp">/data/</span>logs <span class="regexp">/home/</span>chroot<span class="regexp">/home/</span>rd</span><br></pre></td></tr></table></figure>
+<p>使用rd登录测试！！！<br><a id="more"></a><br>五、openssh升级(for centos 5.5)<br>1.升级sshd前准备</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc* make openssl openssl-devel perl pam pam-devel</span><br><span class="line"></span><br><span class="line">mkdir -p <span class="regexp">/opt/</span>soft<span class="regexp">/src &amp;amp;&amp;amp; cd /</span>opt<span class="regexp">/soft/</span>src</span><br><span class="line">wget <span class="string">http:</span><span class="comment">//ftp.bit.nl/mirror/openssh/portable/openssh-5.9p1.tar.gz</span></span><br></pre></td></tr></table></figure>
+<p>#备份现有ssh</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv <span class="regexp">/etc/</span>ssh<span class="regexp">/ /</span>etc/ssh.bak</span><br><span class="line">cp <span class="regexp">/etc/</span>init.d<span class="regexp">/sshd /</span>etc<span class="regexp">/init.d/</span>sshd.bak</span><br></pre></td></tr></table></figure>
+<p>2.安装sshd</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/soft/src</span><br><span class="line">tar zxf openssh-<span class="number">5.9</span>p1<span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line">cd openssh-<span class="number">5.9</span>p1</span><br><span class="line">./configure --prefix=/usr --sysconfdir=/etc/ssh --with-pam --with-zlib --with-md5-passwords</span><br><span class="line">make</span><br><span class="line">rpm -e --nodeps openssh-server-<span class="number">4.3</span>p2-<span class="number">41</span><span class="class">.el5</span></span><br><span class="line">rpm -e --nodeps openssh-<span class="number">4.3</span>p2-<span class="number">41</span><span class="class">.el5</span></span><br><span class="line">make install</span><br><span class="line">mv /etc/init.d/sshd<span class="class">.bak</span> /etc/init.d/sshd</span><br><span class="line">touch /etc/ssh/ssh_host_ecdsa_key</span><br><span class="line">touch /etc/ssh/ssh_host_ecdsa_key<span class="class">.pub</span></span><br><span class="line">mkdir -<span class="tag">p</span> /var/empty/sshd/etc</span><br></pre></td></tr></table></figure>
+<p>#重启sshd.</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/etc/i</span>nit.d<span class="regexp">/sshd restart</span></span><br></pre></td></tr></table></figure>
 <p>升级成功.</p>
 
       
@@ -317,7 +320,7 @@
         <p><span>本文标题:</span><a href="/2012/07/31/使用openssh的新特性构建chroot环境/">使用Openssh的新特性构建chroot环境</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2012年07月31日 - 19时02分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2012/07/31/使用openssh的新特性构建chroot环境/" title="使用Openssh的新特性构建chroot环境">http://www.elain.org/2012/07/31/使用openssh的新特性构建chroot环境/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2012/07/31/使用openssh的新特性构建chroot环境/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

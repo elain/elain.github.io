@@ -332,10 +332,10 @@
 <p>2.1 getopts脚本实例<br>通过例子可以更好地理解g e t o p t s。以下g e t o p t s脚本接受下列选项或参数。</p>
 <ul>
 <li>a 设置变量A L L为t r u e。</li>
-<li><p>h 设置变量H E L P为t r u e。<br>&nbsp;</p>
-</li>
-<li><p>f 设置变量F I L E为t r u e。</p>
-</li>
+<li>h 设置变量H E L P为t r u e。</li>
+</ul>
+<ul>
+<li>f 设置变量F I L E为t r u e。</li>
 <li>v 设置变量V E R B O S E为t r u e。<br>对于所有变量设置，一般总假定其初始状态为f a l s e：</li>
 </ul>
 <p>
@@ -478,7 +478,7 @@
               <p>1、安装好tomcat</p>
 <p>2、在tomcat根目录新建app1和app2两目录</p>
 <p>3、拷贝 conf、logs、 temp、 webapps、 work目录到app1和app2，并分别删除webapps内的所有文件</p>
-<p>4、分别修改conf内的server.xml文件的&lt;server&gt;和&lt;Connector port=”8088”  protocol=”HTTP/1.1”两个端口不相互冲突。如果使用集群方式还要修改&lt;Connector port=”8099”  protocol=”AJP/1.3”端口不相互冲突。</p>
+<p>4、分别修改conf内的server.xml文件的<server>和&lt;Connector port=”8088”  protocol=”HTTP/1.1”两个端口不相互冲突。如果使用集群方式还要修改&lt;Connector port=”8099”  protocol=”AJP/1.3”端口不相互冲突。</p>
 <p>5、新建两个启动文件startApp1.sh、 startApp2.sh，内容分别为：
           
       

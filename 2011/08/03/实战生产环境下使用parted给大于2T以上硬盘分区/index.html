@@ -15,7 +15,7 @@
 <meta property="og:description" content="简述：parted是一个磁盘分区管理管理工具,它比fdisk更加灵活，功能也更丰富，同时还支持GUID分区表(GUID Partition Table), 这在IA64平台上管理磁盘时非常有用，它同时支持交互模式和非交互模式. 它除了能够进行分区的添加,删除等常见操作外,还可以移动分区, 制作文件系统, 调整文件系统大小, 复制文件系统。
 需求：现有一个做了RAID5的硬盘，要求分三个区，
 硬盘总">
-<meta property="og:updated_time" content="2016-02-02T08:06:29.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实战生产环境下使用parted给大于2T以上硬盘分区">
 <meta name="twitter:description" content="简述：parted是一个磁盘分区管理管理工具,它比fdisk更加灵活，功能也更丰富，同时还支持GUID分区表(GUID Partition Table), 这在IA64平台上管理磁盘时非常有用，它同时支持交互模式和非交互模式. 它除了能够进行分区的添加,删除等常见操作外,还可以移动分区, 制作文件系统, 调整文件系统大小, 复制文件系统。
@@ -303,8 +303,9 @@
 <p>需要修改块大小。或划分为多个分区（不得超过16T）。</p>
 <h1 id="mkfs-ext3_-b_8192_/dev/sdb1"><a href="#mkfs-ext3_-b_8192_/dev/sdb1" class="headerlink" title="mkfs.ext3 -b 8192 /dev/sdb1"></a>mkfs.ext3 -b 8192 /dev/sdb1</h1><p>方法二：</p>
 <p>使用xfs文件系统</p>
-<p><pre class="brush: cpp; title: ; notranslate" style="color: #555555;" title="">#yum install xfsprogs -y</pre></p>
-<p>#mkfs.xfs /dev/sdb1<br>&nbsp;</p>
+<pre class="brush: cpp; title: ; notranslate" style="color: #555555;" title="">#yum install xfsprogs -y
+#mkfs.xfs /dev/sdb1</pre>
+
 
       
     </div>
@@ -316,7 +317,7 @@
         <p><span>本文标题:</span><a href="/2011/08/03/实战生产环境下使用parted给大于2T以上硬盘分区/">实战生产环境下使用parted给大于2T以上硬盘分区</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年08月03日 - 14时15分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 16时06分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/08/03/实战生产环境下使用parted给大于2T以上硬盘分区/" title="实战生产环境下使用parted给大于2T以上硬盘分区">http://www.elain.org/2011/08/03/实战生产环境下使用parted给大于2T以上硬盘分区/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/08/03/实战生产环境下使用parted给大于2T以上硬盘分区/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

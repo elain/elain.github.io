@@ -325,14 +325,11 @@
       
           
               <p>作为发布程序的BAK服务器，还需有直接发送数据到WEB服务器上的功能，这里使用ssh无密码登录验证技术实现。</p>
-<p>&nbsp;</p>
 <p>首先在要添加信任关系的每台服务器上修改hosts文件</p>
 <p>vi /etc/hosts</p>
 <p>在下面添加：</p>
 <p><strong>把各服务器的**</strong>IP<strong><strong>和主机名一一对应添加</strong></strong>,<strong><strong>注意区分大小写</strong></strong> **</p>
 <p><a href="http://www.elain.org/?attachment_id=291"><img src="http://www.elain.org/wp-content/uploads/2011/07/11111.png" alt="" title="1111"></a></p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 <p><strong>
           
       
@@ -532,7 +529,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>简述：</p>
+              <p>简述：</p>
 <pre><code>SVN是一个安全虚拟网络系统，它将系统整体的信息安全功能均衡合理地分布在不同的子系统中，
 
 使各子系统的功能得到最大限度的发挥，子系统之间互相补充，系统整体性能大于各子系统功能之和，用均衡互补的原则解决了&amp;quot;木桶原理&amp;quot;的问题。
@@ -540,111 +537,8 @@
 <pre><code>CentOS release 5.5 (Final) x64
 </code></pre><p>IP：10.0.0.110</p>
 <p>#安装部署</p>
-<p>检查是否安装了低版本的SVN</p>
-<pre><code>rpm -qa subversion&lt;!--more--&gt;
-
-[root@Svn tools#]rpm -qa subversion
-
-subversion-1.4.2-4.el5_3.1
-
-subversion-1.4.2-4.el5_3.1 subversion-1.4.2-4
-</code></pre><p>#卸载</p>
-<pre><code>yum remove subversion
-</code></pre><p>安装svn</p>
-<pre><code>yum install subversion&amp;nbsp; -y
-</code></pre><p>mkdir -p /elain/data/{svndata,svnpasswd}</p>
-<p>启动SVN服务指定服务的SVN根目录</p>
-<pre><code>svnserve -d&amp;nbsp; -r /elain/data/svndata/ --pid-file=/elain/data/svndata/svn.pid
-</code></pre><p>查看 SVN 进程:</p>
-<pre><code>[root@Svn tools#]ps -ef|grep svn|grep -v grep
-
-root&amp;nbsp;&amp;nbsp; 27543&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 1&amp;nbsp; 0 14:10 ? 00:00:00 svnserve -d -r /elain/data/svndata/ --pid-file=/elain/data/svndata/svn.pid
-</code></pre><p>检测 SVN 端口:</p>
-<pre><code>[root@Svn tools#]netstat -ln |grep 3690
-
-tcp&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 0&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 0 :::3690&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; :::*&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; LISTEN
-</code></pre><p>建立版本库</p>
-<pre><code>创建一个新的 Subversion 项目 trunk
-
-svnadmin create /elain/data/svndata/trunk
-</code></pre><p>配置允许用户 elain 读写访问</p>
-<p>cd /elain/data/svndata/trunk/conf/</p>
-<pre><code>vi svnserve.conf 修改
-
-=================================================
-
-12 anon-access = read
-
-13 auth-access = write
-
-18 password-db = /elain/data/svnpasswd/passwd
-
-25 authz-db = /elain/data/svnpasswd/authz
-
-=================================================
-
-/etc/init.d/httpd start
-
-注: svnserve.conf 中每个参数都要顶格写,开头不能有空格。
-</code></pre><p>cp authz passwd /elain/data/svnpasswd/</p>
-<p>authz 的配置:</p>
-<pre><code>cd /elain/data/svnpasswd/
-
-vi authz
-
-添加
-
-#################################
-
-[groups]
-
-#定义组
-
-g_webadmin = elain
-</code></pre><p>#定义目录</p>
-<pre><code>[trunk:/]
-
-@g_webadmin = rw
-
-#################################
-
-提示:注意 authz 权限格式的写法
-
-1.authz 中每个参数都要顶格写,开头不能有空格。
-
-2.对于组,要@开头,用户不需要@开头。
-</code></pre><p>passwd 文件用户及密码的设置</p>
-<p>vi passwd</p>
-<pre><code>添加：
-
-#######################
-
-# user=passwd
-
-elain=elain
-
-######################
-
-提示:
-
-1.等号前为 SVN 帐号,等号后为 svn 密码
-
-2.更改 svnserve.conf 时,需要重起 SVN,更改 authz,passwd 文件时不需要重启
-</code></pre><p>重启 SVN 命令&lt;非必需&gt;</p>
-<pre><code>kill -USR1 `cat /elain/data/svndata/svn.pid`
-
-svnserve -d -r /elain/data/svndata/ --pid-file=/elain/data/svndata/svn.pid
-
-提示:当更改 svnserve.conf 时,需要重起 SVN,更改 authz,passwd 文件时不需要重起
-</code></pre><p>到此服务器部署完成</p>
-<p>客户端安装</p>
-<p>客户端软件</p>
-<pre><code>TortoiseSVN-1.6.5.16974-win32-svn-1.6.5.msi
-</code></pre><p>连接:</p>
-<pre><code>svn://10.0.0.110/trunk
-
-用户名 elain 密码 elain
-</code></pre>
+<p>检查是否安装了低版本的SVN<br>
+          
       
     </div>
     
@@ -661,6 +555,10 @@ svnserve -d -r /elain/data/svndata/ --pid-file=/elain/data/svndata/svn.pid
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/subversion/">subversion</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svn/">svn</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a  href="/2011/07/22/'CentOS5.5下SVN部署文档'/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

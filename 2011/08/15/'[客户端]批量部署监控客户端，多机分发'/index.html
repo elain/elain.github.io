@@ -18,7 +18,7 @@ yum install net-snmp -y
 
 /etc/init.d/snmpd start
 
-echo &amp;amp;quot;/etc/init.d/snmpd start&amp;amp;quot;&amp;amp;nbsp;">
+echo &amp;amp;quot;/etc/init.d/snmpd start&amp;amp;quot;  &amp;gt;&amp;gt;/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[客户端]批量部署监控客户端，多机分发 ">
 <meta property="og:url" content="http://www.elain.org/2011/08/15/'[客户端]批量部署监控客户端，多机分发'/index.html">
@@ -36,8 +36,8 @@ yum install net-snmp -y
 
 /etc/init.d/snmpd start
 
-echo &amp;amp;quot;/etc/init.d/snmpd start&amp;amp;quot;&amp;amp;nbsp;">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+echo &amp;amp;quot;/etc/init.d/snmpd start&amp;amp;quot;  &amp;gt;&amp;gt;/">
+<meta property="og:updated_time" content="2016-02-03T06:19:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[客户端]批量部署监控客户端，多机分发 ">
 <meta name="twitter:description" content="环境：CENTOS 5.5 x64
@@ -53,7 +53,7 @@ yum install net-snmp -y
 
 /etc/init.d/snmpd start
 
-echo &amp;amp;quot;/etc/init.d/snmpd start&amp;amp;quot;&amp;amp;nbsp;">
+echo &amp;amp;quot;/etc/init.d/snmpd start&amp;amp;quot;  &amp;gt;&amp;gt;/">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -326,11 +326,11 @@ yum install net-snmp -y
 
 /etc/init.d/snmpd start
 
-echo &amp;quot;/etc/init.d/snmpd start&amp;quot;&amp;nbsp; &amp;gt;&amp;gt;/etc/rc.local
+echo &amp;quot;/etc/init.d/snmpd start&amp;quot;  &gt;&gt;/etc/rc.local
 
 ################################################
 
-#for&amp;nbsp; nagios
+#for  nagios
 
 #创建nagios需要的用户及组
 
@@ -382,7 +382,7 @@ chown -R nagios.nagios /elain/apps/nagios
 
 /elain/apps/nagios/bin/nrpe -c /elain/apps/nagios/etc/nrpe.cfg -d
 
-echo &amp;quot;/elain/apps/nagios/bin/nrpe -c /elain/apps/nagios/etc/nrpe.cfg -d&amp;quot; &amp;gt;&amp;gt;/etc/rc.local
+echo &amp;quot;/elain/apps/nagios/bin/nrpe -c /elain/apps/nagios/etc/nrpe.cfg -d&amp;quot; &gt;&gt;/etc/rc.local
 
 #重启nagios nrpe组合命令
 
@@ -414,11 +414,11 @@ cd /elain/apps
 
 tar zxvf nagios.tar.gz
 
-rm -rf&amp;nbsp; nagios.tar.gz
+rm -rf  nagios.tar.gz
 
 /elain/apps/nagios/bin/nrpe -c /elain/apps/nagios/etc/nrpe.cfg -d
 
-echo &amp;quot;/elain/apps/nagios/bin/nrpe -c /elain/apps/nagios/etc/nrpe.cfg -d&amp;quot; &amp;gt;&amp;gt;/etc/rc.local
+echo &amp;quot;/elain/apps/nagios/bin/nrpe -c /elain/apps/nagios/etc/nrpe.cfg -d&amp;quot; &gt;&gt;/etc/rc.local
 
 # for cacti
 
@@ -428,7 +428,7 @@ mv /etc/snmp/snmpd.conf.ok /etc/snmp/snmpd.conf
 
 /etc/init.d/snmpd start
 
-echo &amp;quot;/etc/init.d/snmpd start&amp;quot;&amp;nbsp; &amp;gt;&amp;gt;/etc/rc.local
+echo &amp;quot;/etc/init.d/snmpd start&amp;quot;  &gt;&gt;/etc/rc.local
 
 在这里只是提供给大家一个思路，欢迎大家一起交流敏捷运维！
 </code></pre>
@@ -442,7 +442,7 @@ echo &amp;quot;/etc/init.d/snmpd start&amp;quot;&amp;nbsp; &amp;gt;&amp;gt;/etc/
         <p><span>本文标题:</span><a href="/2011/08/15/'[客户端]批量部署监控客户端，多机分发'/">[客户端]批量部署监控客户端，多机分发 </a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年08月15日 - 09时37分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/08/15/'[客户端]批量部署监控客户端，多机分发'/" title="[客户端]批量部署监控客户端，多机分发 ">http://www.elain.org/2011/08/15/&#39;[客户端]批量部署监控客户端，多机分发&#39;/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/08/15/&#39;[客户端]批量部署监控客户端，多机分发&#39;/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

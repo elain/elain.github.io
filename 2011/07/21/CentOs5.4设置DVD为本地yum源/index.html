@@ -7,26 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="进入 /etc/yum.repo.d/ 文件夹
 vi Centos-Media.repo
-修改文件中的dvd的位置，并打开本地源，如下：
-CentOS-Media.repo#
-This repo is used to mount the default locations for a CDROM / DVD onCentOS-5.  You can use this repo and yum to">
+修改文件中的dvd的位置，并打开本地源，如下：1234567891011121314151617181920# CentOS-Media.repo## This repo is used to mount the default locations for a CDROM / DVD on#  CentOS-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOs5.4设置DVD为本地yum源">
 <meta property="og:url" content="http://www.elain.org/2011/07/21/CentOs5.4设置DVD为本地yum源/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="进入 /etc/yum.repo.d/ 文件夹
 vi Centos-Media.repo
-修改文件中的dvd的位置，并打开本地源，如下：
-CentOS-Media.repo#
-This repo is used to mount the default locations for a CDROM / DVD onCentOS-5.  You can use this repo and yum to">
-<meta property="og:updated_time" content="2016-02-02T08:04:51.000Z">
+修改文件中的dvd的位置，并打开本地源，如下：1234567891011121314151617181920# CentOS-Media.repo## This repo is used to mount the default locations for a CDROM / DVD on#  CentOS-">
+<meta property="og:updated_time" content="2016-02-03T06:05:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOs5.4设置DVD为本地yum源">
 <meta name="twitter:description" content="进入 /etc/yum.repo.d/ 文件夹
 vi Centos-Media.repo
-修改文件中的dvd的位置，并打开本地源，如下：
-CentOS-Media.repo#
-This repo is used to mount the default locations for a CDROM / DVD onCentOS-5.  You can use this repo and yum to">
+修改文件中的dvd的位置，并打开本地源，如下：1234567891011121314151617181920# CentOS-Media.repo## This repo is used to mount the default locations for a CDROM / DVD on#  CentOS-">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -288,16 +282,10 @@ This repo is used to mount the default locations for a CDROM / DVD onCentOS-5.  
           
         <p>进入 /etc/yum.repo.d/ 文件夹</p>
 <p>vi Centos-Media.repo</p>
-<p>修改文件中的dvd的位置，并打开本地源，如下：</p>
-<h1 id="CentOS-Media-repo"><a href="#CentOS-Media-repo" class="headerlink" title="CentOS-Media.repo"></a>CentOS-Media.repo</h1><p>#</p>
-<h1 id="This_repo_is_used_to_mount_the_default_locations_for_a_CDROM_/_DVD_on"><a href="#This_repo_is_used_to_mount_the_default_locations_for_a_CDROM_/_DVD_on" class="headerlink" title="This repo is used to mount the default locations for a CDROM / DVD on"></a>This repo is used to mount the default locations for a CDROM / DVD on</h1><h1 id="CentOS-5-_You_can_use_this_repo_and_yum_to_install_items_directly_off_the"><a href="#CentOS-5-_You_can_use_this_repo_and_yum_to_install_items_directly_off_the" class="headerlink" title="CentOS-5.  You can use this repo and yum to install items directly off the"></a>CentOS-5.  You can use this repo and yum to install items directly off the</h1><h1 id="DVD_ISO_that_we_release"><a href="#DVD_ISO_that_we_release" class="headerlink" title="DVD ISO that we release."></a>DVD ISO that we release.</h1><p>#</p>
-<h1 id="To_use_this_repo_2C_put_in_your_DVD_and_use_it_with_the_other_repos_too_3A"><a href="#To_use_this_repo_2C_put_in_your_DVD_and_use_it_with_the_other_repos_too_3A" class="headerlink" title="To use this repo, put in your DVD and use it with the other repos too:"></a>To use this repo, put in your DVD and use it with the other repos too:</h1><h1 id="yum__u2013enablerepo_3Dc5-media__5Bcommand_5D"><a href="#yum__u2013enablerepo_3Dc5-media__5Bcommand_5D" class="headerlink" title="yum –enablerepo=c5-media [command]"></a>yum –enablerepo=c5-media [command]</h1><h1 id="3C_21-more-_3E"><a href="#3C_21-more-_3E" class="headerlink" title="<a id=" more"=""></a>"><!--more--></h1><h1 id="or_for_ONLY_the_media_repo_2C_do_this_3A"><a href="#or_for_ONLY_the_media_repo_2C_do_this_3A" class="headerlink" title="or for ONLY the media repo, do this:"></a>or for ONLY the media repo, do this:</h1><p>#</p>
-<h1 id="yum__u2013disablerepo_3D*__u2013enablerepo_3Dc5-media__5Bcommand_5D"><a href="#yum__u2013disablerepo_3D*__u2013enablerepo_3Dc5-media__5Bcommand_5D" class="headerlink" title="yum –disablerepo=* –enablerepo=c5-media [command]"></a>yum –disablerepo=* –enablerepo=c5-media [command]</h1><p>[c5-media]<br>name=CentOS-$releasever - Media<br>baseurl=file:///mnt/</p>
-<p>gblerepo=* –enablerepo=c5-mediapgcheck=1<br>enabled=0<br>gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5</p>
+<p>修改文件中的dvd的位置，并打开本地源，如下：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CentOS-Media.repo</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This repo is used to mount the default locations for a CDROM / DVD on</span></span><br><span class="line"><span class="comment">#  CentOS-5.  You can use this repo and yum to install items directly off the</span></span><br><span class="line"><span class="comment">#  DVD ISO that we release.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># To use this repo, put in your DVD and use it with the other repos too:</span></span><br><span class="line"><span class="comment">#  yum --enablerepo=c5-media [command]</span></span><br><span class="line"><span class="comment"># &lt;!--more--&gt;</span></span><br><span class="line"><span class="comment"># or for ONLY the media repo, do this:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  yum --disablerepo=\* --enablerepo=c5-media [command]</span></span><br><span class="line"><span class="title"></span><br><span class="line">[c5-media]</span></span><br><span class="line"><span class="setting">name=<span class="value">CentOS-<span class="variable">$releasever</span> - Media</span></span></span><br><span class="line"><span class="setting">baseurl=<span class="value">file:///mnt/</span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">gblerepo=<span class="value">\* --enablerepo=c5-mediapgcheck=<span class="number">1</span></span></span></span><br><span class="line"><span class="setting">enabled=<span class="value"><span class="number">0</span></span></span></span><br><span class="line"><span class="setting">gpgkey=<span class="value">file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-<span class="number">5</span></span></span></span><br></pre></td></tr></table></figure></p>
 <p>保存退出</p>
 <p>#mount /dev/cdrom /mnt     //挂载光盘到/mnt下</p>
-<p>使用命令如下：</p>
-<p>yum –disablerepo=* –enablerepo=c5-media install/remove -y</p>
+<p>使用命令如下：<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">yum</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">disablerepo=\*</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enablerepo=c5</span><span class="literal">-</span><span class="comment">media</span> <span class="comment">install/remove</span> <span class="literal">-</span><span class="comment">y</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -309,7 +297,7 @@ This repo is used to mount the default locations for a CDROM / DVD onCentOS-5.  
         <p><span>本文标题:</span><a href="/2011/07/21/CentOs5.4设置DVD为本地yum源/">CentOs5.4设置DVD为本地yum源</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年07月21日 - 18时29分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 16时04分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时05分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/07/21/CentOs5.4设置DVD为本地yum源/" title="CentOs5.4设置DVD为本地yum源">http://www.elain.org/2011/07/21/CentOs5.4设置DVD为本地yum源/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/07/21/CentOs5.4设置DVD为本地yum源/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -345,7 +333,7 @@ This repo is used to mount the default locations for a CDROM / DVD onCentOS-5.  
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS-Media-repo"><span class="toc-number">1.</span> <span class="toc-text">CentOS-Media.repo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#This_repo_is_used_to_mount_the_default_locations_for_a_CDROM_/_DVD_on"><span class="toc-number">2.</span> <span class="toc-text">This repo is used to mount the default locations for a CDROM / DVD on</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS-5-_You_can_use_this_repo_and_yum_to_install_items_directly_off_the"><span class="toc-number">3.</span> <span class="toc-text">CentOS-5.  You can use this repo and yum to install items directly off the</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DVD_ISO_that_we_release"><span class="toc-number">4.</span> <span class="toc-text">DVD ISO that we release.</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#To_use_this_repo_2C_put_in_your_DVD_and_use_it_with_the_other_repos_too_3A"><span class="toc-number">5.</span> <span class="toc-text">To use this repo, put in your DVD and use it with the other repos too:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#yum__u2013enablerepo_3Dc5-media__5Bcommand_5D"><span class="toc-number">6.</span> <span class="toc-text">yum –enablerepo=c5-media [command]</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3C_21-more-_3E"><span class="toc-number">7.</span> <span class="toc-text">"></span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#or_for_ONLY_the_media_repo_2C_do_this_3A"><span class="toc-number">8.</span> <span class="toc-text">or for ONLY the media repo, do this:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#yum__u2013disablerepo_3D*__u2013enablerepo_3Dc5-media__5Bcommand_5D"><span class="toc-number">9.</span> <span class="toc-text">yum –disablerepo=* –enablerepo=c5-media [command]</span></a></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {

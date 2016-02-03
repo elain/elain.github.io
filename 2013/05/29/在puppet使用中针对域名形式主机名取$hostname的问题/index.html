@@ -6,18 +6,21 @@
   <title>在Puppet使用中针对域名形式主机名取$hostname的问题 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="今天测试使用puppet中的if来针对同一node组里不同hostname配件不同的文件，由于同一node组里多个class 一样，且是一个WEB集群，只有一台需要添加一个调试跟踪工具，配置有所不同，所以使用if判断去做匹配，不想把它再独立成一个node.
-node配置如下：[ccWN lang=”bash” width=”99%” height=”100%”]node base {include">
+node配置如下：
+12345678910111213node base &amp;#123;include hosts,sysctl&amp;#125;#p">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Puppet使用中针对域名形式主机名取$hostname的问题">
 <meta property="og:url" content="http://www.elain.org/2013/05/29/在puppet使用中针对域名形式主机名取$hostname的问题/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="今天测试使用puppet中的if来针对同一node组里不同hostname配件不同的文件，由于同一node组里多个class 一样，且是一个WEB集群，只有一台需要添加一个调试跟踪工具，配置有所不同，所以使用if判断去做匹配，不想把它再独立成一个node.
-node配置如下：[ccWN lang=”bash” width=”99%” height=”100%”]node base {include">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+node配置如下：
+12345678910111213node base &amp;#123;include hosts,sysctl&amp;#125;#p">
+<meta property="og:updated_time" content="2016-02-03T05:53:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Puppet使用中针对域名形式主机名取$hostname的问题">
 <meta name="twitter:description" content="今天测试使用puppet中的if来针对同一node组里不同hostname配件不同的文件，由于同一node组里多个class 一样，且是一个WEB集群，只有一台需要添加一个调试跟踪工具，配置有所不同，所以使用if判断去做匹配，不想把它再独立成一个node.
-node配置如下：[ccWN lang=”bash” width=”99%” height=”100%”]node base {include">
+node配置如下：
+12345678910111213node base &amp;#123;include hosts,sysctl&amp;#125;#p">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -278,14 +281,19 @@ node配置如下：[ccWN lang=”bash” width=”99%” height=”100%”]node 
       
           
         <p>今天测试使用puppet中的if来针对同一node组里不同hostname配件不同的文件，由于同一node组里多个class 一样，且是一个WEB集群，只有一台需要添加一个调试跟踪工具，配置有所不同，所以使用if判断去做匹配，不想把它再独立成一个node.</p>
-<p>node配置如下：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>node base {<br>include hosts,sysctl<br>}</p>
-<p>#puppet test<br>node “puppettest01.bj”,”puppettest02.bj” inherits base {<br>if $hostname == “puppettest02.bj” {<br>include php::hd_1<br>} else {<br>include php::hd_2<br>}<br>}<br>[/ccWN]<br>没试不通过，怀疑是变量获取有问题，于是在puppettest01.bj 上执行 facter 来查看变量<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<h1 id="facter"><a href="#facter" class="headerlink" title="facter"></a>facter</h1><p>architecture = x86_64<br>domain =bj<br>fqdn = puppettest01.bj<br>hostname = puppettest01<br>[/ccWN]<br>而我的puppettest01.bj的服务器上查看是这样的<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<p>#hostname<br>puppettest01.bj<br>[/ccWN]<br>从上面信息可以看到我们的 $hostname 是puppettest01 ,而非 puppettest01.bj , facter 获取hostname时截断了.bj,  即：$hostname=puppettest01 ,而我在上面的配置里是使用的 puppettest01.bj</p>
-<p>所以无法匹配到，于是改成了下面的配置<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>node base {<br>include hosts,sysctl<br>}</p>
-<p>#puppet test<br>node “puppettest01.bj”,”puppettest02.bj” inherits base {<br>if $hostname == “puppettest02” {<br>include php::hd_1<br>} else {<br>include php::hd_2<br>}<br>}<br>[/ccWN]<br>测试通过。<br>注：此案例只针对像 puppettest01.bj 这样使用域名方式的主机名有效。</p>
-<p>第二种解决方法：<br>也可使用 $fqdn 变量来匹配，代码如下：<a id="more"></a><br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>node base {<br>include hosts,sysctl<br>}</p>
-<p>#puppet test<br>node “puppettest01.bj”,”puppettest02.bj” inherits base {<br>if $fqdn == “puppettest02.bj” {<br>include php::hd_1<br>} else {<br>include php::hd_2<br>}<br>}<br>[/ccWN]<br>注：此方法不太推荐，因为FQDN 不是由本机决定的，是由 DNS 决定的，这需要DNS的保障才可广泛使用。</p>
+<p>node配置如下：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">node base &#123;</span><br><span class="line"><span class="keyword">include</span> hosts,sysctl</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#puppet test</span></span><br><span class="line">node <span class="string">"puppettest01.bj"</span>,<span class="string">"puppettest02.bj"</span> inherits base &#123;</span><br><span class="line"><span class="keyword">if</span> <span class="variable">$hostname</span> == <span class="string">"puppettest02.bj"</span> &#123;</span><br><span class="line"><span class="keyword">include</span> <span class="symbol">php:</span><span class="symbol">:hd_1</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">include</span> <span class="symbol">php:</span><span class="symbol">:hd_2</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>没试不通过，怀疑是变量获取有问题，于是在puppettest01.bj 上执行 facter 来查看变量</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># facter</span></span><br><span class="line"><span class="setting">architecture = <span class="value">x<span class="number">86_64</span></span></span></span><br><span class="line"><span class="setting">domain =<span class="value">bj</span></span></span><br><span class="line"><span class="setting">fqdn = <span class="value">puppettest01.bj</span></span></span><br><span class="line"><span class="setting">hostname = <span class="value">puppettest01</span></span></span><br></pre></td></tr></table></figure>
+<p>而我的puppettest01.bj的服务器上查看是这样的</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="id">#hostname</span></span><br><span class="line"><span class="tag">puppettest01</span><span class="class">.bj</span></span><br></pre></td></tr></table></figure>
+<p>从上面信息可以看到我们的 $hostname 是puppettest01 ,而非 puppettest01.bj , facter 获取hostname时截断了.bj,  即：$hostname=puppettest01 ,而我在上面的配置里是使用的 puppettest01.bj</p>
+<p>所以无法匹配到，于是改成了下面的配置</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">node base &#123;</span><br><span class="line"><span class="keyword">include</span> hosts,sysctl</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#puppet test</span></span><br><span class="line">node <span class="string">"puppettest01.bj"</span>,<span class="string">"puppettest02.bj"</span> inherits base &#123;</span><br><span class="line"><span class="keyword">if</span> <span class="variable">$hostname</span> == <span class="string">"puppettest02"</span> &#123;</span><br><span class="line"><span class="keyword">include</span> <span class="symbol">php:</span><span class="symbol">:hd_1</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">include</span> <span class="symbol">php:</span><span class="symbol">:hd_2</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试通过。<br>注：此案例只针对像 puppettest01.bj 这样使用域名方式的主机名有效。</p>
+<p>第二种解决方法：<br>也可使用 $fqdn 变量来匹配，代码如下：<a id="more"></a></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">node base &#123;</span><br><span class="line"><span class="keyword">include</span> hosts,sysctl</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#puppet test</span></span><br><span class="line">node <span class="string">"puppettest01.bj"</span>,<span class="string">"puppettest02.bj"</span> inherits base &#123;</span><br><span class="line"><span class="keyword">if</span> <span class="variable">$fqdn</span> == <span class="string">"puppettest02.bj"</span> &#123;</span><br><span class="line"><span class="keyword">include</span> <span class="symbol">php:</span><span class="symbol">:hd_1</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">include</span> <span class="symbol">php:</span><span class="symbol">:hd_2</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：此方法不太推荐，因为FQDN 不是由本机决定的，是由 DNS 决定的，这需要DNS的保障才可广泛使用。</p>
 
       
     </div>
@@ -297,7 +305,7 @@ node配置如下：[ccWN lang=”bash” width=”99%” height=”100%”]node 
         <p><span>本文标题:</span><a href="/2013/05/29/在puppet使用中针对域名形式主机名取$hostname的问题/">在Puppet使用中针对域名形式主机名取$hostname的问题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2013年05月29日 - 11时44分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 13时53分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2013/05/29/在puppet使用中针对域名形式主机名取$hostname的问题/" title="在Puppet使用中针对域名形式主机名取$hostname的问题">http://www.elain.org/2013/05/29/在puppet使用中针对域名形式主机名取$hostname的问题/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2013/05/29/在puppet使用中针对域名形式主机名取$hostname的问题/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -333,7 +341,7 @@ node配置如下：[ccWN lang=”bash” width=”99%” height=”100%”]node 
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#facter"><span class="toc-number">1.</span> <span class="toc-text">facter</span></a></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {

@@ -5,19 +5,16 @@
   
   <title>NGINX 多域名日志切割备份脚本 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#!/bin/bash
-Info   : cut logs for nginxAuthor : elainCTime  : 2011.06.08This script run at 00:00The Nginx logs pathLogs_Path=”/elain/logs/nginx”log_filenames=/bin/ls $Logs_Path |grep -v nginx|grep -v">
+  <meta name="description" content="12345678910111213141516#!/bin/bash# Info   : cut logs for nginx# Author : elain# CTime  : 2011.06.08# This script run at 00:00# The Nginx logs pathLogs_Path=&quot;/elain/logs/nginx&quot;log_filenames=`/bin/ls $">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NGINX 多域名日志切割备份脚本">
 <meta property="og:url" content="http://www.elain.org/2011/07/07/NGINX多域名日志切割备份脚本/index.html">
 <meta property="og:site_name" content="Elain'blog">
-<meta property="og:description" content="#!/bin/bash
-Info   : cut logs for nginxAuthor : elainCTime  : 2011.06.08This script run at 00:00The Nginx logs pathLogs_Path=”/elain/logs/nginx”log_filenames=/bin/ls $Logs_Path |grep -v nginx|grep -v">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:description" content="12345678910111213141516#!/bin/bash# Info   : cut logs for nginx# Author : elain# CTime  : 2011.06.08# This script run at 00:00# The Nginx logs pathLogs_Path=&quot;/elain/logs/nginx&quot;log_filenames=`/bin/ls $">
+<meta property="og:updated_time" content="2016-02-03T06:19:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NGINX 多域名日志切割备份脚本">
-<meta name="twitter:description" content="#!/bin/bash
-Info   : cut logs for nginxAuthor : elainCTime  : 2011.06.08This script run at 00:00The Nginx logs pathLogs_Path=”/elain/logs/nginx”log_filenames=/bin/ls $Logs_Path |grep -v nginx|grep -v">
+<meta name="twitter:description" content="12345678910111213141516#!/bin/bash# Info   : cut logs for nginx# Author : elain# CTime  : 2011.06.08# This script run at 00:00# The Nginx logs pathLogs_Path=&quot;/elain/logs/nginx&quot;log_filenames=`/bin/ls $">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -277,12 +274,8 @@ Info   : cut logs for nginxAuthor : elainCTime  : 2011.06.08This script run at 0
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>#!/bin/bash</p>
-<h1 id="Info__3A_cut_logs_for_nginx"><a href="#Info__3A_cut_logs_for_nginx" class="headerlink" title="Info   : cut logs for nginx"></a>Info   : cut logs for nginx</h1><h1 id="Author__3A_elain"><a href="#Author__3A_elain" class="headerlink" title="Author : elain"></a>Author : elain</h1><h1 id="CTime__3A_2011-06-08"><a href="#CTime__3A_2011-06-08" class="headerlink" title="CTime  : 2011.06.08"></a>CTime  : 2011.06.08</h1><h1 id="This_script_run_at_00_3A00"><a href="#This_script_run_at_00_3A00" class="headerlink" title="This script run at 00:00"></a>This script run at 00:00</h1><h1 id="The_Nginx_logs_path"><a href="#The_Nginx_logs_path" class="headerlink" title="The Nginx logs path"></a>The Nginx logs path</h1><p>Logs_Path=”/elain/logs/nginx”<br>log_filenames=<code>/bin/ls $Logs_Path |grep -v nginx|grep -v logsbak</code><br><a id="more"></a><br>for log_name in $log_filenames<br>do<br>/bin/mv $Logs_Path/$log_name $Logs_Path/logsbak/<code>date -d yesterday +%Y%m%d%H%M</code>-$log_name<br>done</p>
-<p>kill -USR1 <code>cat /elain/apps/nginx/nginx.pid</code></p>
-<p>&nbsp;</p>
-<p>cron定时任务</p>
-<h1 id="Info__3A__u6BCF_u5929_u51CC_u66680_u70B9_u5207_u5272_u4E00_u6B21NGINX_u65E5_u5FD7"><a href="#Info__3A__u6BCF_u5929_u51CC_u66680_u70B9_u5207_u5272_u4E00_u6B21NGINX_u65E5_u5FD7" class="headerlink" title="Info   : 每天凌晨0点切割一次NGINX日志"></a>Info   : 每天凌晨0点切割一次NGINX日志</h1><h1 id="Author__3A_elain-1"><a href="#Author__3A_elain-1" class="headerlink" title="Author : elain"></a>Author : elain</h1><h1 id="CTime__3A_2011-06-08-1"><a href="#CTime__3A_2011-06-08-1" class="headerlink" title="CTime  : 2011.06.08"></a>CTime  : 2011.06.08</h1><p>00 00 <em> </em> * /root/scripts/cut_nginx_log.sh</p>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line"><span class="comment"># Info   : cut logs for nginx</span></span><br><span class="line"><span class="comment"># Author : elain</span></span><br><span class="line"><span class="comment"># CTime  : 2011.06.08</span></span><br><span class="line"><span class="comment"># This script run at 00:00</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># The Nginx logs path</span></span><br><span class="line">Logs_Path=<span class="string">"/elain/logs/nginx"</span></span><br><span class="line"><span class="built_in">log</span>_filenames=`/bin/ls <span class="variable">$Logs_Path</span> |grep -v nginx|grep -v logsbak`</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">log</span>_name <span class="keyword">in</span> <span class="variable">$log_filenames</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">/bin/mv <span class="variable">$Logs_Path</span>/<span class="variable">$log_name</span> <span class="variable">$Logs_Path</span>/logsbak/`date <span class="operator">-d</span> yesterday +%Y%m%d%H%M`-<span class="variable">$log_name</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">kill</span> -USR1 `cat /elain/apps/nginx/nginx.pid`</span><br></pre></td></tr></table></figure>
+<p>cron定时任务<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># Info   : 每天凌晨<span class="number">0</span>点切割一次NGINX日志</span></span><br><span class="line"><span class="preprocessor"># Author : elain</span></span><br><span class="line"><span class="preprocessor"># CTime  : <span class="number">2011.06</span><span class="number">.08</span></span></span><br><span class="line"><span class="number">00</span> <span class="number">00</span> * * * /root/scripts/cut_nginx_log.sh</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -294,7 +287,7 @@ Info   : cut logs for nginxAuthor : elainCTime  : 2011.06.08This script run at 0
         <p><span>本文标题:</span><a href="/2011/07/07/NGINX多域名日志切割备份脚本/">NGINX 多域名日志切割备份脚本</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年07月07日 - 14时11分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/07/07/NGINX多域名日志切割备份脚本/" title="NGINX 多域名日志切割备份脚本">http://www.elain.org/2011/07/07/NGINX多域名日志切割备份脚本/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/07/07/NGINX多域名日志切割备份脚本/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -330,7 +323,7 @@ Info   : cut logs for nginxAuthor : elainCTime  : 2011.06.08This script run at 0
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Info__3A_cut_logs_for_nginx"><span class="toc-number">1.</span> <span class="toc-text">Info   : cut logs for nginx</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Author__3A_elain"><span class="toc-number">2.</span> <span class="toc-text">Author : elain</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CTime__3A_2011-06-08"><span class="toc-number">3.</span> <span class="toc-text">CTime  : 2011.06.08</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#This_script_run_at_00_3A00"><span class="toc-number">4.</span> <span class="toc-text">This script run at 00:00</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#The_Nginx_logs_path"><span class="toc-number">5.</span> <span class="toc-text">The Nginx logs path</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Info__3A__u6BCF_u5929_u51CC_u66680_u70B9_u5207_u5272_u4E00_u6B21NGINX_u65E5_u5FD7"><span class="toc-number">6.</span> <span class="toc-text">Info   : 每天凌晨0点切割一次NGINX日志</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Author__3A_elain-1"><span class="toc-number">7.</span> <span class="toc-text">Author : elain</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CTime__3A_2011-06-08-1"><span class="toc-number">8.</span> <span class="toc-text">CTime  : 2011.06.08</span></a></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {

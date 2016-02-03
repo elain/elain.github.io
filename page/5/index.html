@@ -464,8 +464,12 @@
         <p>由于 一程序员想把在任意目录中可执行，对.bashrc 做了修改，导致系统大部分命令失效</p>
 <p>我上去看了下，发现 所有查看 写入操作的命令都无法使用了，/usr/bin/  /bin/ 下的命令基本上都用不了啦</p>
 <p>首先想到的就是可能他把命令执行路径 改错了，导致所有命令找不到。</p>
-<p>我使用<br>echo $PATH 发现可以使用，<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>[root@uhzl003100 ~]#  echo $PATH<br>/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/sbin:/sbin:/var/www/php5/bin:/root/bin<br>[/ccWN]<br>发现最后面 把bin目录 指错了，</p>
-<p>接着我 执行了<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>PATH=$PATH:/usr/bin<br>[/ccWN]<br>让它指定到正确目录 ，发现一切可以使用了，再对.bashrc文件进行修改编辑，就可以了。</p>
+<p>我使用<br>echo $PATH 发现可以使用，</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@uhzl003100 ~]#  echo $PATH</span><br><span class="line"><span class="regexp">/usr/</span>kerberos<span class="regexp">/sbin:/u</span>sr<span class="regexp">/kerberos/</span>bin:<span class="regexp">/usr/</span>local<span class="regexp">/sbin:/u</span>sr<span class="regexp">/sbin:/</span>sbin:<span class="regexp">/var/</span>www<span class="regexp">/php5/</span>bin:<span class="regexp">/root/</span>bin</span><br></pre></td></tr></table></figure>
+<p>发现最后面 把bin目录 指错了，</p>
+<p>接着我 执行了</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="constant">PATH=</span><span class="variable">$PATH</span><span class="symbol">:/usr/bin</span></span><br></pre></td></tr></table></figure>
+<p>让它指定到正确目录 ，发现一切可以使用了，再对.bashrc文件进行修改编辑，就可以了。</p>
 <p>建议：<br>修改环境变量，务必要谨慎，最好另开一窗口测试，或使用 软链接方式去做二进制命令的链接</p>
 
       

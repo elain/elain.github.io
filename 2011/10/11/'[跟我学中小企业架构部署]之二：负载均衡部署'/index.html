@@ -10,12 +10,13 @@
 所需要软件：
 ipvsadm-1.24.tar.gz
 keepalived-1.1.18.tar.gz
-[ccWN lang=”bash” width=”99%” height=”100%”]mkdir –p /home/elain
-cd /home/elain/
-[/ccWN]
+123mkdir –p /home/elaincd /home/elain/
 rz 上传软件
 注：下面所有服务器配置，安装的源码包都用此路径，下文不再强调。
-此次LB的VI">
+此次LB的VIP，设为：10.0.0.80
+ipvsadm-1.24安装
+
+1234567891011121314">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[跟我学中小企业架构部署]之二：负载均衡部署">
 <meta property="og:url" content="http://www.elain.org/2011/10/11/'[跟我学中小企业架构部署]之二：负载均衡部署'/index.html">
@@ -25,15 +26,16 @@ rz 上传软件
 所需要软件：
 ipvsadm-1.24.tar.gz
 keepalived-1.1.18.tar.gz
-[ccWN lang=”bash” width=”99%” height=”100%”]mkdir –p /home/elain
-cd /home/elain/
-[/ccWN]
+123mkdir –p /home/elaincd /home/elain/
 rz 上传软件
 注：下面所有服务器配置，安装的源码包都用此路径，下文不再强调。
-此次LB的VI">
+此次LB的VIP，设为：10.0.0.80
+ipvsadm-1.24安装
+
+1234567891011121314">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2011/10/11.png">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2011/10/21.png">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[跟我学中小企业架构部署]之二：负载均衡部署">
 <meta name="twitter:description" content="LB1 LB2 部署
@@ -41,12 +43,13 @@ rz 上传软件
 所需要软件：
 ipvsadm-1.24.tar.gz
 keepalived-1.1.18.tar.gz
-[ccWN lang=”bash” width=”99%” height=”100%”]mkdir –p /home/elain
-cd /home/elain/
-[/ccWN]
+123mkdir –p /home/elaincd /home/elain/
 rz 上传软件
 注：下面所有服务器配置，安装的源码包都用此路径，下文不再强调。
-此次LB的VI">
+此次LB的VIP，设为：10.0.0.80
+ipvsadm-1.24安装
+
+1234567891011121314">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -311,126 +314,30 @@ rz 上传软件
 <p>所需要软件：</p>
 <p>ipvsadm-1.24.tar.gz</p>
 <p>keepalived-1.1.18.tar.gz</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]mkdir –p /home/elain</p>
-<p>cd /home/elain/</p>
-<p>[/ccWN]</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> –p /home/elain</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /home/elain/</span><br></pre></td></tr></table></figure>
 <p>rz 上传软件</p>
 <p>注：下面所有服务器配置，安装的源码包都用此路径，下文不再强调。</p>
 <p>此次LB的VIP，设为：10.0.0.80</p>
 <p>ipvsadm-1.24安装</p>
 <hr>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<p>lsmod |grep ip_vs #检查是否存在ip_vs模块</p>
-<p>uname –r #查看内核版本</p>
-<p>tar zxvf ipvsadm-1.24.tar.gz</p>
-<p>cd ipvsadm-1.24</p>
-<p>ln -s /usr/src/kernels/2.6.18-164.el5-x86_64/ /usr/src/linux</p>
-<p>make</p>
-<p>make install</p>
-<p>cd ..</p>
-<p>find / -name ipvsadm #查看安装后路径，可选</p>
-<p>/sbin/ipvsadm  #加载ip_vs模块</p>
-<p>lsmod |grep ip_vs</p>
-<p>[/ccWN]</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="cpp">lsmod |grep ip_vs <span class="preprocessor">#检查是否存在ip_vs模块</span></span><br><span class="line"></span><br><span class="line">uname –r <span class="preprocessor">#查看内核版本</span></span><br><span class="line"></span><br><span class="line">tar zxvf ipvsadm-<span class="number">1.24</span>.tar.gz</span><br><span class="line"></span><br><span class="line">cd ipvsadm-<span class="number">1.24</span></span><br><span class="line"></span><br><span class="line">ln -s /usr/src/kernels/<span class="number">2.6</span><span class="number">.18</span>-<span class="number">164.</span>el5-x86_64/ /usr/src/linux</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line">cd ..</span><br><span class="line"></span><br><span class="line">find / -name ipvsadm <span class="preprocessor">#查看安装后路径，可选</span></span><br><span class="line"></span><br><span class="line">/sbin/ipvsadm  <span class="preprocessor">#加载ip_vs模块</span></span><br><span class="line"></span><br><span class="line">lsmod |grep ip_vs</span></span><br></pre></td></tr></table></figure>
 <p><a href="http://www.elain.org/?attachment_id=465"><img src="http://www.elain.org/wp-content/uploads/2011/10/11.png" alt=""></a></p>
-<p>&nbsp;</p>
 <a id="more"></a>
 <p>若看到上面信息，则ip_vs模块加载成功</p>
 <hr>
 <p>keepalived-1.1.18安装</p>
 <hr>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<p>tar zxvf keepalived-1.1.18.tar.gz</p>
-<p>cd keepalived-1.1.18</p>
-<p>./configure</p>
-<p>make</p>
-<p>make install</p>
-<p>cd ..</p>
-<p>cp /usr/local/etc/rc.d/init.d/keepalived /etc/rc.d/init.d/   #设置为service方式启动</p>
-<p>cp /usr/local/etc/sysconfig/keepalived /etc/sysconfig/</p>
-<p>mkdir /etc/keepalived</p>
-<p>cp /usr/local/etc/keepalived/keepalived.conf /etc/keepalived/</p>
-<p>cp /usr/local/sbin/keepalived /usr/sbin/</p>
-<p>/etc/init.d/keepalived start   #启动keepalived</p>
-<p>echo “/etc/init.d/keepalived start” &gt;&gt;/etc/rc.local  #添加为开机自启动</p>
-<p>sed -i ‘s#net.ipv4.ip_forward = 0#net.ipv4.ip_forward = 1#’ /etc/sysctl.conf  #开启内核转发功能</p>
-<p>sysctl –p    #查看是否开启内核转发</p>
-<p>[/ccWN]</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="stata">tar zxvf keepalived-1.1.18.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="keyword">cd</span> keepalived-1.1.18</span><br><span class="line"></span><br><span class="line">./configure</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="keyword">cd</span> ..</span><br><span class="line"></span><br><span class="line">cp /usr/<span class="keyword">local</span>/etc/rc.<span class="keyword">d</span>/init.<span class="keyword">d</span>/keepalived /etc/rc.<span class="keyword">d</span>/init.<span class="keyword">d</span>/   #设置为service方式启动</span><br><span class="line"></span><br><span class="line">cp /usr/<span class="keyword">local</span>/etc/sysconfig/keepalived /etc/sysconfig/</span><br><span class="line"></span><br><span class="line"><span class="keyword">mkdir</span> /etc/keepalived</span><br><span class="line"></span><br><span class="line">cp /usr/<span class="keyword">local</span>/etc/keepalived/keepalived.<span class="keyword">conf</span> /etc/keepalived/</span><br><span class="line"></span><br><span class="line">cp /usr/<span class="keyword">local</span>/sbin/keepalived /usr/sbin/</span><br><span class="line"></span><br><span class="line">/etc/init.<span class="keyword">d</span>/keepalived start   #启动keepalived</span><br><span class="line"></span><br><span class="line">echo “/etc/init.<span class="keyword">d</span>/keepalived start” &gt;&gt;/etc/rc.<span class="keyword">local</span>  #添加为开机自启动</span><br><span class="line"></span><br><span class="line">sed -i 's#<span class="keyword">net</span>.ipv4.ip_forward = 0#<span class="keyword">net</span>.ipv4.ip_forward = 1#' /etc/sysctl.<span class="keyword">conf</span>  #开启内核转发功能</span><br><span class="line"></span><br><span class="line">sysctl –p    #查看是否开启内核转发</span></span><br></pre></td></tr></table></figure>
 <hr>
 <p>注：以上操作在master backup两服务器上相同</p>
 <p>Keepalived 配置</p>
 <hr>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<p>mv /etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf.ori  #备份原始配置文件</p>
-<p>vi /etc/keepalived/keepalived.conf   #分别在LB1,LB2上建立配置文件</p>
-<p>[/ccWN]</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="stylus">mv /etc/keepalived/keepalived<span class="class">.conf</span> /etc/keepalived/keepalived<span class="class">.conf</span><span class="class">.ori</span>  #备份原始配置文件</span><br><span class="line"></span><br><span class="line">vi /etc/keepalived/keepalived<span class="class">.conf</span>   #分别在LB1,LB2上建立配置文件</span></span><br></pre></td></tr></table></figure>
 <p>keepalived.conf</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]#!/bin/bash</p>
-<p>Configuration File for keepalived</p>
-<p>global_defs {</p>
-<p>notification_email {</p>
-<p>elain2012@hotmail.com     #填写自己的邮箱出现故障接收报警邮件用</p>
-<p>}</p>
-<p>notification_email_from Alexandre.Cassen@firewall.loc</p>
-<p>#smtp_server 192.168.200.1</p>
-<p>smtp_server 127.0.0.1</p>
-<p>smtp_connect_timeout 30</p>
-<p>router_id LVS_01 #备份服务器改为LVS_02</p>
-<p>}</p>
-<p>vrrp_instance VI_1 {</p>
-<p>state MASTER #备份服务器上MASTER为BACKUP</p>
-<p>interface eth0</p>
-<p>lvs_sync_daemon_inteface eth1</p>
-<p>virtual_router_id 81</p>
-<p>priority 100 #备份服务上优先级要低于100，如改为90</p>
-<p>advert_int 1</p>
-<p>authentication {</p>
-<p>auth_type PASS</p>
-<p>auth_pass 1111</p>
-<p>}</p>
-<p>virtual_ipaddress {</p>
-<p>#192.168.200.16</p>
-<p>10.0.0.80   #这里填写VIP地址，也可添加多个VIP</p>
-<p>}</p>
-<p>}</p>
-<p>#</p>
-<p>virtual_server 10.0.0.80 80 {   #这里填写VIP地址</p>
-<p>delay_loop 6</p>
-<p>lb_algo wrr</p>
-<p>lb_kind DR</p>
-<p>nat_mask 255.255.255.0</p>
-<p>persistence_timeout 50</p>
-<p>protocol TCP</p>
-<p>real_server 10.0.0.83 80 { #这里是LAMP服务器对外的IP</p>
-<p>weight 1</p>
-<p>TCP_CHECK {</p>
-<p>connect_timeout 8</p>
-<p>nb_get_retry 3</p>
-<p>delay_before_retry 3</p>
-<p>connect_port 80</p>
-<p>}</p>
-<p>}</p>
-<p>real_server 10.0.0.84 80 { #这里是LEMP对外的IP</p>
-<p>weight 1</p>
-<p>TCP_CHECK {</p>
-<p>connect_timeout 8</p>
-<p>nb_get_retry 3</p>
-<p>delay_before_retry 3</p>
-<p>connect_port 80</p>
-<p>}</p>
-<p>}</p>
-<p>}</p>
-<p>[/ccWN]</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">Configuration File <span class="keyword">for</span> keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line"></span><br><span class="line">notification_email &#123;</span><br><span class="line"></span><br><span class="line">elain2012@hotmail.com     <span class="preprocessor">#填写自己的邮箱出现故障接收报警邮件用</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">notification_email_from Alexandre.Cassen@firewall.loc</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#smtp_server <span class="number">192.168</span><span class="number">.200</span><span class="number">.1</span></span></span><br><span class="line"></span><br><span class="line">smtp_server <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"></span><br><span class="line">smtp_connect_timeout <span class="number">30</span></span><br><span class="line"></span><br><span class="line">router_id LVS_01 <span class="preprocessor">#备份服务器改为LVS_02</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line"></span><br><span class="line">state MASTER <span class="preprocessor">#备份服务器上MASTER为BACKUP</span></span><br><span class="line"></span><br><span class="line">interface eth0</span><br><span class="line"></span><br><span class="line">lvs_sync_daemon_inteface eth1</span><br><span class="line"></span><br><span class="line">virtual_router_id <span class="number">81</span></span><br><span class="line"></span><br><span class="line">priority <span class="number">100</span> <span class="preprocessor">#备份服务上优先级要低于<span class="number">100</span>，如改为<span class="number">90</span></span></span><br><span class="line"></span><br><span class="line">advert_int <span class="number">1</span></span><br><span class="line"></span><br><span class="line">authentication &#123;</span><br><span class="line"></span><br><span class="line">auth_type PASS</span><br><span class="line"></span><br><span class="line">auth_pass <span class="number">1111</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_ipaddress &#123;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="number">192.168</span><span class="number">.200</span><span class="number">.16</span></span></span><br><span class="line"></span><br><span class="line"><span class="number">10.0</span><span class="number">.0</span><span class="number">.80</span>   <span class="preprocessor">#这里填写VIP地址，也可添加多个VIP</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#</span></span><br><span class="line"></span><br><span class="line">virtual_server <span class="number">10.0</span><span class="number">.0</span><span class="number">.80</span> <span class="number">80</span> &#123;   <span class="preprocessor">#这里填写VIP地址</span></span><br><span class="line"></span><br><span class="line">delay_loop <span class="number">6</span></span><br><span class="line"></span><br><span class="line">lb_algo wrr</span><br><span class="line"></span><br><span class="line">lb_kind DR</span><br><span class="line"></span><br><span class="line">nat_mask <span class="number">255.255</span><span class="number">.255</span><span class="number">.0</span></span><br><span class="line"></span><br><span class="line">persistence_timeout <span class="number">50</span></span><br><span class="line"></span><br><span class="line">protocol TCP</span><br><span class="line"></span><br><span class="line">real_server <span class="number">10.0</span><span class="number">.0</span><span class="number">.83</span> <span class="number">80</span> &#123; <span class="preprocessor">#这里是LAMP服务器对外的IP</span></span><br><span class="line"></span><br><span class="line">weight <span class="number">1</span></span><br><span class="line"></span><br><span class="line">TCP_CHECK &#123;</span><br><span class="line"></span><br><span class="line">connect_timeout <span class="number">8</span></span><br><span class="line"></span><br><span class="line">nb_get_retry <span class="number">3</span></span><br><span class="line"></span><br><span class="line">delay_before_retry <span class="number">3</span></span><br><span class="line"></span><br><span class="line">connect_port <span class="number">80</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">real_server <span class="number">10.0</span><span class="number">.0</span><span class="number">.84</span> <span class="number">80</span> &#123; <span class="preprocessor">#这里是LEMP对外的IP</span></span><br><span class="line"></span><br><span class="line">weight <span class="number">1</span></span><br><span class="line"></span><br><span class="line">TCP_CHECK &#123;</span><br><span class="line"></span><br><span class="line">connect_timeout <span class="number">8</span></span><br><span class="line"></span><br><span class="line">nb_get_retry <span class="number">3</span></span><br><span class="line"></span><br><span class="line">delay_before_retry <span class="number">3</span></span><br><span class="line"></span><br><span class="line">connect_port <span class="number">80</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注：以上keepalived.conf文件在LB1，LB2上都需建立；红色标记处，是在LB2使用该配置文件需修改的地方</p>
 <p>/etc/init.d/keepalived restart</p>
 <p>配置完毕！<br><a href="http://www.elain.org/?attachment_id=466"><img src="http://www.elain.org/wp-content/uploads/2011/10/21.png" alt=""></a></p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 <p>使用 ip add 命令查看LB1的IP，若出现上图红圈标记的IP，即配置成功！</p>
 <p>在LB2上还需配置LAMP测试环境：</p>
 <p>此处参考下面要配置的LAMP环境即可！</p>
@@ -445,7 +352,7 @@ rz 上传软件
         <p><span>本文标题:</span><a href="/2011/10/11/'[跟我学中小企业架构部署]之二：负载均衡部署'/">[跟我学中小企业架构部署]之二：负载均衡部署</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年10月11日 - 07时53分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/10/11/'[跟我学中小企业架构部署]之二：负载均衡部署'/" title="[跟我学中小企业架构部署]之二：负载均衡部署">http://www.elain.org/2011/10/11/&#39;[跟我学中小企业架构部署]之二：负载均衡部署&#39;/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/10/11/&#39;[跟我学中小企业架构部署]之二：负载均衡部署&#39;/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

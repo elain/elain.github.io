@@ -265,31 +265,29 @@
           
               <p>此脚本用于在SVN 服务器上，用户通过SVN 客户端提交后，服务端利用hooks脚本自动更新检出数据的备份！</p>
 <blockquote>
-<p>#!/bin/bash&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</p>
-<pre><code>#Author&amp;nbsp; :elain&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+<p>#!/bin/bash                                                                                                               </p>
+<pre><code>#Author  :elain                                                                                                          
 
-#Ctime&amp;nbsp;&amp;nbsp; :20110805&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+#Ctime   :20110805                                                                                                        
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
 
-Bak_Dir=/data/svnbak&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+
+Bak_Dir=/data/svnbak                                                                                               
 
 Svn_Dir=/data/svndata
 
 Svn_data=/data/svnbak/svndata_`date +%Y%m%d`.tar.gz
 
 MailList=elain2012@hotmail.com
-</code></pre><h1 id="Info_26nbsp_3B_26nbsp_3B__3A__u6BCF_u5468_u5907_u4EFD_u4E00_u6B21svn_u6570_u636E"><a href="#Info_26nbsp_3B_26nbsp_3B__3A__u6BCF_u5468_u5907_u4EFD_u4E00_u6B21svn_u6570_u636E" class="headerlink" title="Info&nbsp;&nbsp; : 每周备份一次svn数据"></a>Info&nbsp;&nbsp; : 每周备份一次svn数据</h1><pre><code>/bin/tar zcf $Svn_data /data/svndata
-</code></pre><h1 id="Info_26nbsp_3B_26nbsp_3B__3A__u90AE_u4EF6_u6B63_u6587"><a href="#Info_26nbsp_3B_26nbsp_3B__3A__u90AE_u4EF6_u6B63_u6587" class="headerlink" title="Info&nbsp;&nbsp; : 邮件正文"></a>Info&nbsp;&nbsp; : 邮件正文</h1><pre><code>echo -e &amp;quot;==========`date +%Y年%m月%d日` SVN 备份数据==========&amp;quot; &amp;gt;$LogFile
+</code></pre><h1 id="Info__3A__u6BCF_u5468_u5907_u4EFD_u4E00_u6B21svn_u6570_u636E"><a href="#Info__3A__u6BCF_u5468_u5907_u4EFD_u4E00_u6B21svn_u6570_u636E" class="headerlink" title="Info   : 每周备份一次svn数据"></a>Info   : 每周备份一次svn数据</h1><pre><code>/bin/tar zcf $Svn_data /data/svndata
+</code></pre><h1 id="Info__3A__u90AE_u4EF6_u6B63_u6587"><a href="#Info__3A__u90AE_u4EF6_u6B63_u6587" class="headerlink" title="Info   : 邮件正文"></a>Info   : 邮件正文</h1><pre><code>echo -e &amp;quot;==========`date +%Y年%m月%d日` SVN 备份数据==========&amp;quot; &gt;$LogFile
 
-echo -e &amp;quot;SVN备份文件:\nsvndata_`date +%Y%m%d`.tar.gz \n大小:`du -sh $Svn_data |awk &amp;#039;{print $1}&amp;#039;`&amp;quot; &amp;gt;&amp;gt;$LogFile
+echo -e &amp;quot;SVN备份文件:\nsvndata_`date +%Y%m%d`.tar.gz \n大小:`du -sh $Svn_data |awk &amp;#039;{print $1}&amp;#039;`&amp;quot; &gt;&gt;$LogFile
 
-echo -e &amp;quot;==============by:elain www.elain.org=================\n详情参见附件!&amp;quot; &amp;gt;&amp;gt;$LogFile
-</code></pre><h1 id="Info_26nbsp_3B_26nbsp_3B__3A__u53D1_u9001_u90AE_u4EF6"><a href="#Info_26nbsp_3B_26nbsp_3B__3A__u53D1_u9001_u90AE_u4EF6" class="headerlink" title="Info&nbsp;&nbsp; : 发送邮件"></a>Info&nbsp;&nbsp; : 发送邮件</h1><pre><code>/usr/bin/sendEmail -f admin@elain.org -t $MailList -s mail.elain.org -xu &amp;#039;admin@elain.org&amp;#039; -xp &amp;#039;elain123we&amp;#039; -u &amp;quot;`date +%Y年%m月%d日` SVN备份数据&amp;quot; -m &amp;quot;`cat $LogFile`&amp;quot; -a $Svn_data
-</code></pre><h1 id="Info_26nbsp_3B_26nbsp_3B__3A__u5220_u9664_u4E03_u5929_u524D_u7684_u5907_u4EFD"><a href="#Info_26nbsp_3B_26nbsp_3B__3A__u5220_u9664_u4E03_u5929_u524D_u7684_u5907_u4EFD" class="headerlink" title="Info&nbsp;&nbsp; : 删除七天前的备份"></a>Info&nbsp;&nbsp; : 删除七天前的备份</h1><pre><code>find $Bak_Dir -mtime +7 | xargs rm -rf
-</code></pre><p>&nbsp;</p>
-</blockquote>
-<p>&nbsp;</p>
+echo -e &amp;quot;==============by:elain www.elain.org=================\n详情参见附件!&amp;quot; &gt;&gt;$LogFile
+</code></pre><h1 id="Info__3A__u53D1_u9001_u90AE_u4EF6"><a href="#Info__3A__u53D1_u9001_u90AE_u4EF6" class="headerlink" title="Info   : 发送邮件"></a>Info   : 发送邮件</h1><pre><code>/usr/bin/sendEmail -f admin@elain.org -t $MailList -s mail.elain.org -xu &amp;#039;admin@elain.org&amp;#039; -xp &amp;#039;elain123we&amp;#039; -u &amp;quot;`date +%Y年%m月%d日` SVN备份数据&amp;quot; -m &amp;quot;`cat $LogFile`&amp;quot; -a $Svn_data
+</code></pre><h1 id="Info__3A__u5220_u9664_u4E03_u5929_u524D_u7684_u5907_u4EFD"><a href="#Info__3A__u5220_u9664_u4E03_u5929_u524D_u7684_u5907_u4EFD" class="headerlink" title="Info   : 删除七天前的备份"></a>Info   : 删除七天前的备份</h1><pre><code>find $Bak_Dir -mtime +7 | xargs rm -rf
+</code></pre></blockquote>
           
       
     </div>
@@ -355,26 +353,25 @@ echo -e &amp;quot;==============by:elain www.elain.org=================\n详情�
       
           
               <p>环境：CentOS 5.5 x64</p>
-<p>四台WEB&nbsp; web01&nbsp; web02&nbsp; web03&nbsp; web04</p>
-<pre><code>一台日志服务器&amp;nbsp; log01
+<p>四台WEB  web01  web02  web03  web04</p>
+<pre><code>一台日志服务器  log01
 </code></pre><p>需求：</p>
 <pre><code>每天定时把四台WEB上的NGINX 访问日志合并后传入给awstats系统分析处理
 </code></pre><blockquote>
-<h1 id="Info_26nbsp_3B_26nbsp_3B__3A_merge_log_for_many_server_log"><a href="#Info_26nbsp_3B_26nbsp_3B__3A_merge_log_for_many_server_log" class="headerlink" title="Info&nbsp;&nbsp; : merge log for many server log"></a>Info&nbsp;&nbsp; : merge log for many server log</h1><pre><code># Author : dingtm&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+<h1 id="Info__3A_merge_log_for_many_server_log"><a href="#Info__3A_merge_log_for_many_server_log" class="headerlink" title="Info   : merge log for many server log"></a>Info   : merge log for many server log</h1><pre><code># Author : dingtm                                                                                                    
 
-# CTime&amp;nbsp; : 2011.03.01 &amp;nbsp;
-</code></pre><p>DAY=<code>date -d &amp;#039;-1 day&amp;#039; +%Y/%m/%d</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</p>
-<pre><code>mkdir -p /data/logs/$DAY/merge_logs/&amp;nbsp;&amp;nbsp; #建立合并后的日志文件存放目录
-</code></pre><p>OldLog=/data/logs/$DAY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #各服务器的日志文件，以日期为目录，各服务器主机名为子目录</p>
-<pre><code>NewLog=/data/logs/$DAY/merge_logs&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+# CTime  : 2011.03.01  
+</code></pre><p>DAY=<code>date -d &amp;#039;-1 day&amp;#039; +%Y/%m/%d</code>                                                                 </p>
+<pre><code>mkdir -p /data/logs/$DAY/merge_logs/   #建立合并后的日志文件存放目录
+</code></pre><p>OldLog=/data/logs/$DAY                 #各服务器的日志文件，以日期为目录，各服务器主机名为子目录</p>
+<pre><code>NewLog=/data/logs/$DAY/merge_logs      
 </code></pre><p>for log in access_ebook.elain.org.log access_www.elain.org.log access_blog.elain.org.log access_books.elain.org.log access_bbs.elain.org.log</p>
-<pre><code>&amp;nbsp; do
+<pre><code>  do
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; sort -m -t &amp;quot; &amp;quot; -k 4 -o&amp;nbsp; $NewLog/$log $OldLog/web01/$log $OldLog/web02/$log $OldLog/web03$log $OldLog/web04/$log
+    sort -m -t &amp;quot; &amp;quot; -k 4 -o  $NewLog/$log $OldLog/web01/$log $OldLog/web02/$log $OldLog/web03$log $OldLog/web04/$log
 
 done
 </code></pre></blockquote>
-<p>&nbsp;</p>
           
       
     </div>
@@ -507,16 +504,15 @@ done
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>&nbsp;</p>
-<pre><code>系统环境：
+              <pre><code>系统环境：
 
 Red Hat Enterprise Linux AS release 4 (Nahant Update 6)
 
-&amp;nbsp;
+
 
 所需软件：
 
-&amp;nbsp;
+
 
 mhash-0.9.9.9.tar.bz2
 
@@ -544,7 +540,7 @@ memcache-2.2.5.tgz
 
 php-5.2.14.tar.gz
 
-&amp;nbsp;
+
 
 安装PHP环境所需软件
 
@@ -562,9 +558,9 @@ make install
 
 cd ..
 
-&amp;nbsp;
 
-tar zxvf libmcrypt-2.5.8.tar.gz &amp;nbsp;
+
+tar zxvf libmcrypt-2.5.8.tar.gz  
 
 cd libmcrypt-2.5.8/
 
@@ -588,7 +584,7 @@ cd ..
 
 cd ..
 
-&amp;nbsp;
+
 
 tar jxvf mhash-0.9.9.9.tar.bz2
 

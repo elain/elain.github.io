@@ -5,22 +5,19 @@
   
   <title>监控WEB页面不正常报警脚本 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="有时我们遇到这样的情况，网站监控返回值是200,正常，但页面出现错误，这样的情况下，可以用以下思路做下监控，以下主要是思路，脚本很简单,做成定时 任务 监控WEB 站点页面不正常通过飞信报警[ccWN lang=”bash” width=”99%” height=”100%”]
-#!/bin/sh
-Info   : check the web is okAuthor : dingtmCTime">
+  <meta name="description" content="有时我们遇到这样的情况，网站监控返回值是200,正常，但页面出现错误，这样的情况下，可以用以下思路做下监控，以下主要是思路，脚本很简单,做成定时 任务 监控WEB 站点页面不正常通过飞信报警
+123456789101112131415#!/bin/sh# Info   : check the web is ok# Author : dingtm# CTime  : 2011.11.25# This">
 <meta property="og:type" content="article">
 <meta property="og:title" content="监控WEB页面不正常报警脚本">
 <meta property="og:url" content="http://www.elain.org/2011/11/25/监控WEB页面不正常报警脚本/index.html">
 <meta property="og:site_name" content="Elain'blog">
-<meta property="og:description" content="有时我们遇到这样的情况，网站监控返回值是200,正常，但页面出现错误，这样的情况下，可以用以下思路做下监控，以下主要是思路，脚本很简单,做成定时 任务 监控WEB 站点页面不正常通过飞信报警[ccWN lang=”bash” width=”99%” height=”100%”]
-#!/bin/sh
-Info   : check the web is okAuthor : dingtmCTime">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:description" content="有时我们遇到这样的情况，网站监控返回值是200,正常，但页面出现错误，这样的情况下，可以用以下思路做下监控，以下主要是思路，脚本很简单,做成定时 任务 监控WEB 站点页面不正常通过飞信报警
+123456789101112131415#!/bin/sh# Info   : check the web is ok# Author : dingtm# CTime  : 2011.11.25# This">
+<meta property="og:updated_time" content="2016-02-03T05:53:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="监控WEB页面不正常报警脚本">
-<meta name="twitter:description" content="有时我们遇到这样的情况，网站监控返回值是200,正常，但页面出现错误，这样的情况下，可以用以下思路做下监控，以下主要是思路，脚本很简单,做成定时 任务 监控WEB 站点页面不正常通过飞信报警[ccWN lang=”bash” width=”99%” height=”100%”]
-#!/bin/sh
-Info   : check the web is okAuthor : dingtmCTime">
+<meta name="twitter:description" content="有时我们遇到这样的情况，网站监控返回值是200,正常，但页面出现错误，这样的情况下，可以用以下思路做下监控，以下主要是思路，脚本很简单,做成定时 任务 监控WEB 站点页面不正常通过飞信报警
+123456789101112131415#!/bin/sh# Info   : check the web is ok# Author : dingtm# CTime  : 2011.11.25# This">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -280,11 +277,11 @@ Info   : check the web is okAuthor : dingtmCTime">
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>有时我们遇到这样的情况，网站监控返回值是200,正常，但页面出现错误，这样的情况下，可以用以下思路做下监控，<br>以下主要是思路，脚本很简单,做成定时 任务 监控WEB 站点页面不正常通过飞信报警<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<p>#!/bin/sh</p>
-<h1 id="Info__3A_check_the_web_is_ok"><a href="#Info__3A_check_the_web_is_ok" class="headerlink" title="Info   : check the web is ok"></a>Info   : check the web is ok</h1><h1 id="Author__3A_dingtm"><a href="#Author__3A_dingtm" class="headerlink" title="Author : dingtm"></a>Author : dingtm</h1><h1 id="CTime__3A_2011-11-25"><a href="#CTime__3A_2011-11-25" class="headerlink" title="CTime  : 2011.11.25"></a>CTime  : 2011.11.25</h1><h1 id="This_script_run_every_3_minutes"><a href="#This_script_run_every_3_minutes" class="headerlink" title="This script run every 3 minutes"></a>This script run every 3 minutes</h1><p>Web_Stats=<code>curl  www.elain.org  |grep &quot;开源&quot;|wc -l</code></p>
-<p>if [ $Web_Stats = 0 ]<br>then<br>/usr/local/fetion/fetion –sid=1111111 –pwd=1111111 –to=15801111111 –msg-type=1 –msg-utf8=”<strong> HTTP WARNING  www.elain.org</strong>“<br>else<br>echo “ok” &gt; /dev/null 2&gt;&amp;1<br>fi [/ccWN]<a id="more"></a><br>定时任务<br>[ccWN lang=”bash” width=”99%” height=”100%”]# Info   : check the web</p>
-<h1 id="Author__3A_dingtm-1"><a href="#Author__3A_dingtm-1" class="headerlink" title="Author : dingtm"></a>Author : dingtm</h1><h1 id="CTime__3A_2011-11-25-1"><a href="#CTime__3A_2011-11-25-1" class="headerlink" title="CTime  : 2011.11.25"></a>CTime  : 2011.11.25</h1><p><em>/3 </em> <em> </em> * /bin/sh /root/scripts/check_web.sh  &gt; /dev/null 2&gt;&amp;1<br>[/ccWN]</p>
+        <p>有时我们遇到这样的情况，网站监控返回值是200,正常，但页面出现错误，这样的情况下，可以用以下思路做下监控，<br>以下主要是思路，脚本很简单,做成定时 任务 监控WEB 站点页面不正常通过飞信报警</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="shebang">#!/bin/sh</span></span><br><span class="line"><span class="comment"># Info   : check the web is ok</span></span><br><span class="line"><span class="comment"># Author : dingtm</span></span><br><span class="line"><span class="comment"># CTime  : 2011.11.25</span></span><br><span class="line"><span class="comment"># This script run every 3 minutes</span></span><br><span class="line"></span><br><span class="line">Web_Stats=`curl  www.elain.org  |grep <span class="string">"开源"</span>|wc <span class="operator">-l</span>`</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$Web_Stats</span> = <span class="number">0</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">/usr/<span class="built_in">local</span>/fetion/fetion --sid=<span class="number">1111111</span> --pwd=<span class="number">1111111</span> --to=<span class="number">15801111111</span> --msg-type=<span class="number">1</span> --msg-utf8=<span class="string">"** HTTP WARNING  www.elain.org**"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"ok"</span> &gt; /dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>定时任务</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Info   : check the web</span></span><br><span class="line"><span class="comment"># Author : dingtm</span></span><br><span class="line"><span class="comment"># CTime  : 2011.11.25</span></span><br><span class="line"><span class="keyword">*</span>/3 <span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span> /bin/sh /root/scripts/check_web.sh  &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
 <p>注：监控页面的关键字，最好找唯一值，这样比较严谨一些，例如我在上面找“开源”两字做关键字</p>
 
       
@@ -297,7 +294,7 @@ Info   : check the web is okAuthor : dingtmCTime">
         <p><span>本文标题:</span><a href="/2011/11/25/监控WEB页面不正常报警脚本/">监控WEB页面不正常报警脚本</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年11月25日 - 09时26分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 13时53分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/11/25/监控WEB页面不正常报警脚本/" title="监控WEB页面不正常报警脚本">http://www.elain.org/2011/11/25/监控WEB页面不正常报警脚本/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/11/25/监控WEB页面不正常报警脚本/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -333,7 +330,7 @@ Info   : check the web is okAuthor : dingtmCTime">
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Info__3A_check_the_web_is_ok"><span class="toc-number">1.</span> <span class="toc-text">Info   : check the web is ok</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Author__3A_dingtm"><span class="toc-number">2.</span> <span class="toc-text">Author : dingtm</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CTime__3A_2011-11-25"><span class="toc-number">3.</span> <span class="toc-text">CTime  : 2011.11.25</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#This_script_run_every_3_minutes"><span class="toc-number">4.</span> <span class="toc-text">This script run every 3 minutes</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Author__3A_dingtm-1"><span class="toc-number">5.</span> <span class="toc-text">Author : dingtm</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CTime__3A_2011-11-25-1"><span class="toc-number">6.</span> <span class="toc-text">CTime  : 2011.11.25</span></a></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {

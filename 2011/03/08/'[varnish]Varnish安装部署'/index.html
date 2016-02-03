@@ -17,7 +17,7 @@ Varnish官方网站：http://www.varnish-cache.org/">
 系统环境：CentOS release 5.5 (Final) 64-bit
 所需软件：varnish-2.1.4.tar.gz
 Varnish官方网站：http://www.varnish-cache.org/">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[varnish]Varnish安装部署">
 <meta name="twitter:description" content="简述：Varnish是一款高性能的开源HTTP加速器，挪威最大的在线报纸 Verdens Gang 使用3台Varnish代替了原来的12台Squid，性能比以前更好。
@@ -376,20 +376,9 @@ Varnish官方网站：http://www.varnish-cache.org/">
 <p>synthetic {“</p>
 <p>&lt;?xml version=”1.0” encoding=”utf-8”?&gt;</p>
 <p>&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Strict//EN”</p>
-<p>“<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&amp;gt" target="_blank" rel="external">http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&amp;gt</a>;</p>
-<p>&lt;html&gt;</p>
-<p>&lt;head&gt;</p>
-<p>&lt;title&gt;”} obj.status “ “ obj.response {“&lt;/title&gt;</p>
-<p>&lt;/head&gt;</p>
-<p>&lt;body&gt;</p>
-<p>&lt;h1&gt;Error “} obj.status “ “ obj.response {“&lt;/h1&gt;</p>
-<p>&lt;p&gt;”} obj.response {“&lt;/p&gt;</p>
-<p>&lt;h3&gt;Guru Meditation:&lt;/h3&gt;</p>
-<p>&lt;p&gt;XID: “} req.xid {“&lt;/p&gt;</p>
-<p>&lt;hr&gt;</p>
-<p>&lt;p&gt;Varnish cache server&lt;/p&gt;</p>
-<p>&lt;/body&gt;</p>
-<p>&lt;/html&gt;</p>
+<p>“<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;" target="_blank" rel="external">http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</a></p>
+<html><br><br><head><br><br><title>“} obj.status “ “ obj.response {“</title><br><br></head><br><br><body><br><br><h1>Error “} obj.status “ “ obj.response {“</h1><br><br><p>“} obj.response {“</p><br><br><h3>Guru Meditation:</h3><br><br><p>XID: “} req.xid {“</p><br><br><hr><br><br><p>Varnish cache server</p><br><br></body><br><br></html>
+
 <p>“};</p>
 <p>return (deliver);</p>
 <p>}</p>
@@ -414,7 +403,7 @@ Varnish官方网站：http://www.varnish-cache.org/">
 </blockquote>
 <p>管理Varnish：<br>1、查看Varnish服务器连接数与命中率：<br>/usr/local/varnish/bin/varnishstat</p>
 <p>2、通过Varnish管理端口进行管理：<br>用help看看可以使用哪些Varnish命令：<br>/usr/local/varnish/bin/varnishadm -T 127.0.0.1:2000 help</p>
-<p>[root@postfix varnish]# /usr/local/varnish/bin/varnishadm -T 127.0.0.1:2000 help<br>help [command]<br>ping [timestamp]<br>auth response<br>quit<br>banner<br>status<br>start<br>stop<br>stats<br>vcl.load &lt;configname&gt; &lt;filename&gt;<br>vcl.inline &lt;configname&gt; &lt;quoted_VCLstring&gt;<br>vcl.use &lt;configname&gt;<br>vcl.discard &lt;configname&gt;<br>vcl.list<br>vcl.show &lt;configname&gt;<br>param.show [-l] [&lt;param&gt;]<br>param.set &lt;param&gt; &lt;value&gt;<br>purge.url &lt;regexp&gt;<br>purge &lt;field&gt; &lt;operator&gt; &lt;arg&gt; [&amp;&amp; &lt;field&gt; &lt;oper&gt; &lt;arg&gt;]…<br>purge.list</p>
+<p>[root@postfix varnish]# /usr/local/varnish/bin/varnishadm -T 127.0.0.1:2000 help<br>help [command]<br>ping [timestamp]<br>auth response<br>quit<br>banner<br>status<br>start<br>stop<br>stats<br>vcl.load <configname> <filename><br>vcl.inline <configname> <quoted_vclstring><br>vcl.use <configname><br>vcl.discard <configname><br>vcl.list<br>vcl.show <configname><br>param.show [-l] [<param>]<br>param.set <param> <value><br>purge.url <regexp><br>purge <field> <operator> <arg> [&amp;&amp; <field> <oper> <arg>]…<br>purge.list</arg></oper></field></arg></operator></field></regexp></value></configname></configname></configname></quoted_vclstring></configname></filename></configname></p>
 <p>3、通过Varnish管理端口，使用正则表达式批量清除缓存：<br>(1)、例：清除类似<a href="http://www.elain.org/tmp/aa.html的URL地址）：">http://www.elain.org/tmp/aa.html的URL地址）：</a><br>/usr/local/varnish/bin/varnishadm -T 127.0.0.1:2000 url.purge /tmp/</p>
 <p>(2)、例：清除类似<a href="http://www.elain.org/dl">http://www.elain.org/dl</a> 的URL地址：<br>/usr/local/varnish/bin/varnishadm -T 127.0.0.1:2000 url.purge w*$</p>
 <p>(3)、例：清除所有缓存：<br>/usr/local/varnish/bin/varnishadm -T 127.0.0.1:2000 url.purge *$</p>
@@ -499,7 +488,7 @@ Varnish官方网站：http://www.varnish-cache.org/">
         <p><span>本文标题:</span><a href="/2011/03/08/'[varnish]Varnish安装部署'/">[varnish]Varnish安装部署</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年03月08日 - 15时54分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/03/08/'[varnish]Varnish安装部署'/" title="[varnish]Varnish安装部署">http://www.elain.org/2011/03/08/&#39;[varnish]Varnish安装部署&#39;/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/03/08/&#39;[varnish]Varnish安装部署&#39;/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -535,7 +524,7 @@ Varnish官方网站：http://www.varnish-cache.org/">
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#This_script_run_at_00_3A00"><span class="toc-number">1.</span> <span class="toc-text">This script run at 00:00</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Who_is_allowed_to_purge_u2026"><span class="toc-number">2.</span> <span class="toc-text">Who is allowed to purge….</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">Error “} obj.status “ “ obj.response {“</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.0.1.</span> <span class="toc-text">Guru Meditation:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#This_script_run_at_00_3A00"><span class="toc-number">2.</span> <span class="toc-text">This script run at 00:00</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Who_is_allowed_to_purge_u2026"><span class="toc-number">3.</span> <span class="toc-text">Who is allowed to purge….</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {

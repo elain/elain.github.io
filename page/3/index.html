@@ -285,27 +285,27 @@ node "puppettest01.bj","puppettest02.bj" inherits base {
 <pre>
 class users::elain {
     group { "elain":
-            gid =&gt; 11001,
-            ensure =&gt;present;   
+            gid => 11001,
+            ensure =>present;   
     }
     user { "elain":
-            ensure =&gt; "present",
-            uid =&gt; 11001,
-            gid =&gt; 11001,
-            groups =&gt; elain,
-            shell =&gt;"/bin/bash",
-            home =&gt; "/home/elain",
-            managehome =&gt;"true",
-            require =&gt; Group["elain"];
+            ensure => "present",
+            uid => 11001,
+            gid => 11001,
+            groups => elain,
+            shell =>"/bin/bash",
+            home => "/home/elain",
+            managehome =>"true",
+            require => Group["elain"];
     }
 
     ssh_authorized_key{ "hh-b2c-console01.bj":
-            ensure=&gt;present,
-            type=&gt;"ssh-rsa",
-            key=&gt;"AAAAB3NzaC1yc2EAAAABIwAAAQEAxzWKPyeYFPGZXNIRdz4a7BK6c+xK7xKBgM1HO1OImDi0QFJ0wtxLHIbV9AUcf9dsehQOyfjVhasgJNCoOlHzf7plQ6UmsK5cUmmMUYcN4pw13CqEwYQ/JuwWt2neZ9u6YD+v6/uzi9CclFFlqmNHtL+EIXY/ncrUexikAZlCLvErXIGILnRAUEILmz/IEujU0XuR6CDt54l6gu8/hgAKqmKGkrR2vysCYykQamGr9muvnJ6E4sCawQGNunhmIbmmHV6ub4sp17CSObehqTvtBKXu9T0sVHlBp981soTO2+BQnpjBf7GjSkbyqFYT0s3cqHTvjOGKv7lD2ZK/v3cL0w==",
-            name=&gt;"console01.bj",
-            target=&gt;"/home/elain/.ssh/authorized_keys",
-            user=&gt;''''''''elain'''''''',
+            ensure=>present,
+            type=>"ssh-rsa",
+            key=>"AAAAB3NzaC1yc2EAAAABIwAAAQEAxzWKPyeYFPGZXNIRdz4a7BK6c+xK7xKBgM1HO1OImDi0QFJ0wtxLHIbV9AUcf9dsehQOyfjVhasgJNCoOlHzf7plQ6UmsK5cUmmMUYcN4pw13CqEwYQ/JuwWt2neZ9u6YD+v6/uzi9CclFFlqmNHtL+EIXY/ncrUexikAZlCLvErXIGILnRAUEILmz/IEujU0XuR6CDt54l6gu8/hgAKqmKGkrR2vysCYykQamGr9muvnJ6E4sCawQGNunhmIbmmHV6ub4sp17CSObehqTvtBKXu9T0sVHlBp981soTO2+BQnpjBf7GjSkbyqFYT0s3cqHTvjOGKv7lD2ZK/v3cL0w==",
+            name=>"console01.bj",
+            target=>"/home/elain/.ssh/authorized_keys",
+            user=>''''''''elain'''''''',
     }
 }
 
@@ -444,12 +444,16 @@ class users::elain {
       
           
               <p>今天测试使用puppet中的if来针对同一node组里不同hostname配件不同的文件，由于同一node组里多个class 一样，且是一个WEB集群，只有一台需要添加一个调试跟踪工具，配置有所不同，所以使用if判断去做匹配，不想把它再独立成一个node.</p>
-<p>node配置如下：<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>node base {<br>include hosts,sysctl<br>}</p>
-<p>#puppet test<br>node “puppettest01.bj”,”puppettest02.bj” inherits base {<br>if $hostname == “puppettest02.bj” {<br>include php::hd_1<br>} else {<br>include php::hd_2<br>}<br>}<br>[/ccWN]<br>没试不通过，怀疑是变量获取有问题，于是在puppettest01.bj 上执行 facter 来查看变量<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<h1 id="facter"><a href="#facter" class="headerlink" title="facter"></a>facter</h1><p>architecture = x86_64<br>domain =bj<br>fqdn = puppettest01.bj<br>hostname = puppettest01<br>[/ccWN]<br>而我的puppettest01.bj的服务器上查看是这样的<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<p>#hostname<br>puppettest01.bj<br>[/ccWN]<br>从上面信息可以看到我们的 $hostname 是puppettest01 ,而非 puppettest01.bj , facter 获取hostname时截断了.bj,  即：$hostname=puppettest01 ,而我在上面的配置里是使用的 puppettest01.bj</p>
-<p>所以无法匹配到，于是改成了下面的配置<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>node base {<br>include hosts,sysctl<br>}</p>
-<p>#puppet test<br>node “puppettest01.bj”,”puppettest02.bj” inherits base {<br>if $hostname == “puppettest02” {<br>include php::hd_1<br>} else {<br>include php::hd_2<br>}<br>}<br>[/ccWN]<br>测试通过。<br>注：此案例只针对像 puppettest01.bj 这样使用域名方式的主机名有效。</p>
+<p>node配置如下：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">node base &#123;</span><br><span class="line"><span class="keyword">include</span> hosts,sysctl</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#puppet test</span></span><br><span class="line">node <span class="string">"puppettest01.bj"</span>,<span class="string">"puppettest02.bj"</span> inherits base &#123;</span><br><span class="line"><span class="keyword">if</span> <span class="variable">$hostname</span> == <span class="string">"puppettest02.bj"</span> &#123;</span><br><span class="line"><span class="keyword">include</span> <span class="symbol">php:</span><span class="symbol">:hd_1</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">include</span> <span class="symbol">php:</span><span class="symbol">:hd_2</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>没试不通过，怀疑是变量获取有问题，于是在puppettest01.bj 上执行 facter 来查看变量</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># facter</span></span><br><span class="line"><span class="setting">architecture = <span class="value">x<span class="number">86_64</span></span></span></span><br><span class="line"><span class="setting">domain =<span class="value">bj</span></span></span><br><span class="line"><span class="setting">fqdn = <span class="value">puppettest01.bj</span></span></span><br><span class="line"><span class="setting">hostname = <span class="value">puppettest01</span></span></span><br></pre></td></tr></table></figure>
+<p>而我的puppettest01.bj的服务器上查看是这样的</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="id">#hostname</span></span><br><span class="line"><span class="tag">puppettest01</span><span class="class">.bj</span></span><br></pre></td></tr></table></figure>
+<p>从上面信息可以看到我们的 $hostname 是puppettest01 ,而非 puppettest01.bj , facter 获取hostname时截断了.bj,  即：$hostname=puppettest01 ,而我在上面的配置里是使用的 puppettest01.bj</p>
+<p>所以无法匹配到，于是改成了下面的配置</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">node base &#123;</span><br><span class="line"><span class="keyword">include</span> hosts,sysctl</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#puppet test</span></span><br><span class="line">node <span class="string">"puppettest01.bj"</span>,<span class="string">"puppettest02.bj"</span> inherits base &#123;</span><br><span class="line"><span class="keyword">if</span> <span class="variable">$hostname</span> == <span class="string">"puppettest02"</span> &#123;</span><br><span class="line"><span class="keyword">include</span> <span class="symbol">php:</span><span class="symbol">:hd_1</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">include</span> <span class="symbol">php:</span><span class="symbol">:hd_2</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试通过。<br>注：此案例只针对像 puppettest01.bj 这样使用域名方式的主机名有效。</p>
 <p>第二种解决方法：<br>也可使用 $fqdn 变量来匹配，代码如下：
           
       

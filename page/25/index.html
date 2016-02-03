@@ -329,13 +329,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>进入 /etc/yum.repo.d/ 文件夹</p>
+        <p>进入 /etc/yum.repo.d/ 文件夹</p>
 <p>vi Centos-Media.repo</p>
-<p>修改文件中的dvd的位置，并打开本地源，如下：</p>
-<h1 id="CentOS-Media-repo"><a href="#CentOS-Media-repo" class="headerlink" title="CentOS-Media.repo"></a>CentOS-Media.repo</h1><p>#</p>
-<h1 id="This_repo_is_used_to_mount_the_default_locations_for_a_CDROM_/_DVD_on"><a href="#This_repo_is_used_to_mount_the_default_locations_for_a_CDROM_/_DVD_on" class="headerlink" title="This repo is used to mount the default locations for a CDROM / DVD on"></a>This repo is used to mount the default locations for a CDROM / DVD on</h1><h1 id="CentOS-5-_You_can_use_this_repo_and_yum_to_install_items_directly_off_the"><a href="#CentOS-5-_You_can_use_this_repo_and_yum_to_install_items_directly_off_the" class="headerlink" title="CentOS-5.  You can use this repo and yum to install items directly off the"></a>CentOS-5.  You can use this repo and yum to install items directly off the</h1><h1 id="DVD_ISO_that_we_release"><a href="#DVD_ISO_that_we_release" class="headerlink" title="DVD ISO that we release."></a>DVD ISO that we release.</h1><p>#</p>
-<h1 id="To_use_this_repo_2C_put_in_your_DVD_and_use_it_with_the_other_repos_too_3A"><a href="#To_use_this_repo_2C_put_in_your_DVD_and_use_it_with_the_other_repos_too_3A" class="headerlink" title="To use this repo, put in your DVD and use it with the other repos too:"></a>To use this repo, put in your DVD and use it with the other repos too:</h1><h1 id="yum__u2013enablerepo_3Dc5-media__5Bcommand_5D"><a href="#yum__u2013enablerepo_3Dc5-media__5Bcommand_5D" class="headerlink" title="yum –enablerepo=c5-media [command]"></a>yum –enablerepo=c5-media [command]</h1><h1 id="3C_21-more-_3E"><a href="#3C_21-more-_3E" class="headerlink" title="
-          
+<p>修改文件中的dvd的位置，并打开本地源，如下：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CentOS-Media.repo</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This repo is used to mount the default locations for a CDROM / DVD on</span></span><br><span class="line"><span class="comment">#  CentOS-5.  You can use this repo and yum to install items directly off the</span></span><br><span class="line"><span class="comment">#  DVD ISO that we release.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># To use this repo, put in your DVD and use it with the other repos too:</span></span><br><span class="line"><span class="comment">#  yum --enablerepo=c5-media [command]</span></span><br><span class="line"><span class="comment"># &lt;!--more--&gt;</span></span><br><span class="line"><span class="comment"># or for ONLY the media repo, do this:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  yum --disablerepo=\* --enablerepo=c5-media [command]</span></span><br><span class="line"><span class="title"></span><br><span class="line">[c5-media]</span></span><br><span class="line"><span class="setting">name=<span class="value">CentOS-<span class="variable">$releasever</span> - Media</span></span></span><br><span class="line"><span class="setting">baseurl=<span class="value">file:///mnt/</span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">gblerepo=<span class="value">\* --enablerepo=c5-mediapgcheck=<span class="number">1</span></span></span></span><br><span class="line"><span class="setting">enabled=<span class="value"><span class="number">0</span></span></span></span><br><span class="line"><span class="setting">gpgkey=<span class="value">file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-<span class="number">5</span></span></span></span><br></pre></td></tr></table></figure></p>
+<p>保存退出</p>
+<p>#mount /dev/cdrom /mnt     //挂载光盘到/mnt下</p>
+<p>使用命令如下：<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">yum</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">disablerepo=\*</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enablerepo=c5</span><span class="literal">-</span><span class="comment">media</span> <span class="comment">install/remove</span> <span class="literal">-</span><span class="comment">y</span></span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -352,10 +352,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yum/">yum</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a  href="/2011/07/21/CentOs5.4设置DVD为本地yum源/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -530,9 +526,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>#!/bin/bash</p>
-<h1 id="Info__3A_cut_logs_for_nginx"><a href="#Info__3A_cut_logs_for_nginx" class="headerlink" title="Info   : cut logs for nginx"></a>Info   : cut logs for nginx</h1><h1 id="Author__3A_elain"><a href="#Author__3A_elain" class="headerlink" title="Author : elain"></a>Author : elain</h1><h1 id="CTime__3A_2011-06-08"><a href="#CTime__3A_2011-06-08" class="headerlink" title="CTime  : 2011.06.08"></a>CTime  : 2011.06.08</h1><h1 id="This_script_run_at_00_3A00"><a href="#This_script_run_at_00_3A00" class="headerlink" title="This script run at 00:00"></a>This script run at 00:00</h1><h1 id="The_Nginx_logs_path"><a href="#The_Nginx_logs_path" class="headerlink" title="The Nginx logs path"></a>The Nginx logs path</h1><p>Logs_Path=”/elain/logs/nginx”<br>log_filenames=<code>/bin/ls $Logs_Path |grep -v nginx|grep -v logsbak</code><br>
-          
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line"><span class="comment"># Info   : cut logs for nginx</span></span><br><span class="line"><span class="comment"># Author : elain</span></span><br><span class="line"><span class="comment"># CTime  : 2011.06.08</span></span><br><span class="line"><span class="comment"># This script run at 00:00</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># The Nginx logs path</span></span><br><span class="line">Logs_Path=<span class="string">"/elain/logs/nginx"</span></span><br><span class="line"><span class="built_in">log</span>_filenames=`/bin/ls <span class="variable">$Logs_Path</span> |grep -v nginx|grep -v logsbak`</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">log</span>_name <span class="keyword">in</span> <span class="variable">$log_filenames</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">/bin/mv <span class="variable">$Logs_Path</span>/<span class="variable">$log_name</span> <span class="variable">$Logs_Path</span>/logsbak/`date <span class="operator">-d</span> yesterday +%Y%m%d%H%M`-<span class="variable">$log_name</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">kill</span> -USR1 `cat /elain/apps/nginx/nginx.pid`</span><br></pre></td></tr></table></figure>
+<p>cron定时任务<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># Info   : 每天凌晨<span class="number">0</span>点切割一次NGINX日志</span></span><br><span class="line"><span class="preprocessor"># Author : elain</span></span><br><span class="line"><span class="preprocessor"># CTime  : <span class="number">2011.06</span><span class="number">.08</span></span></span><br><span class="line"><span class="number">00</span> <span class="number">00</span> * * * /root/scripts/cut_nginx_log.sh</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -549,10 +545,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/log/">log</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a  href="/2011/07/07/NGINX多域名日志切割备份脚本/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

@@ -274,15 +274,15 @@
 <p>三、目的：可开放chroot帐号供开发人员web服务器上查看日志，分析问题等。</p>
 <p>四、chroot环境部署</p>
 <p>如果是5.5的系统，需要升级openssh，本文是在6.2和5.5中都有使用。</p>
-<p>#建立帐号<br>[ccWN lang=”bash” width=”99%” height=”100%”]useradd rd<br>echo “www.elain.org” | passwd –stdin rd[/ccWN]</p>
-<p>#下载chroot环境<br>[ccWN lang=”bash” width=”99%” height=”100%”]cd /home<br>wget <a href="http://ebook.elain.org/tools/chroot_v1.0.tar.gz">http://ebook.elain.org/tools/chroot_v1.0.tar.gz</a><br>tar zxvf chroot_v1.0.tar.gz<br>chown rd.rd /home/chroot/home/rd<br>rm -rf chroot_v1.0.tar.gz<br>[/ccWN]</p>
+<p>#建立帐号</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd <span class="built_in">rd</span></span><br><span class="line"><span class="keyword">echo</span> "www.elain.org" | passwd --stdin <span class="built_in">rd</span></span><br></pre></td></tr></table></figure>
+<p>#下载chroot环境</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /home</span><br><span class="line">wget http:<span class="comment">//ebook.elain.org/tools/chroot_v1.0.tar.gz</span></span><br><span class="line">tar zxvf chroot_v1.<span class="number">0</span><span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line">chown rd<span class="class">.rd</span> /home/chroot/home/rd</span><br><span class="line">rm -rf chroot_v1.<span class="number">0</span><span class="class">.tar</span><span class="class">.gz</span></span><br></pre></td></tr></table></figure>
 <p>#注：以上是我做好的chroot环境，大家可以直接下载使用，也可以自己去做。</p>
-<p>#启用ssh 的chroot<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<p>cat  &lt;&lt;EOF&gt;&gt;/etc/ssh/sshd_config</p>
-<p>#chroot<br>Match User rd<br>ChrootDirectory   /home/chroot<br>EOF</p>
-<p>/etc/init.d/sshd restart</p>
-<p>[/ccWN]</p>
-<p>#挂载日志目录<br>[ccWN lang=”bash” width=”99%” height=”100%”]mount –bind /data/logs /home/chroot/home/rd[/ccWN]</p>
+<p>#启用ssh 的chroot</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="crmsh">cat  <span class="tag">&lt;&lt;EOF&gt;</span>&gt;/etc/ssh/sshd_config</span><br><span class="line"></span><br><span class="line"><span class="comment">#chroot</span></span><br><span class="line">Match <span class="keyword">User</span> <span class="title">rd</span></span><br><span class="line">ChrootDirectory   /home/chroot</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">/etc/init.d/sshd restart</span></span><br></pre></td></tr></table></figure>
+<p>#挂载日志目录</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount --bind <span class="regexp">/data/</span>logs <span class="regexp">/home/</span>chroot<span class="regexp">/home/</span>rd</span><br></pre></td></tr></table></figure>
 <p>使用rd登录测试！！！<br>
           
       
@@ -573,14 +573,11 @@
 <p>最后输入以下命令重启 Nautilus 就可以使用 RabbitVCS 了。</p>
 <p>nautilus -q</p>
 <p>googlecode项目：<a href="http://code.google.com/p/rabbitvcs/" target="_blank" rel="external">http://code.google.com/p/rabbitvcs/</a></p>
-<p>&nbsp;</p>
 <p>下载地址：<a href="http://code.google.com/p/rabbitvcs/downloads/list" target="_blank" rel="external">http://code.google.com/p/rabbitvcs/downloads/list</a></p>
-<p>&nbsp;</p>
 <p><a href="http://code.google.com/p/rabbitvcs/downloads/detail?name=rabbitvcs-core_0.15.0.5-1_all.deb&amp;can=2&amp;q=" target="_blank" rel="external">rabbitvcs-core_0.15.0.5-1_all.deb </a></p>
 <p><a href="http://code.google.com/p/rabbitvcs/downloads/detail?name=rabbitvcs-cli_0.15.0.5-1_all.deb&amp;can=2&amp;q=" target="_blank" rel="external">rabbitvcs-cli_0.15.0.5-1_all.deb </a></p>
 <p><a href="http://code.google.com/p/rabbitvcs/downloads/detail?name=rabbitvcs-gedit_0.15.0.5-1_all.deb&amp;can=2&amp;q=" target="_blank" rel="external">rabbitvcs-gedit_0.15.0.5-1_all.deb </a></p>
 <p><a href="http://code.google.com/p/rabbitvcs/downloads/detail?name=rabbitvcs-nautilus3_0.15.0.5-1_all.deb&amp;can=2&amp;q=" target="_blank" rel="external">rabbitvcs-nautilus3_0.15.0.5-1_all.deb </a></p>
-<p>&nbsp;</p>
 <p>依次下载安装即可</p>
 
       

@@ -8,7 +8,7 @@
   <meta name="description" content="软件下载：
 --------------------------------
 
-&amp;amp;nbsp;
+
 
 1、jdk-6u20-linux-i586-rpm.bin
 
@@ -20,7 +20,13 @@ http://www.mydql.com
 
 3、apache-tomcat-6.0.28.tar.gz
 
-http://www.apache.org">
+http://www.apache.org
+
+
+
+
+
+====">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Apache+tomcat安装配置">
 <meta property="og:url" content="http://www.elain.org/2011/08/25/apache+tomcat安装配置/index.html">
@@ -28,7 +34,7 @@ http://www.apache.org">
 <meta property="og:description" content="软件下载：
 --------------------------------
 
-&amp;amp;nbsp;
+
 
 1、jdk-6u20-linux-i586-rpm.bin
 
@@ -40,14 +46,20 @@ http://www.mydql.com
 
 3、apache-tomcat-6.0.28.tar.gz
 
-http://www.apache.org">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+http://www.apache.org
+
+
+
+
+
+====">
+<meta property="og:updated_time" content="2016-02-03T06:19:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache+tomcat安装配置">
 <meta name="twitter:description" content="软件下载：
 --------------------------------
 
-&amp;amp;nbsp;
+
 
 1、jdk-6u20-linux-i586-rpm.bin
 
@@ -59,7 +71,13 @@ http://www.mydql.com
 
 3、apache-tomcat-6.0.28.tar.gz
 
-http://www.apache.org">
+http://www.apache.org
+
+
+
+
+
+====">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -322,7 +340,7 @@ http://www.apache.org">
         <p>软件下载：</p>
 <pre><code>--------------------------------
 
-&amp;nbsp;
+
 
 1、jdk-6u20-linux-i586-rpm.bin
 
@@ -336,9 +354,9 @@ http://www.mydql.com
 
 http://www.apache.org
 
-&amp;nbsp;
 
-&amp;nbsp;
+
+
 
 ==========================================
 
@@ -355,8 +373,6 @@ http://www.apache.org
 rpm -qa|grep java
 
 yum remove java
-
-&amp;nbsp;
 </code></pre><p>#cp jdk-6u20-linux-i586-rpm.bin /usr/local</p>
 <pre><code>#chmod +x jdk-6u20-linux-i586-rpm.bin
 
@@ -365,17 +381,13 @@ yum remove java
 #ln -s /usr/java/jdk1.6.0_20/ /usr/local/java
 
 #vi /etc/profile
-</code></pre><p>&nbsp;</p>
-<p>在最下面添</p>
-<pre><code>&amp;nbsp;
+</code></pre><p>在最下面添</p>
+<pre><code>export JAVA_HOME=/usr/java/jdk1.6.0_20
 
-export JAVA_HOME=/usr/java/jdk1.6.0_20
+export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar  
 
-export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar &amp;nbsp;
-
-export PATH=$PATH:$JAVA_HOME/bin &amp;nbsp;
+export PATH=$PATH:$JAVA_HOME/bin  
 </code></pre><a id="more"></a>
-<p>&nbsp;</p>
 <pre><code>#source /etc/profile
 
 ------------------------------
@@ -402,15 +414,15 @@ export PATH=$PATH:$JAVA_HOME/bin &amp;nbsp;
 
 最下面加入：
 
-&amp;nbsp;
+
 
 export CATALINA_HOME=/usr/local/tomcat
 
-&amp;nbsp;
+
 
 开机自启动
 
-&amp;nbsp; &amp;nbsp;
+
 
 # vi /etc/rc.d/rc.local 添加:
 
@@ -422,7 +434,7 @@ export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 
 /usr/local/tomcat/bin/startup.sh
 
-&amp;nbsp;
+
 
 ------------------------------
 
@@ -430,11 +442,11 @@ export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 
 ------------------------------
 
-# groupadd mysql &amp;nbsp;
+# groupadd mysql  
 
-# useradd -g mysql mysql &amp;nbsp;
+# useradd -g mysql mysql  
 
-# tar zvxf mysql-5.0.56.tar.gz &amp;nbsp;
+# tar zvxf mysql-5.0.56.tar.gz  
 
 # ./configure --prefix=/usr/local/mysql --with-extra-charsets=all
 
@@ -446,33 +458,33 @@ export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 
 # cp support-files/mysql.server /etc/rc.d/init.d/mysqld
 
-# cd /usr/local/mysql &amp;nbsp;
+# cd /usr/local/mysql  
 
-# bin/mysql_install_db --user=mysql &amp;nbsp;
+# bin/mysql_install_db --user=mysql  
 
-# chown -R root . &amp;nbsp;
+# chown -R root .  
 
-# chown -R mysql var &amp;nbsp;
+# chown -R mysql var  
 
-# chgrp -R mysql . &amp;nbsp;
+# chgrp -R mysql .  
 
 # /usr/local/mysql/bin/mysqld_safe --user=mysql &amp;
 
-# /usr/local/mysql/bin/mysqladmin -uroot password xxxxx //为root访问设置密码 &amp;nbsp;
+# /usr/local/mysql/bin/mysqladmin -uroot password xxxxx //为root访问设置密码  
 
-&amp;nbsp;
 
-# vi /etc/rc.d/rc.local&amp;nbsp;&amp;nbsp;&amp;nbsp; //添加到系统自启动
+
+# vi /etc/rc.d/rc.local    //添加到系统自启动
 
 添加：
 
 /etc/rc.d/init.d/mysqld start
 
-&amp;nbsp;
 
-保存并退出 &amp;nbsp;
 
-&amp;nbsp;
+保存并退出  
+
+
 
 GRANT ALL PRIVILEGES ON *.* TO &amp;#039;root&amp;#039;@&amp;#039;%&amp;#039; IDENTIFIED BY &amp;#039;123456&amp;#039; WITH GRANT OPTION;
 
@@ -480,25 +492,25 @@ GRANT ALL PRIVILEGES ON *.* TO &amp;#039;root&amp;#039;@&amp;#039;%&amp;#039; ID
 
 --------------------------------
 
-JDBC的安装 &amp;nbsp;
+JDBC的安装  
 
 #tar -zxvf mysql-connector-java-5.1.13.tar.gz
 
-#cd cd mysql-connector-java-5.1.13 &amp;nbsp;
+#cd cd mysql-connector-java-5.1.13  
 
 # cp mysql-connector-java-5.1.13-bin.jar /usr/local/tomcat/webapps/ROOT/WEB-INF/lib/
 
-&amp;nbsp;
+
 
 #vi /etc/profile
 
 最下面加入
 
-&amp;nbsp;
+
 
 export CLASSPATH=$JAVA_HOME/lib:$JRE/lib:/usr/local/tomcat/webapps/ROOT/WEB-INF/lib/mysql-connector-java-5.1.13-bin.jar
 
-&amp;nbsp;
+
 
 #source /etc/profile
 
@@ -508,23 +520,23 @@ export CLASSPATH=$JAVA_HOME/lib:$JRE/lib:/usr/local/tomcat/webapps/ROOT/WEB-INF/
 
 ---------------------------------
 
-安装php &amp;nbsp;
+安装php  
 
-&amp;nbsp;
 
-# cd /usr/local &amp;nbsp;
 
-# tar -jxvf php-5.2.13.tar.gz &amp;nbsp;
+# cd /usr/local  
+
+# tar -jxvf php-5.2.13.tar.gz  
 
 # cd php-5.2.13
 
-# ./configure --prefix=/usr/local/php --with-mysqld=/usr/local/mysql --with-apxs2=/usr/local/apache/bin/apxs &amp;nbsp;
+# ./configure --prefix=/usr/local/php --with-mysqld=/usr/local/mysql --with-apxs2=/usr/local/apache/bin/apxs  
 
-# make &amp;nbsp;
+# make  
 
-# make install &amp;nbsp;
+# make install  
 
-# cp php.ini-dist /usr/local/php/lib/php.ini &amp;nbsp;
+# cp php.ini-dist /usr/local/php/lib/php.ini  
 
 ---------------------------------
 
@@ -532,33 +544,33 @@ apache与php整合
 
 ---------------------------------
 
-编辑httpd.conf文件 &amp;nbsp;
+编辑httpd.conf文件  
 
-# vi /usr/local/apache/conf/httpd.conf &amp;nbsp;
+# vi /usr/local/apache/conf/httpd.conf  
 
-在LoadModule处添加: &amp;nbsp;
+在LoadModule处添加:  
 
-&amp;nbsp;
 
-LoadModule php5_module module/libphp5.so &amp;nbsp;
 
-&amp;nbsp;
+LoadModule php5_module module/libphp5.so  
 
-在DirectoryIndex处添加: index.php &amp;nbsp;
 
-&amp;nbsp;
 
-在AddType application处添加: &amp;nbsp;
+在DirectoryIndex处添加: index.php  
 
-&amp;nbsp;
+
+
+在AddType application处添加:  
+
+
 
 AddType application/x-httpd-php .php .phtml
 
-AddType applicatoin/x-httpd-php-source .phps &amp;nbsp;
+AddType applicatoin/x-httpd-php-source .phps  
 
-&amp;nbsp;
 
-&amp;nbsp;
+
+
 
 ProxyPass / ajp://127.0.0.1:8009/
 
@@ -568,11 +580,11 @@ ProxyPassReverse / ajp://127.0.0.1:8009/
 
 -------------------------------------------
 
-&amp;nbsp;
+
 
 配置Tomcat
 
-&amp;nbsp;
+
 
 在Tomcat/conf/server.xml的中添加：
 
@@ -586,12 +598,11 @@ javax.sql.DataSource
 
 Container
 </code></pre><p>　　在Tomcat 5.5/webapps/test/META-INF/context.xml的中添加：</p>
-<p>&nbsp;</p>
 <pre><code>　重启Tomcat服务器，写一个test.jsp：
 
-&amp;lt;!doctype html public &amp;quot;-//w3c//dtd html 4.0 transitional//en&amp;quot;
+&lt;!doctype html public &amp;quot;-//w3c//dtd html 4.0 transitional//en&amp;quot;
 
-&amp;quot;http://www.w3.org/TR/REC-html40/strict.dtd&amp;quot;&amp;gt;
+&amp;quot;http://www.w3.org/TR/REC-html40/strict.dtd&amp;quot;&gt;
 </code></pre><p>&lt;％</p>
 <pre><code>out.print(&amp;quot;Start
 
@@ -623,15 +634,11 @@ ex.printStackTrace();
 
 }
 
-％&amp;gt;
+％&gt;
 
-&amp;nbsp;
+
 
 在浏览器中浏览该jsp文件，JSP 解析成功，说明安装正确通过！
-
-&amp;nbsp;
-
-&amp;nbsp;
 </code></pre>
       
     </div>
@@ -643,7 +650,7 @@ ex.printStackTrace();
         <p><span>本文标题:</span><a href="/2011/08/25/apache+tomcat安装配置/">Apache+tomcat安装配置</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年08月25日 - 07时50分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/08/25/apache+tomcat安装配置/" title="Apache+tomcat安装配置">http://www.elain.org/2011/08/25/apache+tomcat安装配置/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/08/25/apache+tomcat安装配置/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

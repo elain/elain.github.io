@@ -5,16 +5,15 @@
   
   <title>LEMP部署安装for RHEL AS4.6 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;nbsp;
-系统环境：
+  <meta name="description" content="系统环境：
 
 Red Hat Enterprise Linux AS release 4 (Nahant Update 6)
 
-&amp;amp;nbsp;
+
 
 所需软件：
 
-&amp;amp;nbsp;
+
 
 mhash-0.9.9.9.tar.bz2
 
@@ -24,21 +23,22 @@ mysql-5.5.3-m3.tar.gz
 
 imagick-2.3.0.tgz
 
-ngin">
+nginx-0.8.46.tar.gz
+
+libiconv-1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LEMP部署安装for RHEL AS4.6">
 <meta property="og:url" content="http://www.elain.org/2011/08/29/LEMP部署安装for RHEL AS4.6/index.html">
 <meta property="og:site_name" content="Elain'blog">
-<meta property="og:description" content="&amp;nbsp;
-系统环境：
+<meta property="og:description" content="系统环境：
 
 Red Hat Enterprise Linux AS release 4 (Nahant Update 6)
 
-&amp;amp;nbsp;
+
 
 所需软件：
 
-&amp;amp;nbsp;
+
 
 mhash-0.9.9.9.tar.bz2
 
@@ -48,20 +48,21 @@ mysql-5.5.3-m3.tar.gz
 
 imagick-2.3.0.tgz
 
-ngin">
-<meta property="og:updated_time" content="2016-02-02T08:09:59.000Z">
+nginx-0.8.46.tar.gz
+
+libiconv-1">
+<meta property="og:updated_time" content="2016-02-03T06:19:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LEMP部署安装for RHEL AS4.6">
-<meta name="twitter:description" content="&amp;nbsp;
-系统环境：
+<meta name="twitter:description" content="系统环境：
 
 Red Hat Enterprise Linux AS release 4 (Nahant Update 6)
 
-&amp;amp;nbsp;
+
 
 所需软件：
 
-&amp;amp;nbsp;
+
 
 mhash-0.9.9.9.tar.bz2
 
@@ -71,7 +72,9 @@ mysql-5.5.3-m3.tar.gz
 
 imagick-2.3.0.tgz
 
-ngin">
+nginx-0.8.46.tar.gz
+
+libiconv-1">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -331,16 +334,15 @@ ngin">
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>&nbsp;</p>
-<pre><code>系统环境：
+        <pre><code>系统环境：
 
 Red Hat Enterprise Linux AS release 4 (Nahant Update 6)
 
-&amp;nbsp;
+
 
 所需软件：
 
-&amp;nbsp;
+
 
 mhash-0.9.9.9.tar.bz2
 
@@ -368,7 +370,7 @@ memcache-2.2.5.tgz
 
 php-5.2.14.tar.gz
 
-&amp;nbsp;
+
 
 安装PHP环境所需软件
 
@@ -386,9 +388,9 @@ make install
 
 cd ..
 
-&amp;nbsp;
 
-tar zxvf libmcrypt-2.5.8.tar.gz &amp;nbsp;
+
+tar zxvf libmcrypt-2.5.8.tar.gz  
 
 cd libmcrypt-2.5.8/
 
@@ -412,7 +414,7 @@ cd ..
 
 cd ..
 
-&amp;nbsp;
+
 
 tar jxvf mhash-0.9.9.9.tar.bz2
 
@@ -426,7 +428,6 @@ make install
 
 cd ..
 </code></pre><a id="more"></a>
-<p>&nbsp;</p>
 <pre><code>ln -s /usr/local/lib/libmcrypt.la /usr/lib/libmcrypt.la
 
 ln -s /usr/local/lib/libmcrypt.so /usr/lib/libmcrypt.so
@@ -447,7 +448,7 @@ ln -s /usr/local/lib/libmhash.so.2.0.1 /usr/lib/libmhash.so.2.0.1
 
 ln -s /usr/local/bin/libmcrypt-config /usr/bin/libmcrypt-config
 
-&amp;nbsp;
+
 
 tar zxvf mcrypt-2.6.8.tar.gz
 
@@ -505,7 +506,7 @@ chmod +w /usr/local/mysql
 
 chown -R mysql:mysql /usr/local/mysql
 
-echo &amp;quot;export PATH=$PATH:/usr/local/mysql/bin/&amp;quot;&amp;gt;&amp;gt;/etc/profile
+echo &amp;quot;export PATH=$PATH:/usr/local/mysql/bin/&amp;quot;&gt;&gt;/etc/profile
 
 source /etc/profile
 
@@ -519,13 +520,13 @@ chkconfig --add mysqld
 
 cd ../
 
-&amp;nbsp;
+
 
 vi /etc/my.cnf
 
-#basedir=/var/lib&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #注释掉这行
+#basedir=/var/lib        #注释掉这行
 
-&amp;nbsp;
+
 
 /etc/init.d/mysqld start
 
@@ -533,7 +534,7 @@ mysqladmin -uroot password admin888
 
 ---------------------------------------
 
-&amp;nbsp;
+
 
 安装PHP（FastCGI模式）
 
@@ -587,7 +588,7 @@ cp php.ini-dist /usr/local/php/etc/php.ini
 
 cd ../
 
-&amp;nbsp;
+
 
 安装PHP扩展模块
 
@@ -607,7 +608,7 @@ make install
 
 cd ../
 
-&amp;nbsp;
+
 
 tar zxvf PDO_MYSQL-1.0.2.tgz
 
@@ -627,9 +628,9 @@ make install
 
 cd ../
 
-&amp;nbsp;
 
-&amp;nbsp;
+
+
 
 配置PHP
 
@@ -637,31 +638,31 @@ cd ../
 
 修改php.ini文件
 
-&amp;nbsp;
+
 
 vi /usr/local/php/etc/php.ini
 
-&amp;nbsp;
+
 
 手工修改：
 
-&amp;nbsp;
+
 
 查找/usr/local/php/etc/php.ini中的
 
-&amp;nbsp;
 
-extension_dir = &amp;quot;./&amp;quot;&amp;nbsp;&amp;nbsp;&amp;nbsp; （约491行）
 
-&amp;nbsp;
+extension_dir = &amp;quot;./&amp;quot;    （约491行）
+
+
 
 修改为
 
-&amp;nbsp;
+
 
 extension_dir = &amp;quot;/usr/local/php/lib/php/extensions/no-debug-non-zts-20060613/&amp;quot;
 
-&amp;nbsp;
+
 
 并在此行后增加以下几行
 
@@ -671,25 +672,25 @@ extension = &amp;quot;pdo_mysql.so&amp;quot;
 
 extension = &amp;quot;imagick.so&amp;quot;
 
-&amp;nbsp;
 
-再查找 output_buffering = Off&amp;nbsp;&amp;nbsp;&amp;nbsp; (约101行)
+
+再查找 output_buffering = Off    (约101行)
 
 修改为 output_buffering = On
 
-&amp;nbsp;
 
-再查找 ;cgi.fix_pathinfo=0&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; (约523行)
 
-修改为 cgi.fix_pathinfo=0，&amp;nbsp;&amp;nbsp;&amp;nbsp; 即取消注释，使生效，防止Nginx文件类型错误解析漏洞。
+再查找 ;cgi.fix_pathinfo=0       (约523行)
 
-&amp;nbsp;
+修改为 cgi.fix_pathinfo=0，    即取消注释，使生效，防止Nginx文件类型错误解析漏洞。
 
-&amp;nbsp;
+
+
+
 
 创建www用户和组，以及供www.elain.org使用的目录：
 
-&amp;nbsp;
+
 
 /usr/sbin/groupadd www
 
@@ -701,19 +702,19 @@ chmod +w /www/htdocs
 
 chown -R www:www /www
 
-&amp;nbsp;
 
-&amp;nbsp;
+
+
 
 创建php-fpm配置文件（php-fpm是为PHP打的一个FastCGI管理补丁，可以平滑变更php.ini配置而无需重启php-cgi）：
 
 在/usr/local/php/etc/目录中创建php-fpm.conf文件：
 
-&amp;nbsp;
+
 
 vi /usr/local/php/etc/php-fpm.conf
 
-&amp;nbsp;
+
 
 输入以下内容:
 </code></pre><p>#######################################</p>
@@ -721,17 +722,17 @@ vi /usr/local/php/etc/php-fpm.conf
 <p>#######################################</p>
 <pre><code>注：如果安装 Nginx + PHP 用于程序调试，请将以上的0改为1，以便显示PHP错误信息，否则，Nginx 会报状态为500的空白错误页）：
 
-&amp;nbsp;
+
 
 启动php-cgi进程，监听127.0.0.1的9000端口，进程数为128（如果服务器内存小于3GB，可以只开启64个进程），用户为www：
 
-&amp;nbsp;
+
 
 ulimit -SHn 65535
 
 /usr/local/php/sbin/php-fpm start
 
-&amp;nbsp;
+
 
 注：/usr/local/php/sbin/php-fpm还有其他参数，包括：start|stop|quit|restart|reload|logrotate，修改php.ini后不重启php-cgi，重新加载配置文件使用reload。
 
@@ -743,7 +744,7 @@ ulimit -SHn 65535
 
 安装Nginx所需的pcre库：
 
-&amp;nbsp;
+
 
 unzip pcre-8.10.zip
 
@@ -755,11 +756,11 @@ make &amp;&amp; make install
 
 cd ../
 
-&amp;nbsp;
+
 
 安装Nginx
 
-&amp;nbsp;
+
 
 tar zxvf nginx-0.8.46.tar.gz
 
@@ -777,11 +778,11 @@ make &amp;&amp; make install
 
 cd ../
 
-&amp;nbsp;
+
 
 创建Nginx日志目录
 
-&amp;nbsp;
+
 
 mkdir -p /www/logs
 
@@ -789,303 +790,303 @@ chmod +w /www/logs
 
 chown -R www:www /www/logs
 
-&amp;nbsp;
+
 
 创建Nginx配置文件
 
-&amp;nbsp;
+
 
 vi /usr/local/nginx/conf/nginx.conf
 
-&amp;nbsp;
+
 
 输入以下内容：
 
 ##################################
 
-user&amp;nbsp; www www;
+user  www www;
 
-&amp;nbsp;
+
 
 worker_processes 8;
 
-&amp;nbsp;
 
-error_log&amp;nbsp; /www/logs/nginx_error.log&amp;nbsp; crit;
 
-&amp;nbsp;
+error_log  /www/logs/nginx_error.log  crit;
 
-pid&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; /usr/local/nginx/nginx.pid;
 
-&amp;nbsp;
 
-#Specifies the value for maximum file descriptors that can be opened by this process. &amp;nbsp;
+pid        /usr/local/nginx/nginx.pid;
+
+
+
+#Specifies the value for maximum file descriptors that can be opened by this process.  
 
 worker_rlimit_nofile 65535;
 
-&amp;nbsp;
 
-events &amp;nbsp;
+
+events  
 
 {
 
-&amp;nbsp; use epoll;
+  use epoll;
 
-&amp;nbsp; worker_connections 65535;
+  worker_connections 65535;
 
 }
 
-&amp;nbsp;
 
-http &amp;nbsp;
+
+http  
 
 {
 
-&amp;nbsp; include&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; mime.types;
+  include       mime.types;
 
-&amp;nbsp; default_type&amp;nbsp; application/octet-stream;
+  default_type  application/octet-stream;
 
-&amp;nbsp;
 
-&amp;nbsp; #charset&amp;nbsp; gb2312;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+  #charset  gb2312;
 
-&amp;nbsp; server_names_hash_bucket_size 128;
 
-&amp;nbsp; client_header_buffer_size 32k;
 
-&amp;nbsp; large_client_header_buffers 4 32k;
+  server_names_hash_bucket_size 128;
 
-&amp;nbsp; client_max_body_size 8m;
+  client_header_buffer_size 32k;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+  large_client_header_buffers 4 32k;
 
-&amp;nbsp; sendfile on;
+  client_max_body_size 8m;
 
-&amp;nbsp; tcp_nopush&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; on;
 
-&amp;nbsp;
 
-&amp;nbsp; keepalive_timeout 60;
+  sendfile on;
 
-&amp;nbsp;
+  tcp_nopush     on;
 
-&amp;nbsp; tcp_nodelay on;
 
-&amp;nbsp;
 
-&amp;nbsp; fastcgi_connect_timeout 300;
+  keepalive_timeout 60;
 
-&amp;nbsp; fastcgi_send_timeout 300;
 
-&amp;nbsp; fastcgi_read_timeout 300;
 
-&amp;nbsp; fastcgi_buffer_size 64k;
+  tcp_nodelay on;
 
-&amp;nbsp; fastcgi_buffers 4 64k;
 
-&amp;nbsp; fastcgi_busy_buffers_size 128k;
 
-&amp;nbsp; fastcgi_temp_file_write_size 128k;
+  fastcgi_connect_timeout 300;
 
-&amp;nbsp;
+  fastcgi_send_timeout 300;
 
-&amp;nbsp; gzip on;
+  fastcgi_read_timeout 300;
 
-&amp;nbsp; gzip_min_length&amp;nbsp; 1k;
+  fastcgi_buffer_size 64k;
 
-&amp;nbsp; gzip_buffers&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 4 16k;
+  fastcgi_buffers 4 64k;
 
-&amp;nbsp; gzip_http_version 1.0;
+  fastcgi_busy_buffers_size 128k;
 
-&amp;nbsp; gzip_comp_level 2;
+  fastcgi_temp_file_write_size 128k;
 
-&amp;nbsp; gzip_types&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; text/plain application/x-javascript text/css application/xml;
 
-&amp;nbsp; gzip_vary on;
 
-&amp;nbsp;
+  gzip on;
 
-&amp;nbsp; #limit_zone&amp;nbsp; crawler&amp;nbsp; $binary_remote_addr&amp;nbsp; 10m;
+  gzip_min_length  1k;
 
-&amp;nbsp;
+  gzip_buffers     4 16k;
 
-&amp;nbsp; server
+  gzip_http_version 1.0;
 
-&amp;nbsp; {
+  gzip_comp_level 2;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; listen&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 80;
+  gzip_types       text/plain application/x-javascript text/css application/xml;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; server_name&amp;nbsp; www.elain.org;
+  gzip_vary on;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; index index.html index.htm index.php;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; root&amp;nbsp; /www/htdocs;
 
-&amp;nbsp;
+  #limit_zone  crawler  $binary_remote_addr  10m;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; #limit_conn&amp;nbsp;&amp;nbsp; crawler&amp;nbsp; 20;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; location ~ .*\.(php|php5)?$
+  server
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; {&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+  {
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; #fastcgi_pass&amp;nbsp; unix:/tmp/php-cgi.sock;
+    listen       80;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; fastcgi_pass&amp;nbsp; 127.0.0.1:9000;
+    server_name  www.elain.org;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; fastcgi_index index.php;
+    index index.html index.htm index.php;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; include fcgi.conf;
+    root  /www/htdocs;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; }
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+    #limit_conn   crawler  20;     
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; {
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; expires&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 30d;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; }
+    location ~ .*\.(php|php5)?$
 
-&amp;nbsp;
+    {       
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; location ~ .*\.(js|css)?$
+      #fastcgi_pass  unix:/tmp/php-cgi.sock;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; {
+      fastcgi_pass  127.0.0.1:9000;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; expires&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 1h;
+      fastcgi_index index.php;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; }&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;
+      include fcgi.conf;
 
-&amp;nbsp;
+    }
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; log_format&amp;nbsp; access&amp;nbsp; &amp;#039;$remote_addr - $remote_user [$time_local] &amp;quot;$request&amp;quot; &amp;#039;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;#039;$status $body_bytes_sent &amp;quot;$http_referer&amp;quot; &amp;#039;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;#039;&amp;quot;$http_user_agent&amp;quot; $http_x_forwarded_for&amp;#039;;
+    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; access_log&amp;nbsp; /www/logs/access.log&amp;nbsp; access;
+    {
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; }
+      expires      30d;
 
-&amp;nbsp;
+    }
 
-&amp;nbsp;&amp;nbsp; server
 
-&amp;nbsp; {
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; listen&amp;nbsp; 80;
+    location ~ .*\.(js|css)?$
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; server_name&amp;nbsp; status.elain.org;
+    {
 
-&amp;nbsp;
+      expires      1h;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; location / {
+    }     
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; stub_status on;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; access_log&amp;nbsp;&amp;nbsp; off;
 
-&amp;nbsp;&amp;nbsp;&amp;nbsp; }
+    log_format  access  &amp;#039;$remote_addr - $remote_user [$time_local] &amp;quot;$request&amp;quot; &amp;#039;
 
-&amp;nbsp; }
+              &amp;#039;$status $body_bytes_sent &amp;quot;$http_referer&amp;quot; &amp;#039;
+
+              &amp;#039;&amp;quot;$http_user_agent&amp;quot; $http_x_forwarded_for&amp;#039;;
+
+    access_log  /www/logs/access.log  access;
+
+      }
+
+
+
+   server
+
+  {
+
+    listen  80;
+
+    server_name  status.elain.org;
+
+
+
+    location / {
+
+    stub_status on;
+
+    access_log   off;
+
+    }
+
+  }
 
 }
 
 ##################################
 
-&amp;nbsp;
+
 
 创建fcgi.conf文件：
 
-&amp;nbsp;
+
 
 vi /usr/local/nginx/conf/fcgi.conf
 
-&amp;nbsp;
+
 
 输入以下内容：
 
 ##################################
 
-fastcgi_param&amp;nbsp; GATEWAY_INTERFACE&amp;nbsp; CGI/1.1;
+fastcgi_param  GATEWAY_INTERFACE  CGI/1.1;
 
-fastcgi_param&amp;nbsp; SERVER_SOFTWARE&amp;nbsp;&amp;nbsp;&amp;nbsp; nginx;
+fastcgi_param  SERVER_SOFTWARE    nginx;
 
-&amp;nbsp;
 
-fastcgi_param&amp;nbsp; QUERY_STRING&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $query_string;
 
-fastcgi_param&amp;nbsp; REQUEST_METHOD&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $request_method;
+fastcgi_param  QUERY_STRING       $query_string;
 
-fastcgi_param&amp;nbsp; CONTENT_TYPE&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $content_type;
+fastcgi_param  REQUEST_METHOD     $request_method;
 
-fastcgi_param&amp;nbsp; CONTENT_LENGTH&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $content_length;
+fastcgi_param  CONTENT_TYPE       $content_type;
 
-&amp;nbsp;
+fastcgi_param  CONTENT_LENGTH     $content_length;
 
-fastcgi_param&amp;nbsp; SCRIPT_FILENAME&amp;nbsp;&amp;nbsp;&amp;nbsp; $document_root$fastcgi_script_name;
 
-fastcgi_param&amp;nbsp; SCRIPT_NAME&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $fastcgi_script_name;
 
-fastcgi_param&amp;nbsp; REQUEST_URI&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $request_uri;
+fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;
 
-fastcgi_param&amp;nbsp; DOCUMENT_URI&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $document_uri;
+fastcgi_param  SCRIPT_NAME        $fastcgi_script_name;
 
-fastcgi_param&amp;nbsp; DOCUMENT_ROOT&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $document_root;
+fastcgi_param  REQUEST_URI        $request_uri;
 
-fastcgi_param&amp;nbsp; SERVER_PROTOCOL&amp;nbsp;&amp;nbsp;&amp;nbsp; $server_protocol;
+fastcgi_param  DOCUMENT_URI       $document_uri;
 
-&amp;nbsp;
+fastcgi_param  DOCUMENT_ROOT      $document_root;
 
-fastcgi_param&amp;nbsp; REMOTE_ADDR&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $remote_addr;
+fastcgi_param  SERVER_PROTOCOL    $server_protocol;
 
-fastcgi_param&amp;nbsp; REMOTE_PORT&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $remote_port;
 
-fastcgi_param&amp;nbsp; SERVER_ADDR&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $server_addr;
 
-fastcgi_param&amp;nbsp; SERVER_PORT&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $server_port;
+fastcgi_param  REMOTE_ADDR        $remote_addr;
 
-fastcgi_param&amp;nbsp; SERVER_NAME&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $server_name;
+fastcgi_param  REMOTE_PORT        $remote_port;
 
-&amp;nbsp;
+fastcgi_param  SERVER_ADDR        $server_addr;
+
+fastcgi_param  SERVER_PORT        $server_port;
+
+fastcgi_param  SERVER_NAME        $server_name;
+
+
 
 # PHP only, required if PHP was built with --enable-force-cgi-redirect
 
-fastcgi_param&amp;nbsp; REDIRECT_STATUS&amp;nbsp;&amp;nbsp;&amp;nbsp; 200;
+fastcgi_param  REDIRECT_STATUS    200;
 
 ################################
 
-&amp;nbsp;
+
 
 启动Nginx
 
-&amp;nbsp;
+
 
 ulimit -SHn 65535
 
 /usr/local/nginx/sbin/nginx
 
-&amp;nbsp;
+
 
 配置开机自动启动Nginx + PHP
 
-&amp;nbsp;
+
 
 vi /etc/rc.local
 
-&amp;nbsp;
+
 
 在末尾增加以下内容：
 
-&amp;nbsp;
+
 
 ulimit -SHn 65535
 
@@ -1093,25 +1094,21 @@ ulimit -SHn 65535
 
 /usr/local/nginx/sbin/nginx
 
-&amp;nbsp;
 
-&amp;nbsp;
+
+
 
 nginx重启
 
-&amp;nbsp;
+
 
 killall -9 nginx;/usr/local/nginx/sbin/nginx
 
-&amp;nbsp;
+
 
 kill -HUP `cat /usr/local/nginx/nginx.pid` #平滑重启
 </code></pre><p>/usr/local/nginx/sbin/nginx -s {reload|stop}</p>
-<pre><code>&amp;nbsp;
-
-killall -HUP nginx
-
-&amp;nbsp;
+<pre><code>killall -HUP nginx
 </code></pre>
       
     </div>
@@ -1123,7 +1120,7 @@ killall -HUP nginx
         <p><span>本文标题:</span><a href="/2011/08/29/LEMP部署安装for RHEL AS4.6/">LEMP部署安装for RHEL AS4.6</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年08月29日 - 08时05分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 16时09分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/08/29/LEMP部署安装for RHEL AS4.6/" title="LEMP部署安装for RHEL AS4.6">http://www.elain.org/2011/08/29/LEMP部署安装for RHEL AS4.6/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/08/29/LEMP部署安装for RHEL AS4.6/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

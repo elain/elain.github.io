@@ -263,11 +263,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>所需软件：<br>[ccWN lang=”bash” width=”99%” height=”100%”]</p>
-<p>ipvsadm-1.24-10.x86_64.rpm<br>heartbeat-2.1.3-3.el5.centos.x86_64.rpm<br>heartbeat-pils-2.1.3-3.el5.centos.x86_64.rpm<br>heartbeat-stonith-2.1.3-3.el5.centos.x86_64.rpm<br>PyXML-0.8.4-4.x86_64.rpm<br>[/ccWN]<br>系统环境：<br>CentOS 5.4 64-bit</p>
+              <p>所需软件：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="css"><span class="tag">ipvsadm-1</span><span class="class">.24-10</span><span class="class">.x86_64</span><span class="class">.rpm</span></span><br><span class="line"><span class="tag">heartbeat-2</span><span class="class">.1</span><span class="class">.3-3</span><span class="class">.el5</span><span class="class">.centos</span><span class="class">.x86_64</span><span class="class">.rpm</span></span><br><span class="line"><span class="tag">heartbeat-pils-2</span><span class="class">.1</span><span class="class">.3-3</span><span class="class">.el5</span><span class="class">.centos</span><span class="class">.x86_64</span><span class="class">.rpm</span></span><br><span class="line"><span class="tag">heartbeat-stonith-2</span><span class="class">.1</span><span class="class">.3-3</span><span class="class">.el5</span><span class="class">.centos</span><span class="class">.x86_64</span><span class="class">.rpm</span></span><br><span class="line"><span class="tag">PyXML-0</span><span class="class">.8</span><span class="class">.4-4</span><span class="class">.x86_64</span><span class="class">.rpm</span></span></span><br></pre></td></tr></table></figure>
+<p>系统环境：<br>CentOS 5.4 64-bit</p>
 <p>HA1                    10.0.0.108<br>HA1                    10.0.0.109<br>web1                   10.0.0.110<br>web2                   10.0.0.111<br>VIP                    10.0.0.100</p>
-<p>ipvsadm-1.24安装<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>rpm -ivh ipvsadm-1.24-10.x86_64.rpm<br>/sbin/ipvsadm<br>[/ccWN]<br>heartbeat 安装<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>rpm -ivh heartbeat-pils-2.1.3-3.el5.centos.x86_64.rpm<br>rpm -ivh heartbeat-stonith-2.1.3-3.el5.centos.x86_64.rpm<br>rpm -ivh PyXML-0.8.4-4.x86_64.rpm<br>rpm -ivh heartbeat-2.1.3-3.el5.centos.x86_64.rpm<br>[/ccWN]<br>注：若heartbeat一次未安装好，再装一次<br>[ccWN lang=”bash” width=”99%” height=”100%”]<br>rpm -q heartbeat -d              //查看安装路径</p>
-<p>echo “service heartbeat start” &gt;&gt; /etc/rc.local<br>[/ccWN]
+<p>ipvsadm-1.24安装</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">rpm -ivh ipvsadm-<span class="number">1.24</span>-<span class="number">10</span><span class="class">.x86_64</span><span class="class">.rpm</span></span><br><span class="line">/sbin/ipvsadm</span><br></pre></td></tr></table></figure>
+<p>heartbeat 安装</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">rpm</span> <span class="tag">-ivh</span> <span class="tag">heartbeat-pils-2</span><span class="class">.1</span><span class="class">.3-3</span><span class="class">.el5</span><span class="class">.centos</span><span class="class">.x86_64</span><span class="class">.rpm</span></span><br><span class="line"><span class="tag">rpm</span> <span class="tag">-ivh</span> <span class="tag">heartbeat-stonith-2</span><span class="class">.1</span><span class="class">.3-3</span><span class="class">.el5</span><span class="class">.centos</span><span class="class">.x86_64</span><span class="class">.rpm</span></span><br><span class="line"><span class="tag">rpm</span> <span class="tag">-ivh</span> <span class="tag">PyXML-0</span><span class="class">.8</span><span class="class">.4-4</span><span class="class">.x86_64</span><span class="class">.rpm</span></span><br><span class="line"><span class="tag">rpm</span> <span class="tag">-ivh</span> <span class="tag">heartbeat-2</span><span class="class">.1</span><span class="class">.3-3</span><span class="class">.el5</span><span class="class">.centos</span><span class="class">.x86_64</span><span class="class">.rpm</span></span><br></pre></td></tr></table></figure>
+<p>注：若heartbeat一次未安装好，再装一次</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">rpm -q heartbeat -<span class="keyword">d</span>              <span class="comment">//查看安装路径</span></span><br><span class="line"></span><br><span class="line">echo <span class="string">"service heartbeat start"</span> &gt;&gt; /etc/rc.<span class="keyword">local</span></span><br></pre></td></tr></table></figure>
           
       
     </div>
@@ -332,7 +337,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <font face="宋体 "></font><font color="#c00000"><strong><font>一、</font></strong></font><font>女浴室起火，里面人乱作一团，赤身往外跑，只见大街上白花花一大群，一老者大喊&ldquo;快捂住&rdquo;，众裸女突然醒悟，但身上要紧部位有三处，手忙脚乱捂不过来，不知所措。这时老者又大喊：&ldquo;捂脸就行，下面都一样！&rdquo;&nbsp;&nbsp;</font>
+              <font face="宋体 "></font><font color="#c00000"><strong><font>一、</font></strong></font><font>女浴室起火，里面人乱作一团，赤身往外跑，只见大街上白花花一大群，一老者大喊&ldquo;快捂住&rdquo;，众裸女突然醒悟，但身上要紧部位有三处，手忙脚乱捂不过来，不知所措。这时老者又大喊：&ldquo;捂脸就行，下面都一样！&rdquo;  </font>
 
 <pre><code>&lt;font color=&quot;red&quot;&gt;&lt;/font&gt;&lt;font&gt;&lt;/font&gt;&lt;font face=&quot;宋体 &quot;&gt;&lt;/font&gt;&lt;font color=&quot;#c00000&quot;&gt;&lt;/font&gt;&lt;font size=&quot;5&quot;&gt;&lt;/font&gt;&lt;font size=&quot;4&quot;&gt;&lt;/font&gt;&lt;font color=&quot;#00b050&quot;&gt;【&lt;/font&gt;&lt;font color=&quot;#00b050&quot;&gt;此事的重要启示：在特殊情况下抓工作不可能面面俱到，要抓住重点。】&lt;/font&gt; 
 
@@ -353,8 +358,6 @@
 &lt;font face=&quot;宋体 &quot;&gt;&lt;/font&gt;&lt;font color=&quot;#c00000&quot;&gt;&lt;/font&gt;&lt;font&gt;AB&lt;/font&gt;&lt;font&gt;无语，走了。 &lt;/font&gt;
 
 &lt;font color=&quot;red&quot;&gt;&lt;/font&gt;&lt;font&gt;&lt;/font&gt;&lt;font face=&quot;宋体 &quot;&gt;&lt;/font&gt;&lt;font color=&quot;#c00000&quot;&gt;&lt;/font&gt;&lt;font size=&quot;5&quot;&gt;&lt;/font&gt;&lt;font size=&quot;4&quot;&gt;&lt;/font&gt;&lt;font color=&quot;#00b050&quot;&gt;【此事的重要启示：核心竞争力不是钱和房子，是在关键的岗位有自已的人。】&lt;/font&gt;
-
-&amp;nbsp;
 </code></pre>
           
       
@@ -431,7 +434,7 @@ libmcrypt-2.5.8.tar.gz
 
 mhash-0.9.9.9.tar.bz2
 
-&amp;nbsp;
+
 
 MYSQL安装
 
@@ -484,8 +487,6 @@ cd mysql-5.0.56
 --with-mysqld-ldflags=-all-static \
 
 --with-client-ldflags=-all-static
-
-&amp;nbsp;
 </code></pre>
           
       
@@ -609,25 +610,23 @@ cd mysql-5.0.56
       
           
               <p>简述：　Memcached 是一个高性能的分布式内存对象缓存系统，用于动态Web应用以减轻数据库负载。它通过在内存中缓存数据和对象来减少读取数据库的次数，从而提供动态、数据库驱动网站的速度。Memcached基于一个存储键/值对的hashmap。其守护进程（daemon ）是用C写的，但是客户端可以用任何语言来编写，并通过memcached协议与守护进程通信。但是它并不提供冗余（例如，复制其hashmap条目）；当某个服务器S停止运行或崩溃了，所有存放在S上的键/值对都将丢失。</p>
-<pre><code>环境：CentOS 5.5&amp;nbsp; x64
+<pre><code>环境：CentOS 5.5  x64
 
 #安装libevent
 
-&amp;nbsp;wget http://www.monkey.org/~provos/libevent-1.4.12-stable.tar.gz
+ wget http://www.monkey.org/~provos/libevent-1.4.12-stable.tar.gz
 
-&amp;nbsp;tar vxf libevent-1.4.12-stable.tar.gz
+ tar vxf libevent-1.4.12-stable.tar.gz
 
-&amp;nbsp;cd libevent-1.4.12-stable
+ cd libevent-1.4.12-stable
 
-&amp;nbsp;./configure --prefix=/elain/apps/libevent
+ ./configure --prefix=/elain/apps/libevent
 
-&amp;nbsp;make &amp;&amp; make install
+ make &amp;&amp; make install
 
 cd ..
 
 #安装memcached
-
-&amp;nbsp;
 </code></pre>
           
       

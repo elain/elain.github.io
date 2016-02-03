@@ -263,26 +263,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>此脚本并没有太多用处，通常用不到，只是一次在和程序员交谈中做的，当时环境是一台测试机，程序员需要及时修改一些nginx配置文件 参数，就写了这么个小脚本，让它在FTP上修改，自动reload.</p>
-<blockquote>
-<p>#!/bin/bash</p>
-<h1 id="Info__3A_check_conf_to_reload_server"><a href="#Info__3A_check_conf_to_reload_server" class="headerlink" title="Info   : check conf to reload server"></a>Info   : check conf to reload server</h1><h1 id="Author__3A_dingtm"><a href="#Author__3A_dingtm" class="headerlink" title="Author : dingtm"></a>Author : dingtm</h1><h1 id="CTime__3A_2010-06-30"><a href="#CTime__3A_2010-06-30" class="headerlink" title="CTime  : 2010.06.30"></a>CTime  : 2010.06.30</h1><h1 id="This_script_run_at_every_one_minutes"><a href="#This_script_run_at_every_one_minutes" class="headerlink" title="This script run at every one minutes"></a>This script run at every one minutes</h1><p>Sdir=/elain/data/htdocs/wwwelainorg/conf</p>
-<p>Ddir=/elain/apps</p>
-<p>if [ $Sdir/nginx.conf -nt $Ddir/nginx/conf/nginx.conf ]</p>
-<p>then</p>
-<p>/bin/cp $Sdir/nginx.conf $Ddir/nginx/conf/</p>
-<p>/elain/apps/nginx/sbin/nginx -s reload</p>
-<p>if [ $? = 0 ]</p>
-<p>then</p>
-<p>echo “<code>date +%Y-%m-%d-%H:%M:%S</code> nginx reload ok “ &gt;&gt;$Sdir/success.log</p>
-<p>else</p>
-<p>echo “<code>date +%Y-%m-%d-%H:%M:%S</code> nginx reload fail “ &gt;&gt;$Sdir/error.log</p>
-<p>fi</p>
-<p>else</p>
-<p>exit 1</p>
-<p>fi</p>
-<p>chown www.www $Sdir/*.log<br>&nbsp;</p>
-</blockquote>
+        <p>此脚本并没有太多用处，通常用不到，只是一次在和程序员交谈中做的，当时环境是一台测试机，程序员需要及时修改一些nginx配置文件 参数，就写了这么个小脚本，让它在FTP上修改，自动reload.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line"><span class="comment"># Info   : check conf to reload server</span></span><br><span class="line"><span class="comment"># Author : dingtm</span></span><br><span class="line"><span class="comment"># CTime  : 2010.06.30</span></span><br><span class="line"><span class="comment"># This script run at every one minutes</span></span><br><span class="line"></span><br><span class="line">Sdir=/elain/data/htdocs/wwwelainorg/conf</span><br><span class="line">Ddir=/elain/apps</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$Sdir</span>/nginx.conf -nt <span class="variable">$Ddir</span>/nginx/conf/nginx.conf ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"></span><br><span class="line">/bin/cp <span class="variable">$Sdir</span>/nginx.conf <span class="variable">$Ddir</span>/nginx/conf/</span><br><span class="line"></span><br><span class="line">/elain/apps/nginx/sbin/nginx <span class="operator">-s</span> reload</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ $? = <span class="number">0</span> ]</span><br><span class="line"></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +%Y-%m-%d-%H:%M:%S` nginx reload ok "</span> &gt;&gt;<span class="variable">$Sdir</span>/success.log</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +%Y-%m-%d-%H:%M:%S` nginx reload fail "</span> &gt;&gt;<span class="variable">$Sdir</span>/error.log</span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">chown www.www <span class="variable">$Sdir</span>/*.log</span><br></pre></td></tr></table></figure></p>
 <p>脚本可以附件中下载：</p>
 <p><a href="http://www.elain.org/?attachment_id=311">check_conf_reload.sh</a></p>
 
@@ -485,7 +466,7 @@
 <p>所需软件：<br>varnish-2.1.4.tar.gz</p>
 <p>Varnish官方网站：<br><a href="http://www.varnish-cache.org/">http://www.varnish-cache.org/</a></p>
 <p>安装前准备：</p>
-<p>创建www用户和组，以及Varnish缓存文件存放目录（/elain/data/vcache）：<br>/usr/sbin/groupadd www -g 600<br>/usr/sbin/useradd -u 600 -g www www<br>mkdir -p /elain/data/vcache<br>chmod +w /elain/data/vcache<br>chown -R www:www /elain/data/vcache<br>
+<p>创建www用户和组，以及Varnish缓存文件存放目录（/elain/data/vcache）：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>sbin/groupadd www -g <span class="number">600</span></span><br><span class="line"><span class="regexp">/usr/</span>sbin/useradd -u <span class="number">600</span> -g www www</span><br><span class="line">mkdir -p <span class="regexp">/elain/</span>data/vcache</span><br><span class="line">chmod +w <span class="regexp">/elain/</span>data/vcache</span><br><span class="line">chown -R <span class="string">www:</span>www <span class="regexp">/elain/</span>data/vcache</span><br></pre></td></tr></table></figure></p>
           
       
     </div>

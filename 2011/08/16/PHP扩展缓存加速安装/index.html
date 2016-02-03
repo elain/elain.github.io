@@ -37,7 +37,7 @@ imagick-2.3.0.tgz
 ZendOptimizer-3.3.9-linux-glibc23-i386.tar.gz
 
 ---------------------------">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP扩展缓存加速安装">
 <meta name="twitter:description" content="所需要软件：
@@ -330,7 +330,7 @@ ZendOptimizer-3.3.9-linux-glibc23-i386.tar.gz
 
 eaccelerator PHP解析cache加速
 
-&amp;nbsp;
+
 
 tar jxvf eaccelerator-0.9.6.1.tar.bz2
 
@@ -346,11 +346,11 @@ make install
 
 cd ..
 
-&amp;nbsp;
+
 
 memcache client ext
 
-&amp;nbsp;
+
 
 tar zxvf memcache-2.2.5.tgz
 
@@ -366,17 +366,17 @@ make install
 
 cd ..
 
-&amp;nbsp;
+
 
 Zend framework
 
-&amp;nbsp;
+
 
 tar zxvf PDO_MYSQL-1.0.2.tgz
 
 cd PDO_MYSQL-1.0.2
 
-/usr/local/php/bin/phpize &amp;nbsp;
+/usr/local/php/bin/phpize  
 
 ./configure \
 
@@ -388,11 +388,9 @@ make install
 
 cd ..
 
-&amp;nbsp;
+
 
 ImageMagick(图片处理)
-
-&amp;nbsp;
 </code></pre><a id="more"></a>
 <pre><code>tar zxvf ImageMagick-6.6.1-10.tar.gz
 
@@ -420,11 +418,11 @@ make install
 
 cd ..
 
-&amp;nbsp;
+
 
 Zend php解析cache加速
 
-&amp;nbsp;
+
 
 tar zxvf ZendOptimizer-3.3.9-linux-glibc23-i386.tar.gz
 
@@ -438,37 +436,37 @@ cd ..
 
 ll /usr/local/php/lib/php/extensions/no-debug-zts-20060613/
 
-&amp;nbsp;
+
 
 配置相关PHP的扩展
 
 -------------------------------------------
 
-&amp;nbsp;
+
 
 vi /usr/local/php/lib/php.ini
 
-查找 extension_dir=&amp;quot;./&amp;quot;&amp;nbsp; (约486行)&amp;nbsp; &amp;nbsp;
+查找 extension_dir=&amp;quot;./&amp;quot;  (约486行)   
 
 添加路径
 
 extension_dir = &amp;quot;/usr/local/php/lib/php/extensions/no-debug-zts-20060613/&amp;quot;
 
-&amp;nbsp;
+
 
 在结尾处添加下面几行，保存退出
 
-&amp;nbsp; extension=memcache.so
+  extension=memcache.so
 
-&amp;nbsp; extension=pdo_mysql.so
+  extension=pdo_mysql.so
 
-&amp;nbsp; extension=imagick.so
+  extension=imagick.so
 
-&amp;nbsp;
+
 
 配置eaccelerator加速PHP解析
 
-&amp;nbsp;
+
 
 mkdir -p /tmp/eaccelerator
 
@@ -478,45 +476,45 @@ vi /usr/local/php/lib/php.ini
 
 在结尾处添加下面几行（注意：放在Zend配置前）
 
-[eaccelerator] &amp;nbsp;
+[eaccelerator]  
 
-extension=eaccelerator.so &amp;nbsp;
+extension=eaccelerator.so  
 
-eaccelerator.shm_size=&amp;quot;64&amp;quot; &amp;nbsp;
+eaccelerator.shm_size=&amp;quot;64&amp;quot;  
 
-eaccelerator.cache_dir=&amp;quot;/tmp/eaccelerator&amp;quot; &amp;nbsp;
+eaccelerator.cache_dir=&amp;quot;/tmp/eaccelerator&amp;quot;  
 
-eaccelerator.enable=&amp;quot;1&amp;quot; &amp;nbsp;
+eaccelerator.enable=&amp;quot;1&amp;quot;  
 
-eaccelerator.optimizer=&amp;quot;1&amp;quot; &amp;nbsp;
+eaccelerator.optimizer=&amp;quot;1&amp;quot;  
 
-eaccelerator.check_mtime=&amp;quot;1&amp;quot; &amp;nbsp;
+eaccelerator.check_mtime=&amp;quot;1&amp;quot;  
 
-eaccelerator.debug=&amp;quot;0&amp;quot; &amp;nbsp;
+eaccelerator.debug=&amp;quot;0&amp;quot;  
 
-eaccelerator.filter=&amp;quot;&amp;quot; &amp;nbsp;
+eaccelerator.filter=&amp;quot;&amp;quot;  
 
-eaccelerator.shm_max=&amp;quot;0&amp;quot; &amp;nbsp;
+eaccelerator.shm_max=&amp;quot;0&amp;quot;  
 
-eaccelerator.shm_ttl=&amp;quot;3600&amp;quot; &amp;nbsp;
+eaccelerator.shm_ttl=&amp;quot;3600&amp;quot;  
 
-eaccelerator.shm_prune_period=&amp;quot;3600&amp;quot; &amp;nbsp;
+eaccelerator.shm_prune_period=&amp;quot;3600&amp;quot;  
 
-eaccelerator.shm_only=&amp;quot;0&amp;quot; &amp;nbsp;
+eaccelerator.shm_only=&amp;quot;0&amp;quot;  
 
-eaccelerator.compress=&amp;quot;1&amp;quot; &amp;nbsp;
+eaccelerator.compress=&amp;quot;1&amp;quot;  
 
-eaccelerator.compress_level=&amp;quot;9&amp;quot; &amp;nbsp;
+eaccelerator.compress_level=&amp;quot;9&amp;quot;  
 
-&amp;nbsp;
+
 
 配置完毕！
 
-&amp;nbsp;
 
-#/usr/local/php/bin/php -v&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; //检查加速情况配置
 
-#ls -l /tmp/eaccelerator&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; //检查是否有缓存内容，有就正常啦
+#/usr/local/php/bin/php -v               //检查加速情况配置
+
+#ls -l /tmp/eaccelerator                 //检查是否有缓存内容，有就正常啦
 
 打开浏览器查看PHP测试页，看memcache插件是否已生效
 </code></pre>
@@ -530,7 +528,7 @@ eaccelerator.compress_level=&amp;quot;9&amp;quot; &amp;nbsp;
         <p><span>本文标题:</span><a href="/2011/08/16/PHP扩展缓存加速安装/">PHP扩展缓存加速安装</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年08月16日 - 07时49分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/08/16/PHP扩展缓存加速安装/" title="PHP扩展缓存加速安装">http://www.elain.org/2011/08/16/PHP扩展缓存加速安装/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/08/16/PHP扩展缓存加速安装/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

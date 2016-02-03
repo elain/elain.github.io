@@ -6,20 +6,17 @@
   <title>[MYSQL]Mysql 数据库丢失Root密码恢复 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="单实例：killall mysqldmysqld_safe –skip-grant-tables &amp;amp;mysql -u root -p
-&amp;nbsp;
 多实例：killall mysqld">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[MYSQL]Mysql 数据库丢失Root密码恢复">
 <meta property="og:url" content="http://www.elain.org/2011/03/08/'[MYSQL]Mysql数据库丢失root密码恢复'/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="单实例：killall mysqldmysqld_safe –skip-grant-tables &amp;amp;mysql -u root -p
-&amp;nbsp;
 多实例：killall mysqld">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[MYSQL]Mysql 数据库丢失Root密码恢复">
 <meta name="twitter:description" content="单实例：killall mysqldmysqld_safe –skip-grant-tables &amp;amp;mysql -u root -p
-&amp;nbsp;
 多实例：killall mysqld">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
@@ -281,7 +278,6 @@
       
           
         <p>单实例：<br>killall mysqld<br>mysqld_safe –skip-grant-tables &amp;<br>mysql -u root -p</p>
-<p>&nbsp;</p>
 <p>多实例：<br>killall mysqld<a id="more"></a><br>mysqld_safe –defaults-file=/data/3306/my.cnf  –skip-grant-table &amp;<br>mysql -u root -p -S /data/3306/mysql.sock</p>
 <p>登陆后修改密码：<br>mysql&gt; UPDATE mysql.user SET password=PASSWORD(“kqzjhack″) WHERE user=’root’;<br>Query OK, 2 rows affected (0.00 sec)<br>Rows matched: 2  Changed: 2  Warnings: 0</p>
 <p>mysql&gt;FLUSH PRIVILEGES;<br>Query OK, 0 rows affected (0.00 sec)</p>
@@ -300,7 +296,7 @@
         <p><span>本文标题:</span><a href="/2011/03/08/'[MYSQL]Mysql数据库丢失root密码恢复'/">[MYSQL]Mysql 数据库丢失Root密码恢复</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年03月08日 - 12时26分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/03/08/'[MYSQL]Mysql数据库丢失root密码恢复'/" title="[MYSQL]Mysql 数据库丢失Root密码恢复">http://www.elain.org/2011/03/08/&#39;[MYSQL]Mysql数据库丢失root密码恢复&#39;/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/03/08/&#39;[MYSQL]Mysql数据库丢失root密码恢复&#39;/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

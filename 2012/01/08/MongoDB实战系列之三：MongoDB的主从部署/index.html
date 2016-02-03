@@ -7,20 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="主从同步：
 md01    10.0.0.11        mastermd02    10.0.0.12        slavemd03    10.0.0.14        slave
-#建立数据库目录[ccWN lang=”bash” width=”99%” height=”100%”]mkdir -p /elain/apps/mongodb/mkdir -p /elain/data/">
+#建立数据库目录
+123mkdir -p /elain/apps/mongodb/mkdir -p /elain/data/mongodb/db/mkdir -p /elain/logs/mongodb/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MongoDB实战系列之三：MongoDB的主从部署">
 <meta property="og:url" content="http://www.elain.org/2012/01/08/MongoDB实战系列之三：MongoDB的主从部署/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="主从同步：
 md01    10.0.0.11        mastermd02    10.0.0.12        slavemd03    10.0.0.14        slave
-#建立数据库目录[ccWN lang=”bash” width=”99%” height=”100%”]mkdir -p /elain/apps/mongodb/mkdir -p /elain/data/">
-<meta property="og:updated_time" content="2016-02-02T08:09:28.000Z">
+#建立数据库目录
+123mkdir -p /elain/apps/mongodb/mkdir -p /elain/data/mongodb/db/mkdir -p /elain/logs/mongodb/">
+<meta property="og:updated_time" content="2016-02-03T05:54:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB实战系列之三：MongoDB的主从部署">
 <meta name="twitter:description" content="主从同步：
 md01    10.0.0.11        mastermd02    10.0.0.12        slavemd03    10.0.0.14        slave
-#建立数据库目录[ccWN lang=”bash” width=”99%” height=”100%”]mkdir -p /elain/apps/mongodb/mkdir -p /elain/data/">
+#建立数据库目录
+123mkdir -p /elain/apps/mongodb/mkdir -p /elain/data/mongodb/db/mkdir -p /elain/logs/mongodb/">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -282,57 +285,60 @@ md01    10.0.0.11        mastermd02    10.0.0.12        slavemd03    10.0.0.14  
           
         <p>主从同步：</p>
 <p>md01    10.0.0.11        master<br>md02    10.0.0.12        slave<br>md03    10.0.0.14        slave</p>
-<p>#建立数据库目录<br>[ccWN lang=”bash” width=”99%” height=”100%”]mkdir -p /elain/apps/mongodb/<br>mkdir -p /elain/data/mongodb/db/<br>mkdir -p /elain/logs/mongodb/[/ccWN]</p>
+<p>#建立数据库目录</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p <span class="regexp">/elain/</span>apps<span class="regexp">/mongodb/</span></span><br><span class="line">mkdir -p <span class="regexp">/elain/</span>data<span class="regexp">/mongodb/</span>db/</span><br><span class="line">mkdir -p <span class="regexp">/elain/</span>logs<span class="regexp">/mongodb/</span></span><br></pre></td></tr></table></figure>
 <p>注：<br>1、不需要像mysql一样复制完整数据过去，丛库启动会制动复制主库完整数据。<br>2、丛库自动配置为只读。<br>3、mongodb第一次启动时间较长，需要注意等待。<br>4、管理命令多数都要在admin库中执行 use admin</p>
 <p>相关参数：./mongod –help<br>–autoresync 当发现从服务器的数据不是最新时，开始从主服务器请求同步数据<br>–slavedelay 同步延迟，单位：秒</p>
-<p>主-从<br>作为主服务器启动<br>[ccWN lang=”bash” width=”99%” height=”100%”]/elain/apps/mongodb/bin/mongod –fork –master –oplogSize=4096 –port 27001 –dbpath /elain/data/mongodb/db –logpath /elain/logs/mongodb/mongodb.log[/ccWN]<br><a id="more"></a><br>作为从服务器启动，并指明主服务器地址。–autoresync为强制从主服务器同步全部数据<br>[ccWN lang=”bash” width=”99%” height=”100%”]/elain/apps/mongodb/bin/mongod –fork –slave –source 10.0.0.11:27001 –port 27001 –dbpath /elain/data/mongodb/db –logpath /elain/logs/mongodb/mongodb.log[/ccWN]</p>
+<p>主-从<br>作为主服务器启动</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/elain/apps/mongodb/bin/mongod</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">fork</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">master</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">oplogSize=4096</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">port</span> <span class="comment">27001</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">dbpath</span> <span class="comment">/elain/data/mongodb/db</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">logpath</span> <span class="comment">/elain/logs/mongodb/mongodb</span><span class="string">.</span><span class="comment">log</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>作为从服务器启动，并指明主服务器地址。–autoresync为强制从主服务器同步全部数据</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/elain/apps/mongodb/bin/mongod</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">fork</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">slave</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">source</span> <span class="comment">10</span><span class="string">.</span><span class="comment">0</span><span class="string">.</span><span class="comment">0</span><span class="string">.</span><span class="comment">11:27001</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">port</span> <span class="comment">27001</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">dbpath</span> <span class="comment">/elain/data/mongodb/db</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">logpath</span> <span class="comment">/elain/logs/mongodb/mongodb</span><span class="string">.</span><span class="comment">log</span></span><br></pre></td></tr></table></figure>
 <p>注：可以在启动从时加以下常用参数<br>–slavedelay 10      #延时复制 单位为秒<br>–autoresync         #自动重新同步<br>–only               #复制指定的数据库，默认复制所有的库<br>–oplogSize          #主节点的oplog日志大小，单位为M，建议设大点(更改oplog大小时，只需停主库，删除local.<em>，然后加–oplogSize=</em> 重新启动即可,*代表大小)</p>
-<p>如果发现主从不同步，从上手动同步<br>[ccWN lang=”bash” width=”99%” height=”100%”]db.runCommand({“resync”:1})[/ccWN]</p>
-<p>状态查询<br>[ccWN lang=”bash” width=”99%” height=”100%”]db.runCommand({“isMaster”:1})  #主还是从[/ccWN]</p>
-<p>在丛库上查询主库地址<br>[ccWN lang=”bash” width=”99%” height=”100%”]&gt; use local;<br>switched to db local</p>
-<blockquote>
-<p>db.sources.find();<br>{ “_id” : ObjectId(“4e9105515d704346c8796407”), “host” : “10.0.0.11:27001”, “source” : “main”, “syncedTo” : { “t” : 1318155992000, “i” : 1 } }[/ccWN]</p>
-</blockquote>
-<p>#查看各Collection状态<br>[ccWN lang=”bash” width=”99%” height=”100%”]db.printCollectionStats();[/ccWN]</p>
-<p>#查看主从复制状态<br>[ccWN lang=”bash” width=”99%” height=”100%”]db.printReplicationInfo();[/ccWN]</p>
-<p>测试主从<br>在主服务器新建数据库<br>[ccWN lang=”bash” width=”99%” height=”100%”]mongo –port 27001</p>
-<blockquote>
-<p>show dbs<br>use elaindb<br>db.blog.save({title:”new article”})[/ccWN]</p>
-</blockquote>
-<p>在从服务器上查看同步数据<br>[ccWN lang=”bash” width=”99%” height=”100%”]mongo –port 27001[/ccWN]</p>
-<p>#在从库插入数据的操作 会提示 not master<br>[ccWN lang=”bash” width=”99%” height=”100%”]&gt; use elaindb;<br>switched to db elaindb</p>
-<blockquote>
-<p>db.blog.find();<br>{ “_id” : ObjectId(“4e9174b48443c8ef12b30c56”), “title” : “new article” }[/ccWN]</p>
-</blockquote>
-<p>#查看主从同步信息：<br>[ccWN lang=”bash” width=”99%” height=”100%”]&gt; db.printReplicationInfo();<br>this is a slave, printing slave replication info.<br>source:   10.0.0.11:27001<br>syncedTo: Sun Oct 09 2011 18:37:12 GMT+0800 (CST)<br>= 19 secs ago (0.01hrs)</p>
-<blockquote>
-<p>db.printSlaveReplicationInfo();[/ccWN]</p>
-</blockquote>
+<p>如果发现主从不同步，从上手动同步</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="function"><span class="title">runCommand</span><span class="params">(&#123;<span class="string">"resync"</span>:<span class="number">1</span>&#125;)</span></span></span><br></pre></td></tr></table></figure>
+<p>状态查询</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="function"><span class="title">runCommand</span><span class="params">(&#123;<span class="string">"isMaster"</span>:<span class="number">1</span>&#125;)</span></span>  #主还是从</span><br></pre></td></tr></table></figure>
+<p>在丛库上查询主库地址</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">use</span> <span class="keyword">local</span>;</span><br><span class="line">switched to <span class="keyword">db</span> <span class="keyword">local</span></span><br><span class="line">&gt; <span class="keyword">db</span>.sources.find();</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"4e9105515d704346c8796407"</span>), <span class="string">"host"</span> : <span class="string">"10.0.0.11:27001"</span>, <span class="string">"source"</span> : <span class="string">"main"</span>, <span class="string">"syncedTo"</span> : &#123; <span class="string">"t"</span> : 1318155992000, <span class="string">"i"</span> : 1 &#125; &#125;</span><br></pre></td></tr></table></figure>
+<p>#查看各Collection状态</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">db</span><span class="class">.printCollectionStats</span>();</span><br></pre></td></tr></table></figure>
+<p>#查看主从复制状态</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">db</span><span class="class">.printReplicationInfo</span>();</span><br></pre></td></tr></table></figure>
+<p>测试主从<br>在主服务器新建数据库</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">mongo</span> <span class="tag">--port</span> 27001</span><br><span class="line">&gt;<span class="tag">show</span> <span class="tag">dbs</span></span><br><span class="line">&gt;<span class="tag">use</span> <span class="tag">elaindb</span></span><br><span class="line">&gt;<span class="tag">db</span><span class="class">.blog</span><span class="class">.save</span>(<span class="rules">&#123;<span class="rule"><span class="attribute">title</span>:<span class="value"><span class="string">"new article"</span></span></span></span>&#125;)</span><br></pre></td></tr></table></figure>
+<p>在从服务器上查看同步数据</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo <span class="comment">--port 27001</span></span><br></pre></td></tr></table></figure>
+<p>#在从库插入数据的操作 会提示 not master</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">use</span> elaindb;</span><br><span class="line">switched to <span class="keyword">db</span> elaindb</span><br><span class="line">&gt; <span class="keyword">db</span>.blog.find();</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"4e9174b48443c8ef12b30c56"</span>), <span class="string">"title"</span> : <span class="string">"new article"</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>#查看主从同步信息：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.printReplicationInfo();</span><br><span class="line">this is a slave, printing slave replication info.</span><br><span class="line">source:   10.0.0.11:27001</span><br><span class="line">syncedTo: Sun Oct 09 2011 18:37:12 GMT+0800 (CST)</span><br><span class="line"><span class="header">= 19 secs ago (0.01hrs)</span></span><br><span class="line"></span><br><span class="line">&gt;db.printSlaveReplicationInfo();</span><br></pre></td></tr></table></figure>
 <p>#此为同步过来的数据，测试成功</p>
 <p>附加：</p>
 <p>添加及删除源：<br>启动从节点时可以用–source指定主节点，也可以在shell中配置这个源，</p>
-<p>启动一个从，端口为27002<br>[ccWN lang=”bash” width=”99%” height=”100%”]/elain/apps/mongodb/bin/mongod –fork –slave  –port 27002 –dbpath /elain/data/mongodb/testdb –logpath /elain/logs/mongodb/mongodb.log[/ccWN]</p>
-<p>登录：<br>[ccWN lang=”bash” width=”99%” height=”100%”]mongo –port 27002</p>
-<p>[root@md03 ~]# mongo –port 27002<br>MongoDB shell version: 2.0.0<br>connecting to: 127.0.0.1:27002/test</p>
-<blockquote>
-<p>show dbs<br>local   (empty)[/ccWN]</p>
-</blockquote>
-<p>添加到从节点上<br>[ccWN lang=”bash” width=”99%” height=”100%”]&gt;use local</p>
-<blockquote>
-<p>db.sources.insert({“host”: “10.0.0.11:27001”});[/ccWN]</p>
-</blockquote>
-<p>#查看显示正在同步<br>[ccWN lang=”bash” width=”99%” height=”100%”]&gt; db.sources.find();<br>{ “_id” : ObjectId(“4e9111e1c29bbd9b9cd31d4e”), “host” : “10.0.0.11:27001”, “source” : “main”, “syncedTo” : { “t” : 1318156782000, “i” : 246 }, “dbsNextPass” : { “testdb” : true, “testdb1” : true } }[/ccWN]</p>
-<p>#同步完成后<br>[ccWN lang=”bash” width=”99%” height=”100%”]&gt; db.sources.find();<br>{ “_id” : ObjectId(“4e9111e1c29bbd9b9cd31d4e”), “host” : “10.0.0.11:27001”, “source” : “main”, “syncedTo” : { “t” : 1318156782000, “i” : 256 } }[/ccWN]</p>
-<p>更改源：(假设10.0.0.12也为主库)<br>[ccWN lang=”bash” width=”99%” height=”100%”]db.sources.insert({“host”: “10.0.0.12:27001”});<br>db.sources.remove({“host”: “10.0.0.11:27001”});[/ccWN]</p>
-<p>若复制中使用了认证，需在local库中添加repl用户来复制<br>[ccWN lang=”bash” width=”99%” height=”100%”]&gt;user local;</p>
-<blockquote>
-<p>db.addUser(“repl”, “elain123”);[/ccWN]</p>
-</blockquote>
+<p>启动一个从，端口为27002</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/elain/</span>apps<span class="regexp">/mongodb/</span>bin<span class="regexp">/mongod --fork --slave  --port 27002 --dbpath /</span>elain<span class="regexp">/data/m</span>ongodb<span class="regexp">/testdb --logpath /</span>elain<span class="regexp">/logs/m</span>ongodb<span class="regexp">/mongodb.log</span></span><br></pre></td></tr></table></figure>
+<p>登录：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mongo --port <span class="number">27002</span></span><br><span class="line"></span><br><span class="line">[root@md03 ~]<span class="preprocessor"># mongo --port <span class="number">27002</span></span></span><br><span class="line">MongoDB shell version: <span class="number">2.0</span><span class="number">.0</span></span><br><span class="line">connecting to: <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">27002</span>/test</span><br><span class="line">&gt; <span class="function">show dbs</span><br><span class="line"><span class="title">local</span>   <span class="params">(empty)</span></span></span><br></pre></td></tr></table></figure>
+<p>添加到从节点上</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">use</span> <span class="keyword">local</span></span><br><span class="line">&gt;<span class="keyword">db</span>.sources.insert(&#123;<span class="string">"host"</span>: <span class="string">"10.0.0.11:27001"</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>#查看显示正在同步</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.sources.find();</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"4e9111e1c29bbd9b9cd31d4e"</span>), <span class="string">"host"</span> : <span class="string">"10.0.0.11:27001"</span>, <span class="string">"source"</span> : <span class="string">"main"</span>, <span class="string">"syncedTo"</span> : &#123; <span class="string">"t"</span> : <span class="number">1318156782000</span>, <span class="string">"i"</span> : <span class="number">246</span> &#125;, <span class="string">"dbsNextPass"</span> : &#123; <span class="string">"testdb"</span> : <span class="literal">true</span>, <span class="string">"testdb1"</span> : <span class="literal">true</span> &#125; &#125;</span><br></pre></td></tr></table></figure>
+<p>#同步完成后</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.sources.find();</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"4e9111e1c29bbd9b9cd31d4e"</span>), <span class="string">"host"</span> : <span class="string">"10.0.0.11:27001"</span>, <span class="string">"source"</span> : <span class="string">"main"</span>, <span class="string">"syncedTo"</span> : &#123; <span class="string">"t"</span> : <span class="number">1318156782000</span>, <span class="string">"i"</span> : <span class="number">256</span> &#125; &#125;</span><br></pre></td></tr></table></figure>
+<p>更改源：(假设10.0.0.12也为主库)</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.sources.<span class="keyword">insert</span>(&#123;<span class="string">"host"</span>: <span class="string">"10.0.0.12:27001"</span>&#125;);</span><br><span class="line">db.sources.remove(&#123;<span class="string">"host"</span>: <span class="string">"10.0.0.11:27001"</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>若复制中使用了认证，需在local库中添加repl用户来复制</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">user</span> <span class="title">local</span>;</span><br><span class="line">&gt; db.addUser(<span class="string">"repl"</span>, <span class="string">"elain123"</span>);</span><br></pre></td></tr></table></figure>
 <p>附录一、Slave 顶替 Master<br>如果主服务器 10.0.0.11 宕机了,<br>此时需要用 10.0.0.12 机器来顶替 master 服务,</p>
 <p>步骤如下:</p>
-<p>#停止 10.0.0.12 进程(mongod)<br>[ccWN lang=”bash” width=”99%” height=”100%”]kill -2 <code>ps -ef|grep mongod|grep -v grep|awk &#39;&#39;&#39;&#39;{print $2}&#39;&#39;&#39;&#39;</code>[/ccWN]</p>
-<p>#删除 10.0.0.12 数据目录中的 local.<em><br>[ccWN lang=”bash” width=”99%” height=”100%”]rm -rf /elain/data/mongodb/db/local.</em>[/ccWN]</p>
-<p>#以–master 模式启动 10.0.0.12<br>[ccWN lang=”bash” width=”99%” height=”100%”]/elain/apps/mongodb/bin/mongod –fork –master –oplogSize=4096 –port 27001 –dbpath /elain/data/mongodb/db –logpath /elain/logs/mongodb/mongodb.log[/ccWN]</p>
+<p>#停止 10.0.0.12 进程(mongod)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -<span class="number">2</span> `ps -ef|grep mongod|grep -v grep|awk <span class="string">''''&#123;print $2&#125;'''</span><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p>`</p>
+<p>#删除 10.0.0.12 数据目录中的 local.*</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">rm</span> -rf /elain/data/mongodb/<span class="keyword">db</span>/<span class="keyword">local</span>.*</span><br></pre></td></tr></table></figure>
+<p>#以–master 模式启动 10.0.0.12</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/elain/apps/mongodb/bin/mongod</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">fork</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">master</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">oplogSize=4096</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">port</span> <span class="comment">27001</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">dbpath</span> <span class="comment">/elain/data/mongodb/db</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">logpath</span> <span class="comment">/elain/logs/mongodb/mongodb</span><span class="string">.</span><span class="comment">log</span></span><br></pre></td></tr></table></figure>
 <p>附录二、切换 Master/Slave 角色<br>切换主库10.0.0.11和从库10.0.0.12的角色</p>
 <p>步骤如下:（命令略）</p>
 <p>用 fsync 命令暂停 主库 上的写操作,<br>关闭 从库 上的服务<br>清空 从库 上的 local.<em>文件<br>用-master 选项重启 从库 服务<br>在 从库 上执行一次写操作,初始化 oplog,获得一个同步起始点<br>关闭 从库 服务,此时 从库 已经有了新的 local.</em>文件<br>关闭 主库 服务,并且用 从库 上新的 local.<em>文件来代替 主库 上的 local.</em>文件(建议先压缩再COPY)<br>用-master 选项重启 从库 服务<br>在启动slave的选项上加一个-fastsync 选项来重启 主库 服务</p>
@@ -347,7 +353,7 @@ md01    10.0.0.11        mastermd02    10.0.0.12        slavemd03    10.0.0.14  
         <p><span>本文标题:</span><a href="/2012/01/08/MongoDB实战系列之三：MongoDB的主从部署/">MongoDB实战系列之三：MongoDB的主从部署</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2012年01月08日 - 12时42分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 16时09分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 13时54分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2012/01/08/MongoDB实战系列之三：MongoDB的主从部署/" title="MongoDB实战系列之三：MongoDB的主从部署">http://www.elain.org/2012/01/08/MongoDB实战系列之三：MongoDB的主从部署/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2012/01/08/MongoDB实战系列之三：MongoDB的主从部署/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

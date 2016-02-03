@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="描述：iostat是I/O  statistics（输入/输出统计）的缩写，iostat工具将对系统的磁盘操作活动进行监视。它的特点是汇报磁盘活动统计情况，同时也会汇报出  CPU使用情况。同vmstat一样，iostat也有一个弱点，就是它不能对某个进程进行深入分析，仅对系统的整体情况进行分析。
 语法：[root@kqzj ~]# iostat –helpUsage: iostat [ opti">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Iostat命令详解">
 <meta name="twitter:description" content="描述：iostat是I/O  statistics（输入/输出统计）的缩写，iostat工具将对系统的磁盘操作活动进行监视。它的特点是汇报磁盘活动统计情况，同时也会汇报出  CPU使用情况。同vmstat一样，iostat也有一个弱点，就是它不能对某个进程进行深入分析，仅对系统的整体情况进行分析。
@@ -278,7 +278,7 @@
       
           
         <p>描述：<br>iostat是I/O  statistics（输入/输出统计）的缩写，iostat工具将对系统的磁盘操作活动进行监视。它的特点是汇报磁盘活动统计情况，同时也会汇报出  CPU使用情况。同vmstat一样，iostat也有一个弱点，就是它不能对某个进程进行深入分析，仅对系统的整体情况进行分析。</p>
-<p>语法：<br>[root@kqzj ~]# iostat –help<br>Usage: iostat [ options… ] [ &lt;interval&gt; [ &lt;count&gt; ] ]<br>Options are:<a id="more"></a><br>[ -c | -d ] [ -k | -m ] [ -t ] [ -V ] [ -x ] [ -n ] [ -h ] [ -N ]<br>[ &lt;device&gt; [ … ] | ALL ] [ -p [ &lt;device&gt; | ALL ] ]</p>
+<p>语法：<br>[root@kqzj ~]# iostat –help<br>Usage: iostat [ options… ] [ <interval> [ <count> ] ]<br>Options are:<a id="more"></a><br>[ -c | -d ] [ -k | -m ] [ -t ] [ -V ] [ -x ] [ -n ] [ -h ] [ -N ]<br>[ <device> [ … ] | ALL ] [ -p [ <device> | ALL ] ]</device></device></count></interval></p>
 <p>参数解释：<br>-c为汇报CPU的使用情况；<br>-d为汇报磁盘的使用情况；<br>-k表示每秒按kilobytes 字节显示数据；<br>-t为打印汇报的时间；<br>-v表示打印出版本信息和用法；<br>-x device指定要统计的设备名称，默认为所有的设备；<br>interval指每次统计间隔的时间；<br>count指按照这个时间间隔统计的次数。</p>
 <p>[root@kqzj ~]# iostat -x<br>Linux 2.6.18-194.el5 (kqzj)     2011年01月13日<br>avg-cpu:  %user   %nice %system %iowait  %steal   %idle<br>0.27    0.03   54.29    0.27    0.00   45.14<br>Device:         rrqm/s   wrqm/s   r/s   w/s   rsec/s   wsec/s avgrq-sz avgqu-sz   await  svctm  %util<br>sda               1.11     0.58  1.10  0.55    50.08     8.97    35.89     0.01    8.24   5.12   0.84<br>sda1              0.21     0.00  0.02  0.00     0.45     0.00    24.05     0.00    1.31   1.14   0.00<br>sda2              0.13     0.00  0.01  0.00     0.58     0.00    49.54     0.00    0.62   0.58   0.00<br>sda3              0.76     0.58  1.06  0.54    48.86     8.97    36.03     0.01    8.41   5.24   0.84</p>
 <p>各値详解：<br>rrqm/s: 每秒进行 merge 的读操作数目。即 delta(rmerge)/s<br>wrqm/s: 每秒进行 merge 的写操作数目。即 delta(wmerge)/s<br>r/s: 每秒完成的读 I/O 设备次数。即 delta(rio)/s<br>w/s: 每秒完成的写 I/O 设备次数。即 delta(wio)/s<br>rsec/s: 每秒读扇区数。即 delta(rsect)/s<br>wsec/s: 每秒写扇区数。即 delta(wsect)/s<br>avgrq-sz: 平均每次设备I/O操作的数据大小 (扇区)。即 delta(rsect+wsect)/delta(rio+wio)<br>avgqu-sz: 平均I/O队列长度。即 delta(aveq)/s/1000 (因为aveq的单位为毫秒)。<br>await: 平均每次设备I/O操作的等待时间 (毫秒)。即 delta(ruse+wuse)/delta(rio+wio)<br>svctm: 平均每次设备I/O操作的服务时间 (毫秒)。即 delta(use)/delta(rio+wio)<br>％util: 一秒中有百分之多少的时间用于 I/O 操作，或者说一秒中有多少时间 I/O 队列是非空的。<br>即 delta(use)/s/1000 (因为use的单位为毫秒)</p>
@@ -294,7 +294,7 @@
         <p><span>本文标题:</span><a href="/2011/03/03/iostat命令详解/">Iostat命令详解</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年03月03日 - 00时16分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/03/03/iostat命令详解/" title="Iostat命令详解">http://www.elain.org/2011/03/03/iostat命令详解/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/03/03/iostat命令详解/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

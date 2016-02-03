@@ -10,7 +10,6 @@ CentOS 5.4 64-bit
 服务器8台
 定义10.0.0.0/24为公网
 10.0.10.0/24为内网
-&amp;nbsp;
 各服务器的作用：
 LB1：
 Hostname：lb1
@@ -26,7 +25,6 @@ CentOS 5.4 64-bit
 服务器8台
 定义10.0.0.0/24为公网
 10.0.10.0/24为内网
-&amp;nbsp;
 各服务器的作用：
 LB1：
 Hostname：lb1
@@ -34,7 +32,7 @@ ech0: 10.0.0.81
 eth1: 10.0.10.81
 该机角色为主负载均衡器，负责分发所有用户请求给后面的webserver 需要部署lvs+keepalived 服务。">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2011/10/1-640x365.jpg">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[跟我学中小企业架构部署]之一：整体架构设计">
 <meta name="twitter:description" content="环境定义：
@@ -42,7 +40,6 @@ CentOS 5.4 64-bit
 服务器8台
 定义10.0.0.0/24为公网
 10.0.10.0/24为内网
-&amp;nbsp;
 各服务器的作用：
 LB1：
 Hostname：lb1
@@ -314,7 +311,6 @@ eth1: 10.0.10.81
 <p>服务器<span style="font-family: DejaVu Serif,serif">8</span>台</p>
 <p>定义<span style="font-family: DejaVu Serif,serif">10.0.0.0/24</span>为公网</p>
 <p><span style="font-family: DejaVu Serif,serif">10.0.10.0/24</span>为内网</p>
-<p>&nbsp;</p>
 <p>各服务器的作用：</p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>LB1</strong></span><strong>：</strong></p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>Hostname</strong></span><strong>：</strong><span style="font-family: DejaVu Serif,serif"><strong>lb1</strong></span></p>
@@ -338,7 +334,6 @@ eth1: 10.0.10.81
 <p>按天生成<span style="font-family: DejaVu Serif,serif">apache </span>网站访问日志。</p>
 <p>每日<span style="font-family: DejaVu Serif,serif">0 </span>点推送网站访问日志到日志备份服务器，本地保留<span style="font-family: DejaVu Serif,serif">7 </span>天访问日志。</p>
 <p>每日<span style="font-family: DejaVu Serif,serif">0 </span>点备份网站程序，并把程序推送到备份服务器。</p>
-<p>&nbsp;</p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>LNMP:</strong></span></p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>Hostname</strong></span><strong>：</strong><span style="font-family: DejaVu Serif,serif"><strong>lnmp</strong></span></p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>ech0: 10.0.0.84</strong></span></p>
@@ -350,7 +345,6 @@ eth1: 10.0.10.81
 <p>按天生成<span style="font-family: DejaVu Serif,serif">nginx </span>网站访问日志。</p>
 <p>每日<span style="font-family: DejaVu Serif,serif">0 </span>点推送网站访问日志到日志备份服务器，本地保留<span style="font-family: DejaVu Serif,serif">7 </span>天访问日志。</p>
 <p>每日<span style="font-family: DejaVu Serif,serif">0 </span>点备份网站程序，并把程序推送到备份服务器。</p>
-<p>&nbsp;</p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>DB1</strong></span><strong>：</strong></p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>Hostname</strong></span><strong>：</strong><span style="font-family: DejaVu Serif,serif"><strong>db1</strong></span></p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>ech0: 10.0.10.87</strong></span></p>
@@ -360,7 +354,6 @@ eth1: 10.0.10.81
 <p>其中 <span style="font-family: DejaVu Serif,serif">3306 </span>端口指定用于<span style="font-family: DejaVu Serif,serif">wiki </span>主数据库<span style="font-family: DejaVu Serif,serif">,3307 </span>端口用于<span style="font-family: DejaVu Serif,serif">blog </span>从数据库。</p>
 <p>每日 <span style="font-family: DejaVu Serif,serif">1 </span>点备份数据库数据，并把数据库数据推送到备份服务器。</p>
 <p>备份策略可按周循环备份即保留最近<span style="font-family: DejaVu Serif,serif">7 </span>日数据，备份服务器除保留最近<span style="font-family: DejaVu Serif,serif">7</span>日数据外，每周在保留一份数据库数据。</p>
-<p>&nbsp;</p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>DB2</strong></span><strong>：</strong></p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>Hostname</strong></span><strong>：</strong><span style="font-family: DejaVu Serif,serif"><strong>db2</strong></span></p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>ech0: 10.0.10.88</strong></span></p>
@@ -371,14 +364,12 @@ eth1: 10.0.10.81
 <p>每日 <span style="font-family: DejaVu Serif,serif">1 </span>点备份数据库数据，并把数据库数据推送到备份服务器。</p>
 <p>从<span style="font-family: DejaVu Serif,serif">mysql1 3306 </span>到<span style="font-family: DejaVu Serif,serif">mysql2 3306 </span>需要部署<span style="font-family: DejaVu Serif,serif">mysql </span>主从同步。</p>
 <p>从<span style="font-family: DejaVu Serif,serif">mysql2 3307 </span>到<span style="font-family: DejaVu Serif,serif">mysql1 3307 </span>也需要部署<span style="font-family: DejaVu Serif,serif">mysql </span>主从同步。</p>
-<p>&nbsp;</p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>BAK</strong></span>：</p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>Hostname</strong></span><strong>：</strong><span style="font-family: DejaVu Serif,serif"><strong>bak</strong></span></p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>ech0: 10.0.10.85</strong></span></p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>eth1: </strong></span></p>
 <p>该机角色为共享存储服务器，为所有 <span style="font-family: DejaVu Serif,serif">web </span>服务器提供如图片，附件，头像等公共数据提</p>
 <p>供数据共享访问服务；程序代码分发服务，即测试没问题后，把代码推送到指定的一个或多个<span style="font-family: DejaVu Serif,serif">web </span>服务器上统一，上线更新程序代码。 需部署<span style="font-family: DejaVu Serif,serif">NFS</span>，<span style="font-family: DejaVu Serif,serif">rsync</span>服务。</p>
-<p>&nbsp;</p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>Nagios</strong></span></p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>Hostname</strong></span><strong>：</strong><span style="font-family: DejaVu Serif,serif"><strong>nagios</strong></span></p>
 <p><span style="font-family: DejaVu Serif,serif"><strong>ech0: 10.0.0.86</strong></span></p>
@@ -396,7 +387,7 @@ eth1: 10.0.10.81
         <p><span>本文标题:</span><a href="/2011/10/09/'[跟我学中小企业架构部署]之一：整体架构设计'/">[跟我学中小企业架构部署]之一：整体架构设计</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年10月09日 - 09时36分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/10/09/'[跟我学中小企业架构部署]之一：整体架构设计'/" title="[跟我学中小企业架构部署]之一：整体架构设计">http://www.elain.org/2011/10/09/&#39;[跟我学中小企业架构部署]之一：整体架构设计&#39;/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/10/09/&#39;[跟我学中小企业架构部署]之一：整体架构设计&#39;/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

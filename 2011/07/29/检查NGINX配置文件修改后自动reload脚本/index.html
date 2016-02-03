@@ -5,25 +5,16 @@
   
   <title>检查NGINX配置文件修改后自动reload脚本 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="此脚本并没有太多用处，通常用不到，只是一次在和程序员交谈中做的，当时环境是一台测试机，程序员需要及时修改一些nginx配置文件 参数，就写了这么个小脚本，让它在FTP上修改，自动reload.
-
-#!/bin/bash
-Info   : check conf to reload serverAuthor : dingtmCTime  : 2010.06.30This script run at e">
+  <meta name="description" content="此脚本并没有太多用处，通常用不到，只是一次在和程序员交谈中做的，当时环境是一台测试机，程序员需要及时修改一些nginx配置文件 参数，就写了这么个小脚本，让它在FTP上修改，自动reload.1234567891011121314151617181920212223242526272829303132333435#!/bin/bash# Info   : check conf to reload">
 <meta property="og:type" content="article">
 <meta property="og:title" content="检查NGINX配置文件修改后自动reload脚本">
 <meta property="og:url" content="http://www.elain.org/2011/07/29/检查NGINX配置文件修改后自动reload脚本/index.html">
 <meta property="og:site_name" content="Elain'blog">
-<meta property="og:description" content="此脚本并没有太多用处，通常用不到，只是一次在和程序员交谈中做的，当时环境是一台测试机，程序员需要及时修改一些nginx配置文件 参数，就写了这么个小脚本，让它在FTP上修改，自动reload.
-
-#!/bin/bash
-Info   : check conf to reload serverAuthor : dingtmCTime  : 2010.06.30This script run at e">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:description" content="此脚本并没有太多用处，通常用不到，只是一次在和程序员交谈中做的，当时环境是一台测试机，程序员需要及时修改一些nginx配置文件 参数，就写了这么个小脚本，让它在FTP上修改，自动reload.1234567891011121314151617181920212223242526272829303132333435#!/bin/bash# Info   : check conf to reload">
+<meta property="og:updated_time" content="2016-02-03T06:19:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="检查NGINX配置文件修改后自动reload脚本">
-<meta name="twitter:description" content="此脚本并没有太多用处，通常用不到，只是一次在和程序员交谈中做的，当时环境是一台测试机，程序员需要及时修改一些nginx配置文件 参数，就写了这么个小脚本，让它在FTP上修改，自动reload.
-
-#!/bin/bash
-Info   : check conf to reload serverAuthor : dingtmCTime  : 2010.06.30This script run at e">
+<meta name="twitter:description" content="此脚本并没有太多用处，通常用不到，只是一次在和程序员交谈中做的，当时环境是一台测试机，程序员需要及时修改一些nginx配置文件 参数，就写了这么个小脚本，让它在FTP上修改，自动reload.1234567891011121314151617181920212223242526272829303132333435#!/bin/bash# Info   : check conf to reload">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -283,26 +274,7 @@ Info   : check conf to reload serverAuthor : dingtmCTime  : 2010.06.30This scrip
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>此脚本并没有太多用处，通常用不到，只是一次在和程序员交谈中做的，当时环境是一台测试机，程序员需要及时修改一些nginx配置文件 参数，就写了这么个小脚本，让它在FTP上修改，自动reload.</p>
-<blockquote>
-<p>#!/bin/bash</p>
-<h1 id="Info__3A_check_conf_to_reload_server"><a href="#Info__3A_check_conf_to_reload_server" class="headerlink" title="Info   : check conf to reload server"></a>Info   : check conf to reload server</h1><h1 id="Author__3A_dingtm"><a href="#Author__3A_dingtm" class="headerlink" title="Author : dingtm"></a>Author : dingtm</h1><h1 id="CTime__3A_2010-06-30"><a href="#CTime__3A_2010-06-30" class="headerlink" title="CTime  : 2010.06.30"></a>CTime  : 2010.06.30</h1><h1 id="This_script_run_at_every_one_minutes"><a href="#This_script_run_at_every_one_minutes" class="headerlink" title="This script run at every one minutes"></a>This script run at every one minutes</h1><p>Sdir=/elain/data/htdocs/wwwelainorg/conf</p>
-<p>Ddir=/elain/apps</p>
-<p>if [ $Sdir/nginx.conf -nt $Ddir/nginx/conf/nginx.conf ]</p>
-<p>then</p>
-<p>/bin/cp $Sdir/nginx.conf $Ddir/nginx/conf/</p>
-<p>/elain/apps/nginx/sbin/nginx -s reload</p>
-<p>if [ $? = 0 ]</p>
-<p>then</p>
-<p>echo “<code>date +%Y-%m-%d-%H:%M:%S</code> nginx reload ok “ &gt;&gt;$Sdir/success.log</p>
-<p>else</p>
-<p>echo “<code>date +%Y-%m-%d-%H:%M:%S</code> nginx reload fail “ &gt;&gt;$Sdir/error.log</p>
-<p>fi</p>
-<p>else</p>
-<p>exit 1</p>
-<p>fi</p>
-<p>chown www.www $Sdir/*.log<br>&nbsp;</p>
-</blockquote>
+        <p>此脚本并没有太多用处，通常用不到，只是一次在和程序员交谈中做的，当时环境是一台测试机，程序员需要及时修改一些nginx配置文件 参数，就写了这么个小脚本，让它在FTP上修改，自动reload.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line"><span class="comment"># Info   : check conf to reload server</span></span><br><span class="line"><span class="comment"># Author : dingtm</span></span><br><span class="line"><span class="comment"># CTime  : 2010.06.30</span></span><br><span class="line"><span class="comment"># This script run at every one minutes</span></span><br><span class="line"></span><br><span class="line">Sdir=/elain/data/htdocs/wwwelainorg/conf</span><br><span class="line">Ddir=/elain/apps</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$Sdir</span>/nginx.conf -nt <span class="variable">$Ddir</span>/nginx/conf/nginx.conf ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"></span><br><span class="line">/bin/cp <span class="variable">$Sdir</span>/nginx.conf <span class="variable">$Ddir</span>/nginx/conf/</span><br><span class="line"></span><br><span class="line">/elain/apps/nginx/sbin/nginx <span class="operator">-s</span> reload</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ $? = <span class="number">0</span> ]</span><br><span class="line"></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +%Y-%m-%d-%H:%M:%S` nginx reload ok "</span> &gt;&gt;<span class="variable">$Sdir</span>/success.log</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"`date +%Y-%m-%d-%H:%M:%S` nginx reload fail "</span> &gt;&gt;<span class="variable">$Sdir</span>/error.log</span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">chown www.www <span class="variable">$Sdir</span>/*.log</span><br></pre></td></tr></table></figure></p>
 <p>脚本可以附件中下载：</p>
 <p><a href="http://www.elain.org/?attachment_id=311">check_conf_reload.sh</a></p>
 
@@ -316,7 +288,7 @@ Info   : check conf to reload serverAuthor : dingtmCTime  : 2010.06.30This scrip
         <p><span>本文标题:</span><a href="/2011/07/29/检查NGINX配置文件修改后自动reload脚本/">检查NGINX配置文件修改后自动reload脚本</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年07月29日 - 10时58分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/07/29/检查NGINX配置文件修改后自动reload脚本/" title="检查NGINX配置文件修改后自动reload脚本">http://www.elain.org/2011/07/29/检查NGINX配置文件修改后自动reload脚本/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/07/29/检查NGINX配置文件修改后自动reload脚本/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -352,7 +324,7 @@ Info   : check conf to reload serverAuthor : dingtmCTime  : 2010.06.30This scrip
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Info__3A_check_conf_to_reload_server"><span class="toc-number">1.</span> <span class="toc-text">Info   : check conf to reload server</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Author__3A_dingtm"><span class="toc-number">2.</span> <span class="toc-text">Author : dingtm</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CTime__3A_2010-06-30"><span class="toc-number">3.</span> <span class="toc-text">CTime  : 2010.06.30</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#This_script_run_at_every_one_minutes"><span class="toc-number">4.</span> <span class="toc-text">This script run at every one minutes</span></a></li></ol>
+    
 </div>
 <style>
     .left-col .switch-btn {

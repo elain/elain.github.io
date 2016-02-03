@@ -5,16 +5,19 @@
   
   <title>批量修改远程主机Root密码脚本 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前提：做SSH 无密码验证可以使用securCRT软件多窗口操作,给所有需更改的服务器添加信任[ccWN lang=”bash” width=”99%” height=”100%”]cat&amp;lt;  /root/.ssh/authorized_keysssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQETvvyoGyBKU4VX4tNyGM+8F4k0d+Fdfg443NxBse">
+  <meta name="description" content="前提：做SSH 无密码验证可以使用securCRT软件多窗口操作,给所有需更改的服务器添加信任
+123cat&amp;lt; &amp;lt;EOF &amp;gt; /root/.ssh/authorized_keysssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQETvvyoGyBKU4VX4tNyGM+8F4k0d+Fdfg443NxBseRV73FGU8787SmhMaF9ytiY2VAL5i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="批量修改远程主机Root密码脚本">
 <meta property="og:url" content="http://www.elain.org/2012/03/29/批量修改远程主机root密码脚本/index.html">
 <meta property="og:site_name" content="Elain'blog">
-<meta property="og:description" content="前提：做SSH 无密码验证可以使用securCRT软件多窗口操作,给所有需更改的服务器添加信任[ccWN lang=”bash” width=”99%” height=”100%”]cat&amp;lt;  /root/.ssh/authorized_keysssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQETvvyoGyBKU4VX4tNyGM+8F4k0d+Fdfg443NxBse">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:description" content="前提：做SSH 无密码验证可以使用securCRT软件多窗口操作,给所有需更改的服务器添加信任
+123cat&amp;lt; &amp;lt;EOF &amp;gt; /root/.ssh/authorized_keysssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQETvvyoGyBKU4VX4tNyGM+8F4k0d+Fdfg443NxBseRV73FGU8787SmhMaF9ytiY2VAL5i">
+<meta property="og:updated_time" content="2016-02-03T05:53:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="批量修改远程主机Root密码脚本">
-<meta name="twitter:description" content="前提：做SSH 无密码验证可以使用securCRT软件多窗口操作,给所有需更改的服务器添加信任[ccWN lang=”bash” width=”99%” height=”100%”]cat&amp;lt;  /root/.ssh/authorized_keysssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQETvvyoGyBKU4VX4tNyGM+8F4k0d+Fdfg443NxBse">
+<meta name="twitter:description" content="前提：做SSH 无密码验证可以使用securCRT软件多窗口操作,给所有需更改的服务器添加信任
+123cat&amp;lt; &amp;lt;EOF &amp;gt; /root/.ssh/authorized_keysssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQETvvyoGyBKU4VX4tNyGM+8F4k0d+Fdfg443NxBseRV73FGU8787SmhMaF9ytiY2VAL5i">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -274,9 +277,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>前提：做SSH 无密码验证<br>可以使用securCRT软件多窗口操作,给所有需更改的服务器添加信任<br>[ccWN lang=”bash” width=”99%” height=”100%”]cat&lt; <eof> /root/.ssh/authorized_keys<br>ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQETvvyoGyBKU4VX4tNyGM+8F4k0d+Fdfg443NxBseRV73FGU8787SmhMaF9ytiY2VAL5iCZmLO4NecforA4P6IpGvzAwDnjM/J0MuhAHCoIHiNqwl5Y1Q6bWj8auXPet+AIw/vNIgorebbIGjZT4sdfsdfWzmYGLmF9ZqnPr8xPm2OjPwTnJsdfggKfEhofLOIHS6HmsKhn4UUogbVaRiZQ4qKf2t5tdfgxc1X8NIVxfnzVYzAxnEUsLsdfM7TK2sfxm7sdfsdfasds11Z8eQD3Q== elain@elain-pc<br>EOF[/ccWN]<br>通过以上方法即可添加，或参考：<a href="http://www.elain.org/?p=275">http://www.elain.org/?p=275</a></eof></p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]cat update_passwd.sh<br>exec 3&lt;iplist<br>while read -u3 line<br>do<br>        IP=<code>echo $line|awk &quot;{print $1}&quot;</code><br>        PASS=<code>echo $line|awk &quot;{print $2}&quot;</code><br>        echo “========$IP========”<br>        ssh -p 22 root@$IP “echo $PASS| passwd –stdin root”<br>done[/ccWN]</p>
-<p>[ccWN lang=”bash” width=”99%” height=”100%”]cat iplist<br>10.0.2.50 admintest1<br>10.0.2.50 admintest3<br>10.0.2.50 admintest5<br>10.0.2.50 admintest5<br>10.0.2.50 admintest5[/ccWN]</p>
+        <p>前提：做SSH 无密码验证<br>可以使用securCRT软件多窗口操作,给所有需更改的服务器添加信任</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat&lt; &lt;EOF &gt; <span class="regexp">/root/</span>.ssh/authorized_keys</span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQETvvyoGyBKU4VX4tNyGM+<span class="number">8</span>F4k0d+Fdfg443NxBseRV73FGU8787SmhMaF9ytiY2VAL5iCZmLO4NecforA4P6IpGvzAwDnjM<span class="regexp">/J0MuhAHCoIHiNqwl5Y1Q6bWj8auXPet+AIw/</span>vNIgorebbIGjZT4sdfsdfWzmYGLmF9ZqnPr8xPm2OjPwTnJsdfggKfEhofLOIHS6HmsKhn4UUogbVaRiZQ4qKf2t5tdfgxc1X8NIVxfnzVYzAxnEUsLsdfM7TK2sfxm7sdfsdfasds11Z8eQD3Q== elain<span class="annotation">@elain</span>-pc</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>通过以上方法即可添加，或参考：<a href="http://www.elain.org/?p=275">http://www.elain.org/?p=275</a></p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat update_passwd.sh</span><br><span class="line">exec <span class="number">3</span>&lt;iplist</span><br><span class="line"><span class="keyword">while</span> read -u3 line</span><br><span class="line">do </span><br><span class="line">        IP=`echo <span class="variable">$line</span>|awk <span class="string">"&#123;print $1&#125;"</span>`</span><br><span class="line">        PASS=`echo <span class="variable">$line</span>|awk <span class="string">"&#123;print $2&#125;"</span>`</span><br><span class="line">        echo <span class="string">"========$IP========"</span></span><br><span class="line">        ssh -p <span class="number">22</span> root@<span class="variable">$IP</span> <span class="string">"echo $PASS| passwd --stdin root"</span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat iplist</span><br><span class="line"><span class="number">10.0</span><span class="number">.2</span><span class="number">.50</span> admintest1</span><br><span class="line"><span class="number">10.0</span><span class="number">.2</span><span class="number">.50</span> admintest3</span><br><span class="line"><span class="number">10.0</span><span class="number">.2</span><span class="number">.50</span> admintest5</span><br><span class="line"><span class="number">10.0</span><span class="number">.2</span><span class="number">.50</span> admintest5</span><br><span class="line"><span class="number">10.0</span><span class="number">.2</span><span class="number">.50</span> admintest5</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -288,7 +293,7 @@
         <p><span>本文标题:</span><a href="/2012/03/29/批量修改远程主机root密码脚本/">批量修改远程主机Root密码脚本</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2012年03月29日 - 17时50分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 13时53分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2012/03/29/批量修改远程主机root密码脚本/" title="批量修改远程主机Root密码脚本">http://www.elain.org/2012/03/29/批量修改远程主机root密码脚本/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2012/03/29/批量修改远程主机root密码脚本/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

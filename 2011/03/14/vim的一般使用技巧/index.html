@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://www.elain.org/2011/03/14/vim的一般使用技巧/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="首先简单的说一下vi编辑器──unix的通用编辑器，读作vee-eye (visual editor的简写)。(这里的vim，是改进的vi， Vi Improved简写，Vim 由Bram Moolenaar编写)vi的工作模式分为命令模式和插入模式 以及 : ex模式;按esc键就可以让vi进入命令模式;插入模式就是你输入文本的模式了。">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:19:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vim的一般使用技巧">
 <meta name="twitter:description" content="首先简单的说一下vi编辑器──unix的通用编辑器，读作vee-eye (visual editor的简写)。(这里的vim，是改进的vi， Vi Improved简写，Vim 由Bram Moolenaar编写)vi的工作模式分为命令模式和插入模式 以及 : ex模式;按esc键就可以让vi进入命令模式;插入模式就是你输入文本的模式了。">
@@ -291,7 +291,7 @@ m[x] 标记x(a~z)位置 例如 mb 标记当前光标位置为标志b
 <p>文本搜索，替换，移动，删除，复制<br>命令 :g/、:s/ 、:m 、:d、:co (或者:t)<br>:g :g/[文本] 全局搜索文本，光标移动到最后一个搜索文本，并显示所有数据加所在行。<br>:g!/[文本]  没有[文本]的行<br>:s :[第n行]，[到第m行]s/[要替换的]/[替换的]  n-m行之间进行替换，如果没有n，m那么就进行当前行的替换<br>：%/s/[要替换的]/[替换的]/g 进行全局替换。 %表示每一行, 另外有 . 表示当前行， $ 表示最后一行,另外可用+-号表示该行的上下n行，例如.-2 表示当前行上面第二行<br>:m :[要移动的数据]m[移动的地方] 例子 :20,30m100 20-30行移动到100行前(最后一行是100行)<br>例子： :g/^$/d 删除所有空行 d加上删除动作</p>
 <p>搜索模式<br>.(点号) 任一个单字符，汉字用两个点 ..</p>
 <ul>
-<li>匹配前面字符零个或者多个任意(并不表示任意字符) 例如 /abcdl<em> 就会查找abcdl或者以abcd开始的，而查找所有是 /.</em><br>^ 表示从行首开始<br>$ $在表达式末表示以正则表达式要在行末。<br>\ 转义 .表示找. *表示找* \表示找\<br>[  ] [0~9]表示匹配0~9之间任意一个数字 同理有[A~Z]和[a~z]，而[AB3a]表示找有A,B, 3,a其中任意一个字符。<br>\&lt; , \&gt; 单词开始或者末尾以空格或者标点符号开始或者结束。 例如 inux\&gt; 匹配linux.<br>\r 回车<br>\t 制表符<br>执行sh命令<br>:![shell command] 例如 :!ls</li>
+<li>匹配前面字符零个或者多个任意(并不表示任意字符) 例如 /abcdl<em> 就会查找abcdl或者以abcd开始的，而查找所有是 /.</em><br>^ 表示从行首开始<br>$ $在表达式末表示以正则表达式要在行末。<br>\ 转义 .表示找. *表示找* \表示找\<br>[  ] [0~9]表示匹配0~9之间任意一个数字 同理有[A~Z]和[a~z]，而[AB3a]表示找有A,B, 3,a其中任意一个字符。<br>\&lt; , > 单词开始或者末尾以空格或者标点符号开始或者结束。 例如 inux> 匹配linux.<br>\r 回车<br>\t 制表符<br>执行sh命令<br>:![shell command] 例如 :!ls</li>
 </ul>
 <p>添加数据到文件末 &gt;&gt;<br>例子 :1,10w&gt;&gt;newfile</p>
 <p>需要注意的是vim可以把一些命令组合起来应用<br>:1,3d | s/they/she/ 一到三行删除，并把当前行they替换为she<br>:.,/while/d 删除当前行到匹配while行所有数据(包括当前行和含有while所在行)<br>:/aaa/,/bbbb/d aaa到bbbb之间行删除(包括这两行)<br>:/aaa/,/bbb/m. aaa到bbb行move到当前行</p>
@@ -313,7 +313,7 @@ m[x] 标记x(a~z)位置 例如 mb 标记当前光标位置为标志b
         <p><span>本文标题:</span><a href="/2011/03/14/vim的一般使用技巧/">Vim的一般使用技巧</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年03月14日 - 09时00分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/03/14/vim的一般使用技巧/" title="Vim的一般使用技巧">http://www.elain.org/2011/03/14/vim的一般使用技巧/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/03/14/vim的一般使用技巧/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

@@ -6,8 +6,7 @@
   <title>Vsftpd服务器虚拟用户配置 | Elain&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="系统环境是: CentOS 5.5 x86_64vsftpd有三种用户模式：匿名用户、本地用户、虚拟用户。本次我们来讲解虚拟用户，它的优点是安全性高，便于管理。
-通过yum直接在线装vsftpd(rpm版本)
-yum -y install vsftpd db4-utils
+通过yum直接在线装vsftpd(rpm版本)yum -y install vsftpd db4-utils
 创建vsftp的系统用户useradd vuser -s /sbin/nologin
 创建系统用户的列表, 一行一个touch">
 <meta property="og:type" content="article">
@@ -15,16 +14,14 @@ yum -y install vsftpd db4-utils
 <meta property="og:url" content="http://www.elain.org/2011/03/22/vsftpd服务器虚拟用户配置/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="系统环境是: CentOS 5.5 x86_64vsftpd有三种用户模式：匿名用户、本地用户、虚拟用户。本次我们来讲解虚拟用户，它的优点是安全性高，便于管理。
-通过yum直接在线装vsftpd(rpm版本)
-yum -y install vsftpd db4-utils
+通过yum直接在线装vsftpd(rpm版本)yum -y install vsftpd db4-utils
 创建vsftp的系统用户useradd vuser -s /sbin/nologin
 创建系统用户的列表, 一行一个touch">
-<meta property="og:updated_time" content="2016-02-02T06:18:15.000Z">
+<meta property="og:updated_time" content="2016-02-03T06:14:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vsftpd服务器虚拟用户配置">
 <meta name="twitter:description" content="系统环境是: CentOS 5.5 x86_64vsftpd有三种用户模式：匿名用户、本地用户、虚拟用户。本次我们来讲解虚拟用户，它的优点是安全性高，便于管理。
-通过yum直接在线装vsftpd(rpm版本)
-yum -y install vsftpd db4-utils
+通过yum直接在线装vsftpd(rpm版本)yum -y install vsftpd db4-utils
 创建vsftp的系统用户useradd vuser -s /sbin/nologin
 创建系统用户的列表, 一行一个touch">
   
@@ -287,71 +284,24 @@ yum -y install vsftpd db4-utils
       
           
         <p>系统环境是: CentOS 5.5 x86_64<br>vsftpd有三种用户模式：匿名用户、本地用户、虚拟用户。本次我们来讲解虚拟用户，它的优点是安全性高，便于管理。</p>
-<h1 id="u901A_u8FC7yum_u76F4_u63A5_u5728_u7EBF_u88C5vsftpd_28rpm_u7248_u672C_29"><a href="#u901A_u8FC7yum_u76F4_u63A5_u5728_u7EBF_u88C5vsftpd_28rpm_u7248_u672C_29" class="headerlink" title="通过yum直接在线装vsftpd(rpm版本)"></a>通过yum直接在线装vsftpd(rpm版本)</h1><blockquote>
-<p>yum -y install vsftpd db4-utils</p>
+<h1 id="u901A_u8FC7yum_u76F4_u63A5_u5728_u7EBF_u88C5vsftpd_28rpm_u7248_u672C_29"><a href="#u901A_u8FC7yum_u76F4_u63A5_u5728_u7EBF_u88C5vsftpd_28rpm_u7248_u672C_29" class="headerlink" title="通过yum直接在线装vsftpd(rpm版本)"></a>通过yum直接在线装vsftpd(rpm版本)</h1><p>yum -y install vsftpd db4-utils</p>
 <h1 id="u521B_u5EFAvsftp_u7684_u7CFB_u7EDF_u7528_u6237"><a href="#u521B_u5EFAvsftp_u7684_u7CFB_u7EDF_u7528_u6237" class="headerlink" title="创建vsftp的系统用户"></a>创建vsftp的系统用户</h1><p>useradd vuser -s /sbin/nologin</p>
 <h1 id="u521B_u5EFA_u7CFB_u7EDF_u7528_u6237_u7684_u5217_u8868_2C__u4E00_u884C_u4E00_u4E2A"><a href="#u521B_u5EFA_u7CFB_u7EDF_u7528_u6237_u7684_u5217_u8868_2C__u4E00_u884C_u4E00_u4E2A" class="headerlink" title="创建系统用户的列表, 一行一个"></a>创建系统用户的列表, 一行一个</h1><p>touch /etc/vsftpd/chroot_list<br><a id="more"></a></p>
 <h1 id="u521B_u5EFA_u865A_u62DF_u7528_u6237_u7684_u914D_u7F6E_u6587_u4EF6_u8DEF_u5F84_u76EE_u5F55"><a href="#u521B_u5EFA_u865A_u62DF_u7528_u6237_u7684_u914D_u7F6E_u6587_u4EF6_u8DEF_u5F84_u76EE_u5F55" class="headerlink" title="创建虚拟用户的配置文件路径目录"></a>创建虚拟用户的配置文件路径目录</h1><p>mkdir /etc/vsftpd/user_config</p>
-</blockquote>
-<h1 id="u628Avsftp_u7684_u7CFB_u7EDF_u7528_u6237_u5199_u5165vsftpd-chroot_list"><a href="#u628Avsftp_u7684_u7CFB_u7EDF_u7528_u6237_u5199_u5165vsftpd-chroot_list" class="headerlink" title="把vsftp的系统用户写入vsftpd.chroot_list"></a>把vsftp的系统用户写入vsftpd.chroot_list</h1><blockquote>
-<p>echo”vuser”  &gt;/etc/vsftpd/chroot_list</p>
-</blockquote>
-<h1 id="u51C6_u5907_u5DE5_u4F5C_2C__u521B_u5EFAvuser_2C__u5355_u884C_u4E3A_u7528_u6237_u540D_2C__u53CC_u884C_u4E3A_u5BC6_u7801"><a href="#u51C6_u5907_u5DE5_u4F5C_2C__u521B_u5EFAvuser_2C__u5355_u884C_u4E3A_u7528_u6237_u540D_2C__u53CC_u884C_u4E3A_u5BC6_u7801" class="headerlink" title="准备工作, 创建vuser, 单行为用户名, 双行为密码"></a>准备工作, 创建vuser, 单行为用户名, 双行为密码</h1><blockquote>
-<p>touch /etc/vsftpd/vuser<br>内容例如:<br>ftp1</p>
+<h1 id="u628Avsftp_u7684_u7CFB_u7EDF_u7528_u6237_u5199_u5165vsftpd-chroot_list"><a href="#u628Avsftp_u7684_u7CFB_u7EDF_u7528_u6237_u5199_u5165vsftpd-chroot_list" class="headerlink" title="把vsftp的系统用户写入vsftpd.chroot_list"></a>把vsftp的系统用户写入vsftpd.chroot_list</h1><p>echo”vuser”  &gt;/etc/vsftpd/chroot_list</p>
+<h1 id="u51C6_u5907_u5DE5_u4F5C_2C__u521B_u5EFAvuser_2C__u5355_u884C_u4E3A_u7528_u6237_u540D_2C__u53CC_u884C_u4E3A_u5BC6_u7801"><a href="#u51C6_u5907_u5DE5_u4F5C_2C__u521B_u5EFAvuser_2C__u5355_u884C_u4E3A_u7528_u6237_u540D_2C__u53CC_u884C_u4E3A_u5BC6_u7801" class="headerlink" title="准备工作, 创建vuser, 单行为用户名, 双行为密码"></a>准备工作, 创建vuser, 单行为用户名, 双行为密码</h1><p>touch /etc/vsftpd/vuser<br>内容例如:<br>ftp1</p>
 <p>123456</p>
 <p>ftp2</p>
 <p>123456</p>
 <h1 id="u521B_u5EFA_u865A_u62DF_u7528_u6237_u5BC6_u7801_u8BA4_u8BC1_u7684_u6570_u636E_u5E93_u6587_u4EF6"><a href="#u521B_u5EFA_u865A_u62DF_u7528_u6237_u5BC6_u7801_u8BA4_u8BC1_u7684_u6570_u636E_u5E93_u6587_u4EF6" class="headerlink" title="创建虚拟用户密码认证的数据库文件"></a>创建虚拟用户密码认证的数据库文件</h1><p>db_load -T -t hash -f /etc/vsftpd/vuser /etc/vsftpd/vuser.db</p>
-</blockquote>
-<h1 id="u76F4_u63A5_u7F16_u8F91_u8BA4_u8BC1_u6587_u4EF6"><a href="#u76F4_u63A5_u7F16_u8F91_u8BA4_u8BC1_u6587_u4EF6" class="headerlink" title="直接编辑认证文件"></a>直接编辑认证文件</h1><blockquote>
-<p>vi /etc/pam.d/vsftpd</p>
+<h1 id="u76F4_u63A5_u7F16_u8F91_u8BA4_u8BC1_u6587_u4EF6"><a href="#u76F4_u63A5_u7F16_u8F91_u8BA4_u8BC1_u6587_u4EF6" class="headerlink" title="直接编辑认证文件"></a>直接编辑认证文件</h1><p>vi /etc/pam.d/vsftpd</p>
 <h1 id="u6E05_u7A7A_u91CC_u9762_u7684_u5185_u5BB9_u6216_u8005_u90FD_u6CE8_u91CA_u6389_28_u6700_u524D_u9762_u52A0_23_29_2C__u6DFB_u52A0_u4E0B_u9762_u4E24_u884C"><a href="#u6E05_u7A7A_u91CC_u9762_u7684_u5185_u5BB9_u6216_u8005_u90FD_u6CE8_u91CA_u6389_28_u6700_u524D_u9762_u52A0_23_29_2C__u6DFB_u52A0_u4E0B_u9762_u4E24_u884C" class="headerlink" title="清空里面的内容或者都注释掉(最前面加#), 添加下面两行"></a>清空里面的内容或者都注释掉(最前面加#), 添加下面两行</h1><p>auth         required     pam_userdb.so db=/etc/vsftpd/vuser</p>
 <p>account    required     pam_userdb.so db=/etc/vsftpd/vuser</p>
-<h1 id="u7F16_u8F91vsftp_u7684_u914D_u7F6E_u6587_u4EF6"><a href="#u7F16_u8F91vsftp_u7684_u914D_u7F6E_u6587_u4EF6" class="headerlink" title="编辑vsftp的配置文件"></a>编辑vsftp的配置文件</h1><p>vi /etc/vsftpd/vsftpd.conf</p>
-<p>#################################<br>local_enable=YES</p>
-<p>write_enable=YES</p>
-<p>local_umask=022</p>
-<p>anon_upload_enable=NO</p>
-<p>anon_mkdir_write_enable=NO</p>
-<p>dirmessage_enable=YES</p>
-<p>xferlog_enable=YES</p>
-<p>connect_from_port_20=YES</p>
-<p>chown_uploads=NO</p>
-<p>xferlog_file=/var/log/vsftpd.log</p>
-<p>xferlog_std_format=YES</p>
-<p>async_abor_enable=YES</p>
-<p>ascii_upload_enable=YES</p>
-<p>ascii_download_enable=YES</p>
-<p>ftpd_banner=Welcome to elain FTP service.</p>
-<p>chroot_list_enable=YES</p>
-<p>chroot_list_file=/etc/vsftpd/chroot_list</p>
-<p>chroot_local_user=NO</p>
-<p>listen=YES</p>
-<p>pam_service_name=vsftpd</p>
-<p>userlist_enable=YES</p>
-<p>tcp_wrappers=YES</p>
-<p>guest_enable=YES</p>
-<p>guest_username=vuser</p>
-<p>user_config_dir=/etc/vsftpd/vuser_config</p>
-<p>reverse_lookup_enable=NO</p>
-<p>##############################</p>
+<h1 id="u7F16_u8F91vsftp_u7684_u914D_u7F6E_u6587_u4EF6"><a href="#u7F16_u8F91vsftp_u7684_u914D_u7F6E_u6587_u4EF6" class="headerlink" title="编辑vsftp的配置文件"></a>编辑vsftp的配置文件</h1><p>vi /etc/vsftpd/vsftpd.conf<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">local_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">write_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">local_umask=<span class="value"><span class="number">022</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">anon_upload_enable=<span class="value"><span class="keyword">NO</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">anon_mkdir_write_enable=<span class="value"><span class="keyword">NO</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">dirmessage_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">xferlog_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">connect_from_port_20=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">chown_uploads=<span class="value"><span class="keyword">NO</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">xferlog_file=<span class="value">/var/log/vsftpd.log</span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">xferlog_std_format=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">async_abor_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">ascii_upload_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">ascii_download_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">ftpd_banner=<span class="value">Welcome to elain FTP service.</span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">chroot_list_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">chroot_list_file=<span class="value">/etc/vsftpd/chroot_list</span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">chroot_local_user=<span class="value"><span class="keyword">NO</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">listen=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="setting">pam_service_name=<span class="value">vsftpd</span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">userlist_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">tcp_wrappers=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">guest_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">guest_username=<span class="value">vuser</span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">user_config_dir=<span class="value">/etc/vsftpd/vuser_config</span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">reverse_lookup_enable=<span class="value"><span class="keyword">NO</span></span></span></span><br></pre></td></tr></table></figure></p>
 <h1 id="u4E3A_u6BCF_u4E2A_u865A_u62DF_u7528_u6237_u521B_u5EFA_u914D_u7F6E_u6587_u4EF6"><a href="#u4E3A_u6BCF_u4E2A_u865A_u62DF_u7528_u6237_u521B_u5EFA_u914D_u7F6E_u6587_u4EF6" class="headerlink" title="为每个虚拟用户创建配置文件"></a>为每个虚拟用户创建配置文件</h1><p>vi /etc/vsftpd/vuser_config/ftp1</p>
-<h1 id="u6DFB_u52A0_u5982_u4E0B_u5185_u5BB9"><a href="#u6DFB_u52A0_u5982_u4E0B_u5185_u5BB9" class="headerlink" title="添加如下内容"></a>添加如下内容</h1><p>############################<br>local_root=/www/htdocs/ftp1</p>
-<p>write_enable=YES</p>
-<p>anon_world_readable_only=NO</p>
-<p>anon_upload_enable=YES</p>
-<p>anon_mkdir_write_enable=YES</p>
-<p>anon_other_write_enable=YES</p>
-<p>############################</p>
-</blockquote>
-<h1 id="u540C_u6837_u7684_u65B9_u6CD5_u5EFA_u7ACBftp2_2C__u5982_u679C_u7528_u6237_u591A_u7684_u8BDD_2C__u5199_u5165/etc/vsftpd/vuser_u6765_u751F_u6210_u5BC6_u7801_u8BA4_u8BC1_u7684_u6570_u636E_u5E93_u6587_u4EF6"><a href="#u540C_u6837_u7684_u65B9_u6CD5_u5EFA_u7ACBftp2_2C__u5982_u679C_u7528_u6237_u591A_u7684_u8BDD_2C__u5199_u5165/etc/vsftpd/vuser_u6765_u751F_u6210_u5BC6_u7801_u8BA4_u8BC1_u7684_u6570_u636E_u5E93_u6587_u4EF6" class="headerlink" title="同样的方法建立ftp2, 如果用户多的话, 写入/etc/vsftpd/vuser来生成密码认证的数据库文件"></a>同样的方法建立ftp2, 如果用户多的话, 写入/etc/vsftpd/vuser来生成密码认证的数据库文件</h1><blockquote>
-<p>mkdir -p /www/htdocs/ftp{1,2}</p>
-<p>echo “ftp1 is ok” &gt;/www/htdocs/ftp1/ftp1.txt</p>
-<p>echo “ftp2 is ok” &gt;/www/htdocs/ftp2/ftp2.txt</p>
-<p>chown -R vuser  /www/htdocs/ftp1</p>
-<p>chown -R vuser  /www/htdocs/ftp2</p>
-<h1 id="u542F_u52A8vsftp_u670D_u52A1_u5668"><a href="#u542F_u52A8vsftp_u670D_u52A1_u5668" class="headerlink" title="启动vsftp服务器"></a>启动vsftp服务器</h1><p>/etc/init.d/vsftpd restart</p>
-</blockquote>
+<h1 id="u6DFB_u52A0_u5982_u4E0B_u5185_u5BB9"><a href="#u6DFB_u52A0_u5982_u4E0B_u5185_u5BB9" class="headerlink" title="添加如下内容"></a>添加如下内容</h1><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">local_root=<span class="value">/www/htdocs/ftp1</span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">write_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">anon_world_readable_only=<span class="value"><span class="keyword">NO</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">anon_upload_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">anon_mkdir_write_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="setting">anon_other_write_enable=<span class="value"><span class="keyword">YES</span></span></span></span><br></pre></td></tr></table></figure>
+<h1 id="u540C_u6837_u7684_u65B9_u6CD5_u5EFA_u7ACBftp2_2C__u5982_u679C_u7528_u6237_u591A_u7684_u8BDD_2C__u5199_u5165/etc/vsftpd/vuser_u6765_u751F_u6210_u5BC6_u7801_u8BA4_u8BC1_u7684_u6570_u636E_u5E93_u6587_u4EF6"><a href="#u540C_u6837_u7684_u65B9_u6CD5_u5EFA_u7ACBftp2_2C__u5982_u679C_u7528_u6237_u591A_u7684_u8BDD_2C__u5199_u5165/etc/vsftpd/vuser_u6765_u751F_u6210_u5BC6_u7801_u8BA4_u8BC1_u7684_u6570_u636E_u5E93_u6587_u4EF6" class="headerlink" title="同样的方法建立ftp2, 如果用户多的话, 写入/etc/vsftpd/vuser来生成密码认证的数据库文件"></a>同样的方法建立ftp2, 如果用户多的话, 写入/etc/vsftpd/vuser来生成密码认证的数据库文件</h1><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p <span class="regexp">/www/</span>htdocs/ftp&#123;<span class="number">1</span>,<span class="number">2</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">echo <span class="string">"ftp1 is ok"</span> &gt;<span class="regexp">/www/</span>htdocs<span class="regexp">/ftp1/</span>ftp1.txt</span><br><span class="line"></span><br><span class="line">echo <span class="string">"ftp2 is ok"</span> &gt;<span class="regexp">/www/</span>htdocs<span class="regexp">/ftp2/</span>ftp2.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">chown -R vuser  <span class="regexp">/www/</span>htdocs/ftp1</span><br><span class="line"></span><br><span class="line">chown -R vuser  <span class="regexp">/www/</span>htdocs/ftp2</span><br></pre></td></tr></table></figure>
+<h1 id="u542F_u52A8vsftp_u670D_u52A1_u5668"><a href="#u542F_u52A8vsftp_u670D_u52A1_u5668" class="headerlink" title="启动vsftp服务器"></a>启动vsftp服务器</h1><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/etc/i</span>nit.d<span class="regexp">/vsftpd restart</span></span><br></pre></td></tr></table></figure>
 <h1 id="u9A8C_u8BC1_u767B_u9646"><a href="#u9A8C_u8BC1_u767B_u9646" class="headerlink" title="验证登陆"></a>验证登陆</h1><p>主机名: 您服务器的ip地址<br>用户:ftp1/123456<br>用户:ftp2/456789</p>
 
       
@@ -364,7 +314,7 @@ yum -y install vsftpd db4-utils
         <p><span>本文标题:</span><a href="/2011/03/22/vsftpd服务器虚拟用户配置/">Vsftpd服务器虚拟用户配置</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2011年03月22日 - 00时08分</p>
-        <p><span>最后更新:</span>2016年02月02日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年02月03日 - 14时14分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2011/03/22/vsftpd服务器虚拟用户配置/" title="Vsftpd服务器虚拟用户配置">http://www.elain.org/2011/03/22/vsftpd服务器虚拟用户配置/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2011/03/22/vsftpd服务器虚拟用户配置/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
