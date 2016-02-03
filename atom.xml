@@ -4,7 +4,7 @@
   <subtitle><![CDATA[致力于LINUX技术研究交流!开源一切,免费一切!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.elain.org/"/>
-  <updated>2016-02-03T03:02:26.000Z</updated>
+  <updated>2016-02-03T03:03:57.000Z</updated>
   <id>http://www.elain.org/</id>
   
   <author>
@@ -19,13 +19,11 @@
     <link href="http://www.elain.org/2016/02/03/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E5%88%B0hexo/"/>
     <id>http://www.elain.org/2016/02/03/博客迁移到hexo/</id>
     <published>2016-02-03T02:49:11.000Z</published>
-    <updated>2016-02-03T03:02:26.000Z</updated>
-    <content type="html"><![CDATA[<pre><code>折腾了一天，博客迁移到了hexo，之前使用的wordpress，里面的内容较陈旧，但也算是迁移过来了，只是以前的链接全部失效了，
-</code></pre><p>如果你通过搜索引擎来到了这里，请重新搜索需要的文章，接下来我会陆续写一下最近半年使用的ELK相关内容，目前网络中有各种调优<br>与部署、配置文件详解，但对入门来说，好多同学都显得很迷茫，我会以主要贴具体的配置文件来讲ELK的实战，配置文件中各参数不会一一解读，请自行搜索。</p>
+    <updated>2016-02-03T03:03:57.000Z</updated>
+    <content type="html"><![CDATA[<p>折腾了一天，博客迁移到了hexo，之前使用的wordpress，里面的内容较陈旧，但也算是迁移过来了，只是以前的链接全部失效了，<br>如果你通过搜索引擎来到了这里，请重新搜索需要的文章，接下来我会陆续写一下最近半年使用的ELK相关内容，目前网络中有各种调优<br>与部署、配置文件详解，但对入门来说，好多同学都显得很迷茫，我会以主要贴具体的配置文件来讲ELK的实战，配置文件中各参数不会一一解读，请自行搜索。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<pre><code>折腾了一天，博客迁移到了hexo，之前使用的wordpress，里面的内容较陈旧，但也算是迁移过来了，只是以前的链接全部失效了，
-</code></pre><p>如果你通过搜索引擎来到了这里，请重新搜索需要的文章，接下来我会陆续写一下最近半年使用的ELK相关]]>
+    <![CDATA[<p>折腾了一天，博客迁移到了hexo，之前使用的wordpress，里面的内容较陈旧，但也算是迁移过来了，只是以前的链接全部失效了，<br>如果你通过搜索引擎来到了这里，请重新搜索需要的文章，接下来我会陆续写一下最近半年使用的ELK相关内容，目前网络中有各种调优<br>与部署、]]>
     </summary>
     
       <category term="迁移" scheme="http://www.elain.org/tags/%E8%BF%81%E7%A7%BB/"/>
