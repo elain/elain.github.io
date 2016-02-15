@@ -4,7 +4,7 @@
   <subtitle><![CDATA[致力于LINUX技术研究交流!开源一切,免费一切!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.elain.org/"/>
-  <updated>2016-02-03T03:03:57.000Z</updated>
+  <updated>2016-02-15T12:08:37.000Z</updated>
   <id>http://www.elain.org/</id>
   
   <author>
@@ -13,6 +13,65 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ELK实战-架构的选择]]></title>
+    <link href="http://www.elain.org/2016/02/15/ELK%E5%AE%9E%E6%88%98%E4%B8%80%E6%9E%B6%E6%9E%84%E7%9A%84%E9%80%89%E6%8B%A9/"/>
+    <id>http://www.elain.org/2016/02/15/ELK实战一架构的选择/</id>
+    <published>2016-02-14T23:34:42.000Z</published>
+    <updated>2016-02-15T12:08:37.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>经常有人在问应该需要哪种架构？要不要使用redis、kafka？它们是怎么的结构去工作的？ELK分别起到了什么作用？接下来根据我的使用经验谈一下目前最常见的两种架构，基本满足于90%以的场景，如有错误之处，还望请指正！</p>
+</blockquote>
+<p>####一、数据量小，且数据可靠性要求不强（允许ELK故障时丢失数据）的公司</p>
+<p>#####架构如下：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logstash -&gt; elasticsearch -&gt; kibana</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p><strong>收集客户端</strong>：rsyslog/heka/flume/logstash/fluent都行，在这个阶段，客户端收集性能不需要过多的考虑，* 都可以满足，看自己的喜好，值得说的是这样的架构规模因数据量不大，客户端此时可以做解析、过滤日志处理后再入到elasticsearch，前提是一定要保证客户端不能影响到生产环境的业务稳定性。不保证收集客户端的可靠性，可通过 supervisor/monit等工具做守护，添加监控</p>
+</li>
+<li><p><strong>数据存储、搜索</strong>: elasticsearch 配置默认即可满足，至于分片复本默认都可以，视数据重要性决定是否添加复本，如果添加，最多一个复本足矣（添加复本性能下降很大，规模不大，这个问题应该不会出现）</p>
+</li>
+<li><p><strong>数据展示</strong>：kibana  可以根据ES的数据做各种各样的图表来直观展示业务实时状况</p>
+</li>
+</ul>
+<p>####二、数据量大，且数据不允许丢失，实时、稳定性要求高的公司</p>
+<p>#####架构如下：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logstash -&gt; kafka -&gt; logstash -&gt; elasticsearch -&gt; kibana</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p><strong>收集客户端</strong>：选型上，在上面基础之上同上，在这里就不能像小规模时的在客户端做大量的数据处理了，尽量收集最原始数据给kafka或redis，因数据量达到一定程度，客户端因数据处理策略会体现出压力过大，从而会影响到生产环境业务<br>的稳定性</p>
+</li>
+<li><p><strong>队列</strong>：可选择redis/kafka这类的队列工具，优选kafka，因它的分布式、高可用性、大吞吐的特性，从数据客户端收集的原始日志写入到kafka，可供各种应用消费</p>
+</li>
+<li><p><strong>数据处理</strong>:可选用logstash/hangout/rsyslog等，优选hangout，性能较logstash好，功能是仿照logstash做的，大部分需求可满足，在这层做数据的解析、过滤等，比如geoip、useragent、json格式化、字段切割/拼接等，按天索引写入elasticsearch（索引建议提前一天以上建立，减少整点自动建立时的高负载），使用curator做定时关闭、删除N天前的索引，如有多索引查询，还可以使用此工具做alias来方便多索引联合查询。</p>
+</li>
+<li><p><strong>数据存储、搜索</strong>: elasticsearch集群，考虑多分片一复本最佳，根据数据大小与搜索频度来调整分片数量，建立索引命名规范，相同类型数据统一建立即mapping模板，添加如bigdesk\marvel\head\kopf这样的监控工具来长期分析性能并调优</p>
+</li>
+<li><p><strong>数据展示</strong>：kibana 根据ES数据做图表，使用elasticdump工具定时备份.kibana索引数据（.kibana是kibana的默认索引名称，里面包含了所有kibana中的配置，如图表、搜索、设置、index pattern等）</p>
+</li>
+</ul>
+<p>以上简单谈了以下两种常见架构，它的使用场景、各层的功能、以及与之相关的一些工具，接下来我会以我们目前使用的架构了逐一讲解。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>经常有人在问应该需要哪种架构？要不要使用redis、kafka？它们是怎么的结构去工作的？ELK分别起到了什么作用？接下来根据我的使用经验谈一下目前最常见的两种架构，基本满足于90%以的场景，如有错误之处，还望请指正！</p>
+</blockquo]]>
+    </summary>
+    
+      <category term="efk" scheme="http://www.elain.org/tags/efk/"/>
+    
+      <category term="elasticsearch" scheme="http://www.elain.org/tags/elasticsearch/"/>
+    
+      <category term="elk" scheme="http://www.elain.org/tags/elk/"/>
+    
+      <category term="fluentd" scheme="http://www.elain.org/tags/fluentd/"/>
+    
+      <category term="kafka" scheme="http://www.elain.org/tags/kafka/"/>
+    
+      <category term="kibana" scheme="http://www.elain.org/tags/kibana/"/>
+    
+      <category term="rsyslog" scheme="http://www.elain.org/tags/rsyslog/"/>
+    
+      <category term="日志分析" scheme="http://www.elain.org/categories/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[博客迁移至Hexo]]></title>
@@ -934,23 +993,6 @@ node base {
 <p>招三流学历一流素质的人才，干二流的工作，发一流的工资。当然，以上一流三流都是相对的。</p>
 <p>大部分人对待新工作职位及待遇都是只能上不能下。</p>
 <p>宁可漏过一千，不可错招]]>
-    </summary>
-    
-      <category term="杂文随笔" scheme="http://www.elain.org/categories/%E6%9D%82%E6%96%87%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[[转]如何摆脱低智商的社会，让自己脱颖而出？]]></title>
-    <link href="http://www.elain.org/2012/11/28/'%5B%E8%BD%AC%5D%E5%A6%82%E4%BD%95%E6%91%86%E8%84%B1%E4%BD%8E%E6%99%BA%E5%95%86%E7%9A%84%E7%A4%BE%E4%BC%9A%EF%BC%8C%E8%AE%A9%E8%87%AA%E5%B7%B1%E8%84%B1%E9%A2%96%E8%80%8C%E5%87%BA%EF%BC%9F'/"/>
-    <id>http://www.elain.org/2012/11/28/'[转]如何摆脱低智商的社会，让自己脱颖而出？'/</id>
-    <published>2012-11-28T04:11:27.000Z</published>
-    <updated>2016-02-02T06:18:15.000Z</updated>
-    <content type="html"><![CDATA[<p>如何摆脱低智商的社会，让自己脱颖而出？<br>看了大前研一的【低智商社会】后深有感触，日本如此发达的社会，大前研一却对于日本年轻人沉溺于动漫、网络游戏、网络社交，出现集体智商衰退的现象忧国忧民。日本人真的是一代不如一代？按照大前研一的说法，就是现在日本已经进入到了“低智商社会”。本书从日本的政治、经济、网络社会、教育等各个范畴去分析，点出了各种现实存在的低智商现象，给想在21世纪生存下去的日本人最后的当头棒喝，也给其他国家的人们一个强烈的警示，从而使我们反思面对的问题。<br>其实在中国更严重，在IT团队跟更更严重！<br>我经常对我的同事们讲的一个观点:在IT界成功真是太容易了。<br>1.最容易成功和获得一份不错薪资的行业就是IT，只要你有学习能力，因为你所有要学的东西，都在网上，通过Google可以获得你想要提高的所有东西。<br>2.只要你坚持不断的写程序，少说多写，你就很容易脱颖而出，因为你周围大部分人都在玩，有的在看垃圾小说，有的在聊天和微博，有的在低头玩弄智能手机。很少有人能够驱动自己从头到尾，从前端到后端，从页面到数据库，独立写一个完整的软件，并为之不断的改进。<br>网络是个让人又爱又恨的地方，我们写软件无法摆脱网络，但是网络让我们效率是如此的低下。<br>十一国庆，我在家，老婆孩子会娘家了，没有一个人打扰我，我发誓要在8天之内，用C#重写原来的通信服务器软件。<br>可是这8天内我做了什么呢？<br>1.因为在家，很松弛，我发现我非常不愿意动手写代码，我愿意查资料，我也不愿意写代码，结果第一天我查了和下载了一通资料和代码；<br>2.第二天，好声音决赛，我在优酷上把好声音看了够；<br>3.第三天我的负罪感加深了，我决定建立个工程，开始写代码，我有了初步的进展，有一个工程了，并把以前的C++的代码翻看了一遍，思考要改进的地方，写下了自己的设计思路，画了2张草图，并写了Socket的公用库。这距离我的目标还很遥远，中间我又花时间升级了我的android手机还看了个电视剧，白天想着晚上有时间，到晚上吃完饭犯困，9点多就睡了。<br>4.第四天我觉得写底层代码，推进太慢，从界面驱动入手，要让自己的工程可以运行和测试，从而不断的推进自己的工作。在写完界面后，我有点得意，放下工作，又犯了浏览网络博客的老毛病，看了很多精彩的博客文章，并放入自己的Evernote中。<br>5.后面的几天，老婆孩子回来了，工作效率更低了，基本上写了界面和底层的协议库，软件从整体上没有运行起来。<br>6.上班后，坐在办公室的感觉真好，由花了一个星期的时间，总算运行起来了。这个工作总共花费了15天，实际上我估算，如果集中精神，每天工作满8个小时，7天就完事了。<br>在现实中，我们的注意力都无法保持一个稳定的状态，网上的东西太多了，如果没有外界的压力，我们的工作效率就更低了，如果我们能超越这一点，我们就能做到和周边的人不一样，这样我们就能很容易脱颖而出得到上司的注意。因为别人都手慢，而你手快，你执行力强，你能够很快的写出一个可以运行的东西,上司就愿意委以重任。<br>现在几乎所有的项目经理在制定计划时，都会迁就我们低效的工作状态，美名其曰，留出冗余。其实我们很多的功能，如果半天完成，必定一天，如果两天能完事，必定要三天、四天的这样拖着。很多人都像有毒瘾一样，从上学开始，大学中，考试前几天，才开始看书，项目中总是在Milestone的最后时刻，才开始稍微动作起来。<br>大部分人几乎整年的不看书不买书，经常在网上浏览文章，会造成知识的碎片化，微博就更加严重，一本好书是从头到尾的让你系统化。无论是技术还是项目管理的书都是这样。我们不能满足于一点点的技巧性的文章。你有没有发现让你解释个东西的时候，你会结结巴巴的，无法从头到尾系统的阐述某个东西。<br>大部分人的能力和知识面都很局限，看看下面，自己能不能做到：<br>1.有没有自己一个人写过一个完整的可以运行的软件，B/S或C/S都行;<br>2.有没有完整的看过非小说的书，如测试驱动、配置管理、项目管理等等；<br>3.知不知道时间管理，想不想对改进自己的时间管理的能力，有没有使用过GTD或番茄时间管理法之类的工具，把自己的事情系统的整理一下；<br>4.有没有持续集中自己的注意力，不浏览网络，写一个小时代码的经历。</p>
-<p>我只是想深刻的反省自己，并提高自己，和大家做个分享，如果我们8个小时能够做到高效率，我们的生活不会那么苦，反而会获得升迁和提拔。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>如何摆脱低智商的社会，让自己脱颖而出？<br>看了大前研一的【低智商社会】后深有感触，日本如此发达的社会，大前研一却对于日本年轻人沉溺于动漫、网络游戏、网络社交，出现集体智商衰退的现象忧国忧民。日本人真的是一代不如一代？按照大前研一的说法，就是现在日本已经进入到了“低智商社]]>
     </summary>
     
       <category term="杂文随笔" scheme="http://www.elain.org/categories/%E6%9D%82%E6%96%87%E9%9A%8F%E7%AC%94/"/>
