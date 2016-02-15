@@ -7,26 +7,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="经常有人在问应该需要哪种架构？要不要使用redis、kafka？它们是怎么的结构去工作的？ELK分别起到了什么作用？接下来根据我的使用经验谈一下目前最常见的两种架构，基本满足于90%以的场景，如有错误之处，还望请指正！
 
- ####一、数据量小，且数据可靠性要求不强（允许ELK故障时丢失数据）的公司###
- #####架构如下：
-1logstash -&amp;gt; elasticsearch -&amp;gt">
+一、数据量小，且数据可靠性要求不强（允许ELK故障时丢失数据）的公司架构如下:
+
+Logstash -&amp;gt; Elasticsearch -&amp;gt; Kibana
+
+
+收集客户">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ELK实战-架构的选择">
 <meta property="og:url" content="http://www.elain.org/2016/02/15/ELK实战一架构的选择/index.html">
 <meta property="og:site_name" content="Elain'blog">
 <meta property="og:description" content="经常有人在问应该需要哪种架构？要不要使用redis、kafka？它们是怎么的结构去工作的？ELK分别起到了什么作用？接下来根据我的使用经验谈一下目前最常见的两种架构，基本满足于90%以的场景，如有错误之处，还望请指正！
 
- ####一、数据量小，且数据可靠性要求不强（允许ELK故障时丢失数据）的公司###
- #####架构如下：
-1logstash -&amp;gt; elasticsearch -&amp;gt">
-<meta property="og:updated_time" content="2016-02-15T12:15:37.000Z">
+一、数据量小，且数据可靠性要求不强（允许ELK故障时丢失数据）的公司架构如下:
+
+Logstash -&amp;gt; Elasticsearch -&amp;gt; Kibana
+
+
+收集客户">
+<meta property="og:updated_time" content="2016-02-15T12:46:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ELK实战-架构的选择">
 <meta name="twitter:description" content="经常有人在问应该需要哪种架构？要不要使用redis、kafka？它们是怎么的结构去工作的？ELK分别起到了什么作用？接下来根据我的使用经验谈一下目前最常见的两种架构，基本满足于90%以的场景，如有错误之处，还望请指正！
 
- ####一、数据量小，且数据可靠性要求不强（允许ELK故障时丢失数据）的公司###
- #####架构如下：
-1logstash -&amp;gt; elasticsearch -&amp;gt">
+一、数据量小，且数据可靠性要求不强（允许ELK故障时丢失数据）的公司架构如下:
+
+Logstash -&amp;gt; Elasticsearch -&amp;gt; Kibana
+
+
+收集客户">
   
     <link rel="alternative" href="/atom.xml" title="Elain&#39;blog" type="application/atom+xml">
   
@@ -289,19 +298,34 @@
         <blockquote>
 <p>经常有人在问应该需要哪种架构？要不要使用redis、kafka？它们是怎么的结构去工作的？ELK分别起到了什么作用？接下来根据我的使用经验谈一下目前最常见的两种架构，基本满足于90%以的场景，如有错误之处，还望请指正！</p>
 </blockquote>
-<p> ####一、数据量小，且数据可靠性要求不强（允许ELK故障时丢失数据）的公司###</p>
-<p> #####架构如下：</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logstash -&gt; elasticsearch -&gt; kibana</span><br></pre></td></tr></table></figure>
-<p> <strong>收集客户端</strong>：rsyslog/heka/flume/logstash/fluent都行，在这个阶段，客户端收集性能不需要过多的考虑，* 都可以满足，看自己的喜好，值得说的是这样的架构规模因数据量不大，客户端此时可以做解析、过滤日志处理后再入到elasticsearch，前提是一定要保证客户端不能影响到生产环境的业务稳定性。不保证收集客户端的可靠性，可通过 supervisor/monit等工具做守护，添加监控</p>
-<p> <strong>数据存储、搜索</strong>: elasticsearch 配置默认即可满足，至于分片复本默认都可以，视数据重要性决定是否添加复本，如果添加，最多一个复本足矣（添加复本性能下降很大，规模不大，这个问题应该不会出现）</p>
-<p> <strong>数据展示</strong>：kibana  可以根据ES的数据做各种各样的图表来直观展示业务实时状况</p>
-<p> ####二、数据量大，且数据不允许丢失，实时、稳定性要求高的公司</p>
-<p> #####架构如下：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logstash -&gt; kafka -&gt; logstash -&gt; elasticsearch -&gt; kibana</span><br></pre></td></tr></table></figure></p>
-<p> <strong>收集客户端</strong>：选型上，在上面基础之上同上，在这里就不能像小规模时的在客户端做大量的数据处理了，尽量收集最原始数据给kafka或redis，因数据量达到一定程度，客户端因数据处理策略会体现出压力过大，从而会影响到生产环境业务<br>的稳定性</p>
-<p> <strong>队列</strong>：可选择redis/kafka这类的队列工具，优选kafka，因它的分布式、高可用性、大吞吐的特性，从数据客户端收集的原始日志写入到kafka，可供各种应用消费</p>
-<p> <strong>数据处理</strong>:可选用logstash/hangout/rsyslog等，优选hangout，性能较logstash好，功能是仿照logstash做的，大部分需求可满足，在这层做数据的解析、过滤等，比如geoip、useragent、json格式化、字段切割/拼接等，按天索引写入elasticsearch（索引建议提前一天以上建立，减少整点自动建立时的高负载），使用curator做定时关闭、删除N天前的索引，如有多索引查询，还可以使用此工具做alias来方便多索引联合查询。</p>
-<p> <strong>数据存储、搜索</strong>: elasticsearch集群，考虑多分片一复本最佳，根据数据大小与搜索频度来调整分片数量，建立索引命名规范，相同类型数据统一建立即mapping模板，添加如bigdesk\marvel\head\kopf这样的监控工具来长期分析性能并调优</p>
-<p> <strong>数据展示</strong>：kibana 根据ES数据做图表，使用elasticdump工具定时备份.kibana索引数据（.kibana是kibana的默认索引名称，里面包含了所有kibana中的配置，如图表、搜索、设置、index pattern等）</p>
+<h1 id="u4E00_u3001_u6570_u636E_u91CF_u5C0F_uFF0C_u4E14_u6570_u636E_u53EF_u9760_u6027_u8981_u6C42_u4E0D_u5F3A_uFF08_u5141_u8BB8ELK_u6545_u969C_u65F6_u4E22_u5931_u6570_u636E_uFF09_u7684_u516C_u53F8"><a href="#u4E00_u3001_u6570_u636E_u91CF_u5C0F_uFF0C_u4E14_u6570_u636E_u53EF_u9760_u6027_u8981_u6C42_u4E0D_u5F3A_uFF08_u5141_u8BB8ELK_u6545_u969C_u65F6_u4E22_u5931_u6570_u636E_uFF09_u7684_u516C_u53F8" class="headerlink" title="一、数据量小，且数据可靠性要求不强（允许ELK故障时丢失数据）的公司"></a>一、数据量小，且数据可靠性要求不强（允许ELK故障时丢失数据）的公司</h1><p>架构如下:</p>
+<blockquote>
+<p>Logstash -&gt; Elasticsearch -&gt; Kibana</p>
+</blockquote>
+<ul>
+<li><p><strong>收集客户端</strong>: rsyslog/heka/flume/logstash/fluent都行，在这个阶段，客户端收集性能不需要过多的考虑，* 都可以满足，看自己的喜好，值得说的是这样的架构规模因数据量不大，客户端此时可以做解析、过滤日志处理后再入到elasticsearch，前提是一定要保证客户端不能影响到生产环境的业务稳定性。不保证收集客户端的可靠性，可通过 supervisor/monit等工具做守护，添加监控</p>
+</li>
+<li><p><strong>数据存储、搜索</strong>: elasticsearch 配置默认即可满足，至于分片复本默认都可以，视数据重要性决定是否添加复本，如果添加，最多一个复本足矣（添加复本性能下降很大，规模不大，这个问题应该不会出现）</p>
+</li>
+<li><p><strong>数据展示</strong>: kibana  可以根据ES的数据做各种各样的图表来直观展示业务实时状况</p>
+</li>
+</ul>
+<h1 id="u4E8C_u3001_u6570_u636E_u91CF_u5927_uFF0C_u4E14_u6570_u636E_u4E0D_u5141_u8BB8_u4E22_u5931_uFF0C_u5B9E_u65F6_u3001_u7A33_u5B9A_u6027_u8981_u6C42_u9AD8_u7684_u516C_u53F8"><a href="#u4E8C_u3001_u6570_u636E_u91CF_u5927_uFF0C_u4E14_u6570_u636E_u4E0D_u5141_u8BB8_u4E22_u5931_uFF0C_u5B9E_u65F6_u3001_u7A33_u5B9A_u6027_u8981_u6C42_u9AD8_u7684_u516C_u53F8" class="headerlink" title="二、数据量大，且数据不允许丢失，实时、稳定性要求高的公司"></a>二、数据量大，且数据不允许丢失，实时、稳定性要求高的公司</h1><p>架构如下:</p>
+<blockquote>
+<p>Logstash -&gt; Kafka -&gt; Logstash -&gt; Elasticsearch -&gt; Kibana</p>
+</blockquote>
+<ul>
+<li><p><strong>收集客户端</strong>: 选型上，在上面基础之上同上，在这里就不能像小规模时的在客户端做大量的数据处理了，尽量收集最原始数据给kafka或redis，因数据量达到一定程度，客户端因数据处理策略会体现出压力过大，从而会影响到生产环境业务<br>的稳定性</p>
+</li>
+<li><p><strong>队列</strong>: 可选择redis/kafka这类的队列工具，优选kafka，因它的分布式、高可用性、大吞吐的特性，它保证了在高并发下即使ES集群故障,在故障恢复后数据仍可追加;从数据客户端收集的原始日志写入到kafka，可供各种应用消费</p>
+</li>
+<li><p><strong>数据处理</strong>: 可选用logstash/hangout/rsyslog等，优选hangout，性能较logstash好，功能是仿照logstash做的，大部分需求可满足，在这层做数据的解析、过滤等，比如geoip、useragent、json格式化、字段切割/拼接等，按天索引写入elasticsearch（索引建议提前一天以上建立，减少整点自动建立时的高负载），使用curator做定时关闭、删除N天前的索引，如有多索引查询，还可以使用此工具做alias来方便多索引联合查询。</p>
+</li>
+<li><p><strong>数据存储、搜索</strong>: elasticsearch集群，考虑多分片一复本最佳，根据数据大小与搜索频度来调整分片数量，建立索引命名规范，相同类型数据统一建立即mapping模板，添加如bigdesk\marvel\head\kopf这样的监控工具来长期分析性能并调优</p>
+</li>
+<li><p><strong>数据展示</strong>: kibana 根据ES数据做图表，使用elasticdump工具定时备份.kibana索引数据（.kibana是kibana的默认索引名称，里面包含了所有kibana中的配置，如图表、搜索、设置、index pattern等）</p>
+</li>
+</ul>
 <p>以上简单谈了以下两种常见架构，它的使用场景、各层的功能、以及与之相关的一些工具，接下来我会以我们目前使用的架构了逐一讲解。</p>
 
       
@@ -314,7 +338,7 @@
         <p><span>本文标题:</span><a href="/2016/02/15/ELK实战一架构的选择/">ELK实战-架构的选择</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2016年02月15日 - 07时34分</p>
-        <p><span>最后更新:</span>2016年02月15日 - 20时15分</p>
+        <p><span>最后更新:</span>2016年02月15日 - 20时46分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/02/15/ELK实战一架构的选择/" title="ELK实战-架构的选择">http://www.elain.org/2016/02/15/ELK实战一架构的选择/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2016/02/15/ELK实战一架构的选择/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -344,7 +368,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#u4E00_u3001_u6570_u636E_u91CF_u5C0F_uFF0C_u4E14_u6570_u636E_u53EF_u9760_u6027_u8981_u6C42_u4E0D_u5F3A_uFF08_u5141_u8BB8ELK_u6545_u969C_u65F6_u4E22_u5931_u6570_u636E_uFF09_u7684_u516C_u53F8"><span class="toc-number">1.</span> <span class="toc-text">一、数据量小，且数据可靠性要求不强（允许ELK故障时丢失数据）的公司</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#u4E8C_u3001_u6570_u636E_u91CF_u5927_uFF0C_u4E14_u6570_u636E_u4E0D_u5141_u8BB8_u4E22_u5931_uFF0C_u5B9E_u65F6_u3001_u7A33_u5B9A_u6027_u8981_u6C42_u9AD8_u7684_u516C_u53F8"><span class="toc-number">2.</span> <span class="toc-text">二、数据量大，且数据不允许丢失，实时、稳定性要求高的公司</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
