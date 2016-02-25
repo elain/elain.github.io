@@ -17,7 +17,7 @@
 1234mkdir -p &amp;amp;amp;&amp;amp;amp; cd /etc/td-agent/mapsaxel -n">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2015/09/QQ20150901-4@2x.png">
 <meta property="og:image" content="http://www.elain.org/wp-content/uploads/2015/09/QQ20150901-3@2x.png">
-<meta property="og:updated_time" content="2016-02-03T06:19:04.000Z">
+<meta property="og:updated_time" content="2016-02-25T03:05:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="给kibana4中配置中国地图(添加最新版4.3.1修改方法)">
 <meta name="twitter:description" content="因本人使用的是 fluentd 来收集日志，并不是logstash ,所以，以下是fluentd 中的配置：
@@ -307,7 +307,7 @@
 <p>打开 ./src/ui/public/vislib/visualizations/_map.js +11<br>把：</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attribute">url</span>: <span class="string">'https://otile&#123;s&#125;-s.mqcdn.com/tiles/1.0.0/map/&#123;z&#125;/&#123;x&#125;/&#123;y&#125;.jpeg',</span></span><br></pre></td></tr></table></figure>
 <p>替换为：</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attribute">url</span>: <span class="string">'http://webrd0&#123;s&#125;.is.autonavi.com/appmaptile?lang=zh_cn&amp;amp;size=1&amp;amp;scale=1&amp;amp;style=8&amp;amp;x=&#123;x&#125;&amp;amp;y=&#123;y&#125;&amp;amp;z=&#123;z&#125;',</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attribute">url</span>: <span class="string">'http://webrd0&#123;s&#125;.is.autonavi.com/appmaptile?lang=zh_cn&amp;size=1&amp;scale=1&amp;style=8&amp;x=&#123;x&#125;&amp;y=&#123;y&#125;&amp;z=&#123;z&#125;',</span></span><br></pre></td></tr></table></figure>
 <p>最重要的是这里，记得修改后在以下文件加载一下，才会生效，我理解是需要预编译的，否则会被cache住，所有的修改并不能及时生效。<br>打开 ./src/ui/autoload.js +35<br>末尾添加：</p>
 <figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="symbol">'ui</span>/vislib'</span><br></pre></td></tr></table></figure>
 <p>重启生效</p>
@@ -323,7 +323,7 @@
         <p><span>本文标题:</span><a href="/2015/09/01/给kibana4中配置中国地图(添加最新版4.3.1修改方法)/">给kibana4中配置中国地图(添加最新版4.3.1修改方法)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 elain 的个人博客">elain</a></p>
         <p><span>发布时间:</span>2015年09月01日 - 11时20分</p>
-        <p><span>最后更新:</span>2016年02月03日 - 14时19分</p>
+        <p><span>最后更新:</span>2016年02月25日 - 11时05分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2015/09/01/给kibana4中配置中国地图(添加最新版4.3.1修改方法)/" title="给kibana4中配置中国地图(添加最新版4.3.1修改方法)">http://www.elain.org/2015/09/01/给kibana4中配置中国地图(添加最新版4.3.1修改方法)/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.elain.org/2015/09/01/给kibana4中配置中国地图(添加最新版4.3.1修改方法)/　　作者: elain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

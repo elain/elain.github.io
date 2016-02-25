@@ -249,7 +249,7 @@
     <link href="http://www.elain.org/2015/09/01/%E7%BB%99kibana4%E4%B8%AD%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%9B%BD%E5%9C%B0%E5%9B%BE(%E6%B7%BB%E5%8A%A0%E6%9C%80%E6%96%B0%E7%89%884.3.1%E4%BF%AE%E6%94%B9%E6%96%B9%E6%B3%95)/"/>
     <id>http://www.elain.org/2015/09/01/给kibana4中配置中国地图(添加最新版4.3.1修改方法)/</id>
     <published>2015-09-01T03:20:30.000Z</published>
-    <updated>2016-02-03T06:19:04.000Z</updated>
+    <updated>2016-02-25T03:05:07.000Z</updated>
     <content type="html"><![CDATA[<p>因本人使用的是 fluentd 来收集日志，并不是logstash ,所以，以下是fluentd 中的配置：</p>
 <p>下载IP库(这里使用的maxmind的免费版，大家如公司有收费版本直接采用即可)<br><a href="http://dev.maxmind.com/geoip/legacy/geolite/" target="_blank" rel="external">http://dev.maxmind.com/geoip/legacy/geolite/</a></p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">mkdir</span> -p &amp;amp;&amp;amp; <span class="keyword">cd</span> /etc/td-agent/maps</span><br><span class="line">axel -<span class="keyword">n</span> 10 http:<span class="comment">//geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz</span></span><br><span class="line">gunzip GeoLiteCity.dat.gz</span><br></pre></td></tr></table></figure>
@@ -275,7 +275,7 @@
 <p>打开 ./src/ui/public/vislib/visualizations/_map.js +11<br>把：</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attribute">url</span>: <span class="string">'https://otile&#123;s&#125;-s.mqcdn.com/tiles/1.0.0/map/&#123;z&#125;/&#123;x&#125;/&#123;y&#125;.jpeg',</span></span><br></pre></td></tr></table></figure>
 <p>替换为：</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attribute">url</span>: <span class="string">'http://webrd0&#123;s&#125;.is.autonavi.com/appmaptile?lang=zh_cn&amp;amp;size=1&amp;amp;scale=1&amp;amp;style=8&amp;amp;x=&#123;x&#125;&amp;amp;y=&#123;y&#125;&amp;amp;z=&#123;z&#125;',</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attribute">url</span>: <span class="string">'http://webrd0&#123;s&#125;.is.autonavi.com/appmaptile?lang=zh_cn&amp;size=1&amp;scale=1&amp;style=8&amp;x=&#123;x&#125;&amp;y=&#123;y&#125;&amp;z=&#123;z&#125;',</span></span><br></pre></td></tr></table></figure>
 <p>最重要的是这里，记得修改后在以下文件加载一下，才会生效，我理解是需要预编译的，否则会被cache住，所有的修改并不能及时生效。<br>打开 ./src/ui/autoload.js +35<br>末尾添加：</p>
 <figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="symbol">'ui</span>/vislib'</span><br></pre></td></tr></table></figure>
 <p>重启生效</p>
