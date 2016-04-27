@@ -4,7 +4,7 @@
   <subtitle><![CDATA[致力于LINUX技术研究交流!开源一切,免费一切!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.elain.org/"/>
-  <updated>2016-04-27T09:20:34.000Z</updated>
+  <updated>2016-04-27T12:12:54.000Z</updated>
   <id>http://www.elain.org/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://www.elain.org/2016/04/26/ELK%E5%AE%9E%E6%88%98%E4%BA%8C%EF%BC%9A%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E5%88%A9%E5%99%A8rsyslog/"/>
     <id>http://www.elain.org/2016/04/26/ELK实战二：日志收集利器rsyslog/</id>
     <published>2016-04-26T13:14:02.000Z</published>
-    <updated>2016-04-27T09:20:34.000Z</updated>
+    <updated>2016-04-27T12:12:54.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>rsyslog 无论在性能还是部署上都优于其它日志收集应用，因系统自带，需要新功能只需要做升级即可，方便部署！</p>
 </blockquote>
@@ -43,7 +43,7 @@
 <p>当然，如果你非要说不会有单机上去查看日志的情况，那使用纯json格式也是相当不错的，针对ELK来说更是方便，可以直接使用logstash或hangout解析json，反而提高grok的性能。<br>比如：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;"<span class="attribute">logtime</span>":<span class="value"><span class="string">"value"</span></span>,"<span class="attribute">client_ip</span>":<span class="value"><span class="string">"value"</span></span>,"<span class="attribute">server_ip</span>":<span class="value"><span class="string">"value"</span></span>,"<span class="attribute">domain</span>":<span class="value"><span class="string">"value"</span></span>,"<span class="attribute">level</span>":<span class="value"><span class="string">""</span>value<span class="string">","</span>http_code<span class="string">":"</span>value<span class="string">","</span>url<span class="string">":"</span>value<span class="string">","</span>response_time<span class="string">":"</span><span class="string">"value"</span></span>,"<span class="attribute">msg</span>":<span class="value"><span class="string">"value"</span></span>&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;"<span class="attribute">logtime</span>":<span class="value"><span class="string">"27/Apr/2016:15:50:55"</span></span>,"<span class="attribute">client_ip</span>":<span class="value"><span class="string">"1.1.1.1"</span></span>,"<span class="attribute">server_ip</span>":<span class="value"><span class="string">"127.0.0.1"</span></span>,"<span class="attribute">domain</span>":<span class="value"><span class="string">"www.elain.org"</span></span>,"<span class="attribute">level</span>":<span class="value"><span class="string">""</span>ERROR<span class="string">","</span>http_code<span class="string">":"</span><span class="number">499</span><span class="string">","</span>url<span class="string">":"</span>/elk/rsyslog<span class="string">","</span>response_time<span class="string">":"</span><span class="string">"0.007"</span></span>,"<span class="attribute">msg</span>":<span class="value"><span class="string">"xxxxx"</span></span>&#125;</span><br></pre></td></tr></table></figure>
-<p>当然，你还可以把前面这些固定的字段从json中扔出来，只把msg做成json，但切记，为了方便能用，在日志中使用json格式时不要做多级嵌套，这样大大增加了日志处理的复杂度，且不同日志如果没有明确级数，就搞的不通用了，大大增加了运维复杂度。</p>
+<p>当然，你还可以把前面这些固定的字段从json中扔出来，只把msg做成json，但切记，为了方便通用，在日志中使用json格式时不要做多级嵌套，这样大大增加了日志处理的复杂度，且不同日志如果没有明确级数，就搞的不通用了，大大增加了运维复杂度。</p>
 <ul>
 <li>使用rsyslog日志收集是尽量保证日志的原始性<br>不去做任何处理 ，直接收集入到队列，如kafka、redis，这样做的的好处时，减少日志客户端rsyslog的性能压力，从而不影响所在服务器上正常业务，并且保持原始日志也便于各自业务方处理，自己写的日志自己最熟悉。</li>
 <li>日志收集客户端rsyslog 使用守护进程的工具做守护,如supervisor、monit等</li>
@@ -99,7 +99,7 @@
 <p>当然，如果你非要说不会有单机上去查看日志的情况，那使用纯json格式也是相当不错的，针对ELK来说更是方便，可以直接使用logstash或hangout解析json，反而提高grok的性能。<br>比如：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;"<span class="attribute">logtime</span>":<span class="value"><span class="string">"value"</span></span>,"<span class="attribute">client_ip</span>":<span class="value"><span class="string">"value"</span></span>,"<span class="attribute">server_ip</span>":<span class="value"><span class="string">"value"</span></span>,"<span class="attribute">domain</span>":<span class="value"><span class="string">"value"</span></span>,"<span class="attribute">level</span>":<span class="value"><span class="string">""</span>value<span class="string">","</span>http_code<span class="string">":"</span>value<span class="string">","</span>url<span class="string">":"</span>value<span class="string">","</span>response_time<span class="string">":"</span><span class="string">"value"</span></span>,"<span class="attribute">msg</span>":<span class="value"><span class="string">"value"</span></span>&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;"<span class="attribute">logtime</span>":<span class="value"><span class="string">"27/Apr/2016:15:50:55"</span></span>,"<span class="attribute">client_ip</span>":<span class="value"><span class="string">"1.1.1.1"</span></span>,"<span class="attribute">server_ip</span>":<span class="value"><span class="string">"127.0.0.1"</span></span>,"<span class="attribute">domain</span>":<span class="value"><span class="string">"www.elain.org"</span></span>,"<span class="attribute">level</span>":<span class="value"><span class="string">""</span>ERROR<span class="string">","</span>http_code<span class="string">":"</span><span class="number">499</span><span class="string">","</span>url<span class="string">":"</span>/elk/rsyslog<span class="string">","</span>response_time<span class="string">":"</span><span class="string">"0.007"</span></span>,"<span class="attribute">msg</span>":<span class="value"><span class="string">"xxxxx"</span></span>&#125;</span><br></pre></td></tr></table></figure>
-<p>当然，你还可以把前面这些固定的字段从json中扔出来，只把msg做成json，但切记，为了方便能用，在日志中使用json格式时不要做多级嵌套，这样大大增加了日志处理的复杂度，且不同日志如果没有明确级数，就搞的不通用了，大大增加了运维复杂度。</p>
+<p>当然，你还可以把前面这些固定的字段从json中扔出来，只把msg做成json，但切记，为了方便通用，在日志中使用json格式时不要做多级嵌套，这样大大增加了日志处理的复杂度，且不同日志如果没有明确级数，就搞的不通用了，大大增加了运维复杂度。</p>
 <ul>
 <li>使用rsyslog日志收集是尽量保证日志的原始性<br>不去做任何处理 ，直接收集入到队列，如kafka、redis，这样做的的好处时，减少日志客户端rsyslog的性能压力，从而不影响所在服务器上正常业务，并且保持原始日志也便于各自业务方处理，自己写的日志自己最熟悉。</li>
 <li>日志收集客户端rsyslog 使用守护进程的工具做守护,如supervisor、monit等</li>
