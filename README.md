@@ -1,2 +1,4 @@
 # elain.github.io
-www.elain'blog
+
+# Elain'Blog
+http://www.elain.org
